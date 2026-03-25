@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 
-const SPREADSHEET_ID = '1Axn_JdbGFc-Y5sWaT9JI-cgbfPy9WnmihANgyRuXPXU';
+const SPREADSHEET_ID = '1pdW8Xif8ZA75UbkAAbnn02wosNbO5kNnmuJ462E-nqw';
 const SHEET_NAMES = ['합의사항', '의사결정', '아이디어', '조사'];
 
 function getAuth() {
