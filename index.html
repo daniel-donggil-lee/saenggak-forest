@@ -537,9 +537,9 @@ function renderPanel() {
         const choices = val.split('/').map(c => `<span class="choice">${c.trim()}</span>`).join('');
         contentHtml += `<div class="choices">${choices}</div>`;
       } else if (cols[i] === '비고' && val) {
-        contentHtml += `<div class="card-note">${val}</div>`;
+        contentHtml += `<div class="card-note">${val.replace(/\n/g, '<br>')}</div>`;
       } else {
-        contentHtml += `<div class="card-content">${val}</div>`;
+        contentHtml += `<div class="card-content">${val.replace(/\n/g, '<br>')}</div>`;
       }
     }
 
