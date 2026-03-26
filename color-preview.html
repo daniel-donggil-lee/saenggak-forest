@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>카드 색상 조합 미리보기</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f6f8fa; padding: 40px; }
+  h1 { font-size: 20px; color: #1f2328; margin-bottom: 32px; }
+  .scheme { margin-bottom: 48px; }
+  .scheme-title { font-size: 16px; font-weight: 600; color: #1f2328; margin-bottom: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .card {
+    border-radius: 8px; padding: 16px 20px; color: #fff; min-height: 120px;
+  }
+  .card-label { font-size: 11px; opacity: 0.8; margin-bottom: 4px; }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .card-content { font-size: 13px; opacity: 0.85; line-height: 1.5; }
+  .card-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px; font-size: 12px; font-weight: 500;
+  }
+  .card-badge .dot {
+    width: 20px; height: 20px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 10px; font-weight: 700;
+    color: #fff;
+  }
+  .priority {
+    display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 4px;
+    margin-left: 8px; font-weight: 600;
+  }
+  .p-urgent { background: #da3633; }
+  .p-important { background: #bd5d00; }
+  .p-hold { background: rgba(255,255,255,0.25); }
+</style>
+</head>
+<body>
+
+<h1>의사결정 카드 색상 조합 미리보기</h1>
+
+<!-- Scheme 1 -->
+<div class="scheme">
+  <div class="scheme-title">1. Deep Cool (네이비 / 포레스트그린 / 딥퍼플 / 다크앰버)</div>
+  <div class="cards">
+    <div class="card" style="background:#1e3a5f">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#4a90d9">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#1a4731">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#34d399">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#3b1f6e">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#a78bfa">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#5c3d0a">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#fbbf24">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scheme 2 -->
+<div class="scheme">
+  <div class="scheme-title">2. Modern Vivid (로얄블루 / 에메랄드 / 바이올렛 / 앰버)</div>
+  <div class="cards">
+    <div class="card" style="background:#2563eb">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#93c5fd">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#059669">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#6ee7b7">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#7c3aed">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#c4b5fd">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#d97706">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#fde68a">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scheme 3 -->
+<div class="scheme">
+  <div class="scheme-title">3. Soft Professional (스틸블루 / 틸 / 로즈 / 슬레이트)</div>
+  <div class="cards">
+    <div class="card" style="background:#3b82a8">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#7dd3fc">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#0d9488">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#5eead4">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#be185d">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#fda4af">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#64748b">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#cbd5e1">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scheme 4 -->
+<div class="scheme">
+  <div class="scheme-title">4. Bold (인디고 / 그린 / 푸시아 / 오렌지)</div>
+  <div class="cards">
+    <div class="card" style="background:#4338ca">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#a5b4fc">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#16a34a">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#86efac">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#c026d3">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#f0abfc">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#ea580c">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#fed7aa">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scheme 5 -->
+<div class="scheme">
+  <div class="scheme-title">5. Notion Style (차분한 톤, 채도 낮음)</div>
+  <div class="cards">
+    <div class="card" style="background:#37352f">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#9b9a97">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#2b593f">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#4dab7c">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#6940a5">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#b49fdc">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#93877b">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#d4cec4">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scheme 6 -->
+<div class="scheme">
+  <div class="scheme-title">6. Ocean Sunset (네이비 / 시안 / 코랄 / 웜그레이)</div>
+  <div class="cards">
+    <div class="card" style="background:#1e3a5f">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#60a5fa">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#0e7490">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#67e8f9">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#c2410c">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#fdba74">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#78716c">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#d6d3d1">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scheme 7 -->
+<div class="scheme">
+  <div class="scheme-title">7. Gradient Depth (슬레이트블루 / 씨그린 / 와인 / 차콜)</div>
+  <div class="cards">
+    <div class="card" style="background:#475569">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#94a3b8">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#166534">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#4ade80">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#881337">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#fb7185">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#44403c">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#a8a29e">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scheme 8 -->
+<div class="scheme">
+  <div class="scheme-title">8. Tech Minimal (미드나잇 / 사이버그린 / 일렉트릭퍼플 / 쿨그레이)</div>
+  <div class="cards">
+    <div class="card" style="background:#1e293b">
+      <div class="card-label">공동 결정</div>
+      <div class="card-title">대표 구조 <span class="priority p-urgent">긴급</span></div>
+      <div class="card-content">이동길+이은경 2인 대표 vs 단독+이사</div>
+      <div class="card-badge"><span class="dot" style="background:#38bdf8">공</span> 공동</div>
+    </div>
+    <div class="card" style="background:#064e3b">
+      <div class="card-label">이동길 결정</div>
+      <div class="card-title">법인 형태 <span class="priority p-important">중요</span></div>
+      <div class="card-content">주식회사 / 유한회사</div>
+      <div class="card-badge"><span class="dot" style="background:#34d399">길</span> 이동길</div>
+    </div>
+    <div class="card" style="background:#581c87">
+      <div class="card-label">이은경 결정</div>
+      <div class="card-title">브랜드명 <span class="priority p-important">중요</span></div>
+      <div class="card-content">브랜드 네이밍</div>
+      <div class="card-badge"><span class="dot" style="background:#d8b4fe">경</span> 이은경</div>
+    </div>
+    <div class="card" style="background:#374151">
+      <div class="card-label">담당 미정</div>
+      <div class="card-title">마케팅 담당 <span class="priority p-hold">보류</span></div>
+      <div class="card-content">이은경 인지도 활용 / 별도 마케팅팀</div>
+      <div class="card-badge"><span class="dot" style="background:#9ca3af">?</span> 미정</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

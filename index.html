@@ -306,7 +306,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const API = '/api/sheets';
+const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
 const SHEET_ORDER = ['로드맵', '할일', '아이디어', '조사', '의사결정', '합의사항'];
 const CATEGORIES = ['법인/거버넌스', '브랜드', '콘텐츠', '인력', '시장/경쟁', '사업 모델', '마케팅', '재무'];
 const PHASE_NAMES = {
@@ -684,27 +684,23 @@ function closeModal() {
   editingRow = null;
 }
 
+async function gasPost(payload) {
+  await fetch(API, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+}
+
 async function saveItem() {
   const config = SHEET_CONFIG[currentTab];
   const values = config.columns.map((_, i) => document.getElementById(`field_${i}`).value);
   try {
     if (editingRow !== null) {
       const endCol = String.fromCharCode(64 + config.columns.length);
-      await fetch(API, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sheet: currentTab, range: `A${editingRow + 1}:${endCol}${editingRow + 1}`, values }),
-      });
+      await gasPost({ action: 'update', sheet: currentTab, range: `A${editingRow + 1}:${endCol}${editingRow + 1}`, values });
     } else {
-      await fetch(API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sheet: currentTab, values }),
-      });
+      await gasPost({ action: 'append', sheet: currentTab, values });
     }
     closeModal();
     showToast(editingRow !== null ? '수정 완료' : '추가 완료');
-    await loadData();
+    setTimeout(() => loadData(), 1000);
   } catch (e) { showToast('저장 실패'); }
 }
 
@@ -713,13 +709,9 @@ async function deleteRow(rowIdx) {
   const config = SHEET_CONFIG[currentTab];
   const endCol = String.fromCharCode(64 + config.columns.length);
   try {
-    await fetch(API, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}` }),
-    });
+    await gasPost({ action: 'clear', sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}` });
     showToast('삭제 완료');
-    await loadData();
+    setTimeout(() => loadData(), 1000);
   } catch (e) { showToast('삭제 실패'); }
 }
 
@@ -732,13 +724,9 @@ async function archiveCard(rowIdx) {
   if (!(values[1]||'').startsWith('[아카이브]')) values[1] = prefix + values[1];
   const endCol = String.fromCharCode(64 + config.columns.length);
   try {
-    await fetch(API, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}`, values }),
-    });
+    await gasPost({ action: 'update', sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}`, values });
     showToast('아카이브로 이동');
-    await loadData();
+    setTimeout(() => loadData(), 1000);
   } catch (e) { showToast('아카이브 실패'); }
 }
 
@@ -756,13 +744,11 @@ async function moveCard(rowIdx, targetSheet) {
   const values = [];
   for (let i = 0; i < targetConfig.columns.length; i++) values.push(i < row.length ? row[i] : '');
   try {
-    await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sheet: targetSheet, values }) });
+    await gasPost({ action: 'append', sheet: targetSheet, values });
     const endCol = String.fromCharCode(64 + sourceConfig.columns.length);
-    await fetch(API, { method: 'DELETE', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}` }) });
+    await gasPost({ action: 'clear', sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}` });
     showToast(`${targetSheet}(으)로 이동 완료`);
-    await loadData();
+    setTimeout(() => loadData(), 1500);
   } catch (e) { showToast('이동 실패'); }
 }
 
@@ -954,13 +940,9 @@ async function toggleTodoStatus(rowIdx) {
 
   const endCol = String.fromCharCode(64 + config.columns.length);
   try {
-    await fetch(API, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sheet: '할일', range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}`, values }),
-    });
+    await gasPost({ action: 'update', sheet: '할일', range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}`, values });
     showToast(`상태: ${values[4]}`);
-    await loadData();
+    setTimeout(() => loadData(), 1000);
   } catch (e) { showToast('상태 변경 실패'); }
 }
 
