@@ -453,11 +453,20 @@ function renderTabs() {
     const active = name === currentTab ? 'active' : '';
     let cnt;
     if (name === '할일') {
-      cnt = dataRows.filter(r => (r[4]||'') !== '완료').length;
+      cnt = dataRows.filter(r => (r[1]||'').trim() && (r[4]||'') !== '완료').length;
     } else if (name === '회의록') {
       cnt = dataRows.filter(r => (r[0]||'').trim()).length;
+    } else if (name === '로드맵') {
+      cnt = dataRows.filter(r => (r[1]||'').trim()).length;
     } else {
-      cnt = dataRows.filter(r => !(r[1]||'').startsWith('[아카이브]') && !(r[1]||'').startsWith('역할:') && !(r[1]||'').startsWith('역할 :')).length;
+      cnt = dataRows.filter(r => {
+        const title = (r[1]||'').trim();
+        if (!title) return false;
+        if (title.startsWith('[아카이브]') || title.startsWith('역할:') || title.startsWith('역할 :')) return false;
+        const lastCol = r[r.length - 1] || '';
+        if (lastCol.startsWith('[→')) return false;
+        return true;
+      }).length;
     }
     const tab = `<div class="tab ${active}" onclick="switchTab('${name}')">
       ${name}<span class="count">${cnt}</span>
@@ -493,7 +502,13 @@ function renderPanel() {
     return renderTodoPanel(config, rows, allDataRows);
   }
 
-  const dataRows = allDataRows.filter(r => !(r[1]||'').startsWith('[아카이브]'));
+  const dataRows = allDataRows.filter(r => {
+    const title = (r[1]||'').trim();
+    if (!title || title.startsWith('[아카이브]')) return false;
+    const lastCol = r[r.length - 1] || '';
+    if (lastCol.startsWith('[→')) return false;
+    return true;
+  });
   const archivedRows = allDataRows.filter(r => (r[1]||'').startsWith('[아카이브]'));
 
   let html = `
