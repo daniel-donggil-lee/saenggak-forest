@@ -307,7 +307,7 @@
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
-const SHEET_ORDER = ['로드맵', '할일', '아이디어', '조사', '의사결정', '합의사항'];
+const SHEET_ORDER = ['로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항'];
 const CATEGORIES = ['법인/거버넌스', '브랜드', '콘텐츠', '인력', '시장/경쟁', '사업 모델', '마케팅', '재무'];
 const PHASE_NAMES = {
   'P0': '사업 설계', 'P1': '콘텐츠 개발', 'P2': '본점 준비',
@@ -323,6 +323,11 @@ const SHEET_CONFIG = {
     sub: '태스크',
     desc: '<strong>이번 주/이번 달 해야 할 일.</strong> 마일스톤에 연결된 구체적 태스크.',
     columns: ['마일스톤', '할일', '담당', '기한', '상태', '완료일', '비고'],
+  },
+  '회의록': {
+    sub: '미팅 기록',
+    desc: '<strong>이동길 + 이은경 회의 기록.</strong> 구글 미트 회의록 링크 + 핵심 결정사항.',
+    columns: ['회차', '일자', '참석자', '안건', '논의 내용', '결정사항', '액션 아이템(담당/기한)'],
   },
   '아이디어': {
     sub: '구상',
@@ -423,8 +428,8 @@ function renderTabs() {
       ${name}<span class="count">${cnt}</span>
       <span class="tab-sub">${config.sub}</span>
     </div>`;
-    if (i === 1) return tab + divider; // 할일 뒤에 구분선
-    if (i < SHEET_ORDER.length - 1 && i > 1) return tab + arrow; // 브레인스토밍 탭 사이 화살표
+    if (i === 2) return tab + divider; // 회의록 뒤에 구분선
+    if (i < SHEET_ORDER.length - 1 && i > 2) return tab + arrow; // 브레인스토밍 탭 사이 화살표
     return tab;
   }).join('');
 }
@@ -443,6 +448,10 @@ function renderPanel() {
   // 로드맵 전용 렌더링
   if (currentTab === '로드맵') {
     return renderRoadmapPanel(config, rows, allDataRows);
+  }
+  // 회의록 전용 렌더링
+  if (currentTab === '회의록') {
+    return renderMeetingPanel(config, rows, allDataRows);
   }
   // 할일 전용 렌더링
   if (currentTab === '할일') {
@@ -767,6 +776,73 @@ document.getElementById('modal').addEventListener('click', (e) => {
   if (e.target === document.getElementById('modal')) closeModal();
 });
 
+// ─── 날짜 포맷 (요일 포함) ───
+const DAY_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
+function formatDateWithDay(dateStr) {
+  if (!dateStr) return '';
+  const clean = dateStr.replace(/\s.*$/, '').trim(); // 타임존 등 제거
+  const match = clean.match(/^(\d{4})-(\d{2})(?:-(\d{2}))?$/);
+  if (!match) return clean;
+  if (!match[3]) return `${match[1]}-${match[2]}`; // 월까지만 있으면 그대로
+  const d = new Date(match[1], parseInt(match[2]) - 1, parseInt(match[3]));
+  return `${match[1]}-${match[2]}-${match[3]} (${DAY_NAMES[d.getDay()]})`;
+}
+
+// ─── 회의록 렌더링 ───
+function renderMeetingPanel(config, rows, allDataRows) {
+  let html = `
+    <div class="panel-header">
+      <div class="panel-desc">${config.desc}</div>
+      <button class="btn btn-primary" style="white-space:nowrap" onclick="openAddModal()">+ 추가</button>
+    </div>
+  `;
+
+  // 회차별 그룹핑
+  const meetings = [];
+  let current = null;
+  allDataRows.forEach((row, idx) => {
+    const realIdx = idx + 2;
+    if ((row[0] || '').trim()) {
+      current = { num: row[0], date: row[1] || '', attendees: row[2] || '', items: [], realIdx };
+      meetings.push(current);
+    }
+    if (current) {
+      const agenda = (row[3] || '').trim();
+      if (agenda) {
+        current.items.push({ agenda, discussion: row[4] || '', decision: row[5] || '', action: row[6] || '', realIdx });
+      }
+    }
+  });
+
+  meetings.reverse().forEach(m => {
+    const dateDisplay = formatDateWithDay(m.date.replace(/\s*\(.*\)/, ''));
+    html += `<div class="roadmap-group">
+      <div class="roadmap-group-header">
+        <span class="roadmap-group-title">${m.num} — ${dateDisplay}</span>
+        <span style="font-size:12px;color:#656d76">${m.attendees}</span>
+      </div>`;
+
+    m.items.forEach(item => {
+      const tag = item.agenda.match(/^\[(.+?)\]/) ? item.agenda.match(/^\[(.+?)\]/)[1] : '';
+      const agendaClean = item.agenda.replace(/^\[.+?\]\s*/, '');
+      const tagHtml = tag ? `<span class="priority-tag ${tag === '긴급' ? 'priority-urgent' : tag === '중요' ? 'priority-important' : tag === '임박' ? 'priority-urgent' : 'priority-hold'}">${tag}</span> ` : '';
+
+      html += `<div class="roadmap-row" onclick="openEditModal(${item.realIdx})">
+        <span class="roadmap-milestone">${tagHtml}${agendaClean}</span>
+      </div>`;
+      if (item.decision) {
+        html += `<div style="padding:4px 20px 12px 36px;font-size:13px;color:#656d76;border-bottom:1px solid #f0f0f0">
+          <strong style="color:#1a7f37">결정:</strong> ${item.decision.replace(/\n/g, '<br>')}
+        </div>`;
+      }
+    });
+
+    html += `</div>`;
+  });
+
+  document.getElementById('mainContent').innerHTML = html;
+}
+
 // ─── 로드맵 렌더링 ───
 function renderRoadmapPanel(config, rows, allDataRows) {
   const total = allDataRows.length;
@@ -816,7 +892,7 @@ function renderRoadmapPanel(config, rows, allDataRows) {
 
       html += `<div class="roadmap-row" onclick="openEditModal(${realIdx})">
         <span class="roadmap-milestone">${milestone}${changeBadge}</span>
-        <span class="roadmap-date">${date}</span>
+        <span class="roadmap-date">${formatDateWithDay(date)}</span>
         <span class="dot ${pi.dot}" style="width:20px;height:20px;font-size:9px">${pi.label}</span>
         <span class="status-badge ${sc}">${status}</span>
       </div>`;
@@ -882,7 +958,7 @@ function renderTodoPanel(config, rows, allDataRows) {
         <div class="todo-check ${checkClass}" onclick="event.stopPropagation(); toggleTodoStatus(${realIdx})">${checkIcon}</div>
         <span class="todo-title ${isDone ? 'done' : ''}">${title}${changeBadge}</span>
         <span class="dot ${pi.dot}" style="width:18px;height:18px;font-size:8px">${pi.label}</span>
-        <span class="todo-due ${isOverdue ? 'overdue' : ''}">${due}${isOverdue ? ' ⚠' : ''}</span>
+        <span class="todo-due ${isOverdue ? 'overdue' : ''}">${formatDateWithDay(due)}${isOverdue ? ' ⚠' : ''}</span>
       </div>`;
     });
 
