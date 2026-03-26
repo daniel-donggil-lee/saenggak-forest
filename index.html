@@ -178,6 +178,16 @@
   .todo-summary .cnt-overdue { color: #cf222e; font-weight: 600; }
   .tab-divider { color: #d1d9e0; font-size: 16px; display: flex; align-items: center; padding: 0 8px; }
 
+  /* Feedback button */
+  .feedback-btn {
+    position: fixed; bottom: 24px; left: 24px; width: 48px; height: 48px;
+    border-radius: 50%; border: none; background: #0969da; color: #fff;
+    font-size: 22px; cursor: pointer; box-shadow: 0 2px 12px rgba(9,105,218,0.4);
+    display: flex; align-items: center; justify-content: center; z-index: 90;
+    transition: transform 0.15s;
+  }
+  .feedback-btn:hover { transform: scale(1.1); }
+
   /* Card actions */
   .card-actions {
     position: absolute; top: 10px; right: 10px; display: flex; gap: 4px;
@@ -304,6 +314,26 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<button class="feedback-btn" onclick="openFeedbackModal()" title="개선 요청">💬</button>
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal" style="width:400px">
+    <h2>개선 요청</h2>
+    <div class="form-group"><label>작성자</label>
+      <select id="fb_author">
+        <option value="이동길">이동길</option>
+        <option value="이은경">이은경</option>
+      </select>
+    </div>
+    <div class="form-group"><label>내용</label>
+      <textarea id="fb_content" placeholder="불편한 점, 추가했으면 하는 기능 등 자유롭게" style="min-height:120px"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeFeedbackModal()">취소</button>
+      <button class="btn btn-primary" onclick="submitFeedback()">보내기</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
@@ -1025,6 +1055,26 @@ async function toggleTodoStatus(rowIdx) {
   const endCol = String.fromCharCode(64 + config.columns.length);
   gasPost({ action: 'update', sheet: '할일', range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}`, values });
 }
+
+function openFeedbackModal() {
+  document.getElementById('fb_content').value = '';
+  document.getElementById('feedbackModal').classList.add('show');
+}
+function closeFeedbackModal() {
+  document.getElementById('feedbackModal').classList.remove('show');
+}
+async function submitFeedback() {
+  const author = document.getElementById('fb_author').value;
+  const content = document.getElementById('fb_content').value.trim();
+  if (!content) { showToast('내용을 입력해주세요'); return; }
+  const today = new Date().toISOString().slice(0, 10);
+  await gasPost({ action: 'append', sheet: '개선요청', values: [author, today, content, '접수', ''] });
+  closeFeedbackModal();
+  showToast('개선 요청 접수 완료');
+}
+document.getElementById('feedbackModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('feedbackModal')) closeFeedbackModal();
+});
 
 loadData();
 </script>
