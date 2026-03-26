@@ -421,6 +421,8 @@ function renderTabs() {
     let cnt;
     if (name === '할일') {
       cnt = dataRows.filter(r => (r[4]||'') !== '완료').length;
+    } else if (name === '회의록') {
+      cnt = dataRows.filter(r => (r[0]||'').trim()).length;
     } else {
       cnt = dataRows.filter(r => !(r[1]||'').startsWith('[아카이브]') && !(r[1]||'').startsWith('역할:') && !(r[1]||'').startsWith('역할 :')).length;
     }
