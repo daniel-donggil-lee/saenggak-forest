@@ -1007,16 +1007,12 @@ async function toggleTodoStatus(rowIdx) {
   while (values.length < config.columns.length) values.push('');
 
   const current = (values[4] || '').trim();
-  if (current === '대기') {
-    values[4] = '진행중';
-  } else if (current === '진행중') {
-    values[4] = '완료';
-    values[5] = new Date().toISOString().slice(0, 10);
-  } else if (current === '완료') {
+  if (current === '완료') {
     values[4] = '대기';
     values[5] = '';
   } else {
-    values[4] = '진행중';
+    values[4] = '완료';
+    values[5] = new Date().toISOString().slice(0, 10);
   }
 
   const endCol = String.fromCharCode(64 + config.columns.length);
