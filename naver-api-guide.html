@@ -368,13 +368,18 @@
         <tr>
           <th>애플리케이션 이름</th>
           <td>
-            <div class="copy-value">
-              <span>생각의숲</span>
-              <button class="copy-btn" onclick="copyText(this, '생각의숲')">복사</button>
+            <div style="font-size:14px; color:#555;">
+              원하는 이름으로 자유롭게 입력하세요<br>
+              <span style="font-size:12px; color:#999;">(예: 카페관리, 슬초자동화, 생각의숲 등)</span>
             </div>
           </td>
         </tr>
       </table>
+      <div class="tip">
+        이 이름은 API 관리용 라벨이에요.<br>
+        카페에 표시되거나 회원들에게 보이지 않으니<br>
+        <strong>본인이 알아보기 쉬운 이름</strong>이면 뭐든 OK!
+      </div>
       <div class="checklist">
         <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>앱 이름 입력 완료</label></div>
       </div>
