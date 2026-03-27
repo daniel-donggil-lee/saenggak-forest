@@ -275,6 +275,34 @@
   .badge-new { background: #da3633; color: #fff; }
   .badge-edited { background: #0969da; color: #fff; }
 
+  /* 리포트 탭 */
+  .report-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 12px; }
+  .report-card {
+    background: #fff; border: 1px solid #d1d9e0; border-radius: 10px;
+    padding: 20px 24px; cursor: pointer; transition: all 0.2s;
+  }
+  .report-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-color: #0969da; }
+  .report-card .report-title { font-size: 16px; font-weight: 600; color: #1f2328; margin-bottom: 6px; }
+  .report-card .report-desc { font-size: 13px; color: #656d76; line-height: 1.5; }
+  .report-card .report-meta { font-size: 12px; color: #8b949e; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .report-card .report-cat { background: #ddf4ff; color: #0969da; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+  .report-viewer {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6); z-index: 2000; display: flex; flex-direction: column;
+  }
+  .report-viewer-bar {
+    background: #1f2328; color: #fff; padding: 12px 20px;
+    display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
+  }
+  .report-viewer-bar .rv-title { font-size: 15px; font-weight: 600; }
+  .report-viewer-bar .rv-actions { display: flex; gap: 8px; }
+  .report-viewer-bar .btn-rv {
+    padding: 6px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3);
+    background: transparent; color: #fff; font-size: 13px; cursor: pointer;
+  }
+  .report-viewer-bar .btn-rv:hover { background: rgba(255,255,255,0.15); }
+  .report-viewer iframe { flex: 1; border: none; background: #fff; }
+
   /* Mobile responsive */
   @media (max-width: 768px) {
     header { padding: 16px 20px; flex-direction: column; gap: 8px; align-items: flex-start; }
@@ -285,6 +313,7 @@
     .panel-header { flex-direction: column; align-items: stretch; }
     .panel-desc { font-size: 13px; }
     .card-grid { grid-template-columns: 1fr; }
+    .report-grid { grid-template-columns: 1fr; }
     .modal { width: 95vw; padding: 20px; }
   }
 </style>
@@ -295,9 +324,7 @@
   <h1><span>생각의숲</span> 사업 운영 보드</h1>
   <div class="header-meta">
     이동길 + 이은경 | 2026-03 ~ |
-    <a href="https://docs.google.com/spreadsheets/d/1pdW8Xif8ZA75UbkAAbnn02wosNbO5kNnmuJ462E-nqw" target="_blank">Sheets 원본</a> |
-    <a href="bm-analysis.html" target="_blank">BM 분석 리포트</a> |
-    <a href="cafe-analysis-report.html" target="_blank">카페 분석 리포트</a>
+    <a href="https://docs.google.com/spreadsheets/d/1pdW8Xif8ZA75UbkAAbnn02wosNbO5kNnmuJ462E-nqw" target="_blank">Sheets 원본</a>
   </div>
 </header>
 
@@ -342,7 +369,13 @@
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
-const SHEET_ORDER = ['로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항'];
+const SHEET_ORDER = ['로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항', '리포트'];
+
+const REPORTS = [
+  { title: 'BM 분석 리포트', desc: '5개 프랜차이즈 정보공개서 기반 사업모델 비교 분석', file: 'bm-analysis.html', date: '2026-03-22', category: '사업 모델' },
+  { title: '카페 분석 리포트', desc: '슬기로운 초등생활 네이버 카페 통계·진단·자동화 방안', file: 'cafe-analysis-report.html', date: '2026-03-27', category: '마케팅' },
+  { title: '네이버 API 가이드', desc: '네이버 카페 API 연동 설정 가이드', file: 'naver-api-guide.html', date: '2026-03-27', category: '마케팅' },
+];
 const CATEGORIES = ['법인/거버넌스', '브랜드', '콘텐츠', '인력', '시장/경쟁', '사업 모델', '마케팅', '재무'];
 const PHASE_NAMES = {
   'P0': '사업 설계', 'P1': '콘텐츠 개발', 'P2': '본점 준비',
@@ -383,6 +416,11 @@ const SHEET_CONFIG = {
     sub: '확정',
     desc: '이동길 + 이은경이 <strong>확정한 전제 조건과 역할분담</strong>. 더 이상 논의 불필요.',
     columns: ['카테고리', '항목', '내용', '담당', '비고'],
+  },
+  '리포트': {
+    sub: '아카이브',
+    desc: '<strong>분석 리포트 아카이브.</strong> 조사·분석 결과물을 모아 볼 수 있습니다.',
+    columns: [],
   },
 };
 
@@ -454,7 +492,9 @@ function renderTabs() {
     const dataRows = rows.filter((r, idx) => idx >= 2 && r.some(c => c));
     const active = name === currentTab ? 'active' : '';
     let cnt;
-    if (name === '할일') {
+    if (name === '리포트') {
+      cnt = REPORTS.length;
+    } else if (name === '할일') {
       cnt = dataRows.filter(r => (r[1]||'').trim() && (r[4]||'') !== '완료').length;
     } else if (name === '회의록') {
       cnt = dataRows.filter(r => (r[0]||'').trim()).length;
@@ -475,7 +515,8 @@ function renderTabs() {
       <span class="tab-sub">${config.sub}</span>
     </div>`;
     if (i === 2) return tab + divider; // 회의록 뒤에 구분선
-    if (i < SHEET_ORDER.length - 1 && i > 2) return tab + arrow; // 브레인스토밍 탭 사이 화살표
+    if (name === '합의사항') return tab + divider; // 합의사항 뒤에 구분선 (리포트 분리)
+    if (i < SHEET_ORDER.length - 1 && i > 2 && name !== '리포트') return tab + arrow; // 브레인스토밍 탭 사이 화살표
     return tab;
   }).join('');
 }
@@ -502,6 +543,10 @@ function renderPanel() {
   // 할일 전용 렌더링
   if (currentTab === '할일') {
     return renderTodoPanel(config, rows, allDataRows);
+  }
+  // 리포트 전용 렌더링
+  if (currentTab === '리포트') {
+    return renderReportPanel();
   }
 
   const dataRows = allDataRows.filter(r => {
@@ -1094,6 +1139,57 @@ async function submitFeedback() {
 document.getElementById('feedbackModal').addEventListener('click', (e) => {
   if (e.target === document.getElementById('feedbackModal')) closeFeedbackModal();
 });
+
+function renderReportPanel() {
+  const main = document.querySelector('main');
+  const cats = [...new Set(REPORTS.map(r => r.category))];
+  let html = `
+    <div class="panel-header">
+      <div class="panel-desc"><strong>분석 리포트 아카이브.</strong> 조사·분석 결과물을 모아 볼 수 있습니다. 카드를 클릭하면 바로 열립니다.</div>
+    </div>
+  `;
+  cats.forEach(cat => {
+    const items = REPORTS.filter(r => r.category === cat);
+    html += `<div class="section-title">${cat}</div><div class="report-grid">`;
+    items.forEach((r, idx) => {
+      const globalIdx = REPORTS.indexOf(r);
+      html += `
+        <div class="report-card" onclick="openReport(${globalIdx})">
+          <div class="report-title">${r.title}</div>
+          <div class="report-desc">${r.desc}</div>
+          <div class="report-meta">
+            <span>${r.date}</span>
+            <span class="report-cat">${r.category}</span>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+  main.innerHTML = html;
+}
+
+function openReport(idx) {
+  const r = REPORTS[idx];
+  const viewer = document.createElement('div');
+  viewer.className = 'report-viewer';
+  viewer.id = 'reportViewer';
+  viewer.innerHTML = `
+    <div class="report-viewer-bar">
+      <span class="rv-title">${r.title}</span>
+      <div class="rv-actions">
+        <button class="btn-rv" onclick="window.open('${r.file}', '_blank')">새 탭에서 열기</button>
+        <button class="btn-rv" onclick="closeReport()">닫기</button>
+      </div>
+    </div>
+    <iframe src="${r.file}"></iframe>
+  `;
+  document.body.appendChild(viewer);
+}
+
+function closeReport() {
+  const v = document.getElementById('reportViewer');
+  if (v) v.remove();
+}
 
 loadData();
 </script>
