@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>네이버 카페 API 설정 가이드</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    background: #f8f6f1;
+    color: #2c2c2c;
+    line-height: 1.7;
+    padding: 0 0 80px;
+  }
+
+  /* 헤더 */
+  .header {
+    background: linear-gradient(135deg, #2D6A4F, #40916C);
+    color: white;
+    padding: 40px 24px 32px;
+    text-align: center;
+  }
+  .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .header p { font-size: 14px; opacity: 0.85; }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    margin-top: 12px;
+  }
+
+  /* 컨테이너 */
+  .container { max-width: 540px; margin: 0 auto; padding: 0 16px; }
+
+  /* 인트로 */
+  .intro {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin: -20px 16px 20px;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    font-size: 15px;
+  }
+  .intro strong { color: #2D6A4F; }
+
+  /* 스텝 카드 */
+  .step {
+    background: white;
+    border-radius: 16px;
+    margin: 16px 0;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .step-number {
+    width: 36px; height: 36px;
+    background: #2D6A4F;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .step-number.done { background: #95D5B2; color: #1B4332; }
+  .step-title { font-size: 16px; font-weight: 600; flex: 1; }
+  .step-time {
+    font-size: 11px;
+    color: #888;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .step-body {
+    padding: 0 20px 20px;
+    font-size: 14px;
+  }
+  .step-body ol, .step-body ul {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+  .step-body li { margin: 6px 0; }
+
+  /* 입력 가이드 테이블 */
+  .input-guide {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .input-guide th {
+    background: #f0f7f4;
+    color: #2D6A4F;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    width: 40%;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .input-guide td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .input-guide .copy-value {
+    background: #FFF8E7;
+    border: 1px dashed #E0C97F;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-family: 'SF Mono', monospace;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .copy-btn {
+    background: #2D6A4F;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .copy-btn:active { background: #1B4332; }
+  .copy-btn.copied { background: #95D5B2; color: #1B4332; }
+
+  /* 경고/팁 박스 */
+  .tip {
+    background: #f0f7f4;
+    border-left: 3px solid #2D6A4F;
+    padding: 12px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .tip::before { content: "💡 "; }
+  .warning {
+    background: #FFF3E0;
+    border-left: 3px solid #E65100;
+    padding: 12px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .warning::before { content: "⚠️ "; }
+
+  /* 스크린샷 영역 */
+  .screenshot-placeholder {
+    background: #f5f5f5;
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin: 12px 0;
+    color: #999;
+    font-size: 13px;
+  }
+
+  /* 최종 제출 카드 */
+  .final-card {
+    background: linear-gradient(135deg, #2D6A4F, #40916C);
+    color: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+    box-shadow: 0 4px 20px rgba(45,106,79,0.3);
+  }
+  .final-card h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .final-item {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .final-item .num {
+    width: 28px; height: 28px;
+    background: white;
+    color: #2D6A4F;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .final-item .label {
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .final-item .desc {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  /* 체크리스트 */
+  .checklist { margin: 16px 0; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+  .check-item input[type="checkbox"] {
+    width: 20px; height: 20px;
+    margin-top: 2px;
+    accent-color: #2D6A4F;
+    flex-shrink: 0;
+  }
+  .check-item.checked label { color: #999; text-decoration: line-through; }
+
+  /* 진행 바 */
+  .progress-bar {
+    background: #e0e0e0;
+    border-radius: 10px;
+    height: 8px;
+    margin: 16px 0 8px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, #2D6A4F, #74C69D);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+  }
+  .progress-text {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+  }
+
+  /* 하단 연락 */
+  .contact {
+    text-align: center;
+    padding: 24px;
+    font-size: 14px;
+    color: #888;
+  }
+  .contact a {
+    color: #2D6A4F;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>네이버 카페 API 설정 가이드</h1>
+  <p>카페 자동화를 위한 1회 설정</p>
+  <div class="badge">소요시간 약 10분</div>
+</div>
+
+<div class="container">
+
+  <div class="intro">
+    언니, 카페 자동화 시스템을 연결하려면<br>
+    네이버에서 <strong>"앱 등록"</strong>을 한 번만 해주시면 돼요.<br>
+    아래 순서대로 따라하시면 됩니다!
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">0 / 8 완료</div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn1">1</div>
+      <div class="step-title">네이버 개발자센터 접속</div>
+      <div class="step-time">1분</div>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li><strong>PC 크롬</strong>에서 아래 주소를 주소창에 입력하세요</li>
+      </ol>
+      <div class="input-guide">
+        <table class="input-guide" style="width:100%">
+          <tr>
+            <th>주소</th>
+            <td>
+              <div class="copy-value">
+                <span>developers.naver.com</span>
+                <button class="copy-btn" onclick="copyText(this, 'developers.naver.com')">복사</button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <ol start="2">
+        <li>오른쪽 위 <strong>[로그인]</strong> 클릭</li>
+      </ol>
+      <div class="warning">
+        <strong>반드시 슬기로운 초등생활 카페를 운영하는 네이버 계정</strong>으로 로그인하세요! (카페 관리자 계정)
+      </div>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>개발자센터 접속 및 로그인 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn2">2</div>
+      <div class="step-title">애플리케이션 등록 시작</div>
+      <div class="step-time">2분</div>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>상단 메뉴에서 <strong>[Application]</strong> 클릭</li>
+        <li><strong>[애플리케이션 등록]</strong> 클릭</li>
+        <li>이용약관 동의 화면 → 모두 체크 → <strong>[확인]</strong></li>
+        <li>휴대폰 인증 요청 → 본인 번호로 인증</li>
+        <li>회사 이름에 아래 입력 후 <strong>[확인]</strong></li>
+      </ol>
+      <table class="input-guide">
+        <tr>
+          <th>회사 이름</th>
+          <td>
+            <div class="copy-value">
+              <span>생각의숲</span>
+              <button class="copy-btn" onclick="copyText(this, '생각의숲')">복사</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="tip">휴대폰 인증은 처음 1회만 하면 돼요. 다음부터는 안 물어봐요!</div>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>이용약관 동의 + 휴대폰 인증 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn3">3</div>
+      <div class="step-title">앱 이름 입력</div>
+      <div class="step-time">30초</div>
+    </div>
+    <div class="step-body">
+      <p>"애플리케이션 등록" 화면이 열리면:</p>
+      <table class="input-guide">
+        <tr>
+          <th>애플리케이션 이름</th>
+          <td>
+            <div class="copy-value">
+              <span>생각의숲</span>
+              <button class="copy-btn" onclick="copyText(this, '생각의숲')">복사</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>앱 이름 입력 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn4">4</div>
+      <div class="step-title">사용 API 선택 (제일 중요!)</div>
+      <div class="step-time">1분</div>
+    </div>
+    <div class="step-body">
+      <p><strong>[사용 API]</strong> 섹션을 찾아주세요:</p>
+      <ol>
+        <li>드롭다운(선택 상자)을 클릭</li>
+        <li>목록에서 <strong>"카페"</strong>를 찾아서 선택</li>
+        <li><strong>[추가]</strong> 버튼 클릭</li>
+      </ol>
+      <div class="tip">
+        "카페"를 추가하면 <strong>"네이버 로그인"</strong>도 자동으로 같이 추가돼요. 이건 정상이에요!
+      </div>
+      <div class="screenshot-placeholder">
+        화면에 이렇게 보여야 정상이에요:<br><br>
+        ✅ 네이버 로그인 (자동 추가됨)<br>
+        ✅ 카페 (내가 추가함)
+      </div>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>"카페" API 추가 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn5">5</div>
+      <div class="step-title">서비스 환경 설정</div>
+      <div class="step-time">2분</div>
+    </div>
+    <div class="step-body">
+      <p><strong>[로그인 오픈 API 서비스 환경]</strong> 섹션에서:</p>
+      <ol>
+        <li>환경 선택: <strong>"PC 웹"</strong> 선택</li>
+        <li>아래 두 칸이 나타나면 정확히 입력:</li>
+      </ol>
+      <table class="input-guide">
+        <tr>
+          <th>서비스 URL</th>
+          <td>
+            <div class="copy-value">
+              <span>http://127.0.0.1</span>
+              <button class="copy-btn" onclick="copyText(this, 'http://127.0.0.1')">복사</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Callback URL</th>
+          <td>
+            <div class="copy-value">
+              <span style="font-size:11px">http://localhost:8888/callback</span>
+              <button class="copy-btn" onclick="copyText(this, 'http://localhost:8888/callback')">복사</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="warning">
+        <strong>localhost</strong>가 아니라 <strong>127.0.0.1</strong>로 입력하세요! (서비스 URL)<br>
+        Callback URL만 localhost를 씁니다.
+      </div>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>서비스 URL + Callback URL 입력 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn6">6</div>
+      <div class="step-title">등록하기 클릭</div>
+      <div class="step-time">10초</div>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>화면 맨 아래 <strong>[등록하기]</strong> 버튼 클릭</li>
+        <li>"등록되었습니다" 메시지가 나오면 성공!</li>
+      </ol>
+      <div class="tip">
+        등록 후 자동으로 "내 애플리케이션" 페이지로 이동돼요.
+      </div>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>애플리케이션 등록 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn7">7</div>
+      <div class="step-title">Client ID / Secret 확인</div>
+      <div class="step-time">1분</div>
+    </div>
+    <div class="step-body">
+      <p>"내 애플리케이션" 페이지에서:</p>
+      <ol>
+        <li><strong>Client ID</strong> — 화면에 바로 보이는 영문+숫자 코드<br>→ 길게 눌러서 복사</li>
+        <li><strong>Client Secret</strong> — <strong>[보기]</strong> 버튼을 눌러야 보여요<br>→ 버튼 누르고 나온 코드를 복사</li>
+      </ol>
+      <div class="screenshot-placeholder">
+        이런 형태로 보여요:<br><br>
+        Client ID: <code>A1b2C3d4E5f6G7h8</code><br>
+        Client Secret: [보기] ← 이걸 클릭!<br>
+        → <code>xYz9AbCdEfGh</code>
+      </div>
+      <div class="warning">
+        Client Secret은 <strong>반드시 [보기]</strong>를 눌러야 나와요!<br>
+        안 누르면 보이지 않습니다.
+      </div>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>Client ID + Secret 복사 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-number" id="sn8">8</div>
+      <div class="step-title">카페 Club ID 확인</div>
+      <div class="step-time">1분</div>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>네이버 카페 접속 → 슬기로운 초등생활 카페</li>
+        <li>카페 메인에서 <strong>[관리]</strong> 클릭</li>
+        <li>관리 페이지 URL 주소창을 확인하세요</li>
+      </ol>
+      <div class="screenshot-placeholder">
+        주소창이 이렇게 생겼어요:<br><br>
+        <code style="font-size:12px">cafe.naver.com/ManageMain.nhn?clubid=<strong style="color:#E65100">12345678</strong></code><br><br>
+        여기서 <strong style="color:#E65100">숫자 부분</strong>이 Club ID예요!
+      </div>
+      <div class="tip">
+        관리 페이지가 안 보이면, 카페 왼쪽 메뉴에서<br>
+        "카페 관리" 또는 톱니바퀴 아이콘을 찾아보세요.
+      </div>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" onchange="updateProgress()"><label>Club ID 확인 완료</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 최종 제출 카드 -->
+  <div class="final-card">
+    <h3>동길이한테 보내줄 3가지</h3>
+    <div class="final-item">
+      <div class="num">1</div>
+      <div>
+        <div class="label">Client ID</div>
+        <div class="desc">내 애플리케이션에서 복사한 영문+숫자 코드</div>
+      </div>
+    </div>
+    <div class="final-item">
+      <div class="num">2</div>
+      <div>
+        <div class="label">Client Secret</div>
+        <div class="desc">[보기] 눌러서 나온 코드</div>
+      </div>
+    </div>
+    <div class="final-item">
+      <div class="num">3</div>
+      <div>
+        <div class="label">Club ID (숫자)</div>
+        <div class="desc">카페 관리 페이지 URL의 숫자</div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:16px; font-size:14px; opacity:0.9">
+      이 3개만 카톡으로 보내주시면<br>나머지는 동길이가 다 세팅합니다!
+    </p>
+  </div>
+
+  <div class="contact">
+    궁금한 거 있으면 동길이한테 전화하세요<br>
+    <a href="tel:">📞 전화하기</a>
+  </div>
+
+</div>
+
+<script>
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '완료!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = '복사';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(function() {
+    // 클립보드 API 안 되면 대체
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '완료!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = '복사';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function updateProgress() {
+  var checks = document.querySelectorAll('.check-item input[type="checkbox"]');
+  var done = 0;
+  checks.forEach(function(cb, i) {
+    var item = cb.closest('.check-item');
+    var sn = document.getElementById('sn' + (i + 1));
+    if (cb.checked) {
+      done++;
+      item.classList.add('checked');
+      if (sn) sn.classList.add('done');
+    } else {
+      item.classList.remove('checked');
+      if (sn) sn.classList.remove('done');
+    }
+  });
+  var pct = Math.round(done / checks.length * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = done + ' / ' + checks.length + ' 완료';
+}
+
+function toggleStep(header) {
+  var body = header.nextElementSibling;
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+  } else {
+    body.style.display = 'block'; // 항상 펼침 (접기 안 함)
+  }
+}
+</script>
+
+</body>
+</html>
