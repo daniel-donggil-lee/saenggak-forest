@@ -238,6 +238,126 @@
   }
   .print-bar button:hover { background: #2d5a27; }
 
+  /* ── Comment System ── */
+  .comment-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #888;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 3px 12px 3px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    float: right;
+    margin-top: 4px;
+  }
+  .comment-btn:hover { color: var(--accent); border-color: var(--accent); background: #f5f5f0; }
+  .comment-btn .cnt {
+    background: var(--accent); color: #fff; font-size: 10px;
+    width: 18px; height: 18px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .comment-btn .cnt.zero { background: #ccc; }
+
+  .comment-area {
+    display: none;
+    margin-top: 12px;
+    padding: 16px;
+    background: #fafaf8;
+    border: 1px solid #e0ddd5;
+    border-radius: 10px;
+  }
+  .comment-area.open { display: block; }
+
+  .comment-list { margin-bottom: 12px; }
+  .comment-item {
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .comment-item .comment-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: #888;
+  }
+  .comment-item .comment-author {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .comment-item .comment-author.eunkyung { color: #c0392b; }
+  .comment-item .comment-author.donggil { color: #2980b9; }
+  .comment-item .comment-text { color: var(--text-sub); }
+
+  .comment-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .comment-input-row select {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    min-width: 90px;
+  }
+  .comment-input-row textarea {
+    flex: 1;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;
+    min-height: 40px;
+    line-height: 1.6;
+  }
+  .comment-input-row textarea:focus { outline: none; border-color: var(--accent); }
+  .comment-submit {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .comment-submit:hover { background: #2d5a27; }
+  .comment-submit:disabled { background: #999; cursor: not-allowed; }
+
+  .comment-empty {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    color: #aaa;
+    text-align: center;
+    padding: 12px;
+  }
+  .comment-status {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+    margin-top: 6px;
+  }
+  .comment-status.error { color: #c0392b; }
+
   /* ── Guide Section ── */
   .guide {
     background: #f8f9fa;
@@ -409,8 +529,9 @@
 <div class="article">
   <h2>제3조 (법인 설립)</h2>
   <p class="clause"><span class="num">①</span> 회사는 주식회사 형태로 설립하며, 설립 시기는 2026년 내로 한다.</p>
-  <p class="clause"><span class="num">②</span> 설립 비용은 갑과 을이 지분 비율에 따라 분담한다.</p>
-  <p class="clause"><span class="num">③</span> 본점 소재지는 갑과 을이 합의하여 정한다.</p>
+  <p class="clause"><span class="num">②</span> <strong>대표이사는 갑(이은경) 단독</strong>으로 선임한다. 을(이동길)은 이사로 등기한다.</p>
+  <p class="clause"><span class="num">③</span> 설립 비용은 갑과 을이 지분 비율에 따라 분담한다.</p>
+  <p class="clause"><span class="num">④</span> 본점 소재지는 갑과 을이 합의하여 정한다.</p>
   <div class="guide">
     <div class="guide-title">쉬운 해설</div>
     <p><strong>주식회사</strong>를 선택한 이유: 나중에 투자를 받거나 상장(IPO)할 때 주식회사가 유리합니다. 유한회사는 지분 양도가 까다롭고 투자자들이 선호하지 않습니다.</p>
@@ -485,15 +606,15 @@
     </tbody>
   </table>
 
-  <p class="clause"><span class="num">②</span> 각 당사자는 자신의 담당 영역에서 자율적으로 업무를 수행한다.</p>
-  <p class="clause"><span class="num">③</span> 담당 영역 간 이견이 발생하거나 영역이 중첩되는 사항에 대해서는 갑이 <strong>최종 결정권</strong>을 가진다. 단, 제6조 제1항에 해당하는 중요 사항은 전원 합의를 우선한다.</p>
+  <p class="clause"><span class="num">②</span> 을은 담당 영역의 업무를 책임지고 집행한다.</p>
+  <p class="clause"><span class="num">③</span> 회사의 모든 업무에 대한 <strong>최종 결정권은 대표이사인 갑</strong>에게 있다. 단, 제6조 제1항에 해당하는 중요 사항은 전원 합의를 우선한다.</p>
   <div class="guide">
     <div class="guide-title">쉬운 해설 — 역할 분담</div>
     <p>쉽게 말하면: <strong>은경 누나 = 콘텐츠 + 얼굴</strong>, <strong>동길 = 경영 + 기술</strong>입니다.</p>
     <p>은경 누나가 "무엇을 가르칠지, 어떻게 가르칠지"를 만들고, 동길이가 "어떻게 운영하고, 어떻게 확장할지"를 책임집니다.</p>
-    <p>각자 맡은 영역에서는 <strong>자율적으로 결정</strong>할 수 있습니다. 예를 들어 은경 누나가 교재 내용을 바꾸는 데 동길이의 허락이 필요하지 않고, 동길이가 가맹점 관리 시스템을 바꾸는 데 은경 누나의 허락이 필요하지 않습니다.</p>
-    <p>단, 영역이 겹치거나 의견이 다를 때는 <strong>은경 누나가 최종 결정권</strong>을 가집니다. 이는 60% 대주주로서의 권한입니다.</p>
-    <p>예외: <strong>큰 돈(1,000만 원+)이 들거나 회사 방향이 바뀌는 결정</strong>은 최종 결정권과 무관하게 반드시 둘이 합의해야 합니다 (제6조).</p>
+    <p>쉽게 말하면: <strong>동길 = 집행 책임자</strong> (맡은 일을 알아서 처리), <strong>은경 누나 = 최종 결정자</strong> (방향이 맞는지 판단)입니다.</p>
+    <p>동길이가 시스템을 만들고 가맹점을 관리하는 건 동길이 몫이지만, 회사 전체의 방향과 판단에 대한 <strong>최종 결정권은 대표이사인 은경 누나</strong>에게 있습니다.</p>
+    <p>단, <strong>큰 돈(1,000만 원+), 투자 유치, 임원 인사</strong> 같은 중요사항은 대표이사라 해도 혼자 결정할 수 없고, <strong>반드시 둘이 합의</strong>해야 합니다 (제6조). 이는 40% 주주인 동길이의 권리를 보호하는 장치입니다.</p>
   </div>
 </div>
 
@@ -516,8 +637,8 @@
   <p class="sub-clause">2. 2차: 외부 자문인(회계사, 법률가 등) 의견 청취 (14일 이내)</p>
   <p class="sub-clause">3. 3차: 제12조에 따른 분쟁 해결 절차</p>
 
-  <div class="note warning">
-    <strong>검토 필요:</strong> 대표이사를 공동대표로 할지, 단독대표 + 이사 구조로 할지 결정 필요. 공동대표 시 인감 공동날인 범위 설정 필요.
+  <div class="note">
+    <strong>확정:</strong> 대표이사는 갑(이은경) 단독. 을(이동길)은 이사로 등기.
   </div>
   <div class="guide">
     <div class="guide-title">쉬운 해설 — 의사결정</div>
@@ -881,6 +1002,163 @@
 </div>
 
 </div><!-- /page -->
+
+<script>
+const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
+const SHEET = '계약서_댓글';
+let allComments = [];
+
+// 조항 목록
+const ARTICLES = [
+  '제1조', '제2조', '제3조', '제4조', '제5조', '제6조', '제7조',
+  '제8조', '제9조', '제10조', '제11조', '제12조', '제13조', '제14조', '제15조', '제16조'
+];
+
+function init() {
+  // 각 article에 댓글 버튼 + 영역 추가
+  document.querySelectorAll('.article').forEach(el => {
+    const h2 = el.querySelector('h2');
+    if (!h2) return;
+    const match = h2.textContent.match(/제\d+조/);
+    if (!match) return;
+    const articleId = match[0];
+
+    // 버튼
+    const btn = document.createElement('button');
+    btn.className = 'comment-btn no-print';
+    btn.setAttribute('data-article', articleId);
+    btn.innerHTML = '<span class="cnt zero" id="cnt-' + articleId + '">0</span> 댓글';
+    btn.onclick = () => toggleComment(articleId);
+    h2.appendChild(btn);
+
+    // 댓글 영역
+    const area = document.createElement('div');
+    area.className = 'comment-area no-print';
+    area.id = 'comments-' + articleId;
+    area.innerHTML = `
+      <div class="comment-list" id="list-${articleId}">
+        <div class="comment-empty">아직 댓글이 없습니다</div>
+      </div>
+      <div class="comment-input-row">
+        <select id="author-${articleId}">
+          <option value="이은경">이은경</option>
+          <option value="이동길">이동길</option>
+        </select>
+        <textarea id="input-${articleId}" placeholder="이 조항에 대한 의견을 남겨주세요..." rows="2"></textarea>
+        <button class="comment-submit" onclick="submitComment('${articleId}')">등록</button>
+      </div>
+      <div class="comment-status" id="status-${articleId}"></div>
+    `;
+    el.appendChild(area);
+  });
+
+  loadComments();
+}
+
+function toggleComment(articleId) {
+  const area = document.getElementById('comments-' + articleId);
+  area.classList.toggle('open');
+  if (area.classList.contains('open')) {
+    document.getElementById('input-' + articleId).focus();
+  }
+}
+
+async function loadComments() {
+  try {
+    const res = await fetch(API);
+    const data = await res.json();
+    const rows = data[SHEET] || [];
+    allComments = rows.slice(1).filter(r => r[0]).map(r => ({
+      article: r[0], author: r[1], text: r[2], date: r[3], status: r[4]
+    }));
+    renderAllComments();
+  } catch (e) {
+    // 오프라인 시 localStorage에서 로드
+    const saved = localStorage.getItem('contract_comments');
+    if (saved) {
+      allComments = JSON.parse(saved);
+      renderAllComments();
+    }
+  }
+}
+
+function renderAllComments() {
+  ARTICLES.forEach(articleId => {
+    const comments = allComments.filter(c => c.article === articleId);
+    const list = document.getElementById('list-' + articleId);
+    const cnt = document.getElementById('cnt-' + articleId);
+    if (!list || !cnt) return;
+
+    cnt.textContent = comments.length;
+    cnt.className = comments.length > 0 ? 'cnt' : 'cnt zero';
+
+    if (comments.length === 0) {
+      list.innerHTML = '<div class="comment-empty">아직 댓글이 없습니다</div>';
+      return;
+    }
+
+    list.innerHTML = comments.map(c => {
+      const authorClass = c.author === '이은경' ? 'eunkyung' : 'donggil';
+      return `<div class="comment-item">
+        <div class="comment-meta">
+          <span class="comment-author ${authorClass}">${c.author}</span>
+          <span>${c.date}</span>
+        </div>
+        <div class="comment-text">${escapeHtml(c.text)}</div>
+      </div>`;
+    }).join('');
+  });
+}
+
+async function submitComment(articleId) {
+  const input = document.getElementById('input-' + articleId);
+  const author = document.getElementById('author-' + articleId).value;
+  const status = document.getElementById('status-' + articleId);
+  const text = input.value.trim();
+
+  if (!text) { input.focus(); return; }
+
+  const now = new Date();
+  const dateStr = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0') + ' ' +
+    String(now.getHours()).padStart(2, '0') + ':' +
+    String(now.getMinutes()).padStart(2, '0');
+
+  const comment = { article: articleId, author, text, date: dateStr, status: '' };
+
+  // 즉시 UI 반영
+  allComments.push(comment);
+  renderAllComments();
+  input.value = '';
+  status.textContent = '저장 중...';
+  status.className = 'comment-status';
+
+  // localStorage 백업
+  localStorage.setItem('contract_comments', JSON.stringify(allComments));
+
+  // Google Sheets에 저장
+  try {
+    const payload = JSON.stringify({
+      action: 'append',
+      sheet: SHEET,
+      values: [articleId, author, text, dateStr, '']
+    });
+    await fetch(API + '?payload=' + encodeURIComponent(payload));
+    status.textContent = '저장 완료';
+    setTimeout(() => { status.textContent = ''; }, 2000);
+  } catch (e) {
+    status.textContent = '오프라인 — 로컬에 저장됨 (다음 접속 시 동기화)';
+    status.className = 'comment-status error';
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
 
 </body>
 </html>
