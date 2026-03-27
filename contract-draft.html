@@ -237,6 +237,122 @@
     transition: background 0.2s;
   }
   .print-bar button:hover { background: #2d5a27; }
+
+  /* ── Guide Section ── */
+  .guide {
+    background: #f8f9fa;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-sub);
+  }
+  .guide .guide-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4a6741;
+    margin-bottom: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .guide .guide-title::before {
+    content: '📖';
+    font-size: 16px;
+  }
+  .guide .guide-title .toggle {
+    font-size: 12px;
+    color: #999;
+    margin-left: auto;
+  }
+  .guide p { margin-bottom: 10px; color: var(--text-sub); }
+  .guide strong { color: var(--text); }
+  .guide .example-box {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .guide .example-box .ex-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #4a6741;
+    margin-bottom: 8px;
+  }
+  .guide .example-box .ex-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 13.5px;
+    border-bottom: 1px dotted #eee;
+  }
+  .guide .example-box .ex-row:last-child { border-bottom: none; }
+  .guide .example-box .ex-label { color: #666; }
+  .guide .example-box .ex-value { font-weight: 600; color: var(--text); }
+  .guide .example-box .ex-value.highlight { color: #b71c1c; }
+  .guide .example-box .ex-value.green { color: #2d5a27; }
+  .guide .vs-box {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: stretch;
+    margin: 12px 0;
+  }
+  .guide .vs-box .vs-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .guide .vs-box .vs-card .vs-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 6px;
+  }
+  .guide .vs-box .vs-card .vs-amount {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .guide .vs-box .vs-divider {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: #ccc;
+    font-weight: 300;
+  }
+  .guide .timeline-mini {
+    display: flex;
+    gap: 0;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .guide .timeline-mini .tm-item {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    background: #f0f0f0;
+    border-right: 2px solid #fff;
+    position: relative;
+  }
+  .guide .timeline-mini .tm-item:first-child { border-radius: 8px 0 0 8px; }
+  .guide .timeline-mini .tm-item:last-child { border-radius: 0 8px 8px 0; border-right: none; }
+  .guide .timeline-mini .tm-item.active { background: #e8f5e4; }
+  .guide .timeline-mini .tm-pct { font-weight: 700; font-size: 15px; display: block; }
+  .guide .timeline-mini .tm-label { font-size: 11px; color: #888; }
+  @media (max-width: 600px) {
+    .guide .vs-box { grid-template-columns: 1fr; }
+    .guide .vs-box .vs-divider { justify-content: center; }
+    .guide .timeline-mini { flex-direction: column; gap: 4px; }
+    .guide .timeline-mini .tm-item { border-radius: 6px !important; border-right: none; }
+  }
 </style>
 </head>
 <body>
@@ -263,6 +379,11 @@
 <div class="article">
   <h2>제1조 (목적)</h2>
   <p class="clause"><span class="num">①</span> 본 계약은 갑과 을이 공동으로 설립하는 법인(이하 "회사")의 지분 구조, 역할 분담, 의사결정 방식, 수익 배분, 엑싯(Exit) 시 정산 방법 등을 정함을 목적으로 한다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설</div>
+    <p>이 계약서는 <strong>주주간계약서(SHA)</strong>라고도 불립니다. 법인(회사)을 함께 만들 때 "돈은 어떻게 나누고, 결정은 누가 하고, 나중에 헤어지면 어떻게 정리할지"를 미리 약속하는 문서입니다.</p>
+    <p>정관(회사 규칙)과 별도로 <strong>두 사람 사이의 사적 약속</strong>이기 때문에, 외부에 공개되지 않습니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제2조 ════════ -->
@@ -275,6 +396,11 @@
   <p class="sub-clause">4. 교육 관련 콘텐츠 IP 개발 및 라이선싱</p>
   <p class="sub-clause">5. 기타 상호 합의에 의해 추가되는 교육 관련 사업</p>
   <p class="clause"><span class="num">②</span> 회사의 상호(브랜드명)는 갑과 을이 합의하여 별도로 정한다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설</div>
+    <p>사업 범위를 넓게 잡아두는 이유가 있습니다. 처음엔 글쓰기 프랜차이즈로 시작하지만, 나중에 온라인 구독이나 AI 교육 서비스를 추가할 때 <strong>계약서를 다시 쓰지 않아도 되게</strong> 하기 위함입니다.</p>
+    <p>여기에 적힌 사업만 이 회사에서 할 수 있고, 여기에 없는 사업을 새로 하려면 둘이 합의해야 합니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제3조 ════════ -->
@@ -283,6 +409,11 @@
   <p class="clause"><span class="num">①</span> 회사는 주식회사 형태로 설립하며, 설립 시기는 2026년 내로 한다.</p>
   <p class="clause"><span class="num">②</span> 설립 비용은 갑과 을이 지분 비율에 따라 분담한다.</p>
   <p class="clause"><span class="num">③</span> 본점 소재지는 갑과 을이 합의하여 정한다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설</div>
+    <p><strong>주식회사</strong>를 선택한 이유: 나중에 투자를 받거나 상장(IPO)할 때 주식회사가 유리합니다. 유한회사는 지분 양도가 까다롭고 투자자들이 선호하지 않습니다.</p>
+    <p><strong>설립 비용</strong>은 등록면허세, 법무사 비용 등 약 100~200만 원 정도이며, 이것도 60:40으로 나눠서 냅니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제4조 ════════ -->
@@ -306,6 +437,33 @@
   <div class="note warning">
     <strong>검토 필요:</strong> 현물출자 가액 산정 방법(감정평가 vs 합의), 스톡옵션 풀 사전 설정 여부(통상 10~15%), 우선주/보통주 구분 필요 시 별도 정관 반영
   </div>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 지분이란?</div>
+    <p><strong>지분 = 회사의 소유 비율</strong>입니다. 회사가 피자 한 판이라면, 은경 언니가 6조각, 동길이가 4조각을 가지는 것과 같습니다.</p>
+
+    <p><strong>지분이 영향을 미치는 것:</strong></p>
+    <div class="example-box">
+      <div class="ex-title">예시: 회사가 1년에 1억 원 순이익을 냈을 때 배당</div>
+      <div class="ex-row"><span class="ex-label">은경 (60%)</span><span class="ex-value">6,000만 원</span></div>
+      <div class="ex-row"><span class="ex-label">동길 (40%)</span><span class="ex-value">4,000만 원</span></div>
+    </div>
+
+    <p><strong>"현물출자"</strong>란 현금 대신 가치 있는 것을 넣는 것입니다:</p>
+    <div class="example-box">
+      <div class="ex-title">출자 구성 예시 (자본금 1억 기준)</div>
+      <div class="ex-row"><span class="ex-label">은경: 현금 3,000만 + 콘텐츠 IP 3,000만</span><span class="ex-value">= 6,000만 (60%)</span></div>
+      <div class="ex-row"><span class="ex-label">동길: 현금 2,000만 + AI시스템 2,000만</span><span class="ex-value">= 4,000만 (40%)</span></div>
+    </div>
+    <p>콘텐츠 IP란 은경 언니의 저서, 강연 콘텐츠, '슬기로운 초등생활' 브랜드를 회사에 빌려주는 권리를 말합니다. 이것의 가치를 얼마로 볼 것인지는 둘이 합의하거나 전문가(감정평가사)에게 맡깁니다.</p>
+
+    <p><strong>"지분 희석"</strong>이란? 나중에 투자자가 들어오면 파이가 커지면서 내 비율이 줄어드는 것입니다:</p>
+    <div class="example-box">
+      <div class="ex-title">예시: 투자자가 20% 지분을 가져가면</div>
+      <div class="ex-row"><span class="ex-label">투자 전 — 은경 60% : 동길 40%</span><span class="ex-value"></span></div>
+      <div class="ex-row"><span class="ex-label">투자 후 — 은경 48% : 동길 32% : 투자자 20%</span><span class="ex-value"></span></div>
+      <div class="ex-row"><span class="ex-label">비율은 줄지만, 회사 가치가 커지므로</span><span class="ex-value green">내 지분의 '가치'는 올라갑니다</span></div>
+    </div>
+  </div>
 </div>
 
 <!-- ════════ 제5조 ════════ -->
@@ -326,6 +484,13 @@
   </table>
 
   <p class="clause"><span class="num">②</span> 각 당사자는 자신의 담당 영역에서 자율적으로 업무를 수행하되, 회사의 중요 사항은 제6조에 따른 의사결정 절차를 따른다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 역할 분담</div>
+    <p>쉽게 말하면: <strong>은경 언니 = 콘텐츠 + 얼굴</strong>, <strong>동길 = 경영 + 기술</strong>입니다.</p>
+    <p>은경 언니가 "무엇을 가르칠지, 어떻게 가르칠지"를 만들고, 동길이가 "어떻게 운영하고, 어떻게 확장할지"를 책임집니다.</p>
+    <p>각자 맡은 영역에서는 <strong>자율적으로 결정</strong>할 수 있습니다. 예를 들어 은경 언니가 교재 내용을 바꾸는 데 동길이의 허락이 필요하지 않고, 동길이가 가맹점 관리 시스템을 바꾸는 데 은경 언니의 허락이 필요하지 않습니다.</p>
+    <p>단, <strong>큰 돈이 들거나 회사 방향이 바뀌는 결정</strong>은 반드시 둘이 합의해야 합니다 (제6조).</p>
+  </div>
 </div>
 
 <!-- ════════ 제6조 ════════ -->
@@ -350,6 +515,28 @@
   <div class="note warning">
     <strong>검토 필요:</strong> 대표이사를 공동대표로 할지, 단독대표 + 이사 구조로 할지 결정 필요. 공동대표 시 인감 공동날인 범위 설정 필요.
   </div>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 의사결정</div>
+    <p>핵심은 <strong>"작은 일은 각자, 큰 일은 같이"</strong>입니다.</p>
+
+    <div class="example-box">
+      <div class="ex-title">합의가 필요한 일 (큰 일) — 예시</div>
+      <div class="ex-row"><span class="ex-label">새 가맹점 계약 체결</span><span class="ex-value">→ 둘 다 동의해야</span></div>
+      <div class="ex-row"><span class="ex-label">투자자에게 지분 파는 것</span><span class="ex-value">→ 둘 다 동의해야</span></div>
+      <div class="ex-row"><span class="ex-label">1,000만 원 이상 쓰는 것</span><span class="ex-value">→ 둘 다 동의해야</span></div>
+      <div class="ex-row"><span class="ex-label">직원 임원급 채용</span><span class="ex-value">→ 둘 다 동의해야</span></div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">각자 결정할 수 있는 일 (작은 일) — 예시</div>
+      <div class="ex-row"><span class="ex-label">은경: 교재 내용 수정, 유튜브 영상 기획</span><span class="ex-value">→ 자율</span></div>
+      <div class="ex-row"><span class="ex-label">동길: 시스템 개발, 가맹점 운영 매뉴얼 변경</span><span class="ex-value">→ 자율</span></div>
+    </div>
+
+    <p><strong>의견이 안 맞으면?</strong> 바로 싸우는 게 아니라 단계를 밟습니다:</p>
+    <p>1단계: 7일간 서면으로 논의 → 2단계: 외부 전문가 의견 듣기 → 3단계: 중재(제14조)</p>
+    <p>이렇게 단계를 두는 이유는, 감정적으로 대립하는 것을 막고 <strong>냉각기를 갖게</strong> 하기 위함입니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제7조 ════════ -->
@@ -358,6 +545,17 @@
   <p class="clause"><span class="num">①</span> 갑과 을의 보수(급여)는 회사의 재무 상황을 고려하여 이사회에서 정한다.</p>
   <p class="clause"><span class="num">②</span> 사업 초기(매출 발생 전)에는 무보수를 원칙으로 하되, 갑과 을의 합의로 최소 생활비 수준의 보수를 지급할 수 있다.</p>
   <p class="clause"><span class="num">③</span> 갑과 을의 보수는 동일 금액을 원칙으로 한다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 월급</div>
+    <p>지분이 60:40이지만 <strong>월급은 동일</strong>합니다. 지분의 차이는 배당(이익 분배)과 엑싯(매각)에서 반영되는 것이지, 월급에서 반영되는 것이 아닙니다.</p>
+    <div class="example-box">
+      <div class="ex-title">예시: 사업 단계별 보수</div>
+      <div class="ex-row"><span class="ex-label">2026~2027 (준비기)</span><span class="ex-value">무보수 또는 최소 생활비</span></div>
+      <div class="ex-row"><span class="ex-label">2027~2028 (초기 운영)</span><span class="ex-value">예: 각자 월 200만 원</span></div>
+      <div class="ex-row"><span class="ex-label">2029~ (안정기)</span><span class="ex-value">예: 각자 월 500만 원</span></div>
+    </div>
+    <p>금액은 회사 재무 상황에 맞춰 둘이 합의해서 조정합니다. 한쪽만 많이 받을 수 없습니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제8조 ════════ -->
@@ -365,6 +563,17 @@
   <h2>제8조 (수익 배분)</h2>
   <p class="clause"><span class="num">①</span> 회사의 당기순이익에 대한 배당은 지분율(갑 60%, 을 40%)에 따라 배분한다.</p>
   <p class="clause"><span class="num">②</span> 배당 시기 및 금액은 갑과 을이 합의하여 결정하되, 회사의 재투자 필요분을 우선 확보한 후 잔여 이익에 대해 배당한다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 배당 vs 월급 vs 엑싯</div>
+    <p>돈을 받는 방법은 세 가지입니다:</p>
+    <div class="example-box">
+      <div class="ex-title">연매출 10억, 순이익 2억인 해의 예시</div>
+      <div class="ex-row"><span class="ex-label">① 월급 (동일)</span><span class="ex-value">은경 500만/월 = 동길 500만/월</span></div>
+      <div class="ex-row"><span class="ex-label">② 배당 (60:40)</span><span class="ex-value">은경 6,000만 : 동길 4,000만</span></div>
+      <div class="ex-row"><span class="ex-label">③ 엑싯 (50:50)</span><span class="ex-value">나중에 회사 팔 때만 적용</span></div>
+    </div>
+    <p>"재투자 필요분을 우선 확보"란, 이익이 2억 나왔다고 2억 전부 나눠 가지지 않고, <strong>회사 성장에 필요한 돈을 먼저 남겨두고 나머지를 나눈다</strong>는 뜻입니다. 예를 들어 1억을 재투자하고 나머지 1억을 60:40으로 나누면 은경 6,000만, 동길 4,000만 원입니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제9조 (핵심) ════════ -->
@@ -388,6 +597,43 @@
   <div class="note">
     <strong>해설:</strong> 운영 중에는 갑 60:을 40 지분으로 배당을 받지만, 회사를 매각하거나 상장할 때의 최종 정산은 50:50으로 합니다. 이는 두 사람의 기여가 종류는 다르지만 가치는 동등하다는 뜻입니다.
   </div>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 엑싯이란? (이 계약서의 가장 중요한 부분)</div>
+    <p><strong>엑싯(Exit)</strong>이란 회사를 매각하거나, 상장(IPO)해서 주식을 파는 것입니다. 쉽게 말해 <strong>"회사를 키워서 큰 돈으로 바꾸는 순간"</strong>입니다.</p>
+
+    <p>운영 중 배당은 60:40이지만, 이 "큰 순간"에는 <strong>50:50으로 나눕니다.</strong> 왜냐하면 은경 언니의 콘텐츠와 동길이의 시스템, 종류는 다르지만 회사를 키운 가치는 동등하다고 보기 때문입니다.</p>
+
+    <div class="example-box">
+      <div class="ex-title">예시 1: 2031년에 회사를 500억에 매각한다면</div>
+      <div class="ex-row"><span class="ex-label">매각 대금</span><span class="ex-value">500억 원</span></div>
+      <div class="ex-row"><span class="ex-label">(-) 부채·비용·세금</span><span class="ex-value">-50억 원</span></div>
+      <div class="ex-row"><span class="ex-label">= 순수 엑싯 대금</span><span class="ex-value highlight">450억 원</span></div>
+      <div class="ex-row" style="border-top: 2px solid #ddd; padding-top: 8px;"><span class="ex-label"><strong>은경 (50%)</strong></span><span class="ex-value highlight">225억 원</span></div>
+      <div class="ex-row"><span class="ex-label"><strong>동길 (50%)</strong></span><span class="ex-value highlight">225억 원</span></div>
+    </div>
+
+    <p><strong>만약 60:40으로 나눴다면?</strong></p>
+    <div class="vs-box">
+      <div class="vs-card">
+        <div class="vs-label">60:40 (일반 지분율)</div>
+        <div class="vs-amount">은경 270억<br>동길 180억</div>
+      </div>
+      <div class="vs-divider">vs</div>
+      <div class="vs-card" style="border-color: #4a6741; background: #f8fdf6;">
+        <div class="vs-label" style="color: #4a6741; font-weight:600;">50:50 (엑싯 약정) ✓</div>
+        <div class="vs-amount">은경 225억<br>동길 225억</div>
+      </div>
+    </div>
+    <p>이 50:50 약정 덕분에 동길이는 엑싯 시 45억 원을 더 받게 되고, 이것이 <strong>"끝까지 함께 가서 큰 결과를 만들자"</strong>는 인센티브입니다.</p>
+
+    <div class="example-box">
+      <div class="ex-title">예시 2: 회사가 상장(IPO)하면?</div>
+      <div class="ex-row"><span class="ex-label">IPO 후 시가총액 1,000억</span><span class="ex-value"></span></div>
+      <div class="ex-row"><span class="ex-label">은경 보유 주식 가치 (50%)</span><span class="ex-value green">500억 원</span></div>
+      <div class="ex-row"><span class="ex-label">동길 보유 주식 가치 (50%)</span><span class="ex-value green">500억 원</span></div>
+    </div>
+    <p>단, 회사를 팔지 말지는 <strong>둘 다 동의해야</strong> 합니다. 한쪽이 "팔자"고 해도 다른 한쪽이 "아니"라고 하면 못 팝니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제10조 ════════ -->
@@ -396,6 +642,18 @@
   <p class="clause"><span class="num">①</span> 갑과 을은 상대방의 서면 동의 없이 자신의 지분을 제3자에게 양도, 담보 제공, 기타 처분할 수 없다.</p>
   <p class="clause"><span class="num">②</span> 일방이 지분을 양도하고자 하는 경우, 상대방에게 <strong>우선매수권(Right of First Refusal)</strong>을 부여한다. 상대방은 통지를 받은 날로부터 30일 이내에 동일 조건으로 매수 의사를 표시할 수 있다.</p>
   <p class="clause"><span class="num">③</span> 일방이 지분 전부를 매각하는 경우, 상대방은 동일 조건으로 함께 매각할 수 있는 권리(Tag-along Right)를 가진다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 지분을 남한테 팔 수 있나?</div>
+    <p><strong>원칙: 상대방 동의 없이는 절대 못 팝니다.</strong></p>
+    <p>만약 팔고 싶다면:</p>
+    <div class="example-box">
+      <div class="ex-title">예시: 동길이가 자기 지분을 외부인 A에게 팔고 싶을 때</div>
+      <div class="ex-row"><span class="ex-label">1. 동길 → 은경에게 통보</span><span class="ex-value">"A가 내 지분 40%를 20억에 사겠다고 합니다"</span></div>
+      <div class="ex-row"><span class="ex-label">2. 우선매수권 발동</span><span class="ex-value">은경이 같은 조건(20억)에 직접 살 수 있음</span></div>
+      <div class="ex-row"><span class="ex-label">3. 은경이 안 사면</span><span class="ex-value">A에게 매각 진행 가능</span></div>
+    </div>
+    <p><strong>Tag-along Right</strong>란? 한쪽이 지분을 팔 때 다른 한쪽도 <strong>같은 조건으로 함께 팔 수 있는 권리</strong>입니다. 예를 들어 동길이가 A에게 팔면, 은경 언니도 원하면 같은 가격에 자기 지분도 A에게 팔 수 있습니다. 이건 <strong>"나만 빠지고 너만 남는" 상황을 막는 안전장치</strong>입니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제11조 ════════ -->
@@ -403,10 +661,22 @@
   <h2>제11조 (경업 금지 및 비밀 유지)</h2>
   <p class="clause"><span class="num">①</span> 갑과 을은 본 계약 기간 및 종료 후 2년간, 상대방의 서면 동의 없이 본 사업과 동일 또는 유사한 사업을 직접 또는 간접적으로 영위하지 아니한다.</p>
   <p class="clause"><span class="num">②</span> 갑과 을은 본 사업 수행 과정에서 알게 된 영업비밀, 고객 정보, 기술 정보 등을 본 사업의 목적 이외에 사용하거나 제3자에게 공개하지 아니한다.</p>
-  <p class="clause"><span class="num">③</span> 단, 갑의 기존 저술 활동, 강연, 유튜브 운영은 경업에 해당하지 않는 것으로 한다. 을의 리마크영어국어학원 운영 또한 경업에 해당하지 않는 것으로 한다.</p>
+  <p class="clause"><span class="num">③</span> 단, 갑의 기존 저술 활동, 강연, 유튜브 운영은 경업에 해당하지 않는 것으로 한다. 을의 리마크에듀 운영 또한 경업에 해당하지 않는 것으로 한다.</p>
 
   <div class="note">
     <strong>해설:</strong> 각자의 기존 사업(이은경의 저술/강연, 이동길의 리마크 학원)은 경업에 해당하지 않도록 명시적으로 예외 처리했습니다.
+  </div>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 딴 데서 같은 사업 하면 안 됨</div>
+    <p><strong>"경업 금지"</strong>란 같은 업종의 사업을 따로 하지 않겠다는 약속입니다.</p>
+    <div class="example-box">
+      <div class="ex-title">허용되는 것 / 안 되는 것</div>
+      <div class="ex-row"><span class="ex-label">은경: 책 쓰기, 유튜브, 강연</span><span class="ex-value green">허용 (기존 활동)</span></div>
+      <div class="ex-row"><span class="ex-label">동길: 리마크에듀 운영</span><span class="ex-value green">허용 (기존 사업)</span></div>
+      <div class="ex-row"><span class="ex-label">은경: 다른 글쓰기 프랜차이즈 만들기</span><span class="ex-value highlight">금지</span></div>
+      <div class="ex-row"><span class="ex-label">동길: 다른 초등 교육 프랜차이즈 만들기</span><span class="ex-value highlight">금지</span></div>
+    </div>
+    <p>이 약속은 계약 기간 중 + <strong>끝난 후 2년간</strong> 유효합니다. 즉, 나가더라도 2년간은 경쟁 사업을 못 합니다.</p>
   </div>
 </div>
 
@@ -421,6 +691,42 @@
   <div class="note warning">
     <strong>중요:</strong> 엑싯(매각/상장) 시에는 50:50이지만, 중도 탈퇴 시에는 지분율(60:40) 기준입니다. 이는 엑싯까지 함께 가는 것에 대한 인센티브입니다.
   </div>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 중간에 나가면 얼마를 받나?</div>
+    <p>엑싯(함께 회사를 팔 때)과 <strong>중도 탈퇴는 완전히 다릅니다.</strong></p>
+
+    <div class="example-box">
+      <div class="ex-title">핵심 차이</div>
+      <div class="ex-row"><span class="ex-label">함께 끝까지 가서 회사를 팔면 (엑싯)</span><span class="ex-value green">50 : 50</span></div>
+      <div class="ex-row"><span class="ex-label">중간에 혼자 나가면 (탈퇴)</span><span class="ex-value highlight">60 : 40 기준 공정가치</span></div>
+    </div>
+
+    <p><strong>"공정가치"란?</strong> 비상장 회사의 가치를 객관적으로 평가한 금액입니다. 둘이 합의하면 그 금액으로 하고, 합의가 안 되면 외부 회계법인이 평가합니다.</p>
+
+    <div class="example-box">
+      <div class="ex-title">예시: 2029년에 동길이가 나가겠다고 하면 (회사가치 80억 평가 시)</div>
+      <div class="ex-row"><span class="ex-label">회사 공정가치</span><span class="ex-value">80억 원</span></div>
+      <div class="ex-row"><span class="ex-label">동길 지분 40%의 가치</span><span class="ex-value">32억 원</span></div>
+      <div class="ex-row"><span class="ex-label">(-) 베스팅 미확정분 (제15조)</span><span class="ex-value">3년차 = 약 75% 확정</span></div>
+      <div class="ex-row" style="border-top: 2px solid #ddd; padding-top: 8px;"><span class="ex-label"><strong>동길이 실수령</strong></span><span class="ex-value highlight">32억 x 75% = 24억 원</span></div>
+    </div>
+
+    <p><strong>같은 시점에 함께 회사를 팔았다면?</strong></p>
+    <div class="vs-box">
+      <div class="vs-card">
+        <div class="vs-label">중도 탈퇴 (60:40 + 베스팅)</div>
+        <div class="vs-amount" style="color:#b71c1c;">24억 원</div>
+      </div>
+      <div class="vs-divider">vs</div>
+      <div class="vs-card" style="border-color: #4a6741; background: #f8fdf6;">
+        <div class="vs-label" style="color: #4a6741; font-weight:600;">엑싯 (50:50)</div>
+        <div class="vs-amount" style="color:#2d5a27;">40억 원</div>
+      </div>
+    </div>
+    <p><strong>16억 원 차이.</strong> 이것이 "끝까지 함께 가자"는 경제적 인센티브입니다.</p>
+
+    <p>또한 나가려면 <strong>6개월 전에 서면 통보</strong>해야 합니다. 갑자기 "내일부터 안 해" 할 수 없고, 인수인계할 시간을 줘야 합니다.</p>
+  </div>
 </div>
 
 <!-- ════════ 제13조 ════════ -->
@@ -430,6 +736,20 @@
   <p class="clause"><span class="num">②</span> 갑이 본 계약 이전에 보유한 기존 저작물(기 출판 서적 등)의 저작권은 갑에게 유보되며, 회사는 이를 사업 목적 범위 내에서 사용할 수 있는 비독점적 라이선스를 부여받는다.</p>
   <p class="clause"><span class="num">③</span> 을이 본 계약 이전에 보유한 기존 기술 자산(리마크 학원 자동화 시스템 등)의 소유권은 을에게 유보되며, 회사는 이를 사업 목적 범위 내에서 사용할 수 있는 비독점적 라이선스를 부여받는다.</p>
   <p class="clause"><span class="num">④</span> 회사 해산 또는 엑싯 시, 제2항 및 제3항의 기존 IP는 각 원소유자에게 복귀한다.</p>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 내 콘텐츠는 내 것</div>
+    <p>이 조항은 매우 중요합니다. 핵심을 정리하면:</p>
+    <div class="example-box">
+      <div class="ex-title">누구 것인가?</div>
+      <div class="ex-row"><span class="ex-label">은경이 이미 낸 책 60권</span><span class="ex-value green">은경 것 (회사에 빌려줌)</span></div>
+      <div class="ex-row"><span class="ex-label">동길이 만든 기존 AI 시스템</span><span class="ex-value green">동길 것 (회사에 빌려줌)</span></div>
+      <div class="ex-row"><span class="ex-label">회사에서 새로 만든 커리큘럼</span><span class="ex-value">회사 것</span></div>
+      <div class="ex-row"><span class="ex-label">회사에서 새로 개발한 AI 엔진</span><span class="ex-value">회사 것</span></div>
+      <div class="ex-row"><span class="ex-label">'생각의숲' 브랜드</span><span class="ex-value">회사 것</span></div>
+    </div>
+    <p>만약 회사가 해산되면, <strong>기존 IP(은경의 책, 동길의 시스템)는 각자에게 돌아갑니다.</strong> 회사에서 새로 만든 것들만 회사 소유입니다.</p>
+    <p>이렇게 하면 최악의 경우(회사가 망해도) <strong>각자 원래 가지고 있던 것은 지킬 수 있습니다.</strong></p>
+  </div>
 </div>
 
 <!-- ════════ 제14조 ════════ -->
@@ -452,6 +772,44 @@
 
   <div class="note">
     <strong>해설:</strong> 베스팅은 '일정 기간 함께 일해야 지분이 확정되는' 제도입니다. 4년 전체를 채워야 100% 지분이 확정되고, 중간에 나가면 미확정분은 반납합니다. 이는 공동창업의 리스크를 줄이는 표준적인 장치입니다.
+  </div>
+  <div class="guide">
+    <div class="guide-title">쉬운 해설 — 베스팅이란?</div>
+    <p>베스팅은 <strong>"일정 기간 함께 일해야 지분이 진짜 내 것이 된다"</strong>는 제도입니다. 스타트업 세계에서 거의 모든 공동창업자가 사용하는 표준 장치입니다.</p>
+
+    <p><strong>왜 필요한가?</strong> 계약서 쓴 직후에 한 사람이 나가버리면, 아무 일도 안 했는데 지분만 가져가는 불공정한 상황이 생깁니다. 베스팅은 이걸 막습니다.</p>
+
+    <p><strong>은경 언니 기준으로 보면:</strong></p>
+    <div class="timeline-mini">
+      <div class="tm-item active">
+        <span class="tm-pct">15%</span>
+        <span class="tm-label">계약 직후<br>(60%의 25%)</span>
+      </div>
+      <div class="tm-item">
+        <span class="tm-pct">30%</span>
+        <span class="tm-label">1년 후<br>(클리프 통과)</span>
+      </div>
+      <div class="tm-item">
+        <span class="tm-pct">45%</span>
+        <span class="tm-label">2년 후</span>
+      </div>
+      <div class="tm-item">
+        <span class="tm-pct">60%</span>
+        <span class="tm-label">4년 후<br>(100% 확정)</span>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">시나리오별 예시 (은경 기준, 전체 60% 중)</div>
+      <div class="ex-row"><span class="ex-label">6개월째 나가면</span><span class="ex-value highlight">0% (1년 클리프 미달 → 전부 소멸)</span></div>
+      <div class="ex-row"><span class="ex-label">1년째 나가면</span><span class="ex-value">15% 확정 (나머지 45%는 동길에게)</span></div>
+      <div class="ex-row"><span class="ex-label">2년째 나가면</span><span class="ex-value">30% 확정 (나머지 30%는 동길에게)</span></div>
+      <div class="ex-row"><span class="ex-label">4년 이후</span><span class="ex-value green">60% 전부 확정 (완전한 내 것)</span></div>
+    </div>
+
+    <p><strong>"클리프(Cliff)"</strong>란? 최초 1년은 아무것도 확정 안 되는 기간입니다. 1년을 넘겨야 비로소 25%가 한 번에 확정되고, 이후부터 매월 조금씩 추가 확정됩니다.</p>
+    <p>쉽게 말하면: <strong>"최소 1년은 함께 해봐야 지분을 가져갈 수 있다"</strong>는 안전장치입니다.</p>
+    <p>이 베스팅은 <strong>양쪽 모두에게 동일하게 적용</strong>됩니다. 동길이에게도 똑같은 조건입니다.</p>
   </div>
 </div>
 
