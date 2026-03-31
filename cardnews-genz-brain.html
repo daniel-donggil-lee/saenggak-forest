@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>생각의숲 카드뉴스 — Z세대 뇌과학</title>
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --g900: #0F2318;
+      --g800: #1E3D2F;
+      --g700: #2D5A40;
+      --g500: #4A7C59;
+      --g400: #6B9E7A;
+      --g300: #A8C5B0;
+      --g100: #EBF0E8;
+      --cream: #F7F4EE;
+      --cream2: #FEFCF8;
+      --gold: #B8965A;
+      --gold2: #D4B07A;
+      --ink: #1C1C1E;
+      --ink2: #4A4A4A;
+      --gray: #8A8A8A;
+      --line: #D4D4D4;
+      --fn: 'Pretendard', -apple-system, sans-serif;
+      --fs: 'Noto Serif KR', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--fn);
+      background: #E2DDD5;
+      padding: 64px 40px 80px;
+    }
+
+    /* ── Header ── */
+    .ph {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .ph h1 {
+      font-family: var(--fs);
+      font-size: 26px;
+      color: var(--g800);
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+    }
+    .ph p { font-size: 12px; color: var(--gray); letter-spacing: 0.5px; }
+
+    /* ── Export all button ── */
+    .btn-all {
+      display: block;
+      margin: 0 auto 52px;
+      padding: 13px 44px;
+      background: var(--g800);
+      color: white;
+      border: none;
+      font-family: var(--fn);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .btn-all:hover { background: var(--g700); }
+    .btn-all:disabled { opacity: 0.6; pointer-events: none; }
+
+    /* ── Card list ── */
+    .list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .ci {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── Base card ── */
+    .card {
+      width: 540px;
+      height: 540px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .inner {
+      width: 100%;
+      height: 100%;
+      padding: 46px 42px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Footer: page num + brand */
+    .cf {
+      position: absolute;
+      bottom: 26px;
+      left: 42px;
+      right: 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .cn {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      opacity: 0.65;
+    }
+    .cb {
+      font-family: var(--fs);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.8px;
+      opacity: 0.55;
+    }
+
+    /* Label */
+    .lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .lbl::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.18;
+    }
+
+    /* Save button */
+    .btn-save {
+      padding: 7px 18px;
+      background: transparent;
+      border: 1px solid #8A8A8A;
+      color: #4A4A4A;
+      font-family: var(--fn);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: all 0.14s;
+    }
+    .btn-save:hover { background: var(--g800); border-color: var(--g800); color: white; }
+
+    /* Deco leaf SVG */
+    .deco {
+      position: absolute;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* ── Photo background layer ── */
+    .bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+    .ov {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+
+    /* ═══════════════════════════════════════
+       CARD 1 — HOOK
+    ═══════════════════════════════════════ */
+    #c1 { background: #0d2018; }
+    #c1 .inner { justify-content: flex-end; }
+    #c1 .bar { width: 32px; height: 2px; background: var(--gold); margin-bottom: 22px; }
+    #c1 .h1t {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.18;
+      color: #fff;
+      letter-spacing: -1.8px;
+      margin-bottom: 18px;
+    }
+    #c1 .h1s {
+      font-size: 11px;
+      color: var(--g300);
+      letter-spacing: 1.2px;
+      font-weight: 400;
+    }
+
+    /* ═══════════════════════════════════════
+       CARD 2 — FACT
+    ═══════════════════════════════════════ */
+    #c2 { background: var(--cream); }
+    #c2 .inner { justify-content: center; }
+    #c2 .pre { font-size: 15px; color: var(--ink2); line-height: 1.6; margin-bottom: 6px; }
+    #c2 .big {
+      font-family: var(--fs);
+      font-size: 64px;
+      color: var(--g800);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -2.5px;
+      margin-bottom: 10px;
+    }
+    #c2 .post { font-size: 15px; color: var(--ink); font-weight: 600; margin-bottom: 32px; }
+    #c2 .src {
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.3px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      margin-top: auto;
+    }
+
+    /* ═══════════════════════════════════════
+       CARD 3 — CAUSE
+    ═══════════════════════════════════════ */
+    #c3 { background: var(--cream); }
+    #c3 .inner { justify-content: center; }
+    #c3 .ico { font-size: 42px; line-height: 1; margin-bottom: 18px; }
+    #c3 .pre { font-size: 17px; color: var(--ink2); font-weight: 400; margin-bottom: 2px; }
+    #c3 .big {
+      font-family: var(--fs);
+      font-size: 70px;
+      color: var(--g800);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 2px;
+    }
+    #c3 .post { font-size: 17px; color: var(--ink2); font-weight: 400; margin-bottom: 20px; }
+    #c3 .plat { font-size: 11px; color: var(--gray); letter-spacing: 1.2px; }
+
+    /* ═══════════════════════════════════════
+       CARD 4 — CLASSROOM
+    ═══════════════════════════════════════ */
+    #c4 { background: #0d1f15; }
+    #c4 .inner { justify-content: center; }
+    #c4 .pre {
+      font-size: 23px;
+      color: rgba(255,255,255,0.82);
+      font-weight: 400;
+      line-height: 1.55;
+      margin-bottom: 26px;
+    }
+    #c4 .div { width: 36px; height: 1px; background: var(--gold); margin-bottom: 26px; }
+    #c4 .big {
+      font-size: 38px;
+      color: var(--cream);
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.8px;
+    }
+    #c4 .big em { color: var(--gold2); font-style: normal; }
+
+    /* ═══════════════════════════════════════
+       CARD 5 — NEUROSCIENCE
+    ═══════════════════════════════════════ */
+    #c5 { background: var(--cream); }
+    #c5 .inner { justify-content: center; }
+    #c5 .big {
+      font-size: 44px;
+      color: var(--g800);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -1.2px;
+      margin-bottom: 6px;
+    }
+    #c5 .strong {
+      font-size: 22px;
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    #c5 .bar { width: 44px; height: 3px; background: var(--g800); margin-bottom: 18px; }
+    #c5 .sub { font-size: 13px; color: var(--gray); line-height: 1.65; }
+
+    /* ═══════════════════════════════════════
+       CARD 6 — PROBLEM
+    ═══════════════════════════════════════ */
+    #c6 { background: #0d1f15; }
+    #c6 .inner { justify-content: center; }
+    #c6 .pre { font-size: 17px; color: rgba(255,255,255,0.78); line-height: 1.65; font-weight: 400; margin-bottom: 22px; }
+    #c6 .arr { font-size: 22px; color: var(--gold); margin-bottom: 16px; }
+    #c6 .big {
+      font-size: 34px;
+      color: var(--cream);
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.5px;
+    }
+
+    /* ═══════════════════════════════════════
+       CARD 7 — EXAM
+    ═══════════════════════════════════════ */
+    #c7 { background: var(--cream); }
+    #c7 .inner { justify-content: center; }
+    #c7 .pre { font-size: 15px; color: var(--ink2); font-weight: 400; margin-bottom: 6px; }
+    #c7 .big {
+      font-family: var(--fs);
+      font-size: 58px;
+      color: var(--g800);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 26px;
+    }
+    #c7 .div { width: 100%; height: 1px; background: rgba(0,0,0,0.12); margin-bottom: 20px; }
+    #c7 .sub { font-size: 15px; color: var(--ink2); line-height: 1.7; }
+    #c7 .sub strong { color: var(--ink); font-weight: 700; }
+
+    /* ═══════════════════════════════════════
+       CARD 8 — TIPS
+    ═══════════════════════════════════════ */
+    #c8 { background: #0d1f15; }
+    #c8 .inner { justify-content: center; }
+    #c8 .tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    #c8 .tip:last-child { margin-bottom: 0; }
+    #c8 .tn {
+      font-size: 20px;
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+    #c8 .tt { font-size: 19px; color: #fff; font-weight: 500; line-height: 1.4; }
+
+    /* ═══════════════════════════════════════
+       CARD 9 — BRAND
+    ═══════════════════════════════════════ */
+    #c9 { background: #e8e0d0; }
+    #c9 .inner { justify-content: center; align-items: center; text-align: center; }
+    #c9 .bico { font-size: 30px; margin-bottom: 14px; opacity: 0.75; }
+    #c9 .bname {
+      font-family: var(--fs);
+      font-size: 58px;
+      color: var(--g800);
+      font-weight: 600;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    #c9 .bsub {
+      font-size: 14px;
+      color: var(--g500);
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: 0.2px;
+      margin-bottom: 22px;
+    }
+    #c9 .bline { width: 28px; height: 1px; background: var(--line); margin: 0 auto 18px; }
+    #c9 .bdesc { font-size: 13px; color: var(--ink2); line-height: 1.7; max-width: 300px; }
+
+    /* ═══════════════════════════════════════
+       CARD 10 — CTA
+    ═══════════════════════════════════════ */
+    #c10 { background: #060e09; }
+    #c10 .inner { justify-content: flex-end; }
+    #c10 .slbl {
+      font-size: 10px;
+      color: var(--g300);
+      letter-spacing: 2px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    #c10 .big {
+      font-size: 40px;
+      color: #fff;
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -1.2px;
+      margin-bottom: 26px;
+    }
+    #c10 .bar { width: 44px; height: 2px; background: var(--gold); margin-bottom: 20px; }
+    #c10 .link { font-size: 16px; color: var(--cream); font-weight: 500; letter-spacing: 0.3px; margin-bottom: 28px; opacity: 0.88; }
+    #c10 .tags { font-size: 11px; color: var(--g300); letter-spacing: 0.3px; line-height: 2; opacity: 0.65; }
+  </style>
+</head>
+<body>
+
+<div class="ph">
+  <h1>생각의숲 카드뉴스</h1>
+  <p>Z세대 뇌과학 · YTN 2026.02 · 인스타그램 1080 × 1080</p>
+</div>
+
+<button class="btn-all" onclick="exportAll()">전체 10장 PNG 저장</button>
+
+<div class="list">
+
+  <!-- ── CARD 1: HOOK ── -->
+  <div class="ci">
+    <div class="card" id="c1">
+      <img class="bg-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1080&q=80" crossorigin="anonymous" alt="">
+      <div class="ov" style="background:rgba(8,22,14,0.70)"></div>
+      <!-- Deco leaf top-right -->
+      <svg class="deco" width="300" height="420" viewBox="0 0 100 155" style="top:-50px;right:-50px;opacity:.07">
+        <path d="M50,150 Q15,115 22,78 Q2,55 12,24 Q26,2 50,0 Q74,2 88,24 Q98,55 78,78 Q85,115 50,150Z" fill="white"/>
+        <line x1="50" y1="150" x2="50" y2="0" stroke="white" stroke-width="0.6" stroke-dasharray="5,5" opacity=".4"/>
+        <path d="M26,95 Q50,84 74,95" fill="none" stroke="white" stroke-width="0.7" opacity=".3"/>
+        <path d="M22,62 Q50,51 78,62" fill="none" stroke="white" stroke-width="0.7" opacity=".3"/>
+      </svg>
+      <div class="inner">
+        <div style="flex:1"></div>
+        <div class="bar"></div>
+        <div class="h1t">우리 아이,<br>부모보다<br>머리가 나쁘게<br>자라고 있다?</div>
+        <div class="h1s">미국 신경과학자의 경고</div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--g300)">01 / 10</span>
+        <span class="cb" style="color:var(--g300)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c1','01_훅')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 2: FACT ── -->
+  <div class="ci">
+    <div class="card" id="c2">
+      <div class="inner">
+        <div class="lbl" style="color:var(--g800)">Research Fact</div>
+        <div class="pre">표준화 학업 평가에서 부모 세대보다<br>낮은 점수를 받은</div>
+        <div class="big">최초의 세대</div>
+        <div class="post">Z세대 (1997~2007년생)</div>
+        <div class="src">재러드 쿠니 호바스 박사 · 미국 신경과학자 · YTN 2026.02</div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--gray)">02 / 10</span>
+        <span class="cb" style="color:var(--g700)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c2','02_팩트')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 3: CAUSE ── -->
+  <div class="ci">
+    <div class="card" id="c3">
+      <img class="bg-img" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1080&q=80" crossorigin="anonymous" alt="">
+      <div class="ov" style="background:rgba(247,244,238,0.86)"></div>
+      <div class="inner">
+        <div class="lbl" style="color:var(--g800)">그 원인은?</div>
+        <div class="ico">📱</div>
+        <div class="pre">하루 깨어 있는 시간의</div>
+        <div class="big">절반 이상</div>
+        <div class="post">을 스크린 앞에서 보냅니다</div>
+        <div class="plat">유튜브 · 숏폼 · 게임 · SNS</div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--gray)">03 / 10</span>
+        <span class="cb" style="color:var(--g700)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c3','03_원인')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 4: CLASSROOM ── -->
+  <div class="ci">
+    <div class="card" id="c4">
+      <svg class="deco" width="200" height="280" viewBox="0 0 100 155" style="bottom:-40px;left:-30px;opacity:.06">
+        <path d="M50,150 Q15,115 22,78 Q2,55 12,24 Q26,2 50,0 Q74,2 88,24 Q98,55 78,78 Q85,115 50,150Z" fill="white"/>
+      </svg>
+      <div class="inner">
+        <div class="lbl" style="color:var(--g300)">교실도 위험합니다</div>
+        <div class="pre">태블릿으로 검색하고<br>AI로 숙제하면</div>
+        <div class="div"></div>
+        <div class="big">생각하는 훈련이<br><em>사라집니다.</em></div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--g300)">04 / 10</span>
+        <span class="cb" style="color:var(--g300)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c4','04_교실')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 5: NEUROSCIENCE ── -->
+  <div class="ci">
+    <div class="card" id="c5">
+      <img class="bg-img" src="https://images.unsplash.com/photo-1524578271613-d550eacf6090?auto=format&fit=crop&w=1080&q=80" crossorigin="anonymous" alt="">
+      <div class="ov" style="background:rgba(247,244,238,0.87)"></div>
+      <div class="inner">
+        <div class="lbl" style="color:var(--g800)">뇌과학의 결론</div>
+        <div class="big">읽고, 쓰고,<br>생각하는 시간이</div>
+        <div class="strong">인지 능력을 만듭니다</div>
+        <div class="bar"></div>
+        <div class="sub">스크린으로 대체할 수 없는<br>뇌 발달의 원칙</div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--gray)">05 / 10</span>
+        <span class="cb" style="color:var(--g700)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c5','05_뇌과학')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 6: PROBLEM ── -->
+  <div class="ci">
+    <div class="card" id="c6">
+      <div class="inner">
+        <div class="lbl" style="color:var(--g300)">우리 아이는?</div>
+        <div class="pre">초등 시기, 깊이 읽고<br>직접 쓰는 경험이 부족하면</div>
+        <div class="arr">↓</div>
+        <div class="big">중2부터 차이가<br>벌어지기 시작합니다</div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--g300)">06 / 10</span>
+        <span class="cb" style="color:var(--g300)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c6','06_문제')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 7: EXAM ── -->
+  <div class="ci">
+    <div class="card" id="c7">
+      <img class="bg-img" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1080&q=80" crossorigin="anonymous" alt="">
+      <div class="ov" style="background:rgba(247,244,238,0.88)"></div>
+      <div class="inner">
+        <div class="lbl" style="color:var(--g800)">입시도 바뀐다</div>
+        <div class="pre">교육부 서·논술형 평가</div>
+        <div class="big">지속 확대 중</div>
+        <div class="div"></div>
+        <div class="sub">AI가 대신 써줄 수 없는 시험장에서<br><strong>아이 혼자 써야 합니다.</strong></div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--gray)">07 / 10</span>
+        <span class="cb" style="color:var(--g700)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c7','07_입시')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 8: TIPS ── -->
+  <div class="ci">
+    <div class="card" id="c8">
+      <div class="inner">
+        <div class="lbl" style="color:var(--g300)">오늘부터 할 수 있는 것</div>
+        <div class="tip">
+          <span class="tn">①</span>
+          <span class="tt">하루 20분, 종이 책 읽기</span>
+        </div>
+        <div class="tip">
+          <span class="tn">②</span>
+          <span class="tt">읽은 내용 한 줄 쓰기</span>
+        </div>
+        <div class="tip">
+          <span class="tn">③</span>
+          <span class="tt">"왜 그렇게 생각해?" 대화하기</span>
+        </div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--g300)">08 / 10</span>
+        <span class="cb" style="color:var(--g300)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c8','08_팁')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 9: BRAND ── -->
+  <div class="ci">
+    <div class="card" id="c9">
+      <img class="bg-img" src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1080&q=80" crossorigin="anonymous" alt="">
+      <div class="ov" style="background:rgba(247,244,238,0.84)"></div>
+      <!-- Deco leaf top-right -->
+      <svg class="deco" width="140" height="200" viewBox="0 0 100 155" style="top:-10px;right:16px;opacity:.08">
+        <path d="M50,150 Q15,115 22,78 Q2,55 12,24 Q26,2 50,0 Q74,2 88,24 Q98,55 78,78 Q85,115 50,150Z" fill="var(--g800)"/>
+      </svg>
+      <div class="inner">
+        <div class="bico">🌿</div>
+        <div class="bname">생각의숲</div>
+        <div class="bsub">읽고, 쓰고, 생각하는<br>문해력 전문 교육센터</div>
+        <div class="bline"></div>
+        <div class="bdesc">스크린 없이, 진짜 사고력을 키우는<br>공간을 준비하고 있습니다</div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--gray)">09 / 10</span>
+        <span class="cb" style="color:var(--g700)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c9','09_브랜드')">저장 →</button>
+  </div>
+
+  <!-- ── CARD 10: CTA ── -->
+  <div class="ci">
+    <div class="card" id="c10">
+      <img class="bg-img" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1080&q=80" crossorigin="anonymous" alt="">
+      <div class="ov" style="background:rgba(4,12,7,0.78)"></div>
+      <svg class="deco" width="220" height="300" viewBox="0 0 100 155" style="top:-20px;right:-40px;opacity:.06">
+        <path d="M50,150 Q15,115 22,78 Q2,55 12,24 Q26,2 50,0 Q74,2 88,24 Q98,55 78,78 Q85,115 50,150Z" fill="white"/>
+        <line x1="50" y1="150" x2="50" y2="0" stroke="white" stroke-width="0.6" stroke-dasharray="5,5" opacity=".4"/>
+      </svg>
+      <div class="inner">
+        <div style="flex:1"></div>
+        <div class="slbl">생각의숲 · 준비 중</div>
+        <div class="big">생각의숲 오픈 소식<br>가장 먼저<br>받아보세요</div>
+        <div class="bar"></div>
+        <div class="link">사전 신청 링크 →</div>
+        <div class="tags">#생각의숲 &nbsp;#초등글쓰기 &nbsp;#문해력 &nbsp;#사고력</div>
+      </div>
+      <div class="cf">
+        <span class="cn" style="color:var(--g400)">10 / 10</span>
+        <span class="cb" style="color:var(--g400)">생각의숲</span>
+      </div>
+    </div>
+    <button class="btn-save" onclick="save('c10','10_CTA')">저장 →</button>
+  </div>
+
+</div><!-- /.list -->
+
+<script>
+  async function save(id, name) {
+    const el = document.getElementById(id);
+    const btn = el.nextElementSibling;
+    const orig = btn.textContent;
+    btn.textContent = '저장 중...';
+    btn.disabled = true;
+    try {
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        width: 540,
+        height: 540,
+        logging: false,
+      });
+      const a = document.createElement('a');
+      a.download = `생각의숲_카드뉴스_${name}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    } catch(e) {
+      alert('저장 오류: ' + e.message);
+    } finally {
+      btn.textContent = orig;
+      btn.disabled = false;
+    }
+  }
+
+  async function exportAll() {
+    const cards = [
+      ['c1','01_훅'],['c2','02_팩트'],['c3','03_원인'],
+      ['c4','04_교실'],['c5','05_뇌과학'],['c6','06_문제'],
+      ['c7','07_입시'],['c8','08_팁'],['c9','09_브랜드'],['c10','10_CTA']
+    ];
+    const btn = document.querySelector('.btn-all');
+    btn.disabled = true;
+    for (let i = 0; i < cards.length; i++) {
+      btn.textContent = `저장 중... (${i+1}/10)`;
+      await save(cards[i][0], cards[i][1]);
+      await new Promise(r => setTimeout(r, 400));
+    }
+    btn.textContent = '✓ 완료';
+    setTimeout(() => { btn.textContent = '전체 10장 PNG 저장'; btn.disabled = false; }, 2000);
+  }
+</script>
+</body>
+</html>
