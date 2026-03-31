@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각의숲 — 마케팅 콘텐츠</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g900: #0F2318;
+    --g800: #1E3D2F;
+    --g700: #2D5A40;
+    --g500: #4A7C59;
+    --g400: #6B9E7A;
+    --g300: #A8C5B0;
+    --g100: #EBF0E8;
+    --cream: #F7F4EE;
+    --gold: #B8965A;
+    --ink: #1C1C1E;
+    --ink2: #4A4A4A;
+    --gray: #8A8A8A;
+    --fn: 'Pretendard', -apple-system, sans-serif;
+    --fs: 'Noto Serif KR', Georgia, serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--fn);
+    background: #E8E3DB;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--g800);
+    padding: 28px 48px 24px;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  .hd-left { display: flex; align-items: flex-end; gap: 20px; }
+  .logo {
+    font-family: var(--fs);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: -0.3px;
+    line-height: 1;
+  }
+  .logo span {
+    display: block;
+    font-family: var(--fn);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--g300);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px;
+    background: transparent;
+    border: 1px solid rgba(168,197,176,0.35);
+    border-radius: 4px;
+    color: var(--g300);
+    font-family: var(--fn);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.18s;
+  }
+  .back-btn:hover { background: rgba(168,197,176,0.1); color: var(--cream); }
+
+  /* ── Filter bar ── */
+  .filter-bar {
+    background: var(--g900);
+    padding: 0 48px;
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(168,197,176,0.12);
+  }
+  .filter-btn {
+    padding: 13px 20px;
+    font-family: var(--fn);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--g300);
+    letter-spacing: 0.6px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { color: var(--cream); }
+  .filter-btn.active { color: var(--cream); border-bottom-color: var(--gold); }
+  .filter-count {
+    display: inline-block;
+    background: rgba(168,197,176,0.15);
+    color: var(--g300);
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+  .filter-btn.active .filter-count { background: rgba(184,150,90,0.2); color: var(--gold); }
+
+  /* ── Main ── */
+  main {
+    padding: 48px 48px 80px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--g500);
+    margin-bottom: 24px;
+  }
+
+  /* ── Card grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+  }
+
+  .card-item {
+    background: var(--cream);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(15,35,24,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .card-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(15,35,24,0.14);
+  }
+
+  /* 미리보기 영역: iframe 축소 */
+  .preview-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: var(--g800);
+  }
+  .preview-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 540px;
+    height: 540px;
+    border: none;
+    transform-origin: top left;
+    transform: scale(0.407);
+    pointer-events: none;
+  }
+  .preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    z-index: 10;
+  }
+  .preview-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: rgba(15,35,24,0.72);
+    backdrop-filter: blur(4px);
+    color: var(--g300);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    z-index: 11;
+  }
+
+  /* 카드 정보 */
+  .card-info {
+    padding: 20px 22px 22px;
+  }
+  .card-theme {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--g500);
+    background: var(--g100);
+    padding: 3px 9px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-family: var(--fs);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--g900);
+    line-height: 1.45;
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--ink2);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid #E8E4DC;
+  }
+  .card-date {
+    font-size: 11px;
+    color: var(--gray);
+  }
+  .card-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-view {
+    padding: 6px 14px;
+    background: var(--g800);
+    color: var(--cream);
+    border: none;
+    font-family: var(--fn);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .btn-view:hover { background: var(--g700); }
+  .btn-png {
+    padding: 6px 14px;
+    background: transparent;
+    color: var(--g500);
+    border: 1px solid var(--g300);
+    font-family: var(--fn);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.15s;
+  }
+  .btn-png:hover { background: var(--g100); color: var(--g800); border-color: var(--g500); }
+
+  /* 빈 상태 */
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--gray);
+  }
+  .empty-state .empty-icon { font-size: 36px; margin-bottom: 14px; opacity: 0.4; }
+  .empty-state p { font-size: 14px; }
+
+  /* ── 통계 바 ── */
+  .stats-bar {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 36px;
+    padding: 20px 28px;
+    background: var(--cream);
+    border-radius: 4px;
+    border-left: 3px solid var(--g500);
+  }
+  .stat { text-align: center; }
+  .stat-n {
+    font-family: var(--fs);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--g800);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-l {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+  }
+  .stat-divider {
+    width: 1px;
+    background: #D8D4CC;
+    align-self: stretch;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-left">
+    <div class="logo">
+      <span>생각의숲</span>
+      마케팅 콘텐츠
+    </div>
+  </div>
+  <a href="index.html" class="back-btn">← 사업 보드로</a>
+</header>
+
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" data-theme="전체" onclick="filterCards('전체')">
+    전체 <span class="filter-count" id="cnt-전체">0</span>
+  </button>
+  <button class="filter-btn" data-theme="뇌과학/인지" onclick="filterCards('뇌과학/인지')">
+    뇌과학/인지 <span class="filter-count" id="cnt-뇌과학/인지">0</span>
+  </button>
+  <button class="filter-btn" data-theme="문해력위기" onclick="filterCards('문해력위기')">
+    문해력위기 <span class="filter-count" id="cnt-문해력위기">0</span>
+  </button>
+  <button class="filter-btn" data-theme="입시변화" onclick="filterCards('입시변화')">
+    입시변화 <span class="filter-count" id="cnt-입시변화">0</span>
+  </button>
+  <button class="filter-btn" data-theme="글쓰기효과" onclick="filterCards('글쓰기효과')">
+    글쓰기효과 <span class="filter-count" id="cnt-글쓰기효과">0</span>
+  </button>
+  <button class="filter-btn" data-theme="AI교육" onclick="filterCards('AI교육')">
+    AI교육 <span class="filter-count" id="cnt-AI교육">0</span>
+  </button>
+  <button class="filter-btn" data-theme="독서효과" onclick="filterCards('독서효과')">
+    독서효과 <span class="filter-count" id="cnt-독서효과">0</span>
+  </button>
+</div>
+
+<main>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat">
+      <div class="stat-n" id="totalCards">0</div>
+      <div class="stat-l">카드뉴스 시리즈</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-n" id="totalSlides">0</div>
+      <div class="stat-l">제작 슬라이드</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-n" id="totalThemes">0</div>
+      <div class="stat-l">커버 테마</div>
+    </div>
+  </div>
+
+  <div class="section-label" id="sectionLabel">카드뉴스 시리즈</div>
+
+  <div class="card-grid" id="cardGrid">
+  </div>
+
+</main>
+
+<script>
+const CONTENT = [
+  {
+    title: 'Z세대 뇌과학',
+    theme: '뇌과학/인지',
+    desc: '스크린이 아이의 뇌를 어떻게 바꾸는가. Z세대가 최초로 부모 세대보다 낮은 학업 점수를 기록한 신경과학적 원인 분석.',
+    file: 'cardnews-genz-brain.html',
+    date: '2026-03-31',
+    cards: 10,
+    hook: 'photo-1503676260728-1c00da094a0b',   // Unsplash ID (훅카드 배경)
+    source: 'YTN · 재러드 쿠니 호바스 박사',
+  },
+  {
+    title: '문해력 위기',
+    theme: '문해력위기',
+    desc: '고2 46% 기초읽기 미달, PISA 12년간 42점 하락. 교실에서 이미 벌어지고 있는 문해력 위기의 데이터.',
+    file: 'cardnews-literacy-crisis.html',
+    date: '2026-03-31',
+    cards: 10,
+    hook: 'photo-1580582932707-520aed937b7b',
+    source: '고려대 교육신문 · PISA 2022',
+  },
+];
+
+let currentTheme = '전체';
+
+function initCounts() {
+  const themes = {};
+  CONTENT.forEach(c => {
+    themes[c.theme] = (themes[c.theme] || 0) + 1;
+  });
+  document.getElementById('cnt-전체').textContent = CONTENT.length;
+  Object.entries(themes).forEach(([t, n]) => {
+    const el = document.getElementById('cnt-' + t);
+    if (el) el.textContent = n;
+  });
+
+  // stats
+  document.getElementById('totalCards').textContent = CONTENT.length;
+  document.getElementById('totalSlides').textContent = CONTENT.reduce((s, c) => s + c.cards, 0);
+  document.getElementById('totalThemes').textContent = new Set(CONTENT.map(c => c.theme)).size;
+}
+
+function filterCards(theme) {
+  currentTheme = theme;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === theme);
+  });
+  renderCards();
+}
+
+function renderCards() {
+  const filtered = currentTheme === '전체'
+    ? CONTENT
+    : CONTENT.filter(c => c.theme === currentTheme);
+
+  const grid = document.getElementById('cardGrid');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <p>아직 이 테마의 카드뉴스가 없습니다</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((c, i) => {
+    const globalIdx = CONTENT.indexOf(c);
+    return `
+    <div class="card-item" onclick="openCard(${globalIdx})">
+      <div class="preview-wrap">
+        <iframe src="${c.file}" scrolling="no" loading="lazy" title="${c.title} 미리보기"></iframe>
+        <div class="preview-overlay"></div>
+        <div class="preview-badge">${c.cards}장</div>
+      </div>
+      <div class="card-info">
+        <div class="card-theme">${c.theme}</div>
+        <div class="card-title">${c.title}</div>
+        <div class="card-desc">${c.desc}<br><span style="color:var(--gray);font-size:11px;margin-top:4px;display:block;">출처: ${c.source}</span></div>
+        <div class="card-meta">
+          <span class="card-date">${c.date}</span>
+          <div class="card-actions">
+            <a href="${c.file}" target="_blank" class="btn-view" onclick="event.stopPropagation()">전체 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openCard(idx) {
+  window.open(CONTENT[idx].file, '_blank');
+}
+
+initCounts();
+renderCards();
+</script>
+
+</body>
+</html>
