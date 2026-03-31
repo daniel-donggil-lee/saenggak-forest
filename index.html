@@ -325,8 +325,6 @@
   <div class="header-meta">
     이동길 + 이은경 | 2026-03 ~ |
     <a href="https://docs.google.com/spreadsheets/d/1pdW8Xif8ZA75UbkAAbnn02wosNbO5kNnmuJ462E-nqw" target="_blank">Sheets 원본</a>
-    &nbsp;·&nbsp;
-    <a href="marketing.html">📸 마케팅 콘텐츠</a>
   </div>
 </header>
 
@@ -371,7 +369,7 @@
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
-const SHEET_ORDER = ['공지사항', '로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항', '리포트'];
+const SHEET_ORDER = ['공지사항', '로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항', '리포트', '마케팅'];
 
 const REPORTS = [
   { title: '전략 보고서 — 프리미엄 교육 시장 함의', desc: '4대 브랜드 분석 기반 입지·타깃·브랜드·경쟁 전략 종합 제언', file: 'strategy-report.html', date: '2026-03-31', category: '시장/경쟁' },
@@ -383,6 +381,8 @@ const REPORTS = [
   { title: '기업가치 시나리오 리포트', desc: '매출 100억 기준, 비즈니스 모델별 기업가치 50억~1,000억 시나리오 분석', file: 'valuation-report.html', date: '2026-03-27', category: '재무' },
   { title: '공동창업 계약서 초안', desc: '지분 60:40, 엑싯 시 50:50 정산 구조 계약서', file: 'contract-draft.html', date: '2026-03-27', category: '법인/거버넌스' },
 ];
+const CONTENT_COUNT = 2; // marketing.html 카드뉴스 시리즈 수 (추가 시 업데이트)
+
 const NOTICES = [
   { title: '회의 자동화 시스템 안내', desc: '08:30 안건 자동 생성 → 11:00 회의록 자동 반영. 이은경 필독 가이드.', file: 'notice_meeting_auto.html', date: '2026-03-31', category: '운영' },
 ];
@@ -436,6 +436,11 @@ const SHEET_CONFIG = {
   '리포트': {
     sub: '아카이브',
     desc: '<strong>분석 리포트 아카이브.</strong> 조사·분석 결과물을 모아 볼 수 있습니다.',
+    columns: [],
+  },
+  '마케팅': {
+    sub: '카드뉴스',
+    desc: '',
     columns: [],
   },
 };
@@ -504,6 +509,15 @@ function renderTabs() {
   const divider = '<span class="tab-divider">|</span>';
   bar.innerHTML = SHEET_ORDER.map((name, i) => {
     const config = SHEET_CONFIG[name];
+
+    // 마케팅 탭: 외부 링크로 처리
+    if (name === '마케팅') {
+      return `<span class="tab-divider">|</span><div class="tab" onclick="window.location.href='marketing.html'" style="cursor:pointer;">
+        📸 마케팅<span class="count">${CONTENT_COUNT}</span>
+        <span class="tab-sub">${config.sub}</span>
+      </div>`;
+    }
+
     const rows = allData[name] || [];
     const dataRows = rows.filter((r, idx) => idx >= 2 && r.some(c => c));
     const active = name === currentTab ? 'active' : '';
