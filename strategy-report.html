@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각의숲 — 프리미엄 교육 시장 전략 보고서</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans KR", sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
+
+  .cover {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d6a4f 60%, #065f46 100%);
+    color: white; padding: 80px 40px; text-align: center;
+  }
+  .cover .tag { font-size: .75rem; letter-spacing: .15em; background: rgba(255,255,255,.15); padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 20px; }
+  .cover h1 { font-size: 2rem; font-weight: 900; line-height: 1.3; margin-bottom: 12px; }
+  .cover h1 span { color: #86efac; }
+  .cover .sub { font-size: .95rem; opacity: .8; margin-bottom: 32px; }
+  .cover .meta { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: .82rem; opacity: .7; }
+  .cover .meta span::before { content: "· "; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* 섹션 */
+  .section { background: white; border-radius: 14px; padding: 32px; margin-bottom: 24px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+  .section-num { font-size: .72rem; font-weight: 700; letter-spacing: .12em; color: #2d6a4f; margin-bottom: 6px; }
+  .section-title { font-size: 1.2rem; font-weight: 800; color: #1e3a5f; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #f1f5f9; }
+
+  h3 { font-size: .97rem; font-weight: 700; color: #1e3a5f; margin: 22px 0 10px; }
+  p { font-size: .88rem; color: #374151; margin-bottom: 12px; line-height: 1.8; }
+  li { font-size: .88rem; color: #374151; margin-bottom: 7px; line-height: 1.7; }
+  ul, ol { padding-left: 1.4em; margin-bottom: 14px; }
+
+  /* 콜아웃 */
+  .callout { border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: .86rem; line-height: 1.8; }
+  .callout.blue  { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .callout.green { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .callout.amber { background: #fffbeb; border-left: 4px solid #f59e0b; }
+  .callout.red   { background: #fff1f2; border-left: 4px solid #f43f5e; }
+  .callout.slate { background: #f8fafc; border-left: 4px solid #94a3b8; }
+  .callout strong { display: block; margin-bottom: 4px; font-size: .87rem; }
+
+  /* 테이블 */
+  .table-wrap { overflow-x: auto; margin: 14px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  th { background: #f1f5f9; color: #475569; font-weight: 700; padding: 9px 12px; text-align: left; }
+  td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+  .num { text-align: center; }
+
+  /* 배지 */
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 700; margin: 0 2px; }
+  .badge.tier1 { background: #fee2e2; color: #dc2626; }
+  .badge.tier2 { background: #fef9c3; color: #92400e; }
+  .badge.tier3 { background: #dcfce7; color: #15803d; }
+  .badge.gray  { background: #f1f5f9; color: #64748b; }
+
+  /* 카드 그리드 */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 16px 0; }
+  @media(max-width:640px){ .grid2,.grid3 { grid-template-columns: 1fr; } }
+  .card { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 16px; }
+  .card .card-label { font-size: .68rem; font-weight: 700; letter-spacing: .08em; color: #6b7280; margin-bottom: 6px; }
+  .card .card-title { font-size: 1rem; font-weight: 800; color: #1e3a5f; margin-bottom: 6px; }
+  .card .card-body { font-size: .8rem; color: #64748b; line-height: 1.7; }
+  .card.highlight { border-color: #fbbf24; background: #fffbeb; }
+  .card.green { border-color: #86efac; background: #f0fdf4; }
+  .card.blue { border-color: #93c5fd; background: #eff6ff; }
+  .card.rose { border-color: #fda4af; background: #fff1f2; }
+
+  /* 인사이트 박스 */
+  .insight-box { background: linear-gradient(135deg,#1e3a5f,#2d6a4f); color: white; border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+  .insight-box h3 { color: #86efac; margin-top: 0; margin-bottom: 10px; font-size: 1rem; }
+  .insight-box p, .insight-box li { color: rgba(255,255,255,.88); font-size: .86rem; }
+
+  /* 진행 바 */
+  .bar-wrap { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+  .bar-label { font-size: .8rem; min-width: 80px; color: #374151; }
+  .bar { height: 8px; border-radius: 4px; }
+  .bar-val { font-size: .78rem; color: #64748b; min-width: 40px; text-align: right; }
+
+  /* 타임라인 */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content:''; position:absolute; left:8px; top:6px; bottom:6px; width:2px; background:#e2e8f0; }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-dot { position: absolute; left: -24px; top: 4px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; }
+  .tl-label { font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: #6b7280; margin-bottom: 3px; }
+  .tl-title { font-size: .92rem; font-weight: 700; color: #1e3a5f; margin-bottom: 4px; }
+  .tl-body { font-size: .82rem; color: #64748b; line-height: 1.7; }
+
+  /* 경고 */
+  .warning { background: #fff7ed; border: 1.5px solid #fb923c; border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: .86rem; }
+  .warning strong { color: #ea580c; display: block; margin-bottom: 4px; }
+
+  /* 결론 */
+  .conclusion { background: linear-gradient(135deg,#1e3a5f,#065f46); color: white; border-radius: 14px; padding: 36px; margin-top: 32px; }
+  .conclusion h2 { color: white; font-size: 1.2rem; margin-bottom: 20px; }
+  .conclusion p, .conclusion li { color: rgba(255,255,255,.85); font-size: .88rem; }
+
+  .divider { border: none; border-top: 2px solid #f1f5f9; margin: 20px 0; }
+  .footnote { font-size: .75rem; color: #94a3b8; margin-top: 8px; }
+
+  .brand-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- 표지 -->
+<div class="cover">
+  <div class="tag">STRATEGY REPORT · 2026.03.31</div>
+  <h1>프리미엄 교육 시장이<br><span>생각의숲</span>에 주는 함의</h1>
+  <p class="sub">4대 핵심 브랜드 전국 분포 분석 기반 · 전략적 제언</p>
+  <div class="meta">
+    <span>분석 브랜드: 폴리어학원·아발론교육·생각하는황소·자라다남아미술</span>
+    <span>가맹점 288개 · 전국 180개 동 분석</span>
+    <span>작성: Claude (이동길 지시)</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Executive Summary -->
+<div class="section">
+  <div class="section-num">EXECUTIVE SUMMARY</div>
+  <div class="section-title">핵심 결론 — 3줄 요약</div>
+  <div class="insight-box">
+    <h3>📌 이 보고서가 말하는 것</h3>
+    <ul>
+      <li><b>전국 180개 동 중 단 4개 동</b>에만 4대 프리미엄 교육 브랜드가 동시 진출해 있다. 이곳이 생각의숲의 "수요 검증된 1호점 후보"다.</li>
+      <li>수도권 집중도(65%)와 시세 데이터를 함께 보면, <b>분당 정자동이 브랜드 론칭 효과와 시장성을 동시에 갖춘 최적 1호점</b>이다. 단, 리스크 최소화가 우선이라면 하남 미사에서 리마크 연계 검증이 먼저다.</li>
+      <li>자라다남아미술 단독 진출 19개 동은 <b>2~3년 후 교육 수요가 성숙할 예비 시장</b>이다. 가맹 2기 이후 공략 리스트로 관리해야 한다.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 1. 시장 환경 -->
+<div class="section">
+  <div class="section-num">SECTION 1</div>
+  <div class="section-title">시장 환경 — 우리가 뛰어드는 판의 구조</div>
+
+  <h3>1-1. 프리미엄 교육 시장의 지리적 집중도</h3>
+  <p>4대 브랜드 전국 288개 가맹점의 지역 분포를 보면, <b>경기(100개)·서울(88개) 합산 65.3%</b>가 수도권에 집중되어 있다. 인천(16개)까지 합하면 수도권 비중은 <b>70.8%</b>다.</p>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin:16px 0">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:.8rem;min-width:90px;color:#374151">경기도</div>
+      <div style="height:10px;background:#1d4ed8;border-radius:4px;width:100%"></div>
+      <div style="font-size:.78rem;color:#64748b;min-width:90px">100개 (34.7%)</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:.8rem;min-width:90px;color:#374151">서울</div>
+      <div style="height:10px;background:#3b82f6;border-radius:4px;width:88%"></div>
+      <div style="font-size:.78rem;color:#64748b;min-width:90px">88개 (30.6%)</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:.8rem;min-width:90px;color:#374151">인천</div>
+      <div style="height:10px;background:#93c5fd;border-radius:4px;width:16%"></div>
+      <div style="font-size:.78rem;color:#64748b;min-width:90px">16개 (5.6%)</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:.8rem;min-width:90px;color:#374151">부산</div>
+      <div style="height:10px;background:#065f46;border-radius:4px;width:15%"></div>
+      <div style="font-size:.78rem;color:#64748b;min-width:90px">15개 (5.2%)</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:.8rem;min-width:90px;color:#374151">충남</div>
+      <div style="height:10px;background:#d97706;border-radius:4px;width:11%"></div>
+      <div style="font-size:.78rem;color:#64748b;min-width:90px">11개 (3.8%)</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:.8rem;min-width:90px;color:#374151">기타</div>
+      <div style="height:10px;background:#e2e8f0;border-radius:4px;width:58%"></div>
+      <div style="font-size:.78rem;color:#64748b;min-width:90px">58개 (20.1%)</div>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <strong>📍 함의</strong>
+    생각의숲이 수도권 바깥에서 먼저 시작한다면 이미 수도권 대비 수요 규모 자체가 1/3 이하다. 브랜드 론칭은 수도권에서 해야 언론·SNS 노출과 이은경 팬층 집객이 동시에 작동한다.
+  </div>
+
+  <h3>1-2. 교육 투자 밀도의 불균형 — "이미 격차가 벌어진 시장"</h3>
+  <p>전국 75개 시군구에 가맹점이 분포하지만, 4개 브랜드가 모두 진출한 구는 <b>27개(36%)</b>에 불과하다. 나머지 48개 구는 2~3개 브랜드만 있는 "미완성 교육특구"다.</p>
+  <p>이는 두 가지 사실을 동시에 말해준다. ① 프리미엄 교육 시장은 이미 상위 27개 구에서 포화에 가까워지고 있다. ② 반대로 3개 브랜드만 있는 14개 구는 공백이 있어 <b>선점 진입 시 차별화 효과</b>가 크다.</p>
+
+</div>
+
+<!-- 2. 입지 전략 -->
+<div class="section">
+  <div class="section-num">SECTION 2</div>
+  <div class="section-title">입지 전략 — 어디서 시작할 것인가</div>
+
+  <h3>2-1. 4대 공통 동 — 전국 180개 동 중 단 4곳</h3>
+  <p>4개 브랜드가 <b>같은 동</b>에 동시 진출한 지역은 전국에 단 4곳이다. 이 4곳은 "프리미엄 교육 지출 의향이 검증된 곳"이라는 시장 증거다.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>지역</th>
+          <th class="num">집적도</th>
+          <th>성격</th>
+          <th>생각의숲 적합도</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>충남 천안시 불당동</b></td>
+          <td class="num">7개</td>
+          <td>충청권 최강 교육특구·신도심</td>
+          <td><span class="badge tier1">★★★ 지방 1순위</span></td>
+        </tr>
+        <tr>
+          <td><b>경기 성남시 정자동</b></td>
+          <td class="num">5개</td>
+          <td>판교 IT 고소득 맞벌이 밀집</td>
+          <td><span class="badge tier1">★★★ 수도권 1순위</span></td>
+        </tr>
+        <tr>
+          <td><b>인천 서구 청라동</b></td>
+          <td class="num">4개</td>
+          <td>계획도시·학부모 교육 투자 의지 강</td>
+          <td><span class="badge tier2">★★ 수도권 2순위</span></td>
+        </tr>
+        <tr>
+          <td><b>광주 광산구 수완동</b></td>
+          <td class="num">4개</td>
+          <td>광주 최대 신도심·호남 거점</td>
+          <td><span class="badge tier2">★★ 호남 1순위</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2-2. 1호점 시나리오 비교</h3>
+  <div class="grid2">
+    <div class="card highlight">
+      <div class="card-label">SCENARIO A · 브랜드 최우선</div>
+      <div class="card-title">분당 정자동</div>
+      <div class="card-body">
+        <b>장점</b><br>
+        · 4개 공통 동, 수도권 유일<br>
+        · 판교 IT 부모 = 이은경 핵심 팬층<br>
+        · 언론·SNS 노출 극대화<br>
+        · 교육투자지수 전국 5위(성남시)<br><br>
+        <b>단점</b><br>
+        · 임대료 부담 (평당 15~25만원)<br>
+        · 기존 학원 포화 → 집객 경쟁
+      </div>
+    </div>
+    <div class="card green">
+      <div class="card-label">SCENARIO B · 리스크 최소화</div>
+      <div class="card-title">하남 미사 (무브랜드 프로토타입)</div>
+      <div class="card-body">
+        <b>장점</b><br>
+        · 이동길 지역 네트워크로 소수 학부모 모집<br>
+        · 브랜드명 비노출 — 실패해도 브랜드 손상 없음<br>
+        · 커리큘럼·수업료·반응 실데이터 확보<br>
+        · 비용은 임시 공간 임대 수준으로 최소화<br><br>
+        <b>단점</b><br>
+        · 하남이 실제 타깃 시장과 다를 수 있음<br>
+        · 집객 규모가 작아 데이터 대표성 제한
+      </div>
+    </div>
+    <div class="card blue">
+      <div class="card-label">SCENARIO C · 지방 선점</div>
+      <div class="card-title">천안 불당동</div>
+      <div class="card-body">
+        <b>장점</b><br>
+        · 집적도 전국 1위 (7개)<br>
+        · 임대료 수도권 1/3<br>
+        · 충청권 프랜차이즈 거점<br>
+        · 경쟁 학원 포화도 낮음<br><br>
+        <b>단점</b><br>
+        · 이은경 팬층 지리 분포 불확실<br>
+        · 수도권 미디어 노출 제한
+      </div>
+    </div>
+    <div class="card rose">
+      <div class="card-label">SCENARIO D · 권장 전략</div>
+      <div class="card-title">하남 무브랜드 검증 → 정자동 정식 론칭</div>
+      <div class="card-body">
+        <b>장점</b><br>
+        · 2026년: 브랜드명 없이 수업만 검증<br>
+        · 브랜드의 첫인상은 2027년 정자동에서 단 한 번<br>
+        · 실패해도 브랜드 무손상, 성공하면 데이터 보유<br>
+        · 정자동 론칭 시 "이미 검증된 커리큘럼"으로 자신감<br><br>
+        <b>단점</b><br>
+        · 2단계 구조로 시간 소요<br>
+        · 프로토타입 단계 공간 비용 발생
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <strong>✅ 권장: Scenario D (하남 무브랜드 검증 → 정자동 정식 론칭)</strong>
+    2026년 하남 미사에서 <b>브랜드명 없이</b> 소규모 수업 운영. "생각의숲"이라는 이름은 이 단계에서 쓰지 않는다. 이동길의 지역 네트워크로 학부모 10~20명을 모집하고, 커리큘럼·수업료·반응 데이터만 축적한다. 브랜드의 첫인상은 2027년 분당 정자동에서 <b>단 한 번, 준비된 상태로</b> 꺼낸다.
+  </div>
+
+  <h3>2-3. 전국 확장 로드맵</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#1e3a5f"></div>
+      <div class="tl-label">2026 (무브랜드 검증)</div>
+      <div class="tl-title">하남 미사 — 브랜드명 없는 수업 프로토타입</div>
+      <div class="tl-body">"생각의숲" 이름 비노출. 이동길 지역 네트워크로 학부모 10~20명 모집. 임시 소형 공간에서 커리큘럼 1기(10주) 운영. 수업료·반응·이탈률·재등록 의향 등 실데이터만 확보. 브랜드는 이 단계에서 소비하지 않는다.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#2d6a4f"></div>
+      <div class="tl-label">2027 (본점)</div>
+      <div class="tl-title">분당 정자동 — 브랜드 1호 본점</div>
+      <div class="tl-body">이은경 공식 론칭. 언론 보도 + 유튜브 채널 연계 홍보. 가맹 모집 사전 예약 시작.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#065f46"></div>
+      <div class="tl-label">2028 (수도권 확장)</div>
+      <div class="tl-title">목동 · 대치동 · 청라동</div>
+      <div class="tl-body">3개 공통 동(목동, 대치) + 4개 공통 동(청라) 순차 진출. 직영 또는 1호 가맹점.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#d97706"></div>
+      <div class="tl-label">2028~2029 (지방 거점)</div>
+      <div class="tl-title">천안 불당동 · 부산 해운대 · 광주 수완동</div>
+      <div class="tl-body">충청(불당동→복대동), 영남(해운대→범어동→상남동), 호남(수완동) 가맹 거점 확보.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. 타깃 고객 분석 -->
+<div class="section">
+  <div class="section-num">SECTION 3</div>
+  <div class="section-title">타깃 고객 분석 — 누가 지갑을 여는가</div>
+
+  <h3>3-1. 4대 브랜드 공통 학부모의 프로파일</h3>
+  <p>폴리어학원(영어 프리미엄)·아발론교육(영어 심화)·생각하는황소(수학 사고력)·자라다남아미술(미술 창의)에 동시에 지출하는 학부모가 모인 동네다. 이들의 공통 특성을 역추적하면 다음과 같다.</p>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="card-label">소득 수준</div>
+      <div class="card-title">맞벌이 고소득</div>
+      <div class="card-body">아파트 시세 5,000만원↑ 지역. 월 교육비 100~200만원 지출 의향. 4개 브랜드 각 월 15~30만원 = 월 교육비 60~120만원 이상 집행 중.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">교육관</div>
+      <div class="card-title">전인 교육 지향</div>
+      <div class="card-body">영어·수학·미술·글쓰기 전방위 투자. 단순 성적보다 "표현력·사고력" 중시. 이은경의 "자기주도 공부법" 철학과 정확히 맞닿아 있음.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">정보 채널</div>
+      <div class="card-title">SNS·유튜브 적극 활용</div>
+      <div class="card-body">이은경 유튜브 구독자 15만+ = 이 타깃이 이미 이은경을 알고 있음. 브랜드 인지 비용이 거의 0에 가까운 지역이 분당·목동·대치 권역.</div>
+    </div>
+  </div>
+
+  <h3>3-2. 자라다남아미술이 드러내는 시장 신호</h3>
+  <p>자라다남아미술은 "남아 미술"이라는 매우 좁은 니치를 공략하는 브랜드다. 이 브랜드가 전국 56개 가맹점을 운영한다는 사실은 다음을 의미한다.</p>
+  <ul>
+    <li><b>프리미엄 창의 교육 카테고리 자체가 성립</b>됐다 — 미술조차 전문 브랜드로 분화될 만큼 시장이 세분화되어 있다.</li>
+    <li>자라다 단독 진출 19개 동은 <b>"영어·수학 선점 후 창의 교육이 다음으로 오는 지역"</b>이다. 글쓰기는 미술보다 학부모 설득이 쉽고 입시 연계성이 높아 자라다가 개척한 수요를 생각의숲이 흡수할 수 있다.</li>
+  </ul>
+
+  <div class="callout amber">
+    <strong>⚠️ 주의: 자라다 있는 곳이 반드시 좋은 게 아니다</strong>
+    자라다 단독 진출 19개 동(고양 동산동·산본동·비전동 등)은 아직 영어·수학 프리미엄 브랜드가 없는 곳이다. 이는 소득 수준이나 교육 투자 밀도가 아직 충분히 성숙하지 않았다는 신호일 수 있다. 가맹점 초기 배치에는 주의가 필요하다.
+  </div>
+</div>
+
+<!-- 4. 브랜드 전략 -->
+<div class="section">
+  <div class="section-num">SECTION 4</div>
+  <div class="section-title">브랜드 전략 함의 — 이은경이라는 자산을 어떻게 쓸 것인가</div>
+
+  <h3>4-1. 이은경 브랜드와 지역 데이터의 교차점</h3>
+  <p>이은경("슬기로운 초등생활")의 팬층은 주로 <b>초등 자녀를 둔 30~40대 엄마</b>로, 이 인구가 가장 밀집한 곳이 경기 신도시권(판교·분당·하남·수원·고양)이다. 이는 4개 브랜드 공통 진출 지역과 상당 부분 겹친다.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>이은경 팬층 집중 예상 지역</th><th>4대 브랜드 집적도</th><th>전략적 의미</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>경기 성남시 분당구 (정자동)</td><td><span class="badge tier1">4개 공통</span></td><td>팬층 + 수요 동시 검증 → 1호점 최적</td></tr>
+        <tr><td>서울 양천구 (목동)</td><td><span class="badge tier2">3개 공통</span></td><td>교육열 1위 지역, 자라다 이미 진출</td></tr>
+        <tr><td>경기 하남시 (미사)</td><td><span class="badge tier2">4구 진출</span></td><td>리마크 거점, 파일럿 최적</td></tr>
+        <tr><td>경기 수원시 (영통·이의)</td><td><span class="badge tier2">3개 공통</span></td><td>삼성 연구직 부모, 고학력·교육 투자 강</td></tr>
+        <tr><td>경기 고양시 (일산)</td><td><span class="badge tier2">4구 진출</span></td><td>중산층 밀집, 가맹점 확장 거점</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. 대치동을 어떻게 볼 것인가</h3>
+  <p>대치동은 교육투자지수 전국 1위이지만 4개 공통 동에서 빠졌다 — 자라다남아미술이 없기 때문이다. 이는 역설적으로 중요한 신호다.</p>
+  <div class="callout blue">
+    <strong>🔍 대치동 해석</strong>
+    대치동 학부모는 영어(폴리·아발론)·수학(황소)은 이미 채워져 있지만 미술 전문 브랜드는 없다. 이 학부모들이 선택하는 미술은 "미술 입시 전문"이지 "창의 미술"이 아니기 때문이다. 글쓰기도 마찬가지 — 대치동에서 경쟁하려면 <b>"초등 글쓰기"가 아닌 "논술·서술형 대비"로 포지셔닝</b>해야 한다. 생각의숲의 인문독서+글쓰기는 이 니즈를 채울 수 있다. 단, 대치동 1호점은 리스크가 크므로 브랜드 검증 후 진출이 맞다.
+  </div>
+
+  <h3>4-3. 이은경 vs 콘텐츠 의존 리스크</h3>
+  <p>현재 생각의숲 콘텐츠 기둥은 이은경(글쓰기)·달콤인문선생님(인문독서)·영어문해력(검토 중) 3축이다. 4개 브랜드 데이터는 한 가지 경고를 던진다.</p>
+  <div class="warning">
+    <strong>⚠️ 콘텐츠 1인 의존 리스크</strong>
+    폴리어학원·아발론교육은 브랜드 시스템으로 운영되기 때문에 1인에 의존하지 않는다. 반면 이은경 브랜드는 본인이 곧 상품이다. 이은경의 퍼스널 브랜드를 활용해 초기 집객은 쉽게 할 수 있지만, 프랜차이즈로 확장할수록 "이은경 없이도 돌아가는 시스템"이 필수다. 커리큘럼 표준화·교사 교육 시스템(평생교육원)이 브랜드 론칭 전에 완성되어야 한다.
+  </div>
+</div>
+
+<!-- 5. 경쟁 환경 -->
+<div class="section">
+  <div class="section-num">SECTION 5</div>
+  <div class="section-title">경쟁 환경 분석 — 우리의 포지션</div>
+
+  <h3>5-1. 생각의숲은 무엇과 경쟁하는가</h3>
+  <p>4대 분석 브랜드(영어·수학·미술)는 직접 경쟁자가 아니다. 오히려 이들이 이미 깔아놓은 "프리미엄 교육 학부모 클러스터"에 편승하는 구조다. 직접 경쟁은 다른 곳에 있다.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>경쟁 카테고리</th><th>대표 브랜드</th><th>생각의숲 차별화</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>일반 논술학원</td>
+          <td>대교·한솔·눈높이</td>
+          <td>이은경 브랜드 신뢰도 + 인문독서 융합 → 단순 첨삭 이상의 가치</td>
+        </tr>
+        <tr>
+          <td>독서논술 프랜차이즈</td>
+          <td>솔루니·위즈덤하우스</td>
+          <td>초등교사 15년 + 60권 저자 = 콘텐츠 깊이 차별화</td>
+        </tr>
+        <tr>
+          <td>온라인 글쓰기 플랫폼</td>
+          <td>클래스101·탈잉</td>
+          <td>오프라인 공간 경험 + 또래 글쓰기 커뮤니티 → 온라인 대체 불가</td>
+        </tr>
+        <tr>
+          <td>지역 소규모 글쓰기 학원</td>
+          <td>비브랜드 개인 학원</td>
+          <td>프랜차이즈 커리큘럼 일관성 + 이은경 브랜드 프리미엄</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>5-2. 공백 시장 — 데이터가 발견한 블루오션</h3>
+  <p>4개 브랜드가 모두 진출한 27개 구에 글쓰기 프리미엄 브랜드는 아직 없다. 이 학부모들은 이미 월 60~120만원의 교육비를 지출하는 사람들이다. 여기에 글쓰기를 더하는 것은 새로운 설득이 아니라 <b>기존 소비 패턴의 연장</b>이다.</p>
+  <div class="callout green">
+    <strong>✅ 핵심 포지셔닝 문장</strong>
+    "영어·수학·미술 다 시키는 부모가 마지막으로 채워야 할 한 칸 — 생각의숲 글쓰기"
+  </div>
+</div>
+
+<!-- 6. 리스크 분석 -->
+<div class="section">
+  <div class="section-num">SECTION 6</div>
+  <div class="section-title">리스크 분석 — 데이터가 보여주지 못하는 것들</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-label">RISK 1</div>
+      <div class="card-title">브랜드 형태 미결정</div>
+      <div class="card-body">현재 분석은 모두 "학원" 기준이다. 생각의숲이 학원·공방·온오프 혼합 중 어떤 형태를 택하느냐에 따라 적합 입지가 완전히 달라진다. 이 결정이 모든 입지 전략의 선행 조건이다.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">RISK 2</div>
+      <div class="card-title">이은경 팬층 지리 미확인</div>
+      <div class="card-body">유튜브·인스타 팬층의 실제 지역 분포 데이터가 없다. 팬층이 지방에 분산되어 있다면 수도권 1호점 전략의 효과가 예상보다 낮을 수 있다. 채널 분석 또는 사전 수요 조사 필요.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">RISK 3</div>
+      <div class="card-title">2027년 시장 변동성</div>
+      <div class="card-body">4대 브랜드 현황은 2026년 3월 기준이다. 2027년 론칭 시점에 시장이 바뀔 수 있다. 특히 AI 학습 도구 보급으로 글쓰기 교육 수요 자체가 재편될 가능성에 대비해야 한다.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">RISK 4</div>
+      <div class="card-title">수업료 수준 미검증</div>
+      <div class="card-body">분당·목동 학부모가 글쓰기에 월 얼마를 지불할 의향이 있는지 데이터가 없다. 비슷한 포지션의 독서논술 브랜드(솔루니 등) 가격 벤치마킹과 실제 수요 인터뷰가 선행되어야 한다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. 실행 우선순위 -->
+<div class="section">
+  <div class="section-num">SECTION 7</div>
+  <div class="section-title">지금 당장 해야 할 것 — 데이터 기반 우선순위</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>과제</th><th>목적</th><th>기한</th><th>담당</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>1</b></td>
+          <td>브랜드 형태 결정 (학원·공방·혼합)</td>
+          <td>모든 입지·운영 전략의 선행 조건</td>
+          <td><span class="badge tier1">긴급</span></td>
+          <td>공동</td>
+        </tr>
+        <tr>
+          <td><b>2</b></td>
+          <td>이은경 채널 팬층 지역 분포 분석</td>
+          <td>유튜브 분석 툴(SocialBlade·YouTube Studio)로 시청자 지역 확인</td>
+          <td><span class="badge tier1">긴급</span></td>
+          <td>이동길</td>
+        </tr>
+        <tr>
+          <td><b>3</b></td>
+          <td>리마크 학부모 글쓰기 수요 인터뷰</td>
+          <td>수업료·형태·시간 선호 검증</td>
+          <td><span class="badge tier2">2026 상반기</span></td>
+          <td>이동길</td>
+        </tr>
+        <tr>
+          <td><b>4</b></td>
+          <td>하남 미사 파일럿 설계</td>
+          <td>커리큘럼 1기 (10주) 테스트 운영</td>
+          <td><span class="badge tier2">2026 하반기</span></td>
+          <td>이은경+이동길</td>
+        </tr>
+        <tr>
+          <td><b>5</b></td>
+          <td>분당 정자동 상권 임장</td>
+          <td>임대료·유동인구·경쟁 학원 파악</td>
+          <td><span class="badge tier3">2026 하반기</span></td>
+          <td>이동길</td>
+        </tr>
+        <tr>
+          <td><b>6</b></td>
+          <td>솔루니·위즈덤하우스 가격 벤치마킹</td>
+          <td>수업료 포지셔닝 기준점 수립</td>
+          <td><span class="badge tier3">2026 상반기</span></td>
+          <td>이동길</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 결론 -->
+<div class="conclusion">
+  <h2>결론 — 데이터가 가리키는 방향</h2>
+  <p style="margin-bottom:16px">이 분석이 말하는 가장 중요한 것은 하나다.</p>
+  <ul style="margin-bottom:20px">
+    <li style="margin-bottom:10px"><b>시장은 이미 만들어져 있다.</b> 전국 27개 구에서 프리미엄 교육 학부모 클러스터가 형성되어 있고, 이들은 이미 월 60~120만원의 교육비를 지출하고 있다. 생각의숲은 새로운 수요를 만들 필요가 없다.</li>
+    <li style="margin-bottom:10px"><b>이은경은 비용 0의 브랜드 신뢰도다.</b> 다른 프랜차이즈가 수억 원의 마케팅비로 쌓아야 할 인지도를 이은경은 이미 갖고 있다. 이 자산을 어느 지역에서 어떤 형태로 전환하느냐가 핵심 과제다.</li>
+    <li style="margin-bottom:10px"><b>첫 번째 결정이 모든 것을 결정한다.</b> 1호점 위치는 단순한 입지 선택이 아니라, 브랜드가 어떤 학부모를 상대하는지, 어떤 가격대에 포지셔닝하는지, 어떤 커리큘럼이 작동하는지를 결정한다. 서두르기보다 검증 후 확신을 갖고 들어가야 한다.</li>
+  </ul>
+  <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:16px 20px;font-size:.86rem;color:rgba(255,255,255,.9)">
+    <b style="color:#86efac">권장 시퀀스:</b><br>
+    브랜드 형태 결정 → 이은경 팬층 지역 확인 → 하남 <b>무브랜드</b> 수업 검증 (2026) → 분당 정자동 <b>생각의숲 첫 공개 론칭</b> (2027) → 수도권 확장 → 지방 프랜차이즈 (2028~)
+  </div>
+</div>
+
+<p class="footnote" style="text-align:center;margin-top:24px">
+  데이터 기준: 2026.03.31 | 카카오 로컬 API 기반 실데이터 (288개 가맹점) | 아파트 시세: KB부동산 2024 추정치<br>
+  본 보고서는 이동길·이은경의 의사결정 지원을 위해 Claude가 작성했습니다.
+</p>
+
+</div>
+</body>
+</html>
