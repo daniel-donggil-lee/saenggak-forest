@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[생각의숲] 회의 운영 방식 안내</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+      line-height: 1.7;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      background-color: #1a1a2e;
+      color: #ffffff;
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-block;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #d0d8f0;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    header .date {
+      font-size: 14px;
+      color: #a0aac8;
+    }
+
+    /* ── 요약 배너 ── */
+    .summary-banner {
+      background-color: #eef2ff;
+      border-left: 4px solid #1a1a2e;
+      padding: 18px 24px;
+      margin: 32px auto;
+      max-width: 720px;
+      border-radius: 0 8px 8px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1a1a2e;
+    }
+
+    /* ── 공통 섹션 ── */
+    .section {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e4f0;
+    }
+
+    /* ── 타임라인 ── */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      background: linear-gradient(to bottom, #1a1a2e, #8892c0);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 44px;
+      margin-bottom: 32px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 11px;
+      top: 13px;
+      width: 18px;
+      height: 18px;
+      background-color: #1a1a2e;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px #1a1a2e;
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-time {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      white-space: nowrap;
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .timeline-body {
+      background-color: #f7f8fc;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .timeline-body ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .timeline-body ul li {
+      font-size: 14px;
+      color: #555;
+      padding: 4px 0 4px 18px;
+      position: relative;
+    }
+
+    .timeline-body ul li::before {
+      content: '›';
+      position: absolute;
+      left: 4px;
+      color: #8892c0;
+      font-weight: 700;
+    }
+
+    /* ── 할 일 박스 ── */
+    .todo-box {
+      background-color: #f0f4ff;
+      border: 1.5px solid #c5d0f0;
+      border-radius: 12px;
+      padding: 24px 24px 20px;
+    }
+
+    .todo-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .todo-box ul li {
+      font-size: 15px;
+      color: #333;
+      padding: 8px 0;
+      border-bottom: 1px dashed #d0d8f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .todo-box ul li:last-child {
+      border-bottom: none;
+      padding-top: 16px;
+      font-weight: 600;
+      color: #1a1a2e;
+      font-size: 14px;
+    }
+
+    /* ── 보드 버튼 ── */
+    .btn-section {
+      text-align: center;
+      padding: 0 20px 48px;
+    }
+
+    .btn-board {
+      display: inline-block;
+      background-color: #1a1a2e;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 50px;
+      letter-spacing: 0.02em;
+      transition: background 0.2s ease;
+    }
+
+    .btn-board:hover {
+      background-color: #2e2e5e;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      background-color: #f3f4f8;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 13px;
+      color: #888;
+      border-top: 1px solid #e0e4f0;
+    }
+
+    footer strong {
+      color: #555;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 480px) {
+      .timeline::before {
+        left: 17px;
+      }
+      .timeline-dot {
+        left: 9px;
+      }
+      .timeline-item {
+        padding-left: 38px;
+      }
+      .summary-banner {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <div class="badge">생각의숲 내부 공지</div>
+    <h1>🌿 회의 운영 방식 안내</h1>
+    <div class="date">시행일: 2026년 4월 1일부터</div>
+  </header>
+
+  <!-- 한 줄 요약 -->
+  <div class="section">
+    <div class="summary-banner">
+      💬 앞으로 회의 전 안건이 자동으로 공유되고, 회의 후 보드가 자동으로 업데이트됩니다.
+    </div>
+  </div>
+
+  <!-- 타임라인 -->
+  <div class="section">
+    <div class="section-title">📅 회의 흐름</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">🕗 08:30</span>
+          <span class="timeline-title">안건 자동 공유</span>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Google Sheets 보드(할일·의사결정·로드맵)에서 현황을 읽어 안건 문서를 자동 생성합니다</li>
+            <li>이은경님 Gmail(<strong>39gambler@gmail.com</strong>)로 자동 공유됩니다</li>
+            <li>회의 전 미리 검토해두시면 됩니다</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">🕘 09:00</span>
+          <span class="timeline-title">회의 시작</span>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Google Meet으로 진행 (기존과 동일)</li>
+            <li>Gemini가 회의 내용을 자동으로 기록합니다 (별도 조작 불필요)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">🕙 10:00</span>
+          <span class="timeline-title">회의 종료</span>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Google Meet 종료 시 Gemini가 회의록 문서를 자동 생성합니다</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">🕚 11:00</span>
+          <span class="timeline-title">보드 자동 업데이트</span>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>회의에서 완료된 할일 → 자동으로 '완료' 처리</li>
+            <li>결정된 의사결정 항목 → 자동으로 반영</li>
+            <li>새로 생긴 액션 아이템 → 할일 탭에 자동 추가</li>
+            <li>회의록 원문 링크 → 회의록 탭에 자동 기입</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 이은경 누나가 할 일 -->
+  <div class="section">
+    <div class="section-title">🙋 이은경 님이 하실 일</div>
+    <div class="todo-box">
+      <ul>
+        <li>
+          <span>✅</span>
+          <span>Google Meet 회의 시 <strong>Gemini 회의록 기능 켜두기</strong> (설정 → 회의록)</span>
+        </li>
+        <li>
+          <span>✅</span>
+          <span>회의 중 주요 결정사항을 명확하게 말하기<br>
+            <em style="font-size:13px; color:#666;">("○○을 완료했습니다", "○○으로 결정했습니다")</em>
+          </span>
+        </li>
+        <li>
+          <span>✅</span>
+          <span>08:30에 공유된 <strong>안건 문서 미리 검토</strong></span>
+        </li>
+        <li>
+          <span>🤖</span>
+          <span>그 외 모든 것은 자동으로 처리됩니다</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 보드 바로가기 버튼 -->
+  <div class="btn-section">
+    <a href="https://daniel-donggil-lee.github.io/saenggak-forest/" target="_blank" class="btn-board">
+      🌿 운영 보드 바로가기
+    </a>
+  </div>
+
+  <!-- 푸터 -->
+  <footer>
+    <p>문의: <strong>이동길</strong> &nbsp;|&nbsp; 자동화 시스템: <strong>Claude + Google Apps Script</strong></p>
+  </footer>
+
+</body>
+</html>
