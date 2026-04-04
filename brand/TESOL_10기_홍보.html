@@ -50,16 +50,19 @@
     padding: 48px;
   }
   .c1-org {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 800;
     letter-spacing: 0.08em;
-    color: #1a3a8c;
+    color: #15c26f;
     margin-bottom: 36px;
     line-height: 1.6;
+    border: 2.5px solid #15c26f;
+    padding: 12px 28px;
+    border-radius: 10px;
   }
   .c1-badge {
     display: inline-block;
-    background: #1a3a8c;
+    background: #15c26f;
     color: #fff;
     font-size: 11px;
     font-weight: 800;
@@ -72,7 +75,7 @@
   .c1-title {
     font-size: 72px;
     font-weight: 900;
-    color: #1a3a8c;
+    color: #15c26f;
     letter-spacing: -0.02em;
     line-height: 1.0;
     margin-bottom: 8px;
@@ -80,7 +83,7 @@
   .c1-title-sub {
     font-size: 28px;
     font-weight: 800;
-    color: #1a3a8c;
+    color: #15c26f;
     letter-spacing: 0.06em;
   }
   .c1-divider {
@@ -90,12 +93,12 @@
     margin: 32px auto;
   }
   .c1-date {
-    font-size: 17px;
-    font-weight: 700;
-    color: #555;
+    font-size: 24px;
+    font-weight: 800;
+    color: #15c26f;
     letter-spacing: -0.01em;
   }
-  .c1-date strong { color: #1a3a8c; }
+  .c1-date strong { color: #15c26f; }
 
   /* ─────────────────────────────────────
      CARD 2 — 대상 / 슬로건
@@ -124,7 +127,7 @@
   }
   .c2-headline em {
     font-style: normal;
-    color: #1a3a8c;
+    color: #15c26f;
   }
   .c2-sub {
     font-size: 15px;
@@ -139,8 +142,8 @@
     margin-bottom: 32px;
   }
   .field-tag {
-    background: #eef2ff;
-    color: #1a3a8c;
+    background: #d4f7e9;
+    color: #0d9a57;
     font-size: 14px;
     font-weight: 700;
     padding: 8px 18px;
@@ -184,7 +187,7 @@
      CARD 3 — 특징
   ───────────────────────────────────── */
   .card3 {
-    background: #1a3a8c;
+    background: #0d9a57;
     display: flex;
     flex-direction: column;
     padding: 48px 44px;
@@ -204,13 +207,63 @@
     letter-spacing: -0.02em;
     margin-bottom: 6px;
   }
-  .c3-stat {
-    font-size: 14px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 28px;
-    letter-spacing: -0.01em;
+  .c3-body {
+    display: flex;
+    flex: 1;
+    gap: 16px;
   }
-  .c3-stat strong { color: rgba(255,255,255,0.9); }
+  .c3-stat-box {
+    width: 160px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: right;
+    border-left: 1px solid rgba(255,255,255,0.15);
+    padding-left: 20px;
+  }
+  .c3-stat-since {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    width: 100%;
+    text-align: right;
+  }
+  .c3-stat-num {
+    font-size: 56px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+  .c3-stat-num span {
+    font-size: 56px;
+    font-weight: 900;
+  }
+  .c3-stat-unit {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    margin-top: 4px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    width: 100%;
+    text-align: right;
+  }
+  .c3-stat-term {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    text-align: right;
+  }
   .feature-list {
     list-style: none;
     flex: 1;
@@ -251,7 +304,7 @@
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.12em;
-    color: #1a3a8c;
+    color: #15c26f;
     text-transform: uppercase;
     margin-bottom: 16px;
   }
@@ -276,7 +329,7 @@
   .cert-icon {
     width: 52px; height: 52px;
     border-radius: 10px;
-    background: #1a3a8c;
+    background: #15c26f;
     color: #fff;
     display: flex; align-items: center; justify-content: center;
     font-size: 22px;
@@ -286,7 +339,7 @@
   .cert-name {
     font-size: 14px;
     font-weight: 800;
-    color: #1a3a8c;
+    color: #15c26f;
     margin-bottom: 3px;
   }
   .cert-issuer {
@@ -294,7 +347,7 @@
     color: #888;
   }
   .open-date-box {
-    background: #1a3a8c;
+    background: #0d9a57;
     border-radius: 14px;
     padding: 20px 24px;
     display: flex;
@@ -326,16 +379,29 @@
     text-transform: uppercase;
     margin-bottom: 4px;
   }
-  .contact-chip strong { font-weight: 800; color: #1a3a8c; }
+  .contact-chip strong { font-weight: 800; color: #15c26f; }
 
   /* ─────────────────────────────────────
      CARD 5 — 강사 소개
   ───────────────────────────────────── */
   .card5 {
     background: #fff;
-    display: flex;
-    flex-direction: column;
-    padding: 44px;
+    display: block;
+    padding: 44px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .c5-left {
+    position: relative;
+    z-index: 2;
+    padding-right: 260px;
+  }
+  .c5-right {
+    position: absolute;
+    right: -10px;
+    bottom: 0;
+    width: 270px;
+    z-index: 1;
   }
   .c5-eyebrow {
     font-size: 11px;
@@ -343,67 +409,42 @@
     letter-spacing: 0.12em;
     color: #888;
     text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .instructor-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    gap: 16px;
+    margin-bottom: 14px;
   }
   .instructor-name {
-    font-size: 44px;
+    font-size: 38px;
     font-weight: 900;
-    color: #1a3a8c;
+    color: #15c26f;
     letter-spacing: -0.03em;
     line-height: 1.0;
   }
   .instructor-title {
-    font-size: 14px;
+    font-size: 13px;
     color: #888;
     margin-top: 4px;
   }
   .instructor-photo {
-    width: 110px;
-    height: 130px;
-    border-radius: 12px;
-    object-fit: cover;
-    object-position: top;
-    flex-shrink: 0;
-    background: #e8edf5;
+    width: 100%;
+    height: auto;
     display: block;
-  }
-  .instructor-photo-placeholder {
-    width: 110px;
-    height: 130px;
-    border-radius: 12px;
-    background: #e8edf5;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    color: #aaa;
-    text-align: center;
-    line-height: 1.4;
   }
   .divider-gold {
     width: 36px; height: 3px;
-    background: #e84040;
-    margin-bottom: 18px;
+    background: #15c26f;
+    margin: 16px 0;
   }
   .career-grid {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0;
+    padding-right: 0;
   }
   .career-item {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    padding: 8px 0;
+    gap: 8px;
+    padding: 7px 0;
     border-bottom: 1px solid #f0f0ed;
     font-size: 13.5px;
     color: #333;
@@ -414,8 +455,8 @@
     content: '';
     width: 4px; height: 4px;
     border-radius: 50%;
-    background: #1a3a8c;
-    margin-top: 7px;
+    background: #15c26f;
+    margin-top: 6px;
     flex-shrink: 0;
   }
 
@@ -459,7 +500,7 @@
   <div class="c1-org">어린이영어교육연구회</div>
   <div class="c1-badge">Recruiting Now · 10기</div>
   <div class="c1-title">TESOL</div>
-  <div class="c1-title-sub">전문가 과정</div>
+  <div class="c1-title-sub">전문가과정 모집</div>
   <div class="c1-divider"></div>
   <div class="c1-date">개강 <strong>4월 17일</strong></div>
 </div>
@@ -467,7 +508,7 @@
 <div class="label">Card 2 / 5 — 대상</div>
 <div class="card card2">
   <div class="c2-eyebrow">Who is this for</div>
-  <div class="c2-headline">영어교육 전문가 지식으로<br><em>무장할 때입니다.</em></div>
+  <div class="c2-headline">영어교육전문가<br><em>지식으로 무장할 때입니다</em></div>
   <div class="c2-sub">영어학 · 교육학 · 영문학 · 심리학 기반 통합 과정</div>
   <div class="fields-wrap">
     <span class="field-tag">영어학</span>
@@ -491,20 +532,27 @@
 <div class="card card3">
   <div class="c3-eyebrow">Program Features</div>
   <div class="c3-title">TESOL 10기</div>
-  <div class="c3-stat">2019년 시작 · 현재 <strong>700명 졸업</strong> · 1학기+2학기 각 3개월</div>
-  <ul class="feature-list">
-    <li><span class="feat-icon">🤝</span>협동학습 & 그룹스터디</li>
-    <li><span class="feat-icon">🎤</span>각종 무료 특강</li>
-    <li><span class="feat-icon">📚</span>출판사 협업 기회</li>
-    <li><span class="feat-icon">🏠</span>홈커밍데이</li>
-    <li><span class="feat-icon">☕</span>연구소 오프 모임</li>
-  </ul>
+  <div class="c3-body">
+    <ul class="feature-list">
+      <li><span class="feat-icon">🤝</span>협동학습 & 그룹스터디</li>
+      <li><span class="feat-icon">🎤</span>각종 무료 특강</li>
+      <li><span class="feat-icon">📚</span>출판사 협업 기회</li>
+      <li><span class="feat-icon">🏠</span>홈커밍데이</li>
+      <li><span class="feat-icon">☕</span>연구소 오프 모임</li>
+    </ul>
+    <div class="c3-stat-box">
+      <div class="c3-stat-since">2019년 시작</div>
+      <div class="c3-stat-num">700<span>명</span></div>
+      <div class="c3-stat-unit">졸업생 배출</div>
+      <div class="c3-stat-term">1, 2학기 각 3개월 과정</div>
+    </div>
+  </div>
 </div>
 
 <div class="label">Card 4 / 5 — 자격증 & 신청</div>
 <div class="card card4">
   <div class="c4-eyebrow">Certification</div>
-  <div class="c4-title">어린이영어지도사 자격증<br>수료 후 발급</div>
+  <div class="c4-title">수료 후 어린이영어지도사<br><span style="color:#15c26f;">TESOL 자격증</span> 발급</div>
   <div class="cert-box">
     <div class="cert-icon">🏅</div>
     <div class="cert-text">
@@ -532,27 +580,8 @@
 </div>
 
 <div class="label">Card 5 / 5 — 강사 소개</div>
-<div class="card card5">
-  <div class="c5-eyebrow">Instructor</div>
-  <div class="instructor-row">
-    <div>
-      <div class="instructor-name">홍현주</div>
-      <div class="instructor-title">어린이영어교육연구회 대표</div>
-    </div>
-    <img src="hong_photo.jpg" class="instructor-photo" alt="홍현주 강사" onerror="this.style.display='none'">
-  </div>
-  <div class="divider-gold"></div>
-  <div class="career-grid">
-    <div class="career-item">한국외국어대학교 영어교육과</div>
-    <div class="career-item">한국외대 영어학 박사</div>
-    <div class="career-item">UNC Chapel Hill Post Doc</div>
-    <div class="career-item">NC State Dept. K-12 ESL Teaching Licensure</div>
-    <div class="career-item">쏙쏙닷컴 영어교육연구소장</div>
-    <div class="career-item">경성대학교 영문과 초빙교수</div>
-    <div class="career-item">한국외대 · 서울대 · 부산교대 강사</div>
-    <div class="career-item">서울시교육청 외국어교육자문위원</div>
-    <div class="career-item">저서 12권</div>
-  </div>
+<div class="card" style="padding:0;">
+  <img src="제목 없는 디자인.png" style="width:100%;height:100%;object-fit:cover;display:block;" alt="강사 홍현주">
 </div>
 
 </body>
