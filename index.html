@@ -941,12 +941,17 @@ function renderMeetingPanel(config, rows, allDataRows) {
   allDataRows.forEach((row, idx) => {
     const realIdx = idx + 2;
     if ((row[0] || '').trim()) {
-      current = { num: row[0], date: row[1] || '', attendees: row[2] || '', items: [], realIdx };
+      // row[7] = 원문 링크(회의록 Docs URL)
+      current = { num: row[0], date: row[1] || '', attendees: row[2] || '', docLink: row[7] || '', items: [], realIdx };
       meetings.push(current);
     }
     if (current) {
       const agenda = (row[3] || '').trim();
-      if (agenda) {
+      const isUrl = /^https?:\/\//.test(agenda);
+      if (isUrl) {
+        // 안건 컬럼에 잘못 들어간 URL → docLink로 처리 (아직 없는 경우에만)
+        if (!current.docLink) current.docLink = agenda;
+      } else if (agenda) {
         current.items.push({ agenda, discussion: row[4] || '', decision: row[5] || '', action: row[6] || '', realIdx });
       }
     }
@@ -955,10 +960,13 @@ function renderMeetingPanel(config, rows, allDataRows) {
   meetings.reverse().forEach((m, mi) => {
     const dateDisplay = formatDateWithDay(m.date.replace(/\s*\(.*\)/, ''));
     const isLatest = mi === 0;
+    const docLinkHtml = m.docLink
+      ? `<a href="${m.docLink}" target="_blank" onclick="event.stopPropagation()" style="font-size:12px;color:#0969da;text-decoration:none;padding:2px 8px;border:1px solid #0969da;border-radius:12px;white-space:nowrap">📄 회의록 보기</a>`
+      : '';
     html += `<div class="roadmap-group">
       <div class="roadmap-group-header" style="cursor:pointer" onclick="var el=document.getElementById('meeting-${mi}'); var open=el.style.display==='none'; el.style.display=open?'block':'none'; this.querySelector('.toggle-icon').textContent=open?'▼':'▶'">
         <span class="roadmap-group-title"><span class="toggle-icon">${isLatest ? '▼' : '▶'}</span> ${m.num} — ${dateDisplay}</span>
-        <span style="font-size:12px;color:#656d76">${m.attendees} · ${m.items.length}건</span>
+        <span style="display:flex;align-items:center;gap:8px;font-size:12px;color:#656d76">${m.attendees} · ${m.items.length}건 ${docLinkHtml}</span>
       </div>
       <div id="meeting-${mi}" class="${isLatest ? 'show' : ''}" style="display:${isLatest ? 'block' : 'none'}">`;
 
