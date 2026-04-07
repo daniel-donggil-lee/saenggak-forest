@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>펜타랩 (PENTA LAB) — 사업 기획안</title>
+<title>펜타랩 (PENTA LAB) — 통합 기획서</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,15 +16,13 @@
   }
 
   .wrap {
-    max-width: 920px;
+    max-width: 940px;
     margin: 0 auto;
     padding: 60px 32px 120px;
   }
 
   /* ── Header ── */
-  .header {
-    margin-bottom: 72px;
-  }
+  .header { margin-bottom: 72px; }
   .header-tag {
     display: inline-block;
     background: #111;
@@ -46,17 +44,11 @@
   }
   .header h1 .accent { color: #C8A45A; }
   .header h1 .dim { color: #999; }
-  .header-meta {
-    font-size: 14px;
-    color: #888;
-    line-height: 1.6;
-  }
+  .header-meta { font-size: 14px; color: #888; line-height: 1.6; }
   .header-meta strong { color: #555; }
 
   /* ── Section ── */
-  .section {
-    margin-bottom: 64px;
-  }
+  .section { margin-bottom: 72px; }
   .section-label {
     font-size: 11px;
     font-weight: 700;
@@ -73,41 +65,27 @@
     letter-spacing: -0.02em;
     margin-bottom: 8px;
   }
-  .section-desc {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 24px;
-  }
+  .section-desc { font-size: 14px; color: #666; margin-bottom: 24px; }
 
-  /* ── Context Box ── */
-  .context-box {
+  /* ── Dark Box ── */
+  .dark-box {
     background: #111;
     color: #fff;
     border-radius: 16px;
-    padding: 36px;
+    padding: 40px;
     margin-bottom: 64px;
   }
-  .context-box h2 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: #C8A45A;
-  }
-  .context-box p {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #ccc;
-    margin-bottom: 12px;
-  }
-  .context-box .highlight {
-    color: #fff;
-    font-weight: 600;
-  }
+  .dark-box h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: #C8A45A; }
+  .dark-box p { font-size: 14px; line-height: 1.8; color: #ccc; margin-bottom: 12px; }
+  .dark-box p:last-child { margin-bottom: 0; }
+  .dark-box .hl { color: #fff; font-weight: 600; }
+  .dark-box .gold { color: #C8A45A; font-weight: 600; }
+
   .decision-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
   }
   .decision-card {
     background: rgba(255,255,255,0.06);
@@ -115,134 +93,114 @@
     border-radius: 12px;
     padding: 16px;
   }
-  .decision-card .label {
-    font-size: 11px;
-    color: #C8A45A;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
+  .decision-card .label { font-size: 11px; color: #C8A45A; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .decision-card .value { font-size: 14px; color: #fff; font-weight: 500; }
+
+  /* ── 고객 경로 ── */
+  .journey-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
   }
-  .decision-card .value {
-    font-size: 14px;
-    color: #fff;
-    font-weight: 500;
+  .journey-card {
+    background: #fff;
+    border: 1px solid rgba(17,17,17,0.09);
+    border-radius: 14px;
+    padding: 24px 20px;
+    border-left: 4px solid #ddd;
   }
+  .journey-card.jA { border-left-color: #4CAF50; }
+  .journey-card.jB { border-left-color: #C8A45A; }
+  .journey-card.jC { border-left-color: #1565C0; }
+  .journey-card .jlabel { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #888; text-transform: uppercase; margin-bottom: 8px; }
+  .journey-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .journey-card .jsub { font-size: 13px; color: #888; margin-bottom: 12px; }
+  .journey-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+  .incubator-box {
+    background: #fff;
+    border: 1px solid rgba(200,164,90,0.3);
+    border-radius: 14px;
+    padding: 24px 28px;
+    border-left: 4px solid #C8A45A;
+  }
+  .incubator-box h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: #C8A45A; }
+  .incubator-box p { font-size: 14px; color: #555; line-height: 1.7; font-style: italic; }
 
   /* ── 3 Lines ── */
   .lines-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 14px;
     margin-bottom: 32px;
-  }
-  @media (max-width: 700px) {
-    .lines-grid { grid-template-columns: 1fr; }
   }
   .line-card {
     border: 1px solid rgba(17,17,17,0.09);
     border-radius: 16px;
     padding: 28px 24px;
     background: #fff;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .line-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
   }
   .line-num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     border-radius: 999px;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 14px; font-weight: 700;
     margin-bottom: 14px;
   }
   .line-num.l1 { background: #E8F5E9; color: #2E7D32; }
   .line-num.l2 { background: #FFF3E0; color: #E65100; }
   .line-num.l3 { background: #E3F2FD; color: #1565C0; }
-  .line-card h3 {
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    letter-spacing: -0.01em;
-  }
-  .line-card .sub {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 12px;
-  }
-  .line-card p {
-    font-size: 13px;
-    color: #555;
-    line-height: 1.6;
-  }
+  .line-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .line-card .sub { font-size: 13px; color: #888; margin-bottom: 12px; }
+  .line-card p { font-size: 13px; color: #555; line-height: 1.6; }
 
-  /* ── Pain Table ── */
-  .pain-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 8px;
-  }
-  .pain-table thead th {
+  /* ── Pain Points ── */
+  .pain-cat-label {
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     color: #888;
-    text-align: left;
-    padding: 10px 12px;
-    border-bottom: 2px solid #111;
     text-transform: uppercase;
+    margin: 28px 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e8e8e5;
   }
-  .pain-table tbody td {
-    padding: 14px 12px;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
+  .pain-cat-label:first-child { margin-top: 0; }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
+    margin-bottom: 4px;
   }
-  .pain-table tbody tr:last-child td { border-bottom: none; }
-  .pain-name {
-    font-weight: 600;
-    color: #111;
+  .pain-item {
+    background: #fff;
+    border: 1px solid rgba(17,17,17,0.08);
+    border-radius: 10px;
+    padding: 16px 18px;
   }
-  .pain-detail {
-    font-size: 12px;
-    color: #888;
-    margin-top: 2px;
+  .pain-item.new-pain {
+    border-left: 3px solid #C8A45A;
   }
-  .asset-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .asset-bar .bar-track {
-    flex: 1;
-    height: 6px;
-    background: #eee;
-    border-radius: 3px;
-    overflow: hidden;
-    min-width: 60px;
-  }
-  .asset-bar .bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: #111;
-    transition: width 0.6s ease;
-  }
-  .asset-bar .bar-pct {
-    font-size: 12px;
-    font-weight: 600;
-    color: #555;
-    min-width: 36px;
-    text-align: right;
+  .pain-item .ptitle { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .pain-item .pdesc { font-size: 12px; color: #888; line-height: 1.55; }
+  .pain-item .pnew {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(200,164,90,0.12);
+    color: #C8A45A;
+    padding: 1px 7px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    margin-left: 6px;
+    vertical-align: middle;
   }
 
   /* ── Product Tiers ── */
-  .tier-section {
-    margin-bottom: 48px;
-  }
+  .tier-section { margin-bottom: 48px; }
   .tier-header {
     display: flex;
     align-items: center;
@@ -250,8 +208,7 @@
     margin-bottom: 6px;
   }
   .tier-header .badge {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 11px; font-weight: 700;
     padding: 3px 10px;
     border-radius: 999px;
     letter-spacing: 0.05em;
@@ -260,20 +217,12 @@
   .badge.green { background: #E8F5E9; color: #2E7D32; }
   .badge.orange { background: #FFF3E0; color: #E65100; }
   .badge.blue { background: #E3F2FD; color: #1565C0; }
-  .tier-header h3 {
-    font-size: 18px;
-    font-weight: 700;
-  }
-  .tier-target {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 16px;
-    padding-left: 2px;
-  }
+  .tier-header h3 { font-size: 18px; font-weight: 700; }
+  .tier-target { font-size: 13px; color: #888; margin-bottom: 16px; padding-left: 2px; }
   .tier-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
   }
   .tier-card {
     border: 1px solid rgba(17,17,17,0.09);
@@ -281,61 +230,112 @@
     padding: 24px;
     background: #fff;
   }
-  .tier-card.featured {
-    border-color: #C8A45A;
-    box-shadow: 0 0 0 1px #C8A45A;
-  }
-  .tier-card .name {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .tier-card .price {
-    font-size: 22px;
-    font-weight: 800;
-    color: #111;
-    margin-bottom: 4px;
-    letter-spacing: -0.02em;
-  }
-  .tier-card .price .unit {
-    font-size: 14px;
-    font-weight: 500;
-    color: #888;
-  }
-  .tier-card .price-note {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 14px;
-  }
-  .tier-card ul {
-    list-style: none;
-    padding: 0;
-  }
+  .tier-card.featured { border-color: #C8A45A; box-shadow: 0 0 0 1px #C8A45A; }
+  .tier-card .name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .tier-card .price { font-size: 22px; font-weight: 800; color: #111; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .tier-card .price .unit { font-size: 14px; font-weight: 500; color: #888; }
+  .tier-card .price-note { font-size: 12px; color: #888; margin-bottom: 14px; }
+  .tier-card ul { list-style: none; }
   .tier-card ul li {
-    font-size: 13px;
-    color: #555;
+    font-size: 13px; color: #555;
     padding: 4px 0 4px 18px;
     position: relative;
     line-height: 1.5;
   }
   .tier-card ul li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #2E7D32;
-    font-weight: 700;
-    font-size: 12px;
+    content: '✓'; position: absolute; left: 0;
+    color: #2E7D32; font-weight: 700; font-size: 12px;
   }
 
-  /* ── Revenue ── */
+  /* ── Tech Table ── */
+  .tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(17,17,17,0.08);
+  }
+  .tech-table thead th {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    color: #888; text-align: left;
+    padding: 12px 14px;
+    background: #f8f8f6;
+    border-bottom: 2px solid #111;
+    text-transform: uppercase;
+  }
+  .tech-table tbody td {
+    padding: 13px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid #f0f0ee;
+    vertical-align: top;
+  }
+  .tech-table tbody tr:last-child td { border-bottom: none; }
+  .tech-name { font-weight: 600; color: #111; }
+  .tech-desc { font-size: 12px; color: #888; margin-top: 2px; }
+  .diff-easy { color: #2E7D32; font-weight: 600; font-size: 12px; }
+  .diff-mid { color: #E65100; font-weight: 600; font-size: 12px; }
+  .diff-hard { color: #C62828; font-weight: 600; font-size: 12px; }
+  .price-tag { font-size: 12px; color: #555; }
+  .price-tag strong { color: #111; font-weight: 700; }
+  .total-row { background: #111 !important; }
+  .total-row td { color: #fff !important; font-weight: 700; border-bottom: none !important; }
+  .total-row td strong { color: #C8A45A; }
+
+  /* ── Weapons ── */
+  .weapon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .weapon-card {
+    background: #fff;
+    border: 1px solid rgba(17,17,17,0.09);
+    border-radius: 14px;
+    padding: 24px 20px;
+  }
+  .weapon-num { font-size: 28px; font-weight: 900; color: rgba(200,164,90,0.25); margin-bottom: 8px; letter-spacing: -0.02em; }
+  .weapon-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .weapon-desc { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* ── Growth Levels ── */
+  .level-stack { display: flex; flex-direction: column; gap: 2px; }
+  .level-item {
+    background: #fff;
+    border: 1px solid rgba(17,17,17,0.08);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 20px;
+  }
+  .level-item.active {
+    background: #111;
+    border-color: #111;
+  }
+  .level-badge {
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #C8A45A;
+    text-transform: uppercase;
+  }
+  .level-item.active .level-badge { color: #C8A45A; }
+  .level-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .level-item.active .level-title { color: #fff; }
+  .level-desc { font-size: 13px; color: #666; line-height: 1.5; }
+  .level-item.active .level-desc { color: #aaa; }
+  .level-revenue { text-align: right; }
+  .level-revenue .amount { font-size: 20px; font-weight: 800; color: #C8A45A; letter-spacing: -0.02em; white-space: nowrap; }
+  .level-revenue .period { font-size: 11px; color: #888; margin-top: 2px; }
+  .level-item.active .level-revenue .period { color: #666; }
+
+  /* ── Revenue Simulation ── */
   .revenue-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 14px;
-    margin-bottom: 32px;
-  }
-  @media (max-width: 700px) {
-    .revenue-grid { grid-template-columns: repeat(2, 1fr); }
+    margin-bottom: 28px;
   }
   .rev-card {
     background: #fff;
@@ -344,825 +344,829 @@
     padding: 20px;
     text-align: center;
   }
-  .rev-card .rev-letter {
-    font-size: 24px;
-    font-weight: 800;
-    color: #C8A45A;
-    margin-bottom: 6px;
-  }
-  .rev-card .rev-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 4px;
-  }
-  .rev-card .rev-desc {
-    font-size: 11px;
-    color: #999;
-    line-height: 1.4;
-  }
+  .rev-card .rev-letter { font-size: 24px; font-weight: 800; color: #C8A45A; margin-bottom: 6px; }
+  .rev-card .rev-label { font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px; }
+  .rev-card .rev-desc { font-size: 11px; color: #999; line-height: 1.4; }
+
+  .sim-box { background: #111; color: #fff; border-radius: 16px; padding: 32px; }
+  .sim-box h4 { font-size: 16px; font-weight: 700; color: #C8A45A; margin-bottom: 20px; }
+  .sim-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .sim-item .sim-label { font-size: 11px; color: #888; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .sim-item .sim-value { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+  .sim-item .sim-value span { font-size: 13px; font-weight: 400; color: #666; }
+  .sim-item .sim-note { font-size: 11px; color: #666; margin-top: 4px; }
 
   /* ── Phase Table ── */
-  .phase-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 32px;
-  }
+  .phase-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
   .phase-table th {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #888;
-    text-align: left;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    color: #888; text-align: left;
     padding: 10px 12px;
     border-bottom: 2px solid #111;
     text-transform: uppercase;
   }
-  .phase-table td {
-    padding: 12px;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
-  }
+  .phase-table td { padding: 12px; font-size: 14px; border-bottom: 1px solid #eee; vertical-align: top; }
   .phase-table tr:last-child td { border-bottom: none; }
-  .phase-name {
-    font-weight: 600;
-  }
+  .phase-name { font-weight: 600; }
 
-  /* ── Simulation Box ── */
-  .sim-box {
-    background: #111;
-    color: #fff;
-    border-radius: 16px;
-    padding: 32px;
-  }
-  .sim-box h4 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #C8A45A;
-    margin-bottom: 16px;
-    letter-spacing: 0.05em;
-  }
-  .sim-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 14px;
-    color: #aaa;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .sim-row:last-child { border-bottom: none; }
-  .sim-row .val { color: #fff; font-weight: 600; }
-  .sim-total {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 0 0;
-    margin-top: 8px;
-    border-top: 2px solid rgba(255,255,255,0.2);
-    font-size: 16px;
-    font-weight: 700;
-    color: #C8A45A;
-  }
-
-  /* ── MVP Section ── */
-  .mvp-box {
-    border: 2px solid #C8A45A;
-    border-radius: 16px;
-    padding: 36px;
-    background: #FFFDF7;
-    margin-bottom: 24px;
-  }
-  .mvp-box h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .mvp-box .mvp-sub {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 20px;
-  }
-  .mvp-timeline {
-    position: relative;
-    padding-left: 28px;
-  }
-  .mvp-timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 4px;
-    bottom: 4px;
-    width: 2px;
-    background: #e0d8c4;
-    border-radius: 1px;
-  }
+  /* ── MVP Timeline ── */
+  .mvp-steps { display: flex; flex-direction: column; gap: 2px; margin-bottom: 28px; }
   .mvp-step {
-    position: relative;
-    margin-bottom: 18px;
-  }
-  .mvp-step:last-child { margin-bottom: 0; }
-  .mvp-step::before {
-    content: '';
-    position: absolute;
-    left: -22px;
-    top: 6px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #C8A45A;
-    border: 2px solid #FFFDF7;
-  }
-  .mvp-step .week {
-    font-size: 11px;
-    font-weight: 700;
-    color: #C8A45A;
-    letter-spacing: 0.05em;
-    margin-bottom: 2px;
-  }
-  .mvp-step .task {
-    font-size: 14px;
-    font-weight: 600;
-    color: #111;
-  }
-  .mvp-step .hours {
-    font-size: 12px;
-    color: #999;
-  }
-
-  .mvp-price {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid #e0d8c4;
-  }
-  @media (max-width: 500px) {
-    .mvp-price { grid-template-columns: 1fr; }
-  }
-  .mvp-price-card {
     background: #fff;
-    border: 1px solid rgba(17,17,17,0.09);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-  }
-  .mvp-price-card .price-label {
-    font-size: 12px;
-    color: #888;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .mvp-price-card .price-val {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-  }
-  .mvp-price-card .price-val.free { color: #2E7D32; }
-  .mvp-price-card .price-val.paid { color: #111; }
-  .mvp-price-card .price-orig {
-    font-size: 12px;
-    color: #bbb;
-    text-decoration: line-through;
-    margin-top: 2px;
-  }
-
-  .mvp-conditions {
-    margin-top: 20px;
-    padding: 16px 20px;
-    background: rgba(200,164,90,0.06);
+    border: 1px solid rgba(17,17,17,0.08);
     border-radius: 10px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 16px;
   }
-  .mvp-conditions .cond-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: #C8A45A;
-    margin-bottom: 8px;
-    letter-spacing: 0.05em;
-  }
-  .mvp-conditions ul {
-    list-style: none;
-    padding: 0;
-  }
-  .mvp-conditions ul li {
-    font-size: 13px;
-    color: #666;
-    padding: 3px 0 3px 16px;
-    position: relative;
-  }
-  .mvp-conditions ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: #C8A45A;
-  }
-
-  /* ── Quote ── */
-  .quote-box {
-    background: #111;
-    color: #fff;
-    border-radius: 16px;
-    padding: 36px 40px;
-    margin: 40px 0;
-    position: relative;
-  }
-  .quote-box::before {
-    content: '"';
-    position: absolute;
-    top: 16px;
-    left: 28px;
-    font-size: 64px;
-    color: #C8A45A;
-    font-family: Georgia, serif;
-    line-height: 1;
-    opacity: 0.5;
-  }
-  .quote-box p {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #ddd;
-    padding-left: 16px;
-  }
-  .quote-box p strong {
-    color: #fff;
-  }
-
-  /* ── Dev Table ── */
-  .dev-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .dev-table thead th {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #888;
-    text-align: left;
-    padding: 10px 12px;
-    border-bottom: 2px solid #111;
-  }
-  .dev-table tbody td {
-    padding: 12px;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
-  }
-  .dev-table tbody tr:last-child td { border-bottom: none; }
+  .mvp-week { font-size: 12px; font-weight: 700; color: #C8A45A; }
+  .mvp-title { font-size: 14px; font-weight: 600; }
+  .mvp-desc { font-size: 13px; color: #666; }
+  .mvp-hours { font-size: 12px; color: #888; white-space: nowrap; }
 
   /* ── Next Steps ── */
-  .next-list {
-    list-style: none;
-    padding: 0;
-    counter-reset: step;
-  }
-  .next-list li {
-    counter-increment: step;
+  .next-list { display: flex; flex-direction: column; gap: 10px; }
+  .next-item {
+    background: #fff;
+    border: 1px solid rgba(17,17,17,0.08);
+    border-radius: 10px;
+    padding: 16px 20px;
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    padding: 16px 0;
-    border-bottom: 1px solid #eee;
   }
-  .next-list li:last-child { border-bottom: none; }
-  .next-list li::before {
-    content: counter(step);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 28px;
-    height: 28px;
-    background: #111;
-    color: #fff;
+  .next-num {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 26px; height: 26px;
+    background: #111; color: #fff;
     border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-top: 1px;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
   }
-  .next-list .step-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 2px;
-  }
-  .next-list .step-desc {
-    font-size: 13px;
-    color: #888;
-  }
+  .next-text { font-size: 14px; color: #333; line-height: 1.6; }
+  .next-text strong { color: #111; }
 
-  /* ── Footer ── */
-  .footer {
-    margin-top: 80px;
-    padding-top: 24px;
-    border-top: 1px solid #e8e8e5;
-    font-size: 12px;
-    color: #bbb;
-    text-align: center;
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .lines-grid, .journey-grid { grid-template-columns: 1fr; }
+    .revenue-grid { grid-template-columns: repeat(2, 1fr); }
+    .level-item { grid-template-columns: 1fr; }
+    .level-revenue { text-align: left; }
+    .mvp-step { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- Header -->
+  <!-- ── Header ── -->
   <div class="header">
-    <div class="header-tag">PENTA WORKS</div>
-    <h1>펜타랩<br><span class="accent">PENTA LAB</span> <span class="dim">사업 기획안</span></h1>
+    <div class="header-tag">PENTA LAB — 통합 기획서 v2.0</div>
+    <h1>펜타랩<br><span class="accent">PENTA LAB</span> <span class="dim">사업 기획서</span></h1>
     <div class="header-meta">
-      <strong>펜타웍스</strong> — 펜타 산하 학원 자동화 컨설팅 브랜드 &middot; 2026.04.03
+      <strong>작성일</strong> 2026.04.08 &nbsp;·&nbsp;
+      <strong>분류</strong> 내부용 (CONFIDENTIAL) &nbsp;·&nbsp;
+      <strong>Phase</strong> P0 — 사업 설계
     </div>
   </div>
 
-  <!-- Context -->
-  <div class="context-box">
-    <h2>Context</h2>
-    <p>펜타를 통해 <span class="highlight">하이그로잉 위례원</span>(미술학원, 1인 원장, 원생 100명)이 자동화+프차 확장을 요청.</p>
-    <p>Daniel은 리마크 학원 운영하며 구축한 자동화 시스템(리드관리, 알림톡, 리포트, 대시보드 등)을 보유.<br>
-    → <span class="highlight">펜타웍스(PENTA WORKS)</span>로 학원 자동화 컨설팅 라인 확장. 펜타 네트워크로 다수 학원 동시 모집.</p>
+  <!-- ── 01. 배경 & 현황 ── -->
+  <div class="dark-box">
+    <h2>왜 지금 펜타랩인가</h2>
+    <p>교육 현장은 <span class="hl">여전히 손으로 돌아간다.</span> CRM도 없고, 알림톡은 카카오 채널 하나로 버티고, 학부모 리포트는 원장이 직접 문자를 보낸다. 미술학원, 독서논술, TESOL — 업종은 달라도 <span class="hl">페인은 같다.</span></p>
+    <p>Daniel은 <span class="gold">리마크 학원 3년간 직접 돌리면서</span> 이 시스템을 만들었다. 리포트 자동화, 교재 제작, CRM, 알림톡, 시험지 — 이미 쓰고 있는 것들이다. 이걸 외부에 납품한다.</p>
+    <p><span class="hl">블랙박스 원칙</span> — AI인지 구글시트인지 고객은 알 필요 없다. "펜타 시스템"만 보여준다.</p>
     <div class="decision-grid">
       <div class="decision-card">
-        <div class="label">브랜드</div>
-        <div class="value">펜타웍스 (PENTA WORKS)</div>
+        <div class="label">첫 고객</div>
+        <div class="value">하이그로잉 위례원<br>(미술학원, 원생 100명)</div>
       </div>
       <div class="decision-card">
-        <div class="label">고객 확보</div>
-        <div class="value">펜타 채널 네트워크</div>
+        <div class="label">5월 미팅</div>
+        <div class="value">책나무 독서논술<br>가맹 600개</div>
       </div>
       <div class="decision-card">
-        <div class="label">현재 단계</div>
-        <div class="value">기획 확정</div>
+        <div class="label">수익 목표</div>
+        <div class="value">월 ~1,538만<br>연 ~2.8억 (12개월)</div>
+      </div>
+      <div class="decision-card">
+        <div class="label">핵심 원칙</div>
+        <div class="value">블랙박스<br>성과로만 증명</div>
       </div>
     </div>
   </div>
 
-  <!-- Service 3 Lines -->
+  <!-- ── 02. 비전 ── -->
   <div class="section">
-    <div class="section-label">SERVICE STRUCTURE</div>
+    <div class="section-label">02 — Vision</div>
+    <div class="section-title">전국 1인 원장 학원의<br>운영 인프라가 된다</div>
+    <div class="section-desc">운영은 시스템으로, 콘텐츠는 자동화로 — 교육 종사자의 반복 업무를 없앤다.</div>
+
+    <div class="dark-box" style="margin-bottom: 0;">
+      <h2>Long-term Vision</h2>
+      <p>"전국 1인 원장 학원의 운영 인프라가 되는 것. 미용실 POS처럼 — 학원을 열면 펜타랩이 깔려있는 세상."</p>
+      <p style="margin-bottom: 0;">이 비전까지 가는 경로는 <span class="gold">4단계 성장 레벨</span>로 설계돼 있다. 지금은 Level 1 — 컨설팅에서 시작해서, Level 4 교육 산업 인프라까지 간다.</p>
+    </div>
+  </div>
+
+  <!-- ── 03. 고객 경로 ── -->
+  <div class="section">
+    <div class="section-label">03 — Customer Journeys</div>
+    <div class="section-title">3가지 고객 경로</div>
+    <div class="section-desc">고객이 펜타랩을 처음 만나는 맥락은 다르다. 경로에 따라 제안 방식도 달라진다.</div>
+
+    <div class="journey-grid">
+      <div class="journey-card jA">
+        <div class="jlabel">경로 A</div>
+        <h3>온라인 → 오프라인</h3>
+        <div class="jsub">개원 희망 강사형 사업자</div>
+        <p>Zoom 수업 하다가 오프라인 개원 고민. 공간·인허가·시스템 전부 처음. 처음부터 펜타 시스템으로 세팅해주면 이탈 없음.</p>
+      </div>
+      <div class="journey-card jB">
+        <div class="jlabel">경로 B</div>
+        <h3>본점 → 가맹</h3>
+        <div class="jsub">확장 희망 원장 (하이그로잉형)</div>
+        <p>직영은 잘 되는데 가맹 확장이 막힌 상태. 표준화된 운영 시스템 없어서 가맹 못 침. 펜타랩이 프차 준비 패키지로 진입.</p>
+      </div>
+      <div class="journey-card jC">
+        <div class="jlabel">경로 C</div>
+        <h3>수동 → 자동화</h3>
+        <div class="jsub">효율화 희망 현역 원장</div>
+        <p>지금도 잘 되고 있는데 원장 번아웃 직전. 조교 인건비 아깝고 알림톡·리포트 수작업 지침. 즉시 ROI 보이는 상품으로 진입.</p>
+      </div>
+    </div>
+
+    <div class="incubator-box">
+      <h4>인큐베이터 모델 (장기 전략)</h4>
+      <p>"나랑 몇 년이든 함께 하고, 독립하고 싶을 때 언제든 말씀하셔라. 독립을 도와드리겠다. 내 학원을 인큐베이터로 생각하라." — 졸업생이 고객이자 레퍼런스가 된다.</p>
+    </div>
+  </div>
+
+  <!-- ── 04. 서비스 3라인 ── -->
+  <div class="section">
+    <div class="section-label">04 — Service Lines</div>
     <div class="section-title">서비스 3라인</div>
-    <div class="section-desc">1인 원장 학원의 성장 단계에 맞는 솔루션을 제공합니다.</div>
+    <div class="section-desc">고객의 성장 단계에 맞춰 3가지 라인으로 서비스를 제공한다.</div>
+
     <div class="lines-grid">
       <div class="line-card">
         <div class="line-num l1">1</div>
         <h3>시스템 개선</h3>
-        <div class="sub">학원을 자동화로 돌리기</div>
-        <p>상담, 수납, 학부모 소통, 마케팅 등 학원 전체 운영 시스템을 자동화하고 효율화합니다.</p>
+        <div class="sub">현재 운영 효율화 · 즉시 ROI</div>
+        <p>상담 자동화, 알림톡, 미납 관리, 학부모 리포트, 마케팅 자동화. 지금 당장 원장의 수작업을 줄여주는 것들.</p>
       </div>
       <div class="line-card">
         <div class="line-num l2">2</div>
         <h3>프차 준비</h3>
-        <div class="sub">복제 가능한 학원으로</div>
-        <p>운영을 표준화하고 매뉴얼화해서 프랜차이즈 가능한 상태로 만듭니다.</p>
+        <div class="sub">가맹 확장 대비 · 표준화</div>
+        <p>커리큘럼 문서화, BI 구축, 가맹 계약서·운영매뉴얼, 법률 검토. 본점 → 가맹으로 가는 체계를 만드는 것.</p>
       </div>
       <div class="line-card">
         <div class="line-num l3">3</div>
         <h3>프차 확장</h3>
-        <div class="sub">실제로 늘리기</div>
-        <p>2호점 이후 다지점 관리 시스템 구축 + 확장 실행을 함께합니다.</p>
+        <div class="sub">가맹 운영 · 성과 보수</div>
+        <p>가맹점 모집 시스템, 본사 통합 대시보드, 가맹점별 성과 추적. 성과 보수 or 로열티 수익 구조.</p>
       </div>
     </div>
   </div>
 
-  <!-- Pain Points -->
+  <!-- ── 05. Pain Points 20 ── -->
   <div class="section">
-    <div class="section-label">PAIN POINTS → SOLUTIONS</div>
-    <div class="section-title">1인 원장이 허덕이는 7가지 지점</div>
-    <div class="section-desc">각 페인포인트에 대한 솔루션과 Daniel의 기존 자산 활용도를 표시합니다.</div>
-    <table class="pain-table">
-      <thead>
-        <tr>
-          <th style="width:30%">문제</th>
-          <th style="width:38%">솔루션</th>
-          <th style="width:32%">보유 자산 활용</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="pain-name">상담 리드 누수</div>
-            <div class="pain-detail">수업 중 전화 못 받고 이탈</div>
-          </td>
-          <td>폼 → 자동 문자 → CRM → 미전환 리마인드</td>
-          <td><div class="asset-bar"><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><div class="bar-pct">90%</div></div></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="pain-name">학부모 소통 수작업</div>
-            <div class="pain-detail">하루 1~2시간 개별 연락</div>
-          </td>
-          <td>알림톡 자동 발송 + 월간 리포트</td>
-          <td><div class="asset-bar"><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><div class="bar-pct">80%</div></div></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="pain-name">원비 미납 누수</div>
-            <div class="pain-detail">연간 수백만 원 새어나감</div>
-          </td>
-          <td>미납 자동 알림 (D-3, D+1, D+7)</td>
-          <td><div class="asset-bar"><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="bar-pct">40%</div></div></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="pain-name">마케팅 못 함</div>
-            <div class="pain-detail">시간 없어 블로그/인스타 방치</div>
-          </td>
-          <td>수업사진 → 블로그 반자동 + 플레이스 최적화</td>
-          <td><div class="asset-bar"><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><div class="bar-pct">50%</div></div></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="pain-name">커리큘럼 표준화 부재</div>
-            <div class="pain-detail">원장 머릿속에만 존재</div>
-          </td>
-          <td>레벨체계 · 수업안 · 평가기준 문서화 프레임워크</td>
-          <td><div class="asset-bar"><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><div class="bar-pct">30%</div></div></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="pain-name">데이터 부재</div>
-            <div class="pain-detail">등록률 · 이탈률 감으로 운영</div>
-          </td>
-          <td>KPI 대시보드 (구글시트 기반)</td>
-          <td><div class="asset-bar"><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-pct">60%</div></div></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="pain-name">확장 로드맵 없음</div>
-            <div class="pain-detail">2호점 내고 싶지만 방법 모름</div>
-          </td>
-          <td>운영 매뉴얼 + 다지점 관리 시스템</td>
-          <td><div class="asset-bar"><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div><div class="bar-pct">70%</div></div></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="section-label">05 — Pain Points</div>
+    <div class="section-title">1인 원장의 20가지 페인</div>
+    <div class="section-desc">처음 7개는 분명한 것들. 13개는 대화 속에서 발견된 숨겨진 페인이다. <span style="color:#C8A45A; font-weight:600;">골드 테두리</span> = 신규 발견.</div>
+
+    <div class="pain-cat-label">운영 · 행정 (6개)</div>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="ptitle">상담 리드 누수</div>
+        <div class="pdesc">카톡 문의가 와도 늦게 답하면 다 빠져나간다. 자동 응대 없음.</div>
+      </div>
+      <div class="pain-item">
+        <div class="ptitle">원비 미납</div>
+        <div class="pdesc">매달 미납 체크를 손으로. 독촉 문자도 원장이 직접 보낸다.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">출결·보강 관리 <span class="pnew">신규</span></div>
+        <div class="pdesc">결석 처리, 보강 스케줄 조율, 강사 공유 — 전부 수작업.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">세무·노무 <span class="pnew">신규</span></div>
+        <div class="pdesc">4대보험, 원천징수, 카드 매출 정리. 세무사 비용도 부담.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">안전관리 문서화 <span class="pnew">신규</span></div>
+        <div class="pdesc">학원 안전관리 의무 서류들, 기간마다 갱신해야 하는데 아는 원장이 없다.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">교습비 상한제 <span class="pnew">신규</span></div>
+        <div class="pdesc">지역별 교습비 신고·변경 절차 복잡. 위반 시 행정처분.</div>
+      </div>
+    </div>
+
+    <div class="pain-cat-label">학부모 · 학생 (5개)</div>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="ptitle">학부모 소통 수작업</div>
+        <div class="pdesc">수업 알림, 숙제 공지, 진도 안내 — 전부 원장이 직접 보낸다.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">성취도 추적 부재 <span class="pnew">신규</span></div>
+        <div class="pdesc">아이가 얼마나 성장했는지 데이터가 없다. 학부모 질문에 "잘 하고 있어요"밖에 못한다.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">수강생 이탈 감지 <span class="pnew">신규</span></div>
+        <div class="pdesc">조용히 그만두는 학생을 미리 못 잡는다. 신규 모집보다 이탈 방어가 5배 싸다.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">등하원 안전 알림 <span class="pnew">신규</span></div>
+        <div class="pdesc">초등 학부모는 등하원 알림 없으면 불안해한다. 경쟁 학원에서 이걸로 차별화.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">조교 의존 구조 <span class="pnew">신규</span></div>
+        <div class="pdesc">조교 한 명 나가면 원장이 다시 다 한다. 사람 의존 없는 구조가 필요.</div>
+      </div>
+    </div>
+
+    <div class="pain-cat-label">마케팅 · 경쟁 (2개)</div>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="ptitle">마케팅 못 함</div>
+        <div class="pdesc">블로그, SNS, 네이버플레이스 — 알아도 시간이 없어서 못 한다.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">리뷰·평판 관리 <span class="pnew">신규</span></div>
+        <div class="pdesc">네이버 리뷰 하나가 상담 전환율을 바꾼다. 모니터링·대응 체계 없음.</div>
+      </div>
+    </div>
+
+    <div class="pain-cat-label">인력 · 조직 (4개)</div>
+    <div class="pain-grid">
+      <div class="pain-item new-pain">
+        <div class="ptitle">강사 채용·이탈 <span class="pnew">신규</span></div>
+        <div class="pdesc">좋은 강사 찾기 어렵고, 구한 강사도 더 좋은 조건 생기면 바로 나간다.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">원장 번아웃 <span class="pnew">신규</span></div>
+        <div class="pdesc">수업·행정·마케팅·상담·회계 혼자 다 한다. 주말 없는 삶.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">저작권 관리 <span class="pnew">신규</span></div>
+        <div class="pdesc">수업자료, 교재, 사진 — 내가 만든 건지 가져온 건지 구분이 없다. 분쟁 발생 시 대처 불가.</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">디지털 전환 장벽 <span class="pnew">신규</span></div>
+        <div class="pdesc">"키오스크 써볼까요?" "앱 도입하면 어떨까요?" — 알아보다가 포기. 너무 복잡하고 비쌈.</div>
+      </div>
+    </div>
+
+    <div class="pain-cat-label">데이터 · 확장 (3개)</div>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="ptitle">데이터 부재</div>
+        <div class="pdesc">상담 전환율, 이탈률, 수업별 매출 — 감으로 운영. 숫자로 결정 못 함.</div>
+      </div>
+      <div class="pain-item">
+        <div class="ptitle">확장 로드맵 없음</div>
+        <div class="pdesc">2호점·가맹을 꿈꾸지만 지금 본점 시스템도 불안한데 확장이 가능할까?</div>
+      </div>
+      <div class="pain-item new-pain">
+        <div class="ptitle">커리큘럼 표준화 부재 <span class="pnew">신규</span></div>
+        <div class="pdesc">강사가 바뀌면 수업이 달라진다. 문서화된 커리큘럼이 없어서 품질 유지 불가.</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Product Tiers -->
+  <!-- ── 06. 상품 구조 ── -->
   <div class="section">
-    <div class="section-label">PRODUCT TIERS</div>
+    <div class="section-label">06 — Product Tiers</div>
     <div class="section-title">상품 구조</div>
+    <div class="section-desc">고객의 페인 강도와 예산에 따라 4개 티어로 진입한다.</div>
 
-    <!-- Free -->
     <div class="tier-section">
       <div class="tier-header">
-        <span class="badge free">FREE</span>
-        <h3>학원 자동화 진단 리포트</h3>
+        <div class="badge free">FREE</div>
+        <h3>자가진단 리포트</h3>
       </div>
-      <div class="tier-target">리드 자석 — 온라인 자가진단 10문항 → AI 맞춤 리포트 PDF · 펜타 채널로 대량 유입</div>
+      <div class="tier-target">리드 자석 — 모든 원장 대상</div>
+      <div class="tier-cards">
+        <div class="tier-card">
+          <div class="name">학원 운영 진단 (무료)</div>
+          <div class="price">0<span class="unit">원</span></div>
+          <div class="price-note">온라인 자가진단 → 결과 리포트 이메일 발송</div>
+          <ul>
+            <li>20개 페인포인트 체크리스트</li>
+            <li>현재 자동화 수준 점수화</li>
+            <li>맞춤 솔루션 추천</li>
+            <li>무료 상담 연결 CTA</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <!-- Line 1 -->
     <div class="tier-section">
       <div class="tier-header">
-        <span class="badge green">라인 1</span>
+        <div class="badge green">라인 1</div>
         <h3>시스템 개선</h3>
       </div>
-      <div class="tier-target">대상: 수작업 중심 1인 원장. 확장 계획 없이 우선 효율부터.</div>
+      <div class="tier-target">즉시 운영 효율화가 필요한 원장</div>
       <div class="tier-cards">
         <div class="tier-card">
           <div class="name">베이직</div>
-          <div class="price">49만 <span class="unit">/ 월</span></div>
-          <div class="price-note">초기 구축 200만 · 외주 시세 2,000~5,000만</div>
+          <div class="price">49만<span class="unit">/월</span></div>
+          <div class="price-note">구축비 없음 · 즉시 시작</div>
           <ul>
-            <li>상담 리드 자동 접수 · 알림</li>
-            <li>학부모 알림톡 자동 발송 (월 500건)</li>
-            <li>미납 알림 자동화</li>
-            <li>KPI 대시보드</li>
-            <li>초기 세팅 1회 (원격 2h)</li>
-            <li>월 1회 유지보수 + 카톡 Q&A</li>
+            <li>카카오 AI 상담 챗봇</li>
+            <li>알림톡 자동화 (출결·공지)</li>
+            <li>미납 자동 감지 + 독촉</li>
+            <li>학부모 리포트 월 1회</li>
           </ul>
         </div>
         <div class="tier-card featured">
           <div class="name">프로</div>
-          <div class="price">99만 <span class="unit">/ 월</span></div>
-          <div class="price-note">초기 구축 500만 · 외주 시세 5,000만~1억 · 6개월 약정</div>
+          <div class="price">99만<span class="unit">/월</span></div>
+          <div class="price-note">구축비 500만 · 2~3주 구축</div>
           <ul>
             <li>베이직 전체 포함</li>
-            <li>마케팅 시스템 (블로그 반자동, 플레이스, 인스타)</li>
-            <li>월간 학부모 리포트 자동 발송</li>
-            <li>월 1회 화상 컨설팅 60분</li>
+            <li>블로그·인스타 자동 포스팅</li>
+            <li>네이버 리뷰 모니터링</li>
+            <li>학부모 성취도 리포트 (주간)</li>
+            <li>이탈 예측 알림</li>
+            <li>실시간 원장 대시보드</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Line 2 -->
     <div class="tier-section">
       <div class="tier-header">
-        <span class="badge orange">라인 2</span>
+        <div class="badge orange">라인 2</div>
         <h3>프차 준비</h3>
       </div>
-      <div class="tier-target">대상: 원생 80명+, "2호점 내고 싶다"는 원장. 시스템이 어느 정도 갖춰진 상태.</div>
+      <div class="tier-target">가맹 확장을 준비 중인 본점 원장</div>
       <div class="tier-cards">
         <div class="tier-card">
           <div class="name">스탠다드</div>
-          <div class="price">2,000만 <span class="unit">+ 월 129만</span></div>
-          <div class="price-note">12개월 약정 · 외주 시세 1억~1.5억</div>
+          <div class="price">129만<span class="unit">/월</span></div>
+          <div class="price-note">구축비 2,000만 · 4~6주 구축</div>
           <ul>
-            <li>라인1 프로 전체 포함</li>
-            <li>커리큘럼 체계화 (문서화 · 레벨 · 평가)</li>
-            <li>운영 매뉴얼 제작 (강사 채용/교육/관리)</li>
-            <li>프차 준비도 로드맵</li>
-            <li>월 2회 1:1 컨설팅</li>
+            <li>프로 전체 포함</li>
+            <li>커리큘럼 AI 문서화</li>
+            <li>가맹 운영매뉴얼 제작</li>
+            <li>결제 시스템 연동</li>
+            <li>회계·세무 자동 분류</li>
+            <li>학부모 PWA 앱</li>
           </ul>
         </div>
         <div class="tier-card">
           <div class="name">프리미엄</div>
-          <div class="price">3,500만 <span class="unit">+ 월 179만</span></div>
-          <div class="price-note">12개월 약정 · 외주 시세 1.5억~2억</div>
+          <div class="price">179만<span class="unit">/월</span></div>
+          <div class="price-note">구축비 3,500만 · 6~8주 구축</div>
           <ul>
             <li>스탠다드 전체 포함</li>
-            <li>펜타 분기 1회 특별 세션</li>
-            <li>브랜드 아이덴티티 정립 (BI, 인테리어 가이드)</li>
-            <li>홍보물 템플릿</li>
-            <li>법률/세무 프차 준비 가이드</li>
+            <li>BI·브랜드 아이덴티티 구축</li>
+            <li>가맹 계약서·법률 검토</li>
+            <li>가맹점 모집 랜딩페이지</li>
+            <li>SaaS 플랫폼 제품화</li>
+            <li>투자·특허 컨설팅</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Line 3 -->
     <div class="tier-section">
       <div class="tier-header">
-        <span class="badge blue">라인 3</span>
-        <h3>프차 확장</h3>
+        <div class="badge blue">라인 3</div>
+        <h3>프차 확장 · 파트너십</h3>
       </div>
-      <div class="tier-target">대상: 라인2 완료 or 이미 시스템 갖춘 학원. 2호점 이후 실행.</div>
+      <div class="tier-target">가맹 모집이 시작된 프랜차이즈 본사</div>
       <div class="tier-cards">
         <div class="tier-card">
           <div class="name">확장 패키지</div>
-          <div class="price">5,000만~ <span class="unit">프로젝트별 협의</span></div>
-          <div class="price-note">&nbsp;</div>
+          <div class="price">5,000만~<span class="unit">초기</span></div>
+          <div class="price-note">월 구독 별도 협의</div>
           <ul>
-            <li>다지점 관리 시스템 구축</li>
-            <li>2호점 오픈 실행 지원</li>
-            <li>가맹 모집 시스템</li>
+            <li>가맹점 통합 관리 시스템</li>
+            <li>본사 실시간 대시보드</li>
+            <li>가맹점별 매출·성과 추적</li>
+            <li>자동 로열티 정산</li>
           </ul>
         </div>
         <div class="tier-card">
           <div class="name">파트너십</div>
-          <div class="price">매출 3~7% <span class="unit">로열티 or 지분 5~15%</span></div>
-          <div class="price-note">초기비 할인/무료</div>
+          <div class="price">로열티<span class="unit"> 3~7%</span></div>
+          <div class="price-note">또는 지분 5~15% 협의</div>
           <ul>
-            <li>Daniel CTO/COO급 참여</li>
-            <li>시스템 전체 구축 · 운영</li>
-            <li>확장 가능성 검증된 학원에만 선별 제안</li>
+            <li>가맹 매출 성과 연동</li>
+            <li>장기 파트너 우선 지원</li>
+            <li>공동 마케팅</li>
+            <li>펜타 네트워크 연결</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Revenue Model -->
+  <!-- ── 07. 가격 전략 단계 ── -->
   <div class="section">
-    <div class="section-label">REVENUE MODEL</div>
-    <div class="section-title">수익 모델</div>
-
-    <div class="revenue-grid">
-      <div class="rev-card">
-        <div class="rev-letter">A</div>
-        <div class="rev-label">월 리테이너</div>
-        <div class="rev-desc">라인1 반복 매출<br>월 49~99만</div>
-      </div>
-      <div class="rev-card">
-        <div class="rev-letter">B</div>
-        <div class="rev-label">프로젝트</div>
-        <div class="rev-desc">라인2 초기 구축비<br>2,000~3,500만 + 월 관리비</div>
-      </div>
-      <div class="rev-card">
-        <div class="rev-letter">C</div>
-        <div class="rev-label">성과 보수</div>
-        <div class="rev-desc">신규 등록 증가분<br>10~15% (3개월 한정)</div>
-      </div>
-      <div class="rev-card">
-        <div class="rev-letter">D</div>
-        <div class="rev-label">프차 확장</div>
-        <div class="rev-desc">라인3 프로젝트비<br>5,000만~ or 로열티</div>
-      </div>
-    </div>
-
-    <!-- Price Strategy -->
-    <div class="section-title" style="font-size:18px; margin-bottom:16px;">가격 전략 단계</div>
+    <div class="section-label">07 — Pricing Strategy</div>
+    <div class="section-title">가격 전략 4단계</div>
+    <div class="section-desc">레퍼런스가 쌓이면서 가격을 올린다.</div>
     <table class="phase-table">
       <thead>
         <tr>
           <th>단계</th>
-          <th>기간</th>
+          <th>시기</th>
           <th>전략</th>
+          <th>목표</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><span class="phase-name">레퍼런스 확보기</span></td>
-          <td>0~6개월</td>
-          <td>3~5개 학원, 프로를 초기 무료 + 월 59만(40%↓). 사례 공개+추천 조건</td>
+          <td>지금~3개월</td>
+          <td>파운딩 파트너 0원 구축 + 월 59만 (정가 대비 40%↓)</td>
+          <td>하이그로잉 MVP 완성, 사례 확보</td>
         </tr>
         <tr>
           <td><span class="phase-name">검증기</span></td>
-          <td>6~12개월</td>
-          <td>정가 전환, 성공 사례 마케팅 시작</td>
+          <td>3~6개월</td>
+          <td>정가 베이직/프로 적용. 사례 기반 세일즈</td>
+          <td>3~5개 고객, 월 300~500만 반복</td>
         </tr>
         <tr>
           <td><span class="phase-name">성장기</span></td>
-          <td>12~24개월</td>
-          <td>Tier 1 대량 + Tier 3 선별. 월 100개 &times; 49만 = 월 4,900만</td>
+          <td>6~12개월</td>
+          <td>스탠다드/프리미엄 세일즈. 콘텐츠 마케팅 시작</td>
+          <td>월 1,000만+ 반복 매출</td>
         </tr>
         <tr>
           <td><span class="phase-name">스케일기</span></td>
-          <td>24개월~</td>
-          <td>SaaS 전환(셀프서비스), 컨설팅은 Tier 3~4만 직접</td>
+          <td>12개월+</td>
+          <td>SaaS 제품화. 책나무 등 프랜차이즈 B2B</td>
+          <td>월 1,538만+ 목표</td>
         </tr>
       </tbody>
     </table>
-
-    <!-- Simulation -->
-    <div class="sim-box">
-      <h4>12개월 차 수익 시뮬레이션</h4>
-      <div class="sim-row">
-        <span>베이직 &times; 15개 학원</span>
-        <span class="val">월 735만 + 초기 3,000만</span>
-      </div>
-      <div class="sim-row">
-        <span>프로 &times; 5개 학원</span>
-        <span class="val">월 495만 + 초기 2,500만</span>
-      </div>
-      <div class="sim-row">
-        <span>스탠다드 &times; 2개 학원</span>
-        <span class="val">월 258만 + 초기 4,000만</span>
-      </div>
-      <div class="sim-row">
-        <span>성과 보수 (간헐적)</span>
-        <span class="val">월 ~50만</span>
-      </div>
-      <div class="sim-total">
-        <span>월 반복 매출 / 연 매출</span>
-        <span>~1,538만 / ~2.8억</span>
-      </div>
-    </div>
   </div>
 
-  <!-- MVP -->
+  <!-- ── 08. 기술 솔루션 15개 ── -->
   <div class="section">
-    <div class="section-label">FOUNDING PARTNER PROGRAM</div>
-    <div class="section-title">하이그로잉 MVP — 파운딩 파트너</div>
-
-    <div class="mvp-box">
-      <h3>하이그로잉 위례원</h3>
-      <div class="mvp-sub">미술학원 &middot; 1인 원장 &middot; 원생 100명 &middot; 첫 레퍼런스 파트너</div>
-
-      <div class="mvp-timeline">
-        <div class="mvp-step">
-          <div class="week">0주</div>
-          <div class="task">현장 방문 → 운영 프로세스 전수 조사 → 진단 리포트</div>
-          <div class="hours">투입 4h</div>
-        </div>
-        <div class="mvp-step">
-          <div class="week">1~2주</div>
-          <div class="task">상담 리드 자동 접수 시스템 구축</div>
-          <div class="hours">투입 6h</div>
-        </div>
-        <div class="mvp-step">
-          <div class="week">3~4주</div>
-          <div class="task">학부모 알림톡 자동 발송 세팅</div>
-          <div class="hours">투입 6h</div>
-        </div>
-        <div class="mvp-step">
-          <div class="week">5~6주</div>
-          <div class="task">미납 알림 + KPI 대시보드</div>
-          <div class="hours">투입 4h</div>
-        </div>
-        <div class="mvp-step">
-          <div class="week">7~8주</div>
-          <div class="task">네이버 플레이스 최적화 + 블로그 가이드</div>
-          <div class="hours">투입 3h</div>
-        </div>
-        <div class="mvp-step">
-          <div class="week">이후 월 1회</div>
-          <div class="task">데이터 리뷰 + 개선 컨설팅</div>
-          <div class="hours">투입 1h/월</div>
-        </div>
-      </div>
-
-      <div class="mvp-price">
-        <div class="mvp-price-card">
-          <div class="price-label">초기 구축</div>
-          <div class="price-val free">무료</div>
-          <div class="price-orig">정가 200만 원</div>
-        </div>
-        <div class="mvp-price-card">
-          <div class="price-label">월 유지</div>
-          <div class="price-val paid">59만 <span style="font-size:14px;font-weight:500;color:#888">/월</span></div>
-          <div class="price-orig">정가 99만 원 (40% 할인, 12개월 고정)</div>
-        </div>
-      </div>
-
-      <div class="mvp-conditions">
-        <div class="cond-title">파운딩 파트너 조건</div>
-        <ul>
-          <li>사례 공개 동의 (before/after 데이터 포함)</li>
-          <li>3개월 후 만족 시 원장 커뮤니티에 추천 1건</li>
-          <li>펜타 콘텐츠(유튜브/책)에 사례로 등장 동의</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Quote -->
-  <div class="quote-box">
-    <p><strong>학원 관리 SW를 파는 게 아닙니다.</strong><br>
-    200명 학원을 직접 운영하며 만든 검증된 시스템을,<br>
-    선생님 학원에 맞게 이식해 드립니다.</p>
-  </div>
-
-  <!-- Dev Needs -->
-  <div class="section">
-    <div class="section-label">DEVELOPMENT ROADMAP</div>
-    <div class="section-title">신규 개발 필요 항목</div>
-    <table class="dev-table">
+    <div class="section-label">08 — Tech Solutions</div>
+    <div class="section-title">15개 솔루션 로드맵</div>
+    <div class="section-desc">외주 총 시세 2.3억~5억+. 우리는 직접 구축 — 고객에게 70~80% 할인된 가격에 납품한다.</div>
+    <table class="tech-table">
       <thead>
         <tr>
-          <th>항목</th>
-          <th>소요</th>
-          <th>용도</th>
+          <th style="width:28%">솔루션</th>
+          <th style="width:10%">난이도</th>
+          <th style="width:12%">기간</th>
+          <th>외주 시세</th>
+          <th>해당 티어</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>과목 범용 상담폼 + 자동응답</td>
-          <td>2~3일</td>
-          <td>MVP 즉시 시연</td>
+          <td><div class="tech-name">카카오 AI 챗봇</div><div class="tech-desc">상담 자동응대 + FAQ + 상담예약</div></td>
+          <td><span class="diff-mid">보통</span></td>
+          <td>2~3주</td>
+          <td><span class="price-tag"><strong>1,500~3,000만</strong></span></td>
+          <td>베이직+</td>
         </tr>
         <tr>
-          <td>미술학원 학부모 리포트 템플릿</td>
+          <td><div class="tech-name">알림톡 자동화</div><div class="tech-desc">출결·공지·미납 자동 발송</div></td>
+          <td><span class="diff-easy">쉬움</span></td>
+          <td>1~2주</td>
+          <td><span class="price-tag"><strong>500~1,000만</strong></span></td>
+          <td>베이직+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">CRM 파이프라인</div><div class="tech-desc">상담 → 등록 → 이탈 방지</div></td>
+          <td><span class="diff-mid">보통</span></td>
+          <td>3주</td>
+          <td><span class="price-tag"><strong>2,000~5,000만</strong></span></td>
+          <td>베이직+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">실시간 대시보드</div><div class="tech-desc">원장용 통합 현황판</div></td>
+          <td><span class="diff-mid">보통</span></td>
+          <td>2~3주</td>
+          <td><span class="price-tag"><strong>1,500~3,000만</strong></span></td>
+          <td>프로+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">콘텐츠 자동 생성</div><div class="tech-desc">수업 사진 → 블로그·인스타 자동화</div></td>
+          <td><span class="diff-easy">쉬움</span></td>
+          <td>1~2주</td>
+          <td><span class="price-tag"><strong>800~2,000만</strong></span></td>
+          <td>프로+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">이탈 예측 모델</div><div class="tech-desc">출결·결제 패턴 분석 → 이탈 경보</div></td>
+          <td><span class="diff-hard">어려움</span></td>
+          <td>4주</td>
+          <td><span class="price-tag"><strong>3,000~7,000만</strong></span></td>
+          <td>프로+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">성취도 추적</div><div class="tech-desc">학생별 성장 데이터 + 학부모 리포트</div></td>
+          <td><span class="diff-mid">보통</span></td>
+          <td>3주</td>
+          <td><span class="price-tag"><strong>2,000~4,000만</strong></span></td>
+          <td>프로+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">리뷰 모니터링</div><div class="tech-desc">네이버·카카오 리뷰 수집 + 알림</div></td>
+          <td><span class="diff-easy">쉬움</span></td>
           <td>1주</td>
-          <td>Tier 1~2 핵심</td>
+          <td><span class="price-tag"><strong>500~1,000만</strong></span></td>
+          <td>프로+</td>
         </tr>
         <tr>
-          <td>수납 데이터 연동 모듈</td>
-          <td>2주</td>
-          <td>미납 관리</td>
+          <td><div class="tech-name">동향 리포트</div><div class="tech-desc">지역 교육 시장 주간 브리핑</div></td>
+          <td><span class="diff-easy">쉬움</span></td>
+          <td>1~2주</td>
+          <td><span class="price-tag"><strong>500~1,500만</strong></span></td>
+          <td>프로+</td>
         </tr>
         <tr>
-          <td>자가진단 리포트 (Tier 0)</td>
-          <td>1주</td>
-          <td>리드 자석</td>
+          <td><div class="tech-name">학부모 PWA</div><div class="tech-desc">등하원·공지·결제 학부모 전용 앱</div></td>
+          <td><span class="diff-mid">보통</span></td>
+          <td>4주</td>
+          <td><span class="price-tag"><strong>3,000~6,000만</strong></span></td>
+          <td>스탠다드+</td>
         </tr>
         <tr>
-          <td>과목별 마케팅 플레이북</td>
-          <td>2주</td>
-          <td>Tier 2</td>
-        </tr>
-        <tr>
-          <td>커리큘럼 문서화 프레임워크</td>
+          <td><div class="tech-name">결제 자동화</div><div class="tech-desc">토스페이먼츠 연동 + 자동 청구</div></td>
+          <td><span class="diff-mid">보통</span></td>
           <td>3~4주</td>
-          <td>Tier 3</td>
+          <td><span class="price-tag"><strong>2,000~4,000만</strong></span></td>
+          <td>스탠다드+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">커리큘럼 AI 문서화</div><div class="tech-desc">강사 수업 → 표준 커리큘럼 자동 생성</div></td>
+          <td><span class="diff-mid">보통</span></td>
+          <td>3주</td>
+          <td><span class="price-tag"><strong>2,000~4,000만</strong></span></td>
+          <td>스탠다드+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">회계·세무 자동 분류</div><div class="tech-desc">카드·현금 매출 자동 분개</div></td>
+          <td><span class="diff-hard">어려움</span></td>
+          <td>4주</td>
+          <td><span class="price-tag"><strong>3,000~5,000만</strong></span></td>
+          <td>스탠다드+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">포트폴리오 갤러리</div><div class="tech-desc">학생 작품·성과 자동 아카이빙</div></td>
+          <td><span class="diff-easy">쉬움</span></td>
+          <td>1~2주</td>
+          <td><span class="price-tag"><strong>500~1,500만</strong></span></td>
+          <td>스탠다드+</td>
+        </tr>
+        <tr>
+          <td><div class="tech-name">SaaS 통합 플랫폼</div><div class="tech-desc">멀티테넌트 통합 관리 시스템</div></td>
+          <td><span class="diff-hard">어려움</span></td>
+          <td>8~12주</td>
+          <td><span class="price-tag"><strong>1억~2억</strong></span></td>
+          <td>프리미엄+</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="3"><strong>총 외주 시세</strong></td>
+          <td colspan="2"><strong>2.3억 ~ 5억+</strong> &nbsp;·&nbsp; 직접 구축 = 고객에게 70~80% 절감</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Next Steps -->
+  <!-- ── 09. 경쟁 무기 ── -->
   <div class="section">
-    <div class="section-label">NEXT STEPS</div>
-    <div class="section-title">다음 단계</div>
-    <ol class="next-list">
-      <li>
-        <div>
-          <div class="step-title">펜타와 방향 합의</div>
-          <div class="step-desc">펜타웍스 브랜드로 학원 자동화 컨설팅 라인 확정</div>
-        </div>
-      </li>
-      <li>
-        <div>
-          <div class="step-title">파운딩 파트너 제안서 A4 1장</div>
-          <div class="step-desc">하이그로잉 원장용, 문제 → 솔루션 → 가격 → ROI 구조</div>
-        </div>
-      </li>
-      <li>
-        <div>
-          <div class="step-title">펜타 네트워크 타겟 리스트</div>
-          <div class="step-desc">자동화 니즈 있을 만한 학원 5~10곳 선별</div>
-        </div>
-      </li>
-      <li>
-        <div>
-          <div class="step-title">Tier 0 자가진단 시스템</div>
-          <div class="step-desc">온라인 폼 + AI 리포트, 펜타 채널로 대량 유입 유도</div>
-        </div>
-      </li>
-      <li>
-        <div>
-          <div class="step-title">하이그로잉 진단 방문</div>
-          <div class="step-desc">운영 프로세스 조사 → 페인포인트 실측 → MVP 범위 확정</div>
-        </div>
-      </li>
-      <li>
-        <div>
-          <div class="step-title">미술학원 범용 템플릿</div>
-          <div class="step-desc">상담폼, 알림톡, 학부모 리포트 커스텀</div>
-        </div>
-      </li>
-    </ol>
+    <div class="section-label">09 — Competitive Moat</div>
+    <div class="section-title">5가지 경쟁 무기</div>
+    <div class="section-desc">따라하기 어려운 구조적 해자.</div>
+    <div class="weapon-grid">
+      <div class="weapon-card">
+        <div class="weapon-num">01</div>
+        <div class="weapon-title">직접 운영 중인 학원</div>
+        <div class="weapon-desc">모든 시스템을 리마크에서 먼저 쓰고 검증한다. "우리가 쓰는 것"을 판다. 데모가 곧 레퍼런스.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-num">02</div>
+        <div class="weapon-title">펜타 = 유통 채널</div>
+        <div class="weapon-desc">이은경 유튜브 15만, 저서 60권. 마케팅비 0원으로 학원 원장에게 닿는 채널이 있다.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-num">03</div>
+        <div class="weapon-title">블랙박스 기술력</div>
+        <div class="weapon-desc">AI인지 구글시트인지 고객은 모른다. 결과만 본다. 따라할 수 없는 구조.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-num">04</div>
+        <div class="weapon-title">풀스택 1인 체제</div>
+        <div class="weapon-desc">외주 없이 전부 직접 구축. 의사결정 속도가 회사 대비 10배. 가격 경쟁력도 10배.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-num">05</div>
+        <div class="weapon-title">교육자 DNA</div>
+        <div class="weapon-desc">경인교대, 초등교사 경험. "교육을 아는 기술자"는 희소하다. 원장들이 진짜 믿는 사람.</div>
+      </div>
+    </div>
   </div>
 
-  <div class="footer">
-    PENTA &middot; 학원 시스템 표준화 구축 &middot; 2026
+  <!-- ── 10. 성장 레벨 ── -->
+  <div class="section">
+    <div class="section-label">10 — Growth Levels</div>
+    <div class="section-title">4단계 성장 로드맵</div>
+    <div class="section-desc">지금은 Level 1. 단계마다 수익 구조가 바뀐다.</div>
+    <div class="level-stack">
+      <div class="level-item active">
+        <div class="level-badge">Level 1<br>현재</div>
+        <div>
+          <div class="level-title">컨설팅</div>
+          <div class="level-desc">학원별 맞춤 자동화 구축. 월 리테이너 + 프로젝트 수수료.</div>
+        </div>
+        <div class="level-revenue">
+          <div class="amount">연 2.8억</div>
+          <div class="period">12개월 목표</div>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge">Level 2<br>6개월+</div>
+        <div>
+          <div class="level-title">SaaS 플랫폼</div>
+          <div class="level-desc">멀티테넌트 플랫폼 제품화. 구축 없이 구독만으로 온보딩.</div>
+        </div>
+        <div class="level-revenue">
+          <div class="amount">연 3~5억</div>
+          <div class="period">24개월 목표</div>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge">Level 3<br>2년+</div>
+        <div>
+          <div class="level-title">프랜차이즈 팩토리</div>
+          <div class="level-desc">"아무 학원 넣으면 프차 나오는 시스템." 책나무·하이그로잉 등 B2B 프랜차이즈.</div>
+        </div>
+        <div class="level-revenue">
+          <div class="amount">연 10억+</div>
+          <div class="period">36개월 목표</div>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge">Level 4<br>5년+</div>
+        <div>
+          <div class="level-title">교육 산업 인프라</div>
+          <div class="level-desc">미용실 POS처럼 — 학원 열면 펜타랩이 깔려있는 세상. 벤치마크·금융·마켓플레이스.</div>
+        </div>
+        <div class="level-revenue">
+          <div class="amount">연 50억+</div>
+          <div class="period">60개월 목표</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 11. 수익 모델 & 시뮬레이션 ── -->
+  <div class="section">
+    <div class="section-label">11 — Revenue</div>
+    <div class="section-title">수익 모델 & 12개월 시뮬레이션</div>
+    <div class="section-desc">4가지 수익 축. 월 리테이너가 핵심.</div>
+
+    <div class="revenue-grid" style="margin-bottom: 32px;">
+      <div class="rev-card">
+        <div class="rev-letter">A</div>
+        <div class="rev-label">월 리테이너</div>
+        <div class="rev-desc">베이직~프리미엄 월 구독. 예측 가능한 반복 수익.</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-letter">B</div>
+        <div class="rev-label">프로젝트</div>
+        <div class="rev-desc">초기 구축비. 200만~3,500만. 선불 수령.</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-letter">C</div>
+        <div class="rev-label">성과 보수</div>
+        <div class="rev-desc">매출 증가분의 일정 % 성과 연동. 고객과 이해 일치.</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-letter">D</div>
+        <div class="rev-label">프차 확장</div>
+        <div class="rev-desc">로열티 3~7% or 지분 5~15%. 장기 파이프라인.</div>
+      </div>
+    </div>
+
+    <div class="sim-box">
+      <h4>12개월 시뮬레이션 (월 리테이너 기준)</h4>
+      <div class="sim-grid">
+        <div class="sim-item">
+          <div class="sim-label">파운딩 파트너 × 2</div>
+          <div class="sim-value">118만<span>/월</span></div>
+          <div class="sim-note">월 59만 × 2개 (40% 할인)</div>
+        </div>
+        <div class="sim-item">
+          <div class="sim-label">베이직 × 5</div>
+          <div class="sim-value">245만<span>/월</span></div>
+          <div class="sim-note">월 49만 × 5개</div>
+        </div>
+        <div class="sim-item">
+          <div class="sim-label">프로 × 3</div>
+          <div class="sim-value">297만<span>/월</span></div>
+          <div class="sim-note">월 99만 × 3개</div>
+        </div>
+        <div class="sim-item">
+          <div class="sim-label">스탠다드 × 2</div>
+          <div class="sim-value">258만<span>/월</span></div>
+          <div class="sim-note">월 129만 × 2개</div>
+        </div>
+        <div class="sim-item">
+          <div class="sim-label">프리미엄 × 2</div>
+          <div class="sim-value">358만<span>/월</span></div>
+          <div class="sim-note">월 179만 × 2개</div>
+        </div>
+        <div class="sim-item">
+          <div class="sim-label">프로젝트 (초기 구축)</div>
+          <div class="sim-value">262만<span>/월</span></div>
+          <div class="sim-note">연 3,150만 ÷ 12</div>
+        </div>
+        <div class="sim-item">
+          <div class="sim-label" style="color:#C8A45A; font-weight:700;">월 합계</div>
+          <div class="sim-value" style="font-size:28px;">1,538만</div>
+          <div class="sim-note" style="color:#C8A45A;">연 ~2.8억</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 12. MVP ── -->
+  <div class="section">
+    <div class="section-label">12 — MVP</div>
+    <div class="section-title">하이그로잉 파운딩 파트너 MVP</div>
+    <div class="section-desc">첫 고객 — 하이그로잉 위례원 (미술학원, 원생 100명, 1인 원장). 구축 0원 + 월 59만.</div>
+
+    <div class="mvp-steps">
+      <div class="mvp-step">
+        <div class="mvp-week">0주</div>
+        <div><div class="mvp-title">킥오프 미팅</div><div class="mvp-desc">현황 파악, 가장 아픈 페인 3개 선정, 우선순위 확정</div></div>
+        <div class="mvp-hours">2~3시간</div>
+      </div>
+      <div class="mvp-step">
+        <div class="mvp-week">1~2주</div>
+        <div><div class="mvp-title">카카오 챗봇 + 알림톡</div><div class="mvp-desc">상담 자동응대, 출결 알림, 미납 독촉 자동화</div></div>
+        <div class="mvp-hours">~40시간</div>
+      </div>
+      <div class="mvp-step">
+        <div class="mvp-week">3~4주</div>
+        <div><div class="mvp-title">CRM + 학부모 리포트</div><div class="mvp-desc">상담 파이프라인, 월간 학부모 리포트 1회 발송</div></div>
+        <div class="mvp-hours">~40시간</div>
+      </div>
+      <div class="mvp-step">
+        <div class="mvp-week">5~6주</div>
+        <div><div class="mvp-title">대시보드 + 마케팅 자동화</div><div class="mvp-desc">원장 대시보드, 블로그 자동 포스팅 1회 세팅</div></div>
+        <div class="mvp-hours">~40시간</div>
+      </div>
+      <div class="mvp-step">
+        <div class="mvp-week">7~8주</div>
+        <div><div class="mvp-title">안정화 + 피드백 반영</div><div class="mvp-desc">QA, 원장 교육, 월 유지보수 체계 전환</div></div>
+        <div class="mvp-hours">~20시간</div>
+      </div>
+      <div class="mvp-step">
+        <div class="mvp-week">8주+</div>
+        <div><div class="mvp-title">월 59만 리테이너 시작</div><div class="mvp-desc">사례 공개 + 채널 언급 조건으로 파운딩 파트너 전환</div></div>
+        <div class="mvp-hours">반복 수익</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 13. Next Steps ── -->
+  <div class="section">
+    <div class="section-label">13 — Next Steps</div>
+    <div class="section-title">다음 단계</div>
+    <div class="section-desc">지금 당장 움직일 것들.</div>
+    <div class="next-list">
+      <div class="next-item">
+        <div class="next-num">1</div>
+        <div class="next-text"><strong>하이그로잉 현장 방문</strong> — 원장 직접 만나서 20개 페인 체크. 우선순위 3개 확정 후 파운딩 파트너 제안서 전달.</div>
+      </div>
+      <div class="next-item">
+        <div class="next-num">2</div>
+        <div class="next-text"><strong>책나무 5월 미팅 준비</strong> — 은경누나 × 책나무 대표 미팅 전 콘텐츠 리포트 데모 완성. 파일럿 30개 가맹점 제안서 작성.</div>
+      </div>
+      <div class="next-item">
+        <div class="next-num">3</div>
+        <div class="next-text"><strong>무료 자가진단 리포트 제작</strong> — 온라인 20개 페인 체크리스트. 결과 리포트 자동 발송. 리드 자석으로 활용.</div>
+      </div>
+      <div class="next-item">
+        <div class="next-num">4</div>
+        <div class="next-text"><strong>펜타랩 랜딩페이지 제작</strong> — B2B 원장 타겟. 자가진단 CTA 중심. 사례 추가되면 업데이트.</div>
+      </div>
+      <div class="next-item">
+        <div class="next-num">5</div>
+        <div class="next-text"><strong>Phase 0 개발 착수</strong> — Supabase + Next.js 멀티테넌트 인프라 초기화. 하이그로잉 MVP 베이직 기능부터.</div>
+      </div>
+    </div>
   </div>
 
 </div>
