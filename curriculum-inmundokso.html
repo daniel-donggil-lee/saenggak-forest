@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>펜타스쿨 인문독서 프리미엄 커리큘럼</title>
+<style>
+  :root {
+    --black: #0a0a0a;
+    --gold: #C9A84C;
+    --gold-light: #f0e0a8;
+    --gold-pale: #fdf8ec;
+    --gray-100: #f5f5f5;
+    --gray-200: #e8e8e8;
+    --gray-400: #999;
+    --gray-600: #555;
+    --white: #ffffff;
+    --ancient: #7b5ea7;
+    --medieval: #2e7d4f;
+    --modern: #1a6494;
+    --contemporary: #c0392b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 2px solid rgba(201,168,76,0.2);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 32px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: var(--black);
+  }
+
+  /* INFO GRID */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .info-card {
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .info-card .label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-400);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .info-card .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+  }
+
+  /* FLOW CARDS */
+  .flow-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 16px;
+  }
+  .flow-card {
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .flow-header {
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flow-header.basic { background: #f0faf4; color: #1a7040; }
+  .flow-header.advanced { background: #f0f4fa; color: #1a3070; }
+  .flow-body { padding: 0; }
+  .flow-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 20px;
+    border-top: 1px solid var(--gray-200);
+    gap: 12px;
+  }
+  .flow-time {
+    min-width: 38px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    padding-top: 2px;
+  }
+  .flow-content .part { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .flow-content .desc { font-size: 12px; color: var(--gray-600); }
+
+  /* TAB SYSTEM */
+  .tab-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    border-bottom: 2px solid var(--gray-200);
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--gray-400);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+  }
+  .tab-btn.active {
+    color: var(--black);
+    border-bottom-color: var(--gold);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* COURSE HEADER */
+  .course-header {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-light);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .course-header .slogan {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .course-header .meta {
+    display: flex;
+    gap: 8px;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  .pill-black { background: var(--black); color: var(--white); }
+  .pill-gold { background: var(--gold); color: var(--black); }
+  .pill-outline { border: 1.5px solid var(--black); color: var(--black); background: transparent; }
+
+  /* CURRICULUM TABLE */
+  .curri-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13.5px;
+    margin-bottom: 20px;
+  }
+  .curri-table th {
+    background: var(--black);
+    color: var(--white);
+    padding: 11px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: left;
+  }
+  .curri-table th:first-child { border-radius: 8px 0 0 0; }
+  .curri-table th:last-child { border-radius: 0 8px 0 0; }
+  .curri-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+  }
+  .curri-table tr:last-child td { border-bottom: none; }
+  .curri-table tr:hover td { background: var(--gray-100); }
+  .week-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-400);
+    min-width: 28px;
+  }
+  .work-title {
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+  .era-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .era-ancient { background: rgba(123,94,167,0.12); color: var(--ancient); }
+  .era-medieval { background: rgba(46,125,79,0.12); color: var(--medieval); }
+  .era-modern { background: rgba(26,100,148,0.12); color: var(--modern); }
+  .era-contemporary { background: rgba(192,57,43,0.12); color: var(--contemporary); }
+
+  .theme-text { font-size: 12px; color: var(--gray-600); }
+  .question-text {
+    font-size: 12.5px;
+    color: var(--black);
+    background: var(--gray-100);
+    border-left: 3px solid var(--gold);
+    padding: 6px 10px;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.5;
+  }
+
+  .note-box {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-light);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--black);
+    margin-top: 16px;
+  }
+  .note-box strong { color: #8b6914; }
+
+  .continued-note {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 20px;
+  }
+
+  /* PENTA INDEX */
+  .penta-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .penta-card {
+    border: 1.5px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .penta-initial {
+    width: 36px;
+    height: 36px;
+    background: var(--black);
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: 900;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+  }
+  .penta-name { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .penta-desc { font-size: 11px; color: var(--gray-600); line-height: 1.5; }
+
+  /* OPERATIONS */
+  .ops-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .ops-card {
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .ops-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ops-card ul {
+    padding-left: 16px;
+    font-size: 12.5px;
+    color: var(--gray-600);
+    line-height: 1.8;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px;
+    font-size: 12px;
+  }
+  .footer strong { color: var(--gold); }
+
+  @media (max-width: 700px) {
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 24px; }
+    .container { padding: 0 20px; }
+    .info-grid { grid-template-columns: 1fr 1fr; }
+    .flow-wrap { grid-template-columns: 1fr; }
+    .penta-grid { grid-template-columns: repeat(3, 1fr); }
+    .ops-grid { grid-template-columns: 1fr; }
+    .tab-btn { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-badge">PENTA SCHOOL · Premium</div>
+    <h1>인문독서 <span>프리미엄</span> 커리큘럼</h1>
+    <div class="hero-sub">《세계소설이 묻고 역사가 답하다》 기반 — 김문영 쌤 (달콤쌤)</div>
+    <div class="hero-meta">
+      <span class="hero-tag">주 1회 · 90분</span>
+      <span class="hero-tag">1:4 그룹수업</span>
+      <span class="hero-tag">3-4학년 기본반</span>
+      <span class="hero-tag">5-6학년 심화반</span>
+      <span class="hero-tag">12주 / 24주</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 개요 -->
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <div class="section-title">수업 개요</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">강사</div>
+        <div class="value">김문영 (달콤쌤)<br><span style="font-weight:400;font-size:12px;color:#888;">논증과추론 · 인문독서 전문</span></div>
+      </div>
+      <div class="info-card">
+        <div class="label">교재</div>
+        <div class="value">《세계소설이 묻고 역사가 답하다》<br><span style="font-weight:400;font-size:12px;color:#888;">김문영 저 · 상상스퀘어 · 2026</span></div>
+      </div>
+      <div class="info-card">
+        <div class="label">교재 구성</div>
+        <div class="value">총 30작품 · 4시대<br><span style="font-weight:400;font-size:12px;color:#888;">고대(2) · 중세(6) · 근대(13) · 현대(9)</span></div>
+      </div>
+    </div>
+    <div style="background:var(--gray-100);border-radius:12px;padding:18px 22px;font-size:13.5px;line-height:1.9;">
+      각 챕터는 <strong>세계소설이 묻다</strong> (줄거리 + 핵심 질문) →
+      <strong>소설을 탐구하다</strong> (작가 · 창작 배경) →
+      <strong>역사가 답하다</strong> (역사적 맥락 심화) 3단계로 구성됩니다.
+    </div>
+  </div>
+
+  <!-- 수업 구성 -->
+  <div class="section">
+    <div class="section-label">Class Structure</div>
+    <div class="section-title">90분 수업 구성</div>
+    <div class="flow-wrap">
+      <div class="flow-card">
+        <div class="flow-header basic">📖 기본반 (3-4학년)</div>
+        <div class="flow-body">
+          <div class="flow-row">
+            <div class="flow-time">20분</div>
+            <div class="flow-content">
+              <div class="part">세계소설이 묻다</div>
+              <div class="desc">교사 스토리텔링 → 핵심 질문 제시</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">15분</div>
+            <div class="flow-content">
+              <div class="part">소설을 탐구하다</div>
+              <div class="desc">작가 소개 + "왜 이 이야기를 썼을까?"</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">25분</div>
+            <div class="flow-content">
+              <div class="part">역사가 답하다</div>
+              <div class="desc">시대 배경 (지도·이미지) → 오늘날 연결</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">25분</div>
+            <div class="flow-content">
+              <div class="part">나라면 어떻게 했을까?</div>
+              <div class="desc">4인 자유 토론 → 3-5문장 글쓰기 → 발표</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">5분</div>
+            <div class="flow-content">
+              <div class="part">마무리</div>
+              <div class="desc">핵심 키워드 3개 정리 + 다음 예고</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-header advanced">🧠 심화반 (5-6학년)</div>
+        <div class="flow-body">
+          <div class="flow-row">
+            <div class="flow-time">10분</div>
+            <div class="flow-content">
+              <div class="part">질문으로 시작하기</div>
+              <div class="desc">도발적 질문 1개 → 즉흥 예상 답변</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">25분</div>
+            <div class="flow-content">
+              <div class="part">소설 + 역사 통합 탐구</div>
+              <div class="desc">스토리 + 역사 맥락 + 작가 의도 통합</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">35분</div>
+            <div class="flow-content">
+              <div class="part">비판적 구조 토론</div>
+              <div class="desc">찬반 논제 → 2:2 역할 토론 → 반론 훈련</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">15분</div>
+            <div class="flow-content">
+              <div class="part">나의 논증 쓰기</div>
+              <div class="desc">주장 1개 + 근거 2개 단락 글쓰기</div>
+            </div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-time">5분</div>
+            <div class="flow-content">
+              <div class="part">마무리</div>
+              <div class="desc">핵심 통찰 공유 + 심화 질문 제시</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 커리큘럼 -->
+  <div class="section">
+    <div class="section-label">Curriculum</div>
+    <div class="section-title">주차별 커리큘럼</div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('basic12')">기본 12주</button>
+      <button class="tab-btn" onclick="showTab('basic24')">기본 24주</button>
+      <button class="tab-btn" onclick="showTab('adv12')">심화 12주</button>
+      <button class="tab-btn" onclick="showTab('adv24')">심화 24주</button>
+    </div>
+
+    <!-- 기본 12주 -->
+    <div id="basic12" class="tab-panel active">
+      <div class="course-header">
+        <div class="slogan">🌍 "세계 영웅들의 이야기 속으로, 역사 탐험 시작!"</div>
+        <div class="meta">
+          <span class="pill pill-black">3-4학년</span>
+          <span class="pill pill-gold">12주</span>
+          <span class="pill pill-outline">기본</span>
+        </div>
+      </div>
+      <table class="curri-table">
+        <thead>
+          <tr>
+            <th style="width:44px;">주차</th>
+            <th>작품</th>
+            <th style="width:180px;">핵심 주제</th>
+            <th>토론 질문</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="week-num">1</td><td><div class="work-title">일리아스·오디세이아<span class="era-badge era-ancient">고대</span></div></td><td class="theme-text">신화 속 영웅, 분노와 귀환</td><td><div class="question-text">"아킬레우스는 왜 화가 났을까? 나라면 싸웠을까?"</div></td></tr>
+          <tr><td class="week-num">2</td><td><div class="work-title">로빈후드<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">정의, 봉건제도</td><td><div class="question-text">"도둑질이 정의가 될 수 있을까?"</div></td></tr>
+          <tr><td class="week-num">3</td><td><div class="work-title">돈키호테<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">꿈과 현실, 기사도</td><td><div class="question-text">"돈키호테는 바보일까, 용감한 사람일까?"</div></td></tr>
+          <tr><td class="week-num">4</td><td><div class="work-title">동방견문록<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">탐험, 문명 교류</td><td><div class="question-text">"마르코 폴로는 왜 긴 여행을 떠났을까?"</div></td></tr>
+          <tr><td class="week-num">5</td><td><div class="work-title">로빈슨 크루소<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">생존, 자립, 도전</td><td><div class="question-text">"무인도에서 혼자 살아야 한다면 가장 먼저 할 일은?"</div></td></tr>
+          <tr><td class="week-num">6</td><td><div class="work-title">걸리버 여행기<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">상대적 크기, 사회 풍자</td><td><div class="question-text">"소인국에서 내가 거인이라면 어떻게 행동해야 할까?"</div></td></tr>
+          <tr><td class="week-num">7</td><td><div class="work-title">올리버 트위스트<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">빈곤, 어린이 권리</td><td><div class="question-text">"올리버가 '더 주세요'라고 한 것은 잘못일까?"</div></td></tr>
+          <tr><td class="week-num">8</td><td><div class="work-title">80일간의 세계일주<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">도전, 약속, 세계 지리</td><td><div class="question-text">"80일 안에 세계를 돌 수 있다는 내기, 너라면 받겠어?"</div></td></tr>
+          <tr><td class="week-num">9</td><td><div class="work-title">노트르담의 꼽추<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">외모 편견, 진정한 아름다움</td><td><div class="question-text">"콰지모도는 왜 사람들에게 미움을 받았을까?"</div></td></tr>
+          <tr><td class="week-num">10</td><td><div class="work-title">안네의 일기<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">2차 세계대전, 희망</td><td><div class="question-text">"벽장 속에 숨어 지내도 희망을 가질 수 있을까?"</div></td></tr>
+          <tr><td class="week-num">11</td><td><div class="work-title">동물농장<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">권력, 평등, 배신</td><td><div class="question-text">"'모든 동물은 평등하다'는 말이 왜 거짓말이 됐을까?"</div></td></tr>
+          <tr><td class="week-num">12</td><td><div class="work-title">페스트<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">연대, 위기 극복</td><td><div class="question-text">"전염병이 돌 때 도망가는 것과 남아서 싸우는 것, 어느 것이 맞을까?"</div></td></tr>
+        </tbody>
+      </table>
+      <div class="note-box"><strong>12주 마무리</strong> — 가장 인상 깊었던 작품 1개 선택 → 이유 발표 (포트폴리오 1호)</div>
+    </div>
+
+    <!-- 기본 24주 -->
+    <div id="basic24" class="tab-panel">
+      <div class="course-header">
+        <div class="slogan">🌍 "세계 영웅들의 이야기 속으로, 역사 탐험 시작!"</div>
+        <div class="meta">
+          <span class="pill pill-black">3-4학년</span>
+          <span class="pill pill-gold">24주</span>
+          <span class="pill pill-outline">기본</span>
+        </div>
+      </div>
+      <div class="continued-note">1~12주차는 <strong>기본 12주 과정</strong>과 동일합니다. 아래는 13주차부터의 확장 커리큘럼입니다.</div>
+      <table class="curri-table">
+        <thead>
+          <tr>
+            <th style="width:44px;">주차</th>
+            <th>작품</th>
+            <th style="width:180px;">핵심 주제</th>
+            <th>토론 질문</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="week-num">13</td><td><div class="work-title">명상록<span class="era-badge era-ancient">고대</span></div></td><td class="theme-text">황제의 일기, 자기 다스림</td><td><div class="question-text">"왜 세상에서 가장 힘 있는 황제가 매일 자기 반성 일기를 썼을까?"</div></td></tr>
+          <tr><td class="week-num">14</td><td><div class="work-title">니벨룽겐의 노래<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">용 퇴치, 배신과 복수</td><td><div class="question-text">"영웅 지크프리트는 왜 비참하게 죽어야 했을까?"</div></td></tr>
+          <tr><td class="week-num">15</td><td><div class="work-title">지킬 박사와 하이드<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">선과 악, 인간의 이중성</td><td><div class="question-text">"착한 내 안에 나쁜 내가 숨어 있을 수 있을까?"</div></td></tr>
+          <tr><td class="week-num">16</td><td><div class="work-title">주홍글씨<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">잘못과 용서, 청교도 사회</td><td><div class="question-text">"잘못을 한 사람을 평생 표시해서 살게 하는 것은 공평할까?"</div></td></tr>
+          <tr><td class="week-num">17</td><td><div class="work-title">톰 아저씨의 오두막<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">노예제, 인권</td><td><div class="question-text">"피부색으로 사람을 다르게 대하는 것은 왜 나쁜 걸까?"</div></td></tr>
+          <tr><td class="week-num">18</td><td><div class="work-title">종의 기원<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">진화론, 과학과 믿음</td><td><div class="question-text">"인간은 원숭이에서 진화했다는 말이 맞을까?"</div></td></tr>
+          <tr><td class="week-num">19</td><td><div class="work-title">자유론<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">자유의 경계</td><td><div class="question-text">"내 자유가 친구를 괴롭히는 것도 될 수 있을까?"</div></td></tr>
+          <tr><td class="week-num">20</td><td><div class="work-title">국부론<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">경제의 시작</td><td><div class="question-text">"보이지 않는 손이 세상을 움직인다는 게 무슨 말일까?"</div></td></tr>
+          <tr><td class="week-num">21</td><td><div class="work-title">서부전선 이상 없다<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">전쟁의 실상, 반전</td><td><div class="question-text">"전쟁에 영웅이 있을까?"</div></td></tr>
+          <tr><td class="week-num">22</td><td><div class="work-title">죄와 벌<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">양심, 구원</td><td><div class="question-text">"나쁜 사람을 죽이는 것은 죄일까, 아닐까?"</div></td></tr>
+          <tr><td class="week-num">23</td><td><div class="work-title">자본론<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">노동과 공정</td><td><div class="question-text">"공장 주인은 왜 일하지 않아도 돈을 많이 벌까?"</div></td></tr>
+          <tr><td class="week-num">24</td><td><div class="work-title">아Q정전<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">자기합리화의 위험</td><td><div class="question-text">"아Q처럼 '나는 사실 이긴 거야'라고 생각한 적 있어?"</div></td></tr>
+        </tbody>
+      </table>
+      <div class="note-box"><strong>24주 마무리</strong> — 30작품 중 읽고 싶은 원작 1권 선정 + 이유 발표 (독서 동기 유발)</div>
+    </div>
+
+    <!-- 심화 12주 -->
+    <div id="adv12" class="tab-panel">
+      <div class="course-header">
+        <div class="slogan">🔍 "세계소설이 묻는다 — 역사가 내 생각에 답한다"</div>
+        <div class="meta">
+          <span class="pill pill-black">5-6학년</span>
+          <span class="pill pill-gold">12주</span>
+          <span class="pill pill-outline">심화</span>
+        </div>
+      </div>
+      <table class="curri-table">
+        <thead>
+          <tr>
+            <th style="width:44px;">주차</th>
+            <th>작품</th>
+            <th style="width:180px;">핵심 주제</th>
+            <th>토론 논제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="week-num">1</td><td><div class="work-title">명상록<span class="era-badge era-ancient">고대</span></div></td><td class="theme-text">스토아 철학, 자기 수양</td><td><div class="question-text">"황제처럼 권력을 가졌을 때 절제하는 것이 가능할까?"</div></td></tr>
+          <tr><td class="week-num">2</td><td><div class="work-title">군주론<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">리더십, 권력의 본질</td><td><div class="question-text">"좋은 리더는 사랑받아야 할까, 두려움의 대상이 되어야 할까?"</div></td></tr>
+          <tr><td class="week-num">3</td><td><div class="work-title">베니스의 상인<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">법과 자비, 차별</td><td><div class="question-text">"살 1파운드를 요구하는 계약은 법적으로 유효한가?"</div></td></tr>
+          <tr><td class="week-num">4</td><td><div class="work-title">니벨룽겐의 노래<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">명예와 복수, 배신의 대가</td><td><div class="question-text">"복수는 정당한 행동인가, 악의 반복인가?"</div></td></tr>
+          <tr><td class="week-num">5</td><td><div class="work-title">종의 기원<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">진화론, 과학과 종교의 충돌</td><td><div class="question-text">"과학적 진실이 기존 믿음과 충돌할 때 어느 것을 따라야 하나?"</div></td></tr>
+          <tr><td class="week-num">6</td><td><div class="work-title">레 미제라블<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">법 vs 정의, 계급 불평등</td><td><div class="question-text">"배고픔으로 빵을 훔친 장발장을 19년 감금한 것은 정당한가?"</div></td></tr>
+          <tr><td class="week-num">7</td><td><div class="work-title">죄와 벌<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">범죄의 심리, 양심과 구원</td><td><div class="question-text">"악한 사람을 죽이는 것은 도덕적으로 허용될 수 있는가?"</div></td></tr>
+          <tr><td class="week-num">8</td><td><div class="work-title">1984<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">전체주의, 감시 사회</td><td><div class="question-text">"사회의 안전을 위해 개인의 프라이버시를 감시하는 것은 정당한가?"</div></td></tr>
+          <tr><td class="week-num">9</td><td><div class="work-title">자유론<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">개인의 자유와 사회의 제한</td><td><div class="question-text">"나의 자유가 타인에게 해를 끼치지 않는다면 무엇이든 해도 되는가?"</div></td></tr>
+          <tr><td class="week-num">10</td><td><div class="work-title">국부론<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">자본주의의 시작, 시장 원리</td><td><div class="question-text">"보이지 않는 손에만 맡기면 세상은 공평해질 수 있는가?"</div></td></tr>
+          <tr><td class="week-num">11</td><td><div class="work-title">위대한 개츠비<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">아메리칸 드림, 사랑과 집착</td><td><div class="question-text">"꿈을 위해 자신의 정체성을 바꾸는 것은 정당한가?"</div></td></tr>
+          <tr><td class="week-num">12</td><td><div class="work-title">아Q정전<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">정신승리, 자기기만</td><td><div class="question-text">"패배를 마음속에서 승리로 바꾸는 것은 지혜인가, 도피인가?"</div></td></tr>
+        </tbody>
+      </table>
+      <div class="note-box"><strong>12주 마무리</strong> — 논증문 쓰기: "내가 가장 공감한 역사적 불의와 그 해결책" (A4 1장)</div>
+    </div>
+
+    <!-- 심화 24주 -->
+    <div id="adv24" class="tab-panel">
+      <div class="course-header">
+        <div class="slogan">🔍 "세계소설이 묻는다 — 역사가 내 생각에 답한다"</div>
+        <div class="meta">
+          <span class="pill pill-black">5-6학년</span>
+          <span class="pill pill-gold">24주</span>
+          <span class="pill pill-outline">심화</span>
+        </div>
+      </div>
+      <div class="continued-note">1~12주차는 <strong>심화 12주 과정</strong>과 동일합니다. 아래는 13주차부터의 확장 커리큘럼입니다.</div>
+      <table class="curri-table">
+        <thead>
+          <tr>
+            <th style="width:44px;">주차</th>
+            <th>작품</th>
+            <th style="width:180px;">핵심 주제</th>
+            <th>토론 논제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="week-num">13</td><td><div class="work-title">일리아스·오디세이아<span class="era-badge era-ancient">고대</span></div></td><td class="theme-text">서양 문학의 뿌리, 신과 인간</td><td><div class="question-text">"신이 인간의 운명을 결정한다면 인간의 의지는 의미가 있는가?"</div></td></tr>
+          <tr><td class="week-num">14</td><td><div class="work-title">로빈후드<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">봉건제 구조와 민중의 저항</td><td><div class="question-text">"부당한 법에 저항하는 것은 정당한가?"</div></td></tr>
+          <tr><td class="week-num">15</td><td><div class="work-title">돈키호테<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">이상과 현실, 광기와 용기의 경계</td><td><div class="question-text">"현실을 무시하고 꿈을 쫓는 것은 어리석음인가, 용기인가?"</div></td></tr>
+          <tr><td class="week-num">16</td><td><div class="work-title">동방견문록<span class="era-badge era-medieval">중세</span></div></td><td class="theme-text">동서 문명의 만남, 편견과 이해</td><td><div class="question-text">"낯선 문명을 이해하는 것이 왜 중요한가?"</div></td></tr>
+          <tr><td class="week-num">17</td><td><div class="work-title">로빈슨 크루소<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">식민주의, 문명의 기준</td><td><div class="question-text">"크루소가 프라이데이를 대한 방식은 정당한가?"</div></td></tr>
+          <tr><td class="week-num">18</td><td><div class="work-title">올리버 트위스트<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">산업혁명, 아동 노동 착취</td><td><div class="question-text">"경제 성장을 위해 어린이의 노동이 정당화될 수 있는가?"</div></td></tr>
+          <tr><td class="week-num">19</td><td><div class="work-title">노트르담의 꼽추<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">낭만주의, 소외와 편견</td><td><div class="question-text">"외모로 사람을 판단하는 것은 왜 사라지지 않을까?"</div></td></tr>
+          <tr><td class="week-num">20</td><td><div class="work-title">주홍글씨<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">종교 권력과 개인의 죄</td><td><div class="question-text">"공동체가 개인의 도덕적 잘못을 공개적으로 처벌하는 것은 정당한가?"</div></td></tr>
+          <tr><td class="week-num">21</td><td><div class="work-title">톰 아저씨의 오두막<span class="era-badge era-modern">근대</span></div></td><td class="theme-text">노예제 폐지 운동, 인종 차별</td><td><div class="question-text">"법이 허용한 차별이라도 도덕적으로 저항해야 하는가?"</div></td></tr>
+          <tr><td class="week-num">22</td><td><div class="work-title">안네의 일기<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">홀로코스트, 기록의 힘</td><td><div class="question-text">"극한 상황에서 기록을 남기는 것이 왜 중요한가?"</div></td></tr>
+          <tr><td class="week-num">23</td><td><div class="work-title">서부전선 이상 없다<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">1차 대전, 반전 문학</td><td><div class="question-text">"전쟁에 참여하는 것이 애국인가, 폭력에 동참하는 것인가?"</div></td></tr>
+          <tr><td class="week-num">24</td><td><div class="work-title">자본론<span class="era-badge era-contemporary">현대</span></div></td><td class="theme-text">마르크스, 노동 착취, 자본주의 비판</td><td><div class="question-text">"자본주의 사회에서 공정한 분배는 가능한가?"</div></td></tr>
+        </tbody>
+      </table>
+      <div class="note-box"><strong>24주 마무리</strong> — 포트폴리오 제출: 12편 논증 단락 묶음 + 최종 에세이 "내가 바꾸고 싶은 역사적 불의" (A4 2장)</div>
+    </div>
+  </div>
+
+  <!-- 펜타 지수 -->
+  <div class="section">
+    <div class="section-label">PENTA Index</div>
+    <div class="section-title">수강생 성장 지표 — 펜타 지수 연동</div>
+    <div class="penta-grid">
+      <div class="penta-card">
+        <div class="penta-initial">P</div>
+        <div class="penta-name">독해</div>
+        <div class="penta-desc">세계 소설 줄거리 독해, 역사 배경 텍스트 이해</div>
+      </div>
+      <div class="penta-card">
+        <div class="penta-initial">E</div>
+        <div class="penta-name">어휘</div>
+        <div class="penta-desc">시대별 개념어 습득 (봉건제, 진화론, 전체주의 등)</div>
+      </div>
+      <div class="penta-card">
+        <div class="penta-initial">N</div>
+        <div class="penta-name">사고</div>
+        <div class="penta-desc">역사적 인과관계 파악, 도덕적 딜레마 분석</div>
+      </div>
+      <div class="penta-card">
+        <div class="penta-initial">T</div>
+        <div class="penta-name">표현</div>
+        <div class="penta-desc">3-5문장 글쓰기 (기본) / 논증 단락 쓰기 (심화)</div>
+      </div>
+      <div class="penta-card">
+        <div class="penta-initial">A</div>
+        <div class="penta-name">소통</div>
+        <div class="penta-desc">4인 자유 토론, 2:2 구조 토론, 발표</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 운영 참고 -->
+  <div class="section">
+    <div class="section-label">Operations</div>
+    <div class="section-title">수업 운영 참고사항</div>
+    <div class="ops-grid">
+      <div class="ops-card">
+        <h4>📚 교재 준비</h4>
+        <ul>
+          <li>학생 책 구매 불필요</li>
+          <li>교사가 챕터별 발췌 프린트 제공</li>
+          <li>강사: 원저 전권 숙지 필수</li>
+          <li>시대별 지도 · 이미지 준비</li>
+        </ul>
+      </div>
+      <div class="ops-card">
+        <h4>👥 반 구성</h4>
+        <ul>
+          <li>1:4 그룹 고정 구성</li>
+          <li>같은 학년대 구성 권장</li>
+          <li>기본→심화 레벨업: 12주 후 평가</li>
+          <li>최소 4인 모집 후 개강</li>
+        </ul>
+      </div>
+      <div class="ops-card">
+        <h4>📁 자료 누적</h4>
+        <ul>
+          <li>매 수업 후 글쓰기 결과물 보관</li>
+          <li>24주 후 포트폴리오 제작</li>
+          <li>학부모 상담 자료로 활용</li>
+          <li>심화 수업 추천 근거로 연결</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>PENTA SCHOOL</strong> · 인문독서 프리미엄 · 강사: 김문영 (달콤쌤) · 2026-04-08
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
