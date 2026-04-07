@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PENTA — 그룹 브랜드 기획서 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --black: #0a0a0a;
+    --gray-900: #111;
+    --gray-800: #1a1a1a;
+    --gray-700: #333;
+    --gray-500: #666;
+    --gray-300: #999;
+    --gray-100: #f5f5f5;
+    --gray-50: #fafafa;
+    --white: #ffffff;
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dim: rgba(201,168,76,0.15);
+    --border: #e8e8e8;
+    --border-dark: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ─── 커버 ─── */
+  .cover {
+    min-height: 100vh;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .cover::before {
+    content: 'GROUP';
+    position: absolute;
+    right: -1%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(80px, 14vw, 200px);
+    font-weight: 900;
+    color: rgba(201,168,76,0.04);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* 배경 오각형 장식 */
+  .cover-pentagon-bg {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 420px;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .cover-tag {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    padding: 6px 14px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 100px;
+    display: inline-block;
+  }
+
+  .cover h1 {
+    font-size: clamp(56px, 10vw, 120px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 12px;
+  }
+
+  .cover h1 span { color: var(--gold); }
+
+  .cover-group-label {
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .cover-sub {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 32px;
+  }
+
+  .cover-meta-item .label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cover-meta-item .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* ─── 섹션 공통 (다크) ─── */
+  .section-dark {
+    padding: 96px 10%;
+    background: var(--black);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  /* ─── 섹션 공통 (라이트) ─── */
+  .section-light {
+    padding: 96px 10%;
+    background: var(--white);
+    color: var(--black);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-dark:last-child,
+  .section-light:last-child { border-bottom: none; }
+
+  /* 섹션 레이블 — 다크 */
+  .section-label-dark {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--black);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    background: var(--gold);
+    padding: 4px 14px;
+    border-radius: 100px;
+  }
+
+  /* 섹션 레이블 — 라이트 */
+  .section-label-light {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--black);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    background: var(--gold);
+    padding: 4px 14px;
+    border-radius: 100px;
+  }
+
+  .section-title-dark {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .section-title-dark::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    bottom: 0.1em;
+    width: 5px;
+    background: var(--gold);
+    border-radius: 3px;
+  }
+
+  .section-title-light {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .section-title-light::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    bottom: 0.1em;
+    width: 5px;
+    background: var(--gold);
+    border-radius: 3px;
+  }
+
+  .section-desc-dark {
+    font-size: 16px;
+    color: rgba(255,255,255,0.45);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 64px;
+  }
+
+  .section-desc-light {
+    font-size: 16px;
+    color: var(--gray-500);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 64px;
+  }
+
+  /* ─── 01. 그룹 미션 ─── */
+  .mission-block {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 56px 64px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mission-block::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 40px;
+    font-size: 160px;
+    color: rgba(201,168,76,0.08);
+    font-family: Georgia, serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .mission-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .mission-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 0;
+  }
+
+  .value-item {
+    background: var(--gray-800);
+    padding: 36px 32px;
+    border: 1px solid rgba(201,168,76,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .value-item:hover { background: #222; }
+
+  .value-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+
+  .value-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .value-name span { color: var(--gold); }
+
+  .value-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  /* ─── 02. 생태계 오버뷰 ─── */
+  .ecosystem-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .pentagon-diagram {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .brand-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .brand-card {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+
+  .brand-card:hover {
+    background: #1e1e1e;
+    border-color: rgba(201,168,76,0.3);
+  }
+
+  .brand-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .brand-card-body {}
+  .brand-card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .brand-card-name .en {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    margin-left: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .brand-card-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .brand-card-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .badge-b2c { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .badge-b2b { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+  .badge-both { background: rgba(201,168,76,0.08); color: rgba(201,168,76,0.7); }
+
+  /* ─── 개별 브랜드 섹션 ─── */
+  .brand-section {
+    padding: 96px 10%;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .brand-section.alt { background: #060606; }
+
+  .brand-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .brand-icon-lg {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .brand-header-text {}
+
+  .brand-number {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .brand-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .brand-title .en {
+    font-size: 0.55em;
+    font-weight: 500;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+    display: block;
+    margin-top: 4px;
+  }
+
+  .brand-tagline {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  /* 브랜드 3열 그리드 */
+  .brand-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+
+  .brand-info-item {
+    background: var(--gray-800);
+    padding: 28px 24px;
+    border: 1px solid rgba(201,168,76,0.08);
+  }
+
+  .brand-info-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .brand-info-value {
+    font-size: 15px;
+    color: var(--white);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .brand-info-value .highlight {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* 브랜드 포인트 리스트 */
+  .brand-points {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-bottom: 0;
+  }
+
+  .brand-point {
+    background: var(--gray-900);
+    border: 1px solid rgba(201,168,76,0.08);
+    padding: 24px 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .brand-point-num {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    margin-top: 3px;
+    background: rgba(201,168,76,0.12);
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .brand-point-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .brand-point-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.55;
+  }
+
+  /* 가격표 */
+  .price-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 0;
+  }
+
+  .price-tier {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 28px 20px;
+    position: relative;
+  }
+
+  .price-tier.featured {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .price-tier.featured::before {
+    content: 'POPULAR';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--black);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .price-tier-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .price-setup {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 4px;
+  }
+
+  .price-monthly {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .price-monthly span {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .price-monthly-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+
+  .price-divider {
+    height: 1px;
+    background: rgba(201,168,76,0.12);
+    margin-bottom: 12px;
+  }
+
+  .price-features {
+    list-style: none;
+  }
+
+  .price-features li {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .price-features li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ─── 트랙 카드 (펜타웍스) ─── */
+  .track-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+
+  .track-card {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 40px 36px;
+  }
+
+  .track-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .track-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .track-target {
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 24px;
+  }
+
+  .track-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .track-features li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .track-features li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  /* ─── 선순환 구조 ─── */
+  .flow-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 64px;
+  }
+
+  .flow-step {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+  }
+
+  .flow-step::after {
+    content: '↓';
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 16px;
+    z-index: 2;
+    background: var(--black);
+    padding: 2px 6px;
+  }
+
+  .flow-step:last-child::after { display: none; }
+
+  .flow-step-num {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--gold);
+    background: rgba(201,168,76,0.12);
+    padding: 4px 10px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    letter-spacing: 0.1em;
+  }
+
+  .flow-step-brand {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+
+  .flow-step-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+
+  .flow-step-arrow {
+    margin-left: auto;
+    font-size: 20px;
+    color: rgba(201,168,76,0.3);
+    flex-shrink: 0;
+  }
+
+  /* ─── 타임라인 ─── */
+  .timeline {
+    position: relative;
+    padding-left: 48px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(201,168,76,0.2);
+  }
+
+  .timeline-year {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .timeline-year:first-child { margin-top: 0; }
+
+  .timeline-year::before {
+    content: '';
+    position: absolute;
+    left: -39px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--black);
+  }
+
+  .timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-item {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.08);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .timeline-month {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    padding: 3px 10px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    min-width: 44px;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-brand-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 8px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  .timeline-content {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+
+  .timeline-content strong { color: var(--white); font-weight: 600; }
+
+  /* ─── 파운더팀 ─── */
+  .founder-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+
+  .founder-card {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 40px 32px;
+  }
+
+  .founder-role {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .founder-name {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .founder-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 24px;
+  }
+
+  .founder-bio {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .founder-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .founder-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(201,168,76,0.8);
+    background: rgba(201,168,76,0.1);
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+
+  /* 지배구조 */
+  .governance {
+    background: var(--gray-800);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 12px;
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .gov-item {}
+  .gov-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .gov-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .gov-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+  }
+
+  /* ─── 푸터 ─── */
+  .footer {
+    padding: 48px 10%;
+    background: var(--black);
+    border-top: 1px solid rgba(201,168,76,0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-meta {
+    font-size: 13px;
+    color: rgba(255,255,255,0.25);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ─── 유틸 ─── */
+  .gold { color: var(--gold); }
+  .serif { font-family: 'Noto Serif KR', serif; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .stat-item {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── 모바일 반응형 ─── */
+  @media (max-width: 900px) {
+    .cover { padding: 60px 6%; }
+    .section-dark, .section-light, .brand-section { padding: 72px 6%; }
+
+    .ecosystem-wrap { grid-template-columns: 1fr; }
+    .pentagon-diagram { display: none; }
+
+    .brand-info-grid { grid-template-columns: 1fr; }
+    .brand-points { grid-template-columns: 1fr; }
+    .price-table { grid-template-columns: 1fr 1fr; }
+    .track-grid { grid-template-columns: 1fr; }
+    .value-grid { grid-template-columns: 1fr; }
+    .founder-grid { grid-template-columns: 1fr; }
+    .governance { grid-template-columns: 1fr; gap: 20px; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+
+    .cover-meta { flex-wrap: wrap; gap: 20px; }
+    .footer { flex-direction: column; gap: 16px; text-align: center; }
+    .footer-meta { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ 커버 ═══ -->
+<section class="cover">
+  <svg class="cover-pentagon-bg" viewBox="0 0 200 200" fill="none">
+    <polygon points="100,10 190,74 157,165 43,165 10,74" stroke="#C9A84C" stroke-width="1.5" fill="rgba(201,168,76,0.03)"/>
+    <polygon points="100,30 170,84 144,154 56,154 30,84" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
+    <polygon points="100,50 150,94 131,143 69,143 50,94" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
+  </svg>
+
+  <div class="cover-tag">PENTA GROUP — Brand Architecture</div>
+  <h1><span>PENTA</span></h1>
+  <div class="cover-group-label">Group Brand Planning 2026</div>
+  <p class="cover-sub serif">배움이 일어나는 모든 접점에서,<br>교육의 기준을 새로 씁니다.</p>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="label">Version</div>
+      <div class="value">v1.0 — 2026.04.07</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Phase</div>
+      <div class="value">P0 — 사업 설계</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">브랜치</div>
+      <div class="value">5개 서브 브랜드</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">대상</div>
+      <div class="value">이은경·이동길 내부용</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 01. 그룹 미션 · 비전 · 가치 ═══ -->
+<section class="section-dark">
+  <div class="section-label-dark">01 — GROUP IDENTITY</div>
+  <h2 class="section-title-dark">PENTA는<br>하나의 생태계입니다</h2>
+  <p class="section-desc-dark">5개의 브랜드가 독립적으로 운영되지만, 하나의 철학으로 연결됩니다.<br>교육에서 강사 양성, 시스템 컨설팅, 콘텐츠 유통까지 — 모든 접점을 아우릅니다.</p>
+
+  <div class="mission-block">
+    <div class="mission-label">GROUP MISSION</div>
+    <div class="mission-text">배움이 일어나는 모든 접점에서,<br>교육의 기준을 새로 씁니다.</div>
+  </div>
+
+  <div class="mission-block" style="margin-bottom: 48px;">
+    <div class="mission-label">GROUP VISION</div>
+    <div class="mission-text" style="font-size: clamp(16px, 2vw, 22px);">대한민국 교육 생태계 전반의 표준이 되는 통합 교육 브랜드.<br>아이부터 강사, 학원까지 — PENTA가 잇는 하나의 흐름.</div>
+  </div>
+
+  <div class="value-grid">
+    <div class="value-item">
+      <div class="value-num">VALUE 01</div>
+      <div class="value-name"><span>깊이</span> Depth</div>
+      <div class="value-desc">피상적인 교육이 아닌, 뿌리 깊은 사고력에 투자합니다. 아이든 강사든 원장이든, 모든 교육은 깊이에서 시작합니다.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-num">VALUE 02</div>
+      <div class="value-name"><span>연결</span> Connection</div>
+      <div class="value-desc">아이-강사-학원-학부모-사회가 하나의 흐름으로 연결됩니다. 단절된 교육이 아닌, 생태계 전체가 함께 성장합니다.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-num">VALUE 03</div>
+      <div class="value-name"><span>확장</span> Expansion</div>
+      <div class="value-desc">본점 하나가 아닌, 전국으로 확장됩니다. 한 명의 강사가 아닌, 시스템이 재생산됩니다. 규모가 가치를 배가합니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02. 5개 브랜드 생태계 ═══ -->
+<section class="section-dark" style="background: #060606;">
+  <div class="section-label-dark">02 — BRAND ECOSYSTEM</div>
+  <h2 class="section-title-dark">5개의 브랜드,<br>하나의 생태계</h2>
+  <p class="section-desc-dark">PENTA = 다섯(Five)을 뜻하는 접두사.<br>5개 브랜드가 각자의 역할로 교육 가치 사슬 전체를 커버합니다.</p>
+
+  <div class="ecosystem-wrap">
+    <!-- 오각형 다이어그램 -->
+    <div class="pentagon-diagram">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 오각형 배경 라인 -->
+        <polygon points="200,32 368,148 304,340 96,340 32,148"
+          stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="rgba(201,168,76,0.03)"/>
+
+        <!-- 각 꼭짓점에서 중심으로 이어지는 선 -->
+        <line x1="200" y1="32" x2="200" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="368" y1="148" x2="200" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="304" y1="340" x2="200" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="96" y1="340" x2="200" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="32" y1="148" x2="200" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+
+        <!-- 중심 원 -->
+        <circle cx="200" cy="200" r="36" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+        <text x="200" y="194" text-anchor="middle" fill="#C9A84C" font-size="13" font-weight="900" font-family="Pretendard, sans-serif" letter-spacing="1">PENTA</text>
+        <text x="200" y="212" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-size="9" font-family="Pretendard, sans-serif">GROUP</text>
+
+        <!-- 꼭짓점 노드 — 펜타스쿨 (상단) -->
+        <circle cx="200" cy="32" r="28" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="200" y="26" text-anchor="middle" fill="#C9A84C" font-size="9" font-weight="700" font-family="Pretendard, sans-serif">펜타스쿨</text>
+        <text x="200" y="38" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Pretendard, sans-serif">SCHOOL</text>
+
+        <!-- 꼭짓점 노드 — 펜타웍스 (우상) -->
+        <circle cx="368" cy="148" r="28" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+        <text x="368" y="142" text-anchor="middle" fill="#C9A84C" font-size="9" font-weight="700" font-family="Pretendard, sans-serif">펜타웍스</text>
+        <text x="368" y="154" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Pretendard, sans-serif">WORKS</text>
+
+        <!-- 꼭짓점 노드 — 펜타몰 (우하) -->
+        <circle cx="304" cy="340" r="28" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+        <text x="304" y="334" text-anchor="middle" fill="#C9A84C" font-size="9" font-weight="700" font-family="Pretendard, sans-serif">펜타몰</text>
+        <text x="304" y="346" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Pretendard, sans-serif">MALL</text>
+
+        <!-- 꼭짓점 노드 — 펜타랩 (좌하) -->
+        <circle cx="96" cy="340" r="28" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+        <text x="96" y="334" text-anchor="middle" fill="#C9A84C" font-size="9" font-weight="700" font-family="Pretendard, sans-serif">펜타랩</text>
+        <text x="96" y="346" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Pretendard, sans-serif">LAB</text>
+
+        <!-- 꼭짓점 노드 — 펜타캠퍼스 (좌상) -->
+        <circle cx="32" cy="148" r="28" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+        <text x="32" y="142" text-anchor="middle" fill="#C9A84C" font-size="9" font-weight="700" font-family="Pretendard, sans-serif">펜타</text>
+        <text x="32" y="152" text-anchor="middle" fill="#C9A84C" font-size="9" font-weight="700" font-family="Pretendard, sans-serif">캠퍼스</text>
+        <text x="32" y="162" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Pretendard, sans-serif">CAMPUS</text>
+      </svg>
+    </div>
+
+    <!-- 브랜드 카드 목록 -->
+    <div class="brand-cards">
+      <div class="brand-card">
+        <div class="brand-card-icon">🏫</div>
+        <div class="brand-card-body">
+          <div class="brand-card-name">펜타스쿨 <span class="en">PENTA SCHOOL</span></div>
+          <div class="brand-card-desc">초등 종합문해력 오프라인 교육 · 직영+가맹</div>
+        </div>
+        <div class="brand-card-badge badge-b2c">B2C</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-card-icon">🎓</div>
+        <div class="brand-card-body">
+          <div class="brand-card-name">펜타캠퍼스 <span class="en">PENTA CAMPUS</span></div>
+          <div class="brand-card-desc">강사 양성 평생교육원 · 자격증 → 취업 3경로</div>
+        </div>
+        <div class="brand-card-badge badge-both">B2C/B2B</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-card-icon">🤝</div>
+        <div class="brand-card-body">
+          <div class="brand-card-name">펜타웍스 <span class="en">PENTA WORKS</span></div>
+          <div class="brand-card-desc">강사 에이전시 · 학교 방과후 강사 플랫폼</div>
+        </div>
+        <div class="brand-card-badge badge-b2b">B2B</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-card-icon">🔬</div>
+        <div class="brand-card-body">
+          <div class="brand-card-name">펜타랩 <span class="en">PENTA LAB</span></div>
+          <div class="brand-card-desc">교육 자동화 솔루션 + 콘텐츠 대행</div>
+        </div>
+        <div class="brand-card-badge badge-b2b">B2B</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-card-icon">🛍️</div>
+        <div class="brand-card-body">
+          <div class="brand-card-name">펜타몰 <span class="en">PENTA MALL</span></div>
+          <div class="brand-card-desc">교육 큐레이션 커머스 · 법인 설립 후 착수</div>
+        </div>
+        <div class="brand-card-badge badge-b2c">B2C</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03. 펜타스쿨 ═══ -->
+<section class="brand-section">
+  <div class="brand-header">
+    <div class="brand-icon-lg">🏫</div>
+    <div class="brand-header-text">
+      <div class="brand-number">03 — BRAND 01</div>
+      <div class="brand-title">
+        펜타스쿨
+        <span class="en">PENTA SCHOOL</span>
+      </div>
+      <p class="brand-tagline">대한민국 최초의 초등 종합문해력 전문 프랜차이즈.<br>읽고, 쓰고, 생각하고, 말하는 힘을 키웁니다.</p>
+    </div>
+  </div>
+
+  <div class="brand-info-grid">
+    <div class="brand-info-item">
+      <div class="brand-info-label">타겟</div>
+      <div class="brand-info-value">초등학생 · 학부모</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">형태</div>
+      <div class="brand-info-value">오프라인 전용 · 직영+가맹</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">오픈 목표</div>
+      <div class="brand-info-value"><span class="highlight">2027년 1~2월</span> 연구수업 시작</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">포지셔닝</div>
+      <div class="brand-info-value">글쓰기 전문 + 프리미엄<br>(경쟁사 부재)</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">본점 위치</div>
+      <div class="brand-info-value">대치 또는 분당</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">시장 규모</div>
+      <div class="brand-info-value">초등 사교육 <span class="highlight">13조</span><br>글쓰기 전문 프랜차이즈 = 0</div>
+    </div>
+  </div>
+
+  <div class="brand-points">
+    <div class="brand-point">
+      <div class="brand-point-num">P·E·N·T·A</div>
+      <div>
+        <div class="brand-point-title">5개 문해력 영역</div>
+        <div class="brand-point-desc">P(독해) · E(어휘) · N(사고) · T(표현) · A(소통) — 각 영역을 체계적으로 측정하고 강화합니다.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">특허</div>
+      <div>
+        <div class="brand-point-title">펜타 지수 (특허 출원 검토)</div>
+        <div class="brand-point-desc">"우리 아이 문해력 몇 점인지 아세요?" — 전국 표준화 진단 지수로 무료 유입, 자발적 공유 설계.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">에르메스</div>
+      <div>
+        <div class="brand-point-title">에르메스 전략 (프리미엄)</div>
+        <div class="brand-point-desc">9개 프리미엄 클래스 — 기본 적응 → 포트폴리오 분석 → 추천 → 부모 인터뷰 → 등록 (5단계). 희소성이 가치를 만듭니다.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">교사</div>
+      <div>
+        <div class="brand-point-title">교사 양성 시스템 (해자)</div>
+        <div class="brand-point-desc">펜타캠퍼스 수료 → 자격증 취득 → 가맹점 취업 연결. 콘텐츠와 강사를 동시에 표준화합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04. 펜타캠퍼스 ═══ -->
+<section class="brand-section alt">
+  <div class="brand-header">
+    <div class="brand-icon-lg">🎓</div>
+    <div class="brand-header-text">
+      <div class="brand-number">04 — BRAND 02</div>
+      <div class="brand-title">
+        펜타캠퍼스
+        <span class="en">PENTA CAMPUS</span>
+      </div>
+      <p class="brand-tagline">강사 양성부터 취업 연결까지 — 평생교육원 기반의 교사 플랫폼.<br>펜타스쿨의 품질을 시스템이 보장합니다.</p>
+    </div>
+  </div>
+
+  <div class="brand-info-grid">
+    <div class="brand-info-item">
+      <div class="brand-info-label">타겟</div>
+      <div class="brand-info-value">강사 지망생 · 초등 교육 전문가</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">형태</div>
+      <div class="brand-info-value">온라인 평생교육원 (인가 진행 중)</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">오픈 목표</div>
+      <div class="brand-info-value"><span class="highlight">2026년 10월</span> · 5개 자격증 과정</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">주소</div>
+      <div class="brand-info-value">리마크 학원 (2종근린생활시설)</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">취업 경로</div>
+      <div class="brand-info-value">①펜타학원 직고용<br>②가맹 창업 (자격증 필수)<br>③학교 방과후 강사</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">첫 매출</div>
+      <div class="brand-info-value"><span class="highlight">1,000만원</span> 확정 건 존재<br>(연수원 설립 비용 지원)</div>
+    </div>
+  </div>
+
+  <div class="brand-points">
+    <div class="brand-point">
+      <div class="brand-point-num">인가</div>
+      <div>
+        <div class="brand-point-title">평생교육원 정식 인가</div>
+        <div class="brand-point-desc">행정사 통해 진행 중 (비용 200만원). 교원 직무능력향상 자격증 과정 개설.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">5개</div>
+      <div>
+        <div class="brand-point-title">자격증 과정 (5개 예정)</div>
+        <div class="brand-point-desc">각 영역 전문 강사 과정 구성 예정. 수료 시 PENTA 공인 강사 자격 취득.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">Moodle</div>
+      <div>
+        <div class="brand-point-title">AWS EC2 인프라 완성</div>
+        <div class="brand-point-desc">Moodle 4.4 + Lambda 테마 구축 완료 (13.124.27.141). 강좌 생성 + API 연동 예정.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">파이프</div>
+      <div>
+        <div class="brand-point-title">캠퍼스 → 스쿨 파이프라인</div>
+        <div class="brand-point-desc">자격증 취득자 → 펜타 가맹점 취업 연결. 교사 공급 문제를 구조적으로 해결.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05. 펜타웍스 ═══ -->
+<section class="brand-section">
+  <div class="brand-header">
+    <div class="brand-icon-lg">🤝</div>
+    <div class="brand-header-text">
+      <div class="brand-number">05 — BRAND 03</div>
+      <div class="brand-title">
+        펜타웍스
+        <span class="en">PENTA WORKS</span>
+      </div>
+      <p class="brand-tagline">교육 인재가 필요한 곳에, 검증된 강사를 연결합니다.<br>강사 에이전시 + 학교 방과후 강사 매칭 플랫폼.</p>
+    </div>
+  </div>
+
+  <div class="brand-info-grid">
+    <div class="brand-info-item">
+      <div class="brand-info-label">타겟 (공급)</div>
+      <div class="brand-info-value">펜타캠퍼스 수료 강사<br>이은경 강사 네트워크</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">타겟 (수요)</div>
+      <div class="brand-info-value">학교 방과후 담당<br>교육 기관 · 기업 강연 의뢰처</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">수익 모델</div>
+      <div class="brand-info-value">강의 성사 시 <span class="highlight">수수료</span><br>플랫폼 등록비 · 매칭 수수료</div>
+    </div>
+  </div>
+
+  <div class="track-grid">
+    <div class="track-card">
+      <div class="track-label">Track A — 강사 에이전시</div>
+      <div class="track-title">검증된 강사를 연결한다</div>
+      <div class="track-target">기업·기관·지자체 강연 의뢰처 · 교육 콘텐츠 구매자</div>
+      <ul class="track-features">
+        <li>이은경 네트워크 기반 시니어 강사 풀</li>
+        <li>강사 프로필·포트폴리오 큐레이션</li>
+        <li>강연 기획·계약·정산 대행</li>
+        <li>펜타 브랜드 공신력으로 신뢰 보증</li>
+        <li>수수료 기반 — 성사 시 과금</li>
+      </ul>
+    </div>
+    <div class="track-card">
+      <div class="track-label">Track B — 방과후 강사 플랫폼</div>
+      <div class="track-title">학교와 강사를 잇는 플랫폼</div>
+      <div class="track-target">초·중학교 방과후 담당자 · 취업을 원하는 신진 강사</div>
+      <ul class="track-features">
+        <li>펜타캠퍼스 수료생 → 방과후 강사 등록</li>
+        <li>학교별 수요 공고 + 강사 매칭 자동화</li>
+        <li>수업 이력·평가 관리 시스템</li>
+        <li>방과후 강사 커리큘럼 표준화 제공</li>
+        <li>매칭 수수료 + 플랫폼 이용료</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="brand-points">
+    <div class="brand-point">
+      <div class="brand-point-num">공급</div>
+      <div>
+        <div class="brand-point-title">강사 풀은 이미 있다</div>
+        <div class="brand-point-desc">이은경 팔로워 15만 = 검증된 강사 네트워크. 펜타캠퍼스 수료생이 매기 추가됩니다. 공급 문제가 없습니다.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">수요</div>
+      <div>
+        <div class="brand-point-title">방과후 강사 수요는 구조적</div>
+        <div class="brand-point-desc">전국 초·중학교 방과후 시장은 매년 반복 수요. 학교 입장에서는 검증된 강사를 쉽게 찾는 것이 가장 큰 페인 포인트.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">연결</div>
+      <div>
+        <div class="brand-point-title">캠퍼스 → 웍스 → 스쿨 파이프라인</div>
+        <div class="brand-point-desc">캠퍼스에서 자격증 취득 → 웍스를 통해 방과후 취업 → 경력 쌓은 후 펜타스쿨 가맹 창업. 하나의 경력 경로가 됩니다.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">수익</div>
+      <div>
+        <div class="brand-point-title">수수료 기반 — 리스크 없는 구조</div>
+        <div class="brand-point-desc">강의 성사 시 수수료 과금. 고정 비용 없이 매칭이 늘수록 수익 증가. 플랫폼이 커질수록 공급·수요 양쪽 네트워크 효과.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 06. 펜타랩 ═══ -->
+<section class="brand-section alt">
+  <div class="brand-header">
+    <div class="brand-icon-lg">🔬</div>
+    <div class="brand-header-text">
+      <div class="brand-number">06 — BRAND 04</div>
+      <div class="brand-title">
+        펜타랩
+        <span class="en">PENTA LAB</span>
+      </div>
+      <p class="brand-tagline">교육 운영을 자동화하고, 콘텐츠 제작을 대행합니다.<br>내부 기술은 절대 노출하지 않는 블랙박스 원칙.</p>
+    </div>
+  </div>
+
+  <div class="brand-info-grid">
+    <div class="brand-info-item">
+      <div class="brand-info-label">타겟</div>
+      <div class="brand-info-value">교육 기관 · 프랜차이즈 본사 · 독서논술 학원</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">핵심 원칙</div>
+      <div class="brand-info-value">블랙박스 원칙 — AI/구글시트 내부 기술 미노출. "펜타 시스템"으로만 표현.</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">핵심 레퍼런스</div>
+      <div class="brand-info-value">책나무 독서논술 프랜차이즈<br><span class="highlight">600개 가맹점 · 5월 미팅 예정</span></div>
+    </div>
+  </div>
+
+  <div class="brand-points">
+    <div class="brand-point">
+      <div class="brand-point-num">축 1</div>
+      <div>
+        <div class="brand-point-title">자동화·표준화 솔루션</div>
+        <div class="brand-point-desc">오프라인 학원 CRM · 알림 · 리포트 자동화. 프랜차이즈 표준 운영 시스템 구축.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">축 2</div>
+      <div>
+        <div class="brand-point-title">콘텐츠 자동화 대행</div>
+        <div class="brand-point-desc">내신 교재 제작 · 학부모 리포트 HTML · 시험지 자동화. 리마크 파이프라인을 외부에 납품.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">책나무</div>
+      <div>
+        <div class="brand-point-title">B2B 첫 타겟 — 책나무</div>
+        <div class="brand-point-desc">파일럿 30개 가맹점 → 월 1,200만원. 300개 → 월 1.2억. 마진 98%+. 5월 초 은경누나 미팅.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">리드인</div>
+      <div>
+        <div class="brand-point-title">경쟁사 대비 차별점</div>
+        <div class="brand-point-desc">리드인(특허 보유) 대비 — 카톡 텍스트 → 시각화 HTML, 성장 추이 그래프, AI+강사 이중 코멘트.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 07. 펜타몰 ═══ -->
+<section class="brand-section">
+  <div class="brand-header">
+    <div class="brand-icon-lg">🛍️</div>
+    <div class="brand-header-text">
+      <div class="brand-number">07 — BRAND 05</div>
+      <div class="brand-title">
+        펜타몰
+        <span class="en">PENTA MALL</span>
+      </div>
+      <p class="brand-tagline">교육 큐레이션 커머스. 유무형 상품을 엄선해 제공합니다.<br>법인 설립 완료 후 착수 — 2026년 8월 오픈 목표.</p>
+    </div>
+  </div>
+
+  <div class="brand-info-grid">
+    <div class="brand-info-item">
+      <div class="brand-info-label">타겟</div>
+      <div class="brand-info-value">초등 학부모 · 교사</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">현재 상태</div>
+      <div class="brand-info-value"><span style="color: rgba(255,255,255,0.4);">착수 보류</span><br>법인 설립 후 PG사 계약 필요</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">오픈 목표</div>
+      <div class="brand-info-value"><span class="highlight">2026년 8월말</span><br>(법인 설립 선행 조건)</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">첫 상품</div>
+      <div class="brand-info-value">스터디플래너<br>(은경누나 제안)</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">결제 수단</div>
+      <div class="brand-info-value">토스페이먼츠<br>(카카오페이·카드 통합)</div>
+    </div>
+    <div class="brand-info-item">
+      <div class="brand-info-label">임시 대안</div>
+      <div class="brand-info-value">은경누나 개인사업자<br>스마트스토어 운영</div>
+    </div>
+  </div>
+
+  <div class="brand-points" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="brand-point">
+      <div class="brand-point-num">큐레이션</div>
+      <div>
+        <div class="brand-point-title">엄선된 교육 상품</div>
+        <div class="brand-point-desc">플래너·교구·교재 등 오프라인 상품 + 디지털 상품 (PDF, 강의 등) 통합 판매.</div>
+      </div>
+    </div>
+    <div class="brand-point">
+      <div class="brand-point-num">조건</div>
+      <div>
+        <div class="brand-point-title">선행 조건 2가지</div>
+        <div class="brand-point-desc">①법인 설립 완료 (PG사 계약을 위해 필수) ②은경누나와 사업 범위 합의 (교육+커머스 or 교육만).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 08. 선순환 생태계 & 타임라인 ═══ -->
+<section class="section-dark" style="background: #060606;">
+  <div class="section-label-dark">08 — SYNERGY & TIMELINE</div>
+  <h2 class="section-title-dark">하나의 흐름,<br>다섯 개의 힘</h2>
+  <p class="section-desc-dark">각 브랜드는 독립 수익원이면서, 동시에 서로를 강화합니다.<br>스쿨이 브랜드를 만들고, 캠퍼스가 강사를 공급하며, 웍스·랩이 생태계를 확장합니다.</p>
+
+  <div class="flow-wrap">
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 01</div>
+      <div class="flow-step-brand">펜타스쿨</div>
+      <div class="flow-step-text">직영 본점 오픈 → 브랜드 신뢰·데이터 축적 → "펜타 지수" 전국 확산 → 학부모 인지도 폭발</div>
+      <div class="flow-step-arrow">▶</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 02</div>
+      <div class="flow-step-brand">펜타캠퍼스</div>
+      <div class="flow-step-text">평생교육원 강사 양성 → 자격증 취득자 배출 → 펜타스쿨 가맹 창업 또는 취업 연결 → 교사 품질 구조화</div>
+      <div class="flow-step-arrow">▶</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 03</div>
+      <div class="flow-step-brand">가맹 확장</div>
+      <div class="flow-step-text">전국 가맹점 네트워크 형성 → 규모의 데이터 → 펜타 지수 전국 표준화 → 브랜드 해자 깊어짐</div>
+      <div class="flow-step-arrow">▶</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 04</div>
+      <div class="flow-step-brand">펜타웍스·랩</div>
+      <div class="flow-step-text">캠퍼스 수료생 → 웍스 방과후 취업 연결 · 랩이 가맹점 운영 자동화 납품 → 생태계 수익 다각화</div>
+      <div class="flow-step-arrow">▶</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 05</div>
+      <div class="flow-step-brand">펜타몰</div>
+      <div class="flow-step-text">누적된 팬덤(학부모·강사) → 큐레이션 커머스 → 교재·교구·플래너 판매 → 수익 다각화 완성</div>
+      <div class="flow-step-arrow">▶</div>
+    </div>
+  </div>
+
+  <!-- 타임라인 -->
+  <div class="timeline">
+    <div class="timeline-year">2026</div>
+    <div class="timeline-items">
+      <div class="timeline-item">
+        <div class="timeline-month">4월</div>
+        <div class="timeline-brand-tag">그룹</div>
+        <div class="timeline-content"><strong>법인 설립</strong> — 행정사 진행 중 (초창패 업종 고려)</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">5월</div>
+        <div class="timeline-brand-tag">랩</div>
+        <div class="timeline-content"><strong>책나무 미팅</strong> — 은경누나 × 책나무 대표 · 파일럿 30개 가맹점 계약 협상</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">8월</div>
+        <div class="timeline-brand-tag">몰</div>
+        <div class="timeline-content"><strong>펜타몰 오픈</strong> — 스터디플래너 첫 상품 (법인 설립 완료 조건)</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">10월</div>
+        <div class="timeline-brand-tag">캠퍼스</div>
+        <div class="timeline-content"><strong>펜타캠퍼스 오픈</strong> — 자격증 과정 5개 · 첫 강사 1기 모집</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">12월</div>
+        <div class="timeline-brand-tag">스쿨</div>
+        <div class="timeline-content"><strong>본점 인테리어 마감</strong> — 대치 또는 분당 · 연구수업 준비</div>
+      </div>
+    </div>
+
+    <div class="timeline-year">2027</div>
+    <div class="timeline-items">
+      <div class="timeline-item">
+        <div class="timeline-month">1~2월</div>
+        <div class="timeline-brand-tag">스쿨</div>
+        <div class="timeline-content"><strong>연구수업 시작 ★</strong> — 직영 1호점 정식 오픈 (대치 또는 분당)</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">상반기</div>
+        <div class="timeline-brand-tag">스쿨</div>
+        <div class="timeline-content"><strong>직영 2호점 검토</strong> — 서초구 · 과천 · 송파 후보</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">초</div>
+        <div class="timeline-brand-tag">그룹</div>
+        <div class="timeline-content"><strong>초창패 지원</strong> — 은경누나 담당 · 빅데이터AI 분야 (2027년 초)</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">하반기</div>
+        <div class="timeline-brand-tag">스쿨</div>
+        <div class="timeline-content"><strong>가맹 시작 ★</strong> — 자격증 소지자 대상 1기 모집 · 전국 확장 시작</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 09. 파운더팀 ═══ -->
+<section class="section-dark">
+  <div class="section-label-dark">09 — FOUNDING TEAM</div>
+  <h2 class="section-title-dark">이 사람들이<br>만듭니다</h2>
+  <p class="section-desc-dark">콘텐츠와 시스템, 브랜드와 운영 — 각자의 강점이 정확히 맞물립니다.</p>
+
+  <div class="founder-grid">
+    <div class="founder-card">
+      <div class="founder-role">CO-FOUNDER · 최종결정권</div>
+      <div class="founder-name">이은경</div>
+      <div class="founder-sub">슬기로운 초등생활 · 지분 60%</div>
+      <div class="founder-bio">초등교사 15년 경력, 저서 60여 권 (베스트셀러 다수), 유튜브 구독자 15만+. 초등 교육 분야 최고의 신뢰도와 브랜드 파워를 보유합니다.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">브랜드</span>
+        <span class="founder-tag">커리큘럼</span>
+        <span class="founder-tag">교사 교육</span>
+        <span class="founder-tag">강사 섭외</span>
+        <span class="founder-tag">초창패</span>
+      </div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-role">CO-FOUNDER · 시스템·운영</div>
+      <div class="founder-name">이동길</div>
+      <div class="founder-sub">리마크영어국어학원 · 지분 40%</div>
+      <div class="founder-bio">리마크영어국어학원 공동 원장 3년차. AI 기반 학원 운영 자동화 시스템 구축. 프랜차이즈 시스템 설계·가맹 운영 관리 전담.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">경영·운영</span>
+        <span class="founder-tag">시스템 자동화</span>
+        <span class="founder-tag">프랜차이즈 설계</span>
+        <span class="founder-tag">B2B 영업</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ 푸터 ═══ -->
+<footer class="footer">
+  <div class="footer-logo">PENTA</div>
+  <div class="footer-meta">
+    그룹 브랜드 기획서 v1.0 — 2026.04.07<br>
+    이은경 · 이동길 내부용 (CONFIDENTIAL)
+  </div>
+</footer>
+
+</body>
+</html>
