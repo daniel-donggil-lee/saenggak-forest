@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>펜타랩 (PENTA LAB) — 교육 사업 자동화 시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0a0a0a;
+  --gold: #C9A84C;
+  --gold-light: #e8c96d;
+  --white: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-400: #a3a3a3;
+  --gray-600: #525252;
+  --gray-800: #262626;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, sans-serif;
+  background: var(--white);
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+.nav-logo span { color: var(--gold); }
+.nav-cta {
+  background: var(--gold);
+  color: var(--black);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .2s;
+}
+.nav-cta:hover { background: var(--gold-light); }
+
+/* ── HERO ── */
+#hero {
+  background: var(--black);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 100px;
+}
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.hero-tag::before { content: '✓'; }
+.hero-h1 {
+  font-size: clamp(42px, 7vw, 80px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+.hero-h1 .gold { color: var(--gold); }
+.hero-sub {
+  font-size: clamp(16px, 2.2vw, 20px);
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.7);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 2px;
+  transition: color .2s;
+}
+.btn-secondary:hover { color: var(--white); }
+.hero-badges {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-badge-num {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: -0.03em;
+}
+.hero-badge-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.02em;
+}
+
+/* ── SECTION COMMONS ── */
+.section {
+  padding: 100px 40px;
+}
+.section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 17px;
+  color: var(--gray-600);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 56px;
+}
+
+/* ── PAIN TABS ── */
+.tab-wrap {
+  display: flex;
+  gap: 4px;
+  background: var(--gray-100);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  width: fit-content;
+}
+.tab-btn {
+  padding: 10px 24px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: all .2s;
+}
+.tab-btn.active {
+  background: var(--black);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.pain-card {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
+}
+.pain-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.pain-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity .2s;
+}
+.pain-card:hover::before { opacity: 1; }
+.pain-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gray-400);
+  margin-bottom: 12px;
+}
+.pain-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.5;
+}
+
+.pain-footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 20px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pain-footer span { color: var(--gold); }
+
+/* ── BEFORE AFTER ── */
+#before-after { background: var(--gray-50); }
+.ba-tabs { display: flex; gap: 4px; background: var(--gray-200); padding: 4px; border-radius: 12px; margin-bottom: 40px; width: fit-content; }
+.ba-tab { padding: 10px 24px; border-radius: 9px; font-size: 14px; font-weight: 600; border: none; background: transparent; color: var(--gray-400); cursor: pointer; transition: all .2s; }
+.ba-tab.active { background: var(--white); color: var(--black); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.ba-panel { display: none; }
+.ba-panel.active { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+
+.ba-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+.ba-before {
+  background: #fff5f5;
+  padding: 20px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.ba-after {
+  background: #f0faf0;
+  padding: 20px;
+}
+.ba-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.ba-before .ba-label { color: #e05252; }
+.ba-after .ba-label { color: #3a9e4a; }
+.ba-category {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-400);
+  margin-bottom: 6px;
+}
+.ba-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.5;
+}
+.ba-after .ba-text { color: #1a7a28; }
+
+/* ── SERVICES ── */
+.service-tabs { display: flex; gap: 4px; background: var(--gray-100); padding: 4px; border-radius: 12px; margin-bottom: 40px; width: fit-content; }
+.service-tab { padding: 10px 24px; border-radius: 9px; font-size: 14px; font-weight: 600; border: none; background: transparent; color: var(--gray-400); cursor: pointer; transition: all .2s; }
+.service-tab.active { background: var(--black); color: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.service-panel { display: none; }
+.service-panel.active { display: block; }
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.service-card {
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 32px 28px;
+  position: relative;
+  background: var(--white);
+  transition: border-color .2s, box-shadow .2s;
+}
+.service-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(201,168,76,0.1); }
+.service-card.featured {
+  border-color: var(--gold);
+  background: var(--black);
+}
+.service-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.service-badge.line1 { background: rgba(201,168,76,0.12); color: var(--gold); }
+.service-badge.line2 { background: rgba(10,10,10,0.08); color: var(--gray-600); }
+.service-badge.line3 { background: #f0f8ff; color: #2563eb; }
+.service-card.featured .service-badge.line1 { background: rgba(201,168,76,0.2); }
+
+.service-tier {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.service-card.featured .service-tier { color: var(--white); }
+.service-price-wrap { margin-bottom: 20px; }
+.service-price {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--black);
+}
+.service-card.featured .service-price { color: var(--gold); }
+.service-price-unit { font-size: 14px; font-weight: 500; color: var(--gray-400); margin-left: 4px; }
+.service-setup {
+  font-size: 13px;
+  color: var(--gray-400);
+  margin-bottom: 4px;
+}
+.service-desc {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.service-card.featured .service-desc { color: rgba(255,255,255,0.55); }
+.service-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.service-features li {
+  font-size: 13px;
+  color: var(--gray-600);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.service-card.featured .service-features li { color: rgba(255,255,255,0.65); }
+.service-features li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.value-banner {
+  background: var(--black);
+  border-radius: 16px;
+  padding: 32px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.value-banner-text {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+}
+.value-banner-text strong { color: var(--gold); font-size: 18px; }
+.value-banner-cta {
+  background: var(--gold);
+  color: var(--black);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+.value-banner-cta:hover { background: var(--gold-light); }
+
+/* ── WHY ── */
+#why { background: var(--black); }
+#why .section-title { color: var(--white); }
+#why .section-desc { color: rgba(255,255,255,0.5); }
+#why .section-eyebrow { color: var(--gold); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+}
+.why-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 36px 28px;
+  transition: border-color .2s;
+}
+.why-card:hover { border-color: rgba(201,168,76,0.4); }
+.why-icon {
+  font-size: 36px;
+  margin-bottom: 20px;
+  display: block;
+}
+.why-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.why-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.75;
+}
+.why-text strong { color: var(--gold); font-weight: 700; }
+
+/* ── HOW IT WORKS ── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 0;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: calc(12.5% + 20px);
+  right: calc(12.5% + 20px);
+  height: 1px;
+  background: var(--gray-200);
+}
+.step-item {
+  padding: 0 16px 32px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 56px;
+  height: 56px;
+  background: var(--black);
+  color: var(--gold);
+  font-size: 20px;
+  font-weight: 900;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  letter-spacing: -0.02em;
+}
+.step-title {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+/* ── FOUNDING PARTNER ── */
+#founding {
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+#founding::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+#founding .section-title { color: var(--white); }
+#founding .section-desc { color: rgba(255,255,255,0.5); }
+#founding .section-eyebrow { color: var(--gold); }
+
+.founding-card {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 24px;
+  padding: 52px;
+  position: relative;
+  overflow: hidden;
+}
+.founding-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+.founding-benefits {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.founding-benefit {
+  text-align: center;
+}
+.founding-benefit-val {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+.founding-benefit-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+.founding-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin-bottom: 32px;
+}
+.founding-conditions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.founding-condition {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+.founding-condition::before { content: '✓'; color: var(--gold); font-weight: 700; }
+.founding-slots {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.founding-slots-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+}
+.founding-slots-badge {
+  background: rgba(220,60,60,0.15);
+  border: 1px solid rgba(220,60,60,0.3);
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.btn-founding {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 18px 40px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.btn-founding:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* ── CTA FORM ── */
+#contact { background: var(--gray-50); }
+.form-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 24px;
+  padding: 52px;
+  max-width: 680px;
+}
+.form-group {
+  margin-bottom: 24px;
+}
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--black);
+  background: var(--white);
+  transition: border-color .2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--gold);
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--gray-400); }
+.form-textarea { resize: vertical; min-height: 96px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+  width: 100%;
+  padding: 18px;
+  background: var(--black);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--gray-800); transform: translateY(-1px); }
+.form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.form-note {
+  font-size: 12px;
+  color: var(--gray-400);
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+.form-success-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.form-success-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.form-success-desc {
+  font-size: 15px;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  padding: 48px 40px;
+  text-align: center;
+}
+.footer-logo {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.footer-logo span { color: var(--gold); }
+.footer-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  #hero { padding: 100px 20px 80px; }
+  .hero-badges { gap: 20px; }
+
+  .section { padding: 72px 20px; }
+
+  .pain-grid { grid-template-columns: 1fr 1fr; }
+  .ba-panel.active { grid-template-columns: 1fr; }
+  .service-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .steps-grid::before { display: none; }
+  .founding-benefits { grid-template-columns: 1fr; gap: 16px; }
+  .founding-card { padding: 32px 24px; }
+  .form-card { padding: 32px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .value-banner { flex-direction: column; }
+  footer { padding: 40px 20px; }
+}
+
+@media (max-width: 480px) {
+  .pain-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PENTA<span>LAB</span></div>
+  <a href="#contact" class="nav-cta">무료 상담 신청 →</a>
+</nav>
+
+<!-- ── 01 HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tags">
+      <span class="hero-tag">오프라인 학원 원장</span>
+      <span class="hero-tag">온라인 교육 사업자</span>
+    </div>
+    <h1 class="hero-h1">
+      교육 사업,<br>이제 <span class="gold">시스템</span>이<br>합니다
+    </h1>
+    <p class="hero-sub">
+      오프라인 학원부터 팔로워 10만 온라인 강사까지 —<br>
+      리마크 학원 3년 직접 운영으로 검증한 자동화 시스템을 이식합니다
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">무료 상담 신청 →</a>
+      <a href="#pain" class="btn-secondary">자가진단 해보기 ↓</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <div class="hero-badge-num">3년</div>
+        <div class="hero-badge-label">리마크 직접 운영</div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">15개</div>
+        <div class="hero-badge-label">검증된 솔루션</div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">1/10</div>
+        <div class="hero-badge-label">외주 대비 비용</div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">8주</div>
+        <div class="hero-badge-label">구축 완료</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 02 PAIN ── -->
+<section id="pain" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">자가진단</p>
+    <h2 class="section-title">지금 이 중에<br>몇 개나 해당되세요?</h2>
+    <p class="section-desc">오프라인 학원 원장도, 온라인 교육 사업자도 — 문제의 뿌리는 같습니다. 자동화 시스템의 부재.</p>
+
+    <div class="tab-wrap">
+      <button class="tab-btn active" onclick="switchTab('pain','a')">Track A · 오프라인 학원</button>
+      <button class="tab-btn" onclick="switchTab('pain','b')">Track B · 온라인 교육 사업자</button>
+    </div>
+
+    <div id="pain-a" class="tab-panel active">
+      <div class="pain-grid">
+        <div class="pain-card"><div class="pain-num">01</div><div class="pain-text">카톡 문의 늦게 답하면 그냥 이탈</div></div>
+        <div class="pain-card"><div class="pain-num">02</div><div class="pain-text">미납 체크 매달 수작업으로 처리</div></div>
+        <div class="pain-card"><div class="pain-num">03</div><div class="pain-text">학부모 리포트 원장이 직접 작성</div></div>
+        <div class="pain-card"><div class="pain-num">04</div><div class="pain-text">블로그·인스타 알면서도 못 하고 있음</div></div>
+        <div class="pain-card"><div class="pain-num">05</div><div class="pain-text">강사 나가면 원장이 다시 다 맡음</div></div>
+        <div class="pain-card"><div class="pain-num">06</div><div class="pain-text">2호점 꿈꾸지만 지금 본점도 불안</div></div>
+      </div>
+      <div class="pain-footer">이 중 <span>1개라도</span> 해당되면, 펜타랩이 해결합니다 →</div>
+    </div>
+
+    <div id="pain-b" class="tab-panel">
+      <div class="pain-grid">
+        <div class="pain-card"><div class="pain-num">01</div><div class="pain-text">매 기수 수강생 관리 다 수동 (엑셀+카톡)</div></div>
+        <div class="pain-card"><div class="pain-num">02</div><div class="pain-text">Zoom 수업 알림 매번 직접 발송</div></div>
+        <div class="pain-card"><div class="pain-num">03</div><div class="pain-text">결제·환불 내가 직접 처리</div></div>
+        <div class="pain-card"><div class="pain-num">04</div><div class="pain-text">수강 완주율·만족도 데이터가 없음</div></div>
+        <div class="pain-card"><div class="pain-num">05</div><div class="pain-text">콘텐츠 파이프라인 없어서 올리다 말다</div></div>
+        <div class="pain-card"><div class="pain-num">06</div><div class="pain-text">팔로워는 늘어도 수익은 제자리</div></div>
+      </div>
+      <div class="pain-footer">이 중 <span>1개라도</span> 해당되면, 펜타랩이 해결합니다 →</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 BEFORE/AFTER ── -->
+<section id="before-after" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">Before / After</p>
+    <h2 class="section-title">펜타랩 도입 전 vs 후</h2>
+    <p class="section-desc">수치로 보이는 변화. 8주 구축 이후 실제 운영 방식이 바뀝니다.</p>
+
+    <div class="ba-tabs">
+      <button class="ba-tab active" onclick="switchTab('ba','a')">Track A · 오프라인 학원</button>
+      <button class="ba-tab" onclick="switchTab('ba','b')">Track B · 온라인 사업자</button>
+    </div>
+
+    <div id="ba-a" class="ba-panel active">
+      <div class="ba-card">
+        <div class="ba-before"><div class="ba-label">Before</div><div class="ba-category">상담 문의</div><div class="ba-text">하루 뒤 답장 → 이미 다른 학원 등록</div></div>
+        <div class="ba-after"><div class="ba-label">After</div><div class="ba-text">15분 내 자동 응답 → 상담 전환율 3배</div></div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-before"><div class="ba-label">Before</div><div class="ba-category">미납 관리</div><div class="ba-text">엑셀 + 수동 독촉 전화 매달 반복</div></div>
+        <div class="ba-after"><div class="ba-label">After</div><div class="ba-text">자동 감지 + 문자 발송으로 미납율 -80%</div></div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-before"><div class="ba-label">Before</div><div class="ba-category">수업 운영</div><div class="ba-text">감으로 운영 — 데이터 없음</div></div>
+        <div class="ba-after"><div class="ba-label">After</div><div class="ba-text">실시간 대시보드 — 수강률·납부율 한눈에</div></div>
+      </div>
+    </div>
+
+    <div id="ba-b" class="ba-panel">
+      <div class="ba-card">
+        <div class="ba-before"><div class="ba-label">Before</div><div class="ba-category">기수 오픈</div><div class="ba-text">카톡 공지 + 수동 입금 확인 + 스프레드시트</div></div>
+        <div class="ba-after"><div class="ba-label">After</div><div class="ba-text">랜딩페이지 + 자동 결제 + CRM 자동 등록</div></div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-before"><div class="ba-label">Before</div><div class="ba-category">Zoom 알림</div><div class="ba-text">수업 때마다 직접 공지 — 빠뜨리면 항의</div></div>
+        <div class="ba-after"><div class="ba-label">After</div><div class="ba-text">수업 전 자동 알림 발송 — 노쇼 -70%</div></div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-before"><div class="ba-label">Before</div><div class="ba-category">콘텐츠</div><div class="ba-text">올리다 말다 — 업로드 일정 없음</div></div>
+        <div class="ba-after"><div class="ba-label">After</div><div class="ba-text">예약 발행 파이프라인 — 채널 성장 궤도 진입</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 SERVICES ── -->
+<section id="services" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">서비스 & 가격</p>
+    <h2 class="section-title">3단계 서비스 라인</h2>
+    <p class="section-desc">지금 당장 필요한 것부터 시작하세요. 단계별로 확장 가능합니다.</p>
+
+    <div class="service-tabs">
+      <button class="service-tab active" onclick="switchTab('service','a')">Track A · 오프라인 학원</button>
+      <button class="service-tab" onclick="switchTab('service','b')">Track B · 온라인 사업자</button>
+    </div>
+
+    <!-- Track A -->
+    <div id="service-a" class="service-panel active">
+      <div class="service-grid">
+        <div class="service-card">
+          <span class="service-badge line1">라인 1 · 시스템 개선</span>
+          <div class="service-tier">베이직</div>
+          <div class="service-price-wrap">
+            <span class="service-price">49만</span><span class="service-price-unit">원/월</span>
+          </div>
+          <div class="service-desc">즉시 ROI — 문의 자동 응답부터 시작</div>
+          <ul class="service-features">
+            <li>카카오 자동 응답 챗봇</li>
+            <li>학생 CRM 기본 구축</li>
+            <li>미납 자동 감지 + 문자</li>
+            <li>학원비 청구서 자동 발송</li>
+          </ul>
+        </div>
+        <div class="service-card featured">
+          <span class="service-badge line1">라인 1 · 시스템 개선</span>
+          <div class="service-tier">프로</div>
+          <div class="service-price-wrap">
+            <div class="service-setup">구축 500만 원 (1회)</div>
+            <span class="service-price">99만</span><span class="service-price-unit" style="color:rgba(255,255,255,0.4)">원/월</span>
+          </div>
+          <div class="service-desc">풀 자동화 — AI 챗봇 + 예약 + 리포트</div>
+          <ul class="service-features">
+            <li>베이직 전체 포함</li>
+            <li>AI 챗봇 (상담 자동화)</li>
+            <li>Cal.com 상담 예약 연동</li>
+            <li>학부모 리포트 자동 생성</li>
+            <li>SNS 예약 발행 시스템</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <span class="service-badge line2">라인 2 · 프차 준비</span>
+          <div class="service-tier">스탠다드</div>
+          <div class="service-price-wrap">
+            <div class="service-setup">구축 2,000만 원 (1회)</div>
+            <span class="service-price">129만</span><span class="service-price-unit">원/월</span>
+          </div>
+          <div class="service-desc">가맹 확장 준비 — 멀티 브랜치 운영</div>
+          <ul class="service-features">
+            <li>프로 전체 포함</li>
+            <li>멀티 지점 통합 대시보드</li>
+            <li>가맹 운영 매뉴얼 시스템화</li>
+            <li>성과 추적 + KPI 자동화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track B -->
+    <div id="service-b" class="service-panel">
+      <div class="service-grid">
+        <div class="service-card">
+          <span class="service-badge line1">라인 1 · 시스템 개선</span>
+          <div class="service-tier">베이직</div>
+          <div class="service-price-wrap">
+            <span class="service-price">49만</span><span class="service-price-unit">원/월</span>
+          </div>
+          <div class="service-desc">즉시 ROI — 기수 관리부터 자동화</div>
+          <ul class="service-features">
+            <li>수강생 CRM 자동 등록</li>
+            <li>결제 페이지 + 자동 확인</li>
+            <li>Zoom 수업 알림 자동 발송</li>
+            <li>수강생 대시보드 기본</li>
+          </ul>
+        </div>
+        <div class="service-card featured">
+          <span class="service-badge line1">라인 1 · 시스템 개선</span>
+          <div class="service-tier">프로</div>
+          <div class="service-price-wrap">
+            <div class="service-setup">구축 500만 원 (1회)</div>
+            <span class="service-price">99만</span><span class="service-price-unit" style="color:rgba(255,255,255,0.4)">원/월</span>
+          </div>
+          <div class="service-desc">콘텐츠 파이프라인 + 완주율 분석</div>
+          <ul class="service-features">
+            <li>베이직 전체 포함</li>
+            <li>콘텐츠 예약 발행 시스템</li>
+            <li>수강 완주율·만족도 트래킹</li>
+            <li>이탈 수강생 자동 리텐션</li>
+            <li>기수별 성과 분석 리포트</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <span class="service-badge line2">라인 2 · 규모화</span>
+          <div class="service-tier">스탠다드</div>
+          <div class="service-price-wrap">
+            <div class="service-setup">구축 2,000만 원 (1회)</div>
+            <span class="service-price">129만</span><span class="service-price-unit">원/월</span>
+          </div>
+          <div class="service-desc">강의 플랫폼 자체 구축 + 멤버십</div>
+          <ul class="service-features">
+            <li>프로 전체 포함</li>
+            <li>자체 LMS 플랫폼 구축</li>
+            <li>멤버십/구독 결제 시스템</li>
+            <li>제자 커뮤니티 자동화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="value-banner">
+      <div class="value-banner-text">
+        외주 개발 총 시세 <strong>2.3억~5억+</strong><br>
+        펜타랩은 직접 구축합니다 — 그 70~80% 절감
+      </div>
+      <a href="#contact" class="value-banner-cta">가격 상담 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 WHY PENTALAB ── -->
+<section id="why" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">Why PentaLab</p>
+    <h2 class="section-title" style="color:var(--white)">우리가 쓰는 걸<br>팝니다</h2>
+    <p class="section-desc">직접 운영하며 검증한 시스템입니다. 데모가 곧 레퍼런스입니다.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🏫</span>
+        <div class="why-title">리마크 학원 3년 직접 운영</div>
+        <div class="why-text">말만 하는 컨설팅이 아닙니다. <strong>지금도 돌아가는 시스템을 그대로 이식</strong>합니다. 데모가 곧 레퍼런스.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">📚</span>
+        <div class="why-title">이은경 유튜브 15만 · 저서 60권</div>
+        <div class="why-text">학원 원장과 온라인 교육 사업자 모두가 신뢰하는 채널. <strong>펜타랩은 그 신뢰를 공유합니다.</strong></div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">⚡</span>
+        <div class="why-title">외주 없이 직접 구축</div>
+        <div class="why-text">모든 시스템을 외주 없이 직접 만듭니다. <strong>외주 시세 대비 1/10 비용</strong>으로 동일한 결과물을 납품합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 06 HOW IT WORKS ── -->
+<section id="how" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">프로세스</p>
+    <h2 class="section-title">4단계로 완성됩니다</h2>
+    <p class="section-desc">상담 신청부터 시스템 완성까지 8주. 구축 이후에는 월 리테이너로 계속 관리합니다.</p>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-title">자가진단</div>
+        <div class="step-desc">무료 · 20문항<br>우리 사업의 페인 포인트를 정확히 파악합니다</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-title">킥오프 미팅</div>
+        <div class="step-desc">2~3시간 · 무료<br>페인 우선순위 확정 + 커스텀 로드맵 설계</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-title">8주 구축</div>
+        <div class="step-desc">기능 순차 이식<br>가장 급한 것부터 빠르게 도입합니다</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-title">월 리테이너</div>
+        <div class="step-desc">유지보수 + 개선<br>사업 성장에 맞춰 시스템을 계속 업그레이드</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 07 FOUNDING PARTNER ── -->
+<section id="founding" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">파운딩 파트너 오퍼</p>
+    <h2 class="section-title" style="color:var(--white)">지금 신청하면<br>이 조건으로 시작합니다</h2>
+    <p class="section-desc">오프라인 학원 원장도, 온라인 교육 사업자도 동일 조건으로 신청 가능합니다.</p>
+
+    <div class="founding-card">
+      <div class="founding-benefits">
+        <div class="founding-benefit">
+          <div class="founding-benefit-val">구축비 0원</div>
+          <div class="founding-benefit-label">정가 200만~500만 원<br>전액 면제</div>
+        </div>
+        <div class="founding-benefit">
+          <div class="founding-benefit-val">월 59만</div>
+          <div class="founding-benefit-label">12개월 고정<br>(정가 99만 대비 40% 할인)</div>
+        </div>
+        <div class="founding-benefit">
+          <div class="founding-benefit-val">8주 완성</div>
+          <div class="founding-benefit-label">킥오프 미팅 이후<br>8주 이내 전달 보장</div>
+        </div>
+      </div>
+      <div class="founding-divider"></div>
+      <div class="founding-conditions">
+        <span class="founding-condition">사례 공개 동의</span>
+        <span class="founding-condition">3개월 후 추천 1건</span>
+        <span class="founding-condition">킥오프 2주 내 일정 확정</span>
+      </div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:28px;line-height:1.7;">
+        온라인 교육 사업자도 가능합니다. 기수 관리·결제·콘텐츠 파이프라인 세팅까지<br>
+        팔로워 10만 채널도 동일 조건으로 신청할 수 있습니다.
+      </p>
+      <div class="founding-slots">
+        <div class="founding-slots-text">파운딩 파트너 자리는 한정적으로 운영됩니다</div>
+        <div class="founding-slots-badge">⚡ 현재 2자리 남음</div>
+      </div>
+      <div style="margin-top:36px;">
+        <a href="#contact" class="btn-founding">파운딩 파트너 신청 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 08 CTA FORM ── -->
+<section id="contact" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">무료 상담 신청</p>
+    <h2 class="section-title">지금 신청하면<br>24시간 내 연락드립니다</h2>
+    <p class="section-desc">부담 없이 작성해주세요. 가장 아픈 문제 하나만 적어도 됩니다.</p>
+
+    <div class="form-card">
+      <form id="consultForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="bizName">사업체 이름 *</label>
+            <input class="form-input" type="text" id="bizName" name="bizName" placeholder="학원명 또는 채널명·브랜드명" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bizType">유형 *</label>
+            <select class="form-select" id="bizType" name="bizType" required>
+              <option value="">선택해주세요</option>
+              <option value="오프라인 학원">오프라인 학원</option>
+              <option value="온라인 교육 사업자">온라인 교육 사업자</option>
+              <option value="둘 다">둘 다</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="scale">원생 / 수강생 수 *</label>
+          <select class="form-select" id="scale" name="scale" required>
+            <option value="">선택해주세요</option>
+            <option value="~30명">~30명</option>
+            <option value="30~80명">30~80명</option>
+            <option value="80명~">80명~</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="pain">가장 아픈 문제 *</label>
+          <textarea class="form-textarea" id="pain" name="pain" placeholder="지금 가장 해결하고 싶은 것을 자유롭게 적어주세요" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">연락처 (전화번호) *</label>
+          <input class="form-input" type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">상담 신청하기</button>
+        <p class="form-note">확인 후 24시간 내 연락드립니다 · 영업 목적 외 사용하지 않습니다</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✅</div>
+        <div class="form-success-title">상담 신청이 완료되었습니다</div>
+        <div class="form-success-desc">24시간 내 담당자가 직접 연락드립니다.<br>빠른 상담을 원하시면 인스타 DM으로도 연락 주세요.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PENTA<span>LAB</span></div>
+  <div class="footer-sub">교육 사업 자동화 시스템 · PENTA GROUP</div>
+</footer>
+
+<script>
+// ── Tab switcher ──
+function switchTab(group, track) {
+  const prefix = group === 'pain' ? 'pain' : group === 'ba' ? 'ba' : 'service';
+  const panelA = document.getElementById(prefix + '-a');
+  const panelB = document.getElementById(prefix + '-b');
+  const tabs = document.querySelectorAll(
+    group === 'pain' ? '.tab-btn' :
+    group === 'ba' ? '.ba-tab' : '.service-tab'
+  );
+
+  if (track === 'a') {
+    panelA.classList.add('active');
+    panelB.classList.remove('active');
+    tabs[0].classList.add('active');
+    tabs[1].classList.remove('active');
+  } else {
+    panelB.classList.add('active');
+    panelA.classList.remove('active');
+    tabs[1].classList.add('active');
+    tabs[0].classList.remove('active');
+  }
+}
+
+// ── Form submission → Google Apps Script (doGet + payload 방식) ──
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
+
+document.getElementById('consultForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '전송 중...';
+
+  const ts = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+  const payload = JSON.stringify({
+    action: 'append',
+    sheet: '상담신청',
+    values: [
+      ts,
+      document.getElementById('bizName').value.trim(),
+      document.getElementById('bizType').value,
+      document.getElementById('scale').value,
+      document.getElementById('pain').value.trim(),
+      document.getElementById('phone').value.trim(),
+    ],
+  });
+
+  const url = GAS_URL + '?payload=' + encodeURIComponent(payload);
+
+  try {
+    // doGet accepts append via payload param; no-cors works cross-origin
+    await fetch(url, { method: 'GET', mode: 'no-cors' });
+    document.getElementById('consultForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '상담 신청하기';
+    alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+  }
+});
+</script>
+</body>
+</html>
