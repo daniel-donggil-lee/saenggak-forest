@@ -452,6 +452,91 @@ nav {
 }
 .value-banner-cta:hover { background: var(--gold-light); }
 
+/* ── PROOF ── */
+#proof { background: var(--gray-50); }
+.proof-label {
+  display: inline-block;
+  background: var(--black);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 40px;
+}
+.proof-metrics {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.proof-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.proof-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+.proof-before {
+  font-size: 13px;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-bottom: 4px;
+  text-decoration: line-through;
+}
+.proof-arrow {
+  font-size: 20px;
+  color: var(--gray-400);
+  display: block;
+  margin: 8px 0;
+}
+.proof-after {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 900;
+  color: var(--black);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.proof-after span { color: var(--gold); }
+.proof-context {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+.proof-source {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  padding: 20px 28px;
+}
+.proof-source-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.proof-source-text {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+.proof-source-text strong { color: var(--black); font-weight: 700; }
+
 /* ── WHY ── */
 #why { background: var(--black); }
 #why .section-title { color: var(--white); }
@@ -766,6 +851,7 @@ footer {
 
   .section { padding: 72px 20px; }
 
+  .proof-metrics { grid-template-columns: 1fr; }
   .pain-grid { grid-template-columns: 1fr 1fr; }
   .ba-panel.active { grid-template-columns: 1fr; }
   .service-grid { grid-template-columns: 1fr; }
@@ -1039,7 +1125,45 @@ footer {
   </div>
 </section>
 
-<!-- ── 05 WHY PENTALAB ── -->
+<!-- ── 05 PROOF ── -->
+<section id="proof" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">실제 데이터</p>
+    <h2 class="section-title">직접 도입하고<br>측정했습니다</h2>
+    <p class="section-desc">말로만 하는 컨설팅이 아닙니다. 아래 수치는 직접 운영한 학원에서 측정한 실제 데이터입니다.</p>
+
+    <div class="proof-metrics">
+      <div class="proof-card">
+        <div class="proof-before">문의 응답 시간 평균 8시간</div>
+        <span class="proof-arrow">↓</span>
+        <div class="proof-after"><span>5</span>분</div>
+        <div class="proof-context">카톡 자동 응답 도입 후<br>심야 문의도 즉시 대응</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-before">학부모 리포트 월 8시간 수작업</div>
+        <span class="proof-arrow">↓</span>
+        <div class="proof-after"><span>0</span>시간</div>
+        <div class="proof-context">자동 생성으로 전환 후<br>원장 시간 월 8시간 회수</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-before">매달 전화 독촉 → 관계 어색</div>
+        <span class="proof-arrow">↓</span>
+        <div class="proof-after">자동<span>문자</span></div>
+        <div class="proof-context">미납 감지 즉시 발송<br>원장이 직접 연락할 필요 없음</div>
+      </div>
+    </div>
+
+    <div class="proof-source">
+      <div class="proof-source-dot"></div>
+      <div class="proof-source-text">
+        <strong>경기도 소재 영어·국어 통합학원 (원생 150명+) — 3년 직접 운영·측정</strong><br>
+        동일 시스템을 지금도 운영 중입니다. 상담 신청 시 실제 화면 데모로 확인 가능합니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 07 WHY PENTALAB ── -->
 <section id="why" class="section">
   <div class="section-inner">
     <p class="section-eyebrow">Why PentaLab</p>
