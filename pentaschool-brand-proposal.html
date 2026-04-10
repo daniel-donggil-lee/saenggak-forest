@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PENTA SCHOOL — 브랜드 기획서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-dim: rgba(201,168,76,0.2);
+    --gold-border: rgba(201,168,76,0.35);
+    --bg: #0a0a0a;
+    --card: #1a1a1a;
+    --text: #ffffff;
+    --gray: #888888;
+    --gray-light: #cccccc;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── TOP LINE ── */
+  .top-line {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    z-index: 1000;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 3px;
+    z-index: 999;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── LAYOUT ── */
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 120px;
+  }
+
+  section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* ── PILL LABEL ── */
+  .pill {
+    display: inline-block;
+    padding: 5px 16px;
+    border: 1px solid var(--gold-border);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .sec-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    padding-left: 20px;
+    border-left: 3px solid var(--gold);
+    margin-bottom: 12px;
+  }
+  .sec-desc {
+    font-size: 15px;
+    color: var(--gray);
+    margin-bottom: 40px;
+    padding-left: 23px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    padding: 120px 0 80px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 0.04em;
+  }
+  .hero-meta-item strong { color: var(--gold); font-weight: 600; }
+  .hero-meta-item::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold-border);
+  }
+  .hero-meta-item:first-child::before { display: none; }
+
+  .hero-h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+  .hero-h1 .gold { color: var(--gold); }
+
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    color: var(--gray-light);
+    line-height: 1.7;
+    max-width: 700px;
+    margin-bottom: 48px;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    padding: 8px 18px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── STAT CARDS ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    padding: 28px 24px;
+  }
+  .stat-card .num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .stat-card .label { font-size: 13px; color: var(--gray); }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    background: var(--card);
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-top: 40px;
+    position: relative;
+  }
+  .quote-block::before {
+    content: '"';
+    font-family: 'Noto Serif KR', serif;
+    font-size: 80px;
+    color: var(--gold);
+    opacity: 0.3;
+    position: absolute;
+    top: 12px; left: 24px;
+    line-height: 1;
+  }
+  .quote-block p {
+    font-size: 17px;
+    color: var(--gray-light);
+    line-height: 1.8;
+    padding-left: 16px;
+  }
+
+  /* ── MISSION BOX ── */
+  .mission-box {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 16px;
+    padding: 48px 48px;
+    text-align: center;
+    margin-top: 40px;
+  }
+  .mission-box .mission-label {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .mission-box .mission-main {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .mission-box .mission-sub {
+    font-size: 15px;
+    color: var(--gray-light);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .mission-box .target-tag {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 6px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  /* ── PENTA DIAGRAM ── */
+  .penta-diagram-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  @media (max-width: 768px) {
+    .penta-diagram-wrap { grid-template-columns: 1fr; }
+  }
+  .penta-svg-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .penta-cards { display: flex; flex-direction: column; gap: 12px; }
+  .penta-card {
+    background: var(--card);
+    border: 1px solid var(--gold-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .penta-letter {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    min-width: 28px;
+    line-height: 1.2;
+  }
+  .penta-info { flex: 1; }
+  .penta-info .title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .penta-info .core {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 4px;
+  }
+  .penta-info .courses {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ── CURRICULUM TABLE ── */
+  .curriculum-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 768px) {
+    .curriculum-grid { grid-template-columns: 1fr; }
+  }
+  .cur-box {
+    background: var(--card);
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cur-box-header {
+    padding: 20px 24px;
+    background: var(--gold-dim);
+    border-bottom: 1px solid var(--gold-border);
+  }
+  .cur-box-header .tier {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cur-box-header .name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .cur-box-body { padding: 20px 24px; }
+  .cur-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .cur-item:last-child { border-bottom: none; }
+  .cur-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* ── FLOW STEPS ── */
+  .flow-steps {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    padding: 20px 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .flow-step:first-child { border-radius: 10px 0 0 10px; }
+  .flow-step:last-child { border-radius: 0 10px 10px 0; }
+  .flow-step + .flow-step { border-left: none; }
+  .flow-step .step-num {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .flow-step .step-name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .flow-step .step-desc {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+  .flow-arrow {
+    font-size: 18px;
+    color: var(--gold);
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── PENTA INDEX (RADAR) ── */
+  .radar-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  @media (max-width: 768px) { .radar-section { grid-template-columns: 1fr; } }
+  .radar-desc { display: flex; flex-direction: column; gap: 16px; }
+  .radar-point {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .radar-point .rp-label {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .radar-point .rp-text { font-size: 13px; color: var(--gray-light); }
+
+  /* ── POSITIONING MATRIX ── */
+  .matrix-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .matrix-wrap { grid-template-columns: 1fr; } }
+
+  .matrix-box {
+    background: var(--card);
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .matrix-box h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+  }
+  .matrix-box ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .matrix-box ul li {
+    font-size: 13px;
+    color: var(--gray-light);
+    padding-left: 14px;
+    position: relative;
+  }
+  .matrix-box ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+  }
+
+  /* ── TABLE ── */
+  .tbl-wrap { margin-top: 40px; overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead tr {
+    background: var(--gold-dim);
+    border-bottom: 1px solid var(--gold-border);
+  }
+  thead th {
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  tbody tr:last-child { border-bottom: none; }
+  td {
+    padding: 14px 16px;
+    color: var(--gray-light);
+    vertical-align: top;
+  }
+  td:first-child { font-weight: 600; color: var(--text); }
+  .check { color: var(--gold); font-weight: 700; }
+  .win { color: var(--gold); font-size: 12px; font-weight: 700; }
+
+  /* ── FOUNDERS ── */
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 768px) { .founder-grid { grid-template-columns: 1fr; } }
+  .founder-card {
+    background: var(--card);
+    border: 1px solid var(--gold-border);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .founder-card .f-role {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .founder-card .f-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .founder-card .f-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .f-stat {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .founder-card .f-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+  .founder-card .f-domain {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--gray-light);
+  }
+  .founder-card .f-domain span {
+    display: inline-block;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+    margin: 3px 3px 3px 0;
+  }
+
+  /* ── ROADMAP ── */
+  .roadmap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 40px;
+    position: relative;
+  }
+  .roadmap-list::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    top: 40px;
+    bottom: 40px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .rm-item {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .rm-item:last-child { border-bottom: none; }
+  .rm-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--bg);
+    flex-shrink: 0;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+    margin-left: 24px;
+  }
+  .rm-dot.active { background: var(--gold); }
+  .rm-content { flex: 1; }
+  .rm-date {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .rm-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .rm-desc { font-size: 13px; color: var(--gray); }
+
+  /* ── PENDING CARDS ── */
+  .pending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .pending-card {
+    background: var(--card);
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .pending-card .p-priority {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .pending-card .p-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .pending-card .p-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 60px 0 40px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+  footer .f-brand {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  footer .f-sub { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
+  footer .f-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  footer .f-tag {
+    padding: 6px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  /* ── BENCHMARK ROW ── */
+  .benchmark-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .bm-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .bm-card .bm-label { font-size: 11px; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
+  .bm-card .bm-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .bm-card .bm-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="top-line"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">PENTA SCHOOL · 브랜드 기획서</div>
+    <ul class="nav-links">
+      <li><a href="#why">Why Now</a></li>
+      <li><a href="#5영역">5영역</a></li>
+      <li><a href="#커리큘럼">커리큘럼</a></li>
+      <li><a href="#포지셔닝">포지셔닝</a></li>
+      <li><a href="#로드맵">로드맵</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-meta">
+      <span class="hero-meta-item"><strong>브랜드</strong> PENTA SCHOOL</span>
+      <span class="hero-meta-item"><strong>포지션</strong> 니치 프리미엄 프랜차이즈</span>
+      <span class="hero-meta-item"><strong>Phase</strong> P0 사업설계</span>
+    </div>
+    <h1 class="hero-h1">초등 문해력의<br><span class="gold">새로운 기준</span></h1>
+    <p class="hero-sub">읽고, 쓰고, 생각하고, 말하는 힘 — 대한민국 최초 초등 종합문해력 전문 프랜차이즈</p>
+    <div class="hero-badges">
+      <span class="badge">PENTA SCHOOL</span>
+      <span class="badge">초등 5영역 문해력</span>
+      <span class="badge">니치 프리미엄</span>
+      <span class="badge">펜타 지수 특허 출원 검토</span>
+    </div>
+  </section>
+
+  <!-- ── 01 WHY NOW ── -->
+  <section id="why">
+    <div class="pill">01 — Why Now</div>
+    <h2 class="sec-title">지금이어야 하는 이유</h2>
+    <p class="sec-desc">시장 공백 + 정책 변화 + 시대적 필요가 동시에 교차하는 지점</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">13조 2,000억</div>
+        <div class="label">초등 사교육 시장 연간 규모</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">0개</div>
+        <div class="label">글쓰기 전문 프랜차이즈 — 시장 공백</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2025</div>
+        <div class="label">서논술형 평가 전국 확대 시행</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2028</div>
+        <div class="label">대입 논술 비중 강화 예정</div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;">
+      <div style="font-size:13px; color:var(--gold); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px;">기존 경쟁사 한계</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>브랜드</th>
+              <th>포지션</th>
+              <th>한계</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>한우리</td>
+              <td style="color:var(--gray)">고학년 논술 중심</td>
+              <td style="color:var(--gray)">올드화, 초등 특화 없음</td>
+            </tr>
+            <tr>
+              <td>책나무·리드인</td>
+              <td style="color:var(--gray)">독서코칭이 본업</td>
+              <td style="color:var(--gray)">글쓰기 전문성 취약</td>
+            </tr>
+            <tr>
+              <td>빅4 (교원·대교·웅진·재능)</td>
+              <td style="color:var(--gray)">전과목 패키지</td>
+              <td style="color:var(--gray)">글쓰기를 패키지 일부로만 취급</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>AI가 글을 쓰는 시대, 스스로 생각하고 쓰는 힘이 가장 희소하다</p>
+    </div>
+  </section>
+
+  <!-- ── 02 MISSION ── -->
+  <section id="mission">
+    <div class="pill">02 — Mission</div>
+    <h2 class="sec-title">우리가 하는 일</h2>
+    <p class="sec-desc">초등 종합문해력 전문 프랜차이즈, 대한민국 최초</p>
+
+    <div class="mission-box">
+      <div class="mission-label">Brand Mission</div>
+      <div class="mission-main">대한민국 최초 초등 종합문해력 전문 프랜차이즈</div>
+      <div class="mission-sub">아이들이 스스로 생각하고, 자기 언어로 세상을 표현하는 힘을 기릅니다</div>
+      <div class="target-tag">타겟: 니치 프리미엄층 초등 학부모</div>
+    </div>
+  </section>
+
+  <!-- ── 03 PENTA 5영역 ── -->
+  <section id="5영역">
+    <div class="pill">03 — PENTA 5영역</div>
+    <h2 class="sec-title">문해력의 다섯 가지 차원</h2>
+    <p class="sec-desc">P·E·N·T·A — 각 영역이 연결되어 완전한 문해력을 구성합니다</p>
+
+    <div class="penta-diagram-wrap">
+      <div class="penta-svg-area">
+        <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 배경 오각형 -->
+          <polygon points="150,20 278,108 230,260 70,260 22,108"
+            fill="rgba(201,168,76,0.06)"
+            stroke="rgba(201,168,76,0.3)"
+            stroke-width="1.5"/>
+          <!-- 내부 오각형 (채워진) -->
+          <polygon points="150,56 238,121 208,220 92,220 62,121"
+            fill="rgba(201,168,76,0.15)"
+            stroke="rgba(201,168,76,0.5)"
+            stroke-width="1"/>
+          <!-- 중심 -->
+          <circle cx="150" cy="150" r="4" fill="#C9A84C" opacity="0.6"/>
+          <!-- 라인들 -->
+          <line x1="150" y1="150" x2="150" y2="20" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,4" opacity="0.4"/>
+          <line x1="150" y1="150" x2="278" y2="108" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,4" opacity="0.4"/>
+          <line x1="150" y1="150" x2="230" y2="260" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,4" opacity="0.4"/>
+          <line x1="150" y1="150" x2="70" y2="260" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,4" opacity="0.4"/>
+          <line x1="150" y1="150" x2="22" y2="108" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,4" opacity="0.4"/>
+          <!-- 꼭짓점 레이블 -->
+          <text x="150" y="12" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="13" font-weight="700" fill="#C9A84C">P 독해</text>
+          <text x="290" y="112" text-anchor="start" font-family="Pretendard, sans-serif" font-size="13" font-weight="700" fill="#C9A84C">E 어휘</text>
+          <text x="238" y="278" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="13" font-weight="700" fill="#C9A84C">T 표현</text>
+          <text x="62" y="278" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="13" font-weight="700" fill="#C9A84C">A 소통</text>
+          <text x="4" y="112" text-anchor="start" font-family="Pretendard, sans-serif" font-size="13" font-weight="700" fill="#C9A84C">N 사고</text>
+          <!-- 중앙 텍스트 -->
+          <text x="150" y="145" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="15" font-weight="700" fill="white">PENTA</text>
+          <text x="150" y="163" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="10" fill="#888">문해력 지수</text>
+        </svg>
+      </div>
+
+      <div class="penta-cards">
+        <div class="penta-card">
+          <div class="penta-letter">P</div>
+          <div class="penta-info">
+            <div class="title">독해 — 텍스트 이해력</div>
+            <div class="core">핵심 추론 · 맥락 파악 · 구조 이해</div>
+            <div class="courses">→ 인문독서 과정</div>
+          </div>
+        </div>
+        <div class="penta-card">
+          <div class="penta-letter">E</div>
+          <div class="penta-info">
+            <div class="title">어휘 — 개념어 체계화</div>
+            <div class="core">배경지식 확장 · 어휘 맥락 이해</div>
+            <div class="courses">→ 어휘 맥락 이해</div>
+          </div>
+        </div>
+        <div class="penta-card">
+          <div class="penta-letter">N</div>
+          <div class="penta-info">
+            <div class="title">사고 — 논리적 추론</div>
+            <div class="core">비판적 사고 · 질문 설계</div>
+            <div class="courses">→ 논증과추론 · 질문설계 · 논제분석훈련</div>
+          </div>
+        </div>
+        <div class="penta-card">
+          <div class="penta-letter">T</div>
+          <div class="penta-info">
+            <div class="title">표현 — 구조적 글쓰기</div>
+            <div class="core">에세이 · 논술 · 구조 설계</div>
+            <div class="courses">→ 사고력에세이 · 구조설계논술</div>
+          </div>
+        </div>
+        <div class="penta-card">
+          <div class="penta-letter">A</div>
+          <div class="penta-info">
+            <div class="title">소통 — 말하기·토론·발표</div>
+            <div class="core">타인 설득 · 자료 기반 논증</div>
+            <div class="courses">→ 자료기반토론 · 하브루타토론</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 04 커리큘럼 ── -->
+  <section id="커리큘럼">
+    <div class="pill">04 — 커리큘럼 구조</div>
+    <h2 class="sec-title">기본 → 프리미엄 2단계</h2>
+    <p class="sec-desc">입학 진단 → 기본 적응 → 포트폴리오 분석 → 맞춤 과목 추천</p>
+
+    <div class="curriculum-grid">
+      <div class="cur-box">
+        <div class="cur-box-header">
+          <div class="tier">Basic Course</div>
+          <div class="name">기본 과정</div>
+        </div>
+        <div class="cur-box-body">
+          <div class="cur-item">
+            <div class="cur-dot"></div>
+            <div>
+              <div style="font-weight:700; font-size:14px; margin-bottom:3px;">이은경 글쓰기</div>
+              <div style="font-size:12px; color:var(--gray)">초등 글쓰기 핵심 커리큘럼 · 전 학년</div>
+            </div>
+          </div>
+          <div class="cur-item">
+            <div class="cur-dot"></div>
+            <div>
+              <div style="font-weight:700; font-size:14px; margin-bottom:3px;">달콤인문 인문독서</div>
+              <div style="font-size:12px; color:var(--gray)">인문학·고전 독서 과정 · 김문영</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cur-box">
+        <div class="cur-box-header">
+          <div class="tier">Premium Course</div>
+          <div class="name">프리미엄 과정 (9개 과목)</div>
+        </div>
+        <div class="cur-box-body">
+          <div class="cur-item"><div class="cur-dot"></div><div>인문독서</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>논증과추론</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>질문설계</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>개념어체계화</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>사고력에세이</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>논제분석훈련</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>구조설계논술</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>자료기반토론</div></div>
+          <div class="cur-item"><div class="cur-dot"></div><div>하브루타토론</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;">
+      <div style="font-size:13px; color:var(--gold); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px;">입학 프로세스 5단계</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="step-num">STEP 1</div>
+          <div class="step-name">기본 적응</div>
+          <div class="step-desc">기본 과정 수강</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="step-num">STEP 2</div>
+          <div class="step-name">포트폴리오 분석</div>
+          <div class="step-desc">글쓰기 결과물 검토</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="step-num">STEP 3</div>
+          <div class="step-name">과목 추천</div>
+          <div class="step-desc">5영역 기반 맞춤 추천</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="step-num">STEP 4</div>
+          <div class="step-name">부모 인터뷰</div>
+          <div class="step-desc">목표·방향 합의</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="step-num">STEP 5</div>
+          <div class="step-name">등록</div>
+          <div class="step-desc">프리미엄 과정 시작</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 05 펜타 지수 ── -->
+  <section id="펜타지수">
+    <div class="pill">05 — 펜타 지수</div>
+    <h2 class="sec-title">우리 아이 문해력 몇 점인지 아세요?</h2>
+    <p class="sec-desc">무료 진단 마케팅 훅 — 5영역 측정 + 오각형 레이더 차트 + 전국 동학년 백분위</p>
+
+    <div class="radar-section">
+      <div>
+        <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 배경 그리드 -->
+          <polygon points="140,30 252,93 210,230 70,230 28,93" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+          <polygon points="140,65 219,114 191,207 89,207 61,114" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+          <polygon points="140,100 186,134 172,184 108,184 94,134" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+          <!-- 샘플 데이터 (예시) -->
+          <polygon points="140,50 234,101 198,218 82,218 46,101"
+            fill="rgba(201,168,76,0.18)"
+            stroke="#C9A84C"
+            stroke-width="2"/>
+          <!-- 꼭짓점 점 -->
+          <circle cx="140" cy="50" r="4" fill="#C9A84C"/>
+          <circle cx="234" cy="101" r="4" fill="#C9A84C"/>
+          <circle cx="198" cy="218" r="4" fill="#C9A84C"/>
+          <circle cx="82" cy="218" r="4" fill="#C9A84C"/>
+          <circle cx="46" cy="101" r="4" fill="#C9A84C"/>
+          <!-- 레이블 -->
+          <text x="140" y="22" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="12" font-weight="700" fill="#C9A84C">P 독해</text>
+          <text x="265" y="106" text-anchor="start" font-family="Pretendard, sans-serif" font-size="12" font-weight="700" fill="#C9A84C">E 어휘</text>
+          <text x="210" y="248" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="12" font-weight="700" fill="#C9A84C">T 표현</text>
+          <text x="70" y="248" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="12" font-weight="700" fill="#C9A84C">A 소통</text>
+          <text x="5" y="106" text-anchor="start" font-family="Pretendard, sans-serif" font-size="12" font-weight="700" fill="#C9A84C">N 사고</text>
+          <!-- 중앙 -->
+          <text x="140" y="136" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="14" font-weight="700" fill="white">펜타 지수</text>
+          <text x="140" y="153" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11" fill="#888">상위 12%</text>
+        </svg>
+      </div>
+
+      <div class="radar-desc">
+        <div class="radar-point">
+          <div class="rp-label">마케팅 훅</div>
+          <div class="rp-text">"우리 아이 문해력 몇 점인지 아세요?" — 무료 진단으로 학부모 유입</div>
+        </div>
+        <div class="radar-point">
+          <div class="rp-label">5영역 진단</div>
+          <div class="rp-text">독해·어휘·사고·표현·소통 각 영역 측정 → 오각형 레이더 차트 시각화</div>
+        </div>
+        <div class="radar-point">
+          <div class="rp-label">전국 백분위</div>
+          <div class="rp-text">전국 동학년 대비 백분위 제공 — "전국 상위 N%" 학부모 자발 공유 유도</div>
+        </div>
+        <div class="radar-point">
+          <div class="rp-label">특허 아이템</div>
+          <div class="rp-text">초등 문해력 5차원 진단 + 전국 표준화 데이터베이스 묶음 출원 검토 중</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 06 포지셔닝 ── -->
+  <section id="포지셔닝">
+    <div class="pill">06 — 포지셔닝</div>
+    <h2 class="sec-title">에르메스 전략 — 희소성이 가치다</h2>
+    <p class="sec-desc">니치 프리미엄 포지셔닝 · 동시 등록 불가 · 정원 제한</p>
+
+    <div class="benchmark-row">
+      <div class="bm-card">
+        <div class="bm-label">벤치마크</div>
+        <div class="bm-title">자라다남아미술</div>
+        <div class="bm-desc">니치 프리미엄 성공 사례 — 특정 대상·고퀄리티 집중으로 프리미엄 시장 선점</div>
+      </div>
+      <div class="bm-card">
+        <div class="bm-label">에르메스 전략</div>
+        <div class="bm-title">희소성 → 가치</div>
+        <div class="bm-desc">동시 등록 불가 · 정원 제한 · 돈이 있어도 아무나 못 들어오는 구조 설계</div>
+      </div>
+      <div class="bm-card">
+        <div class="bm-label">가격 전략</div>
+        <div class="bm-title">프리미엄 포지셔닝</div>
+        <div class="bm-desc">저가 대량 모델 거부 — 프리미엄 가격이 브랜드 신뢰를 강화하는 구조</div>
+      </div>
+    </div>
+
+    <div class="matrix-wrap" style="margin-top:40px;">
+      <div class="bm-card" style="background:var(--card); border-color:var(--gold-border);">
+        <div class="bm-label">포지셔닝 매트릭스</div>
+        <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:8px; text-align:center;">
+          <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:20px 12px;">
+            <div style="font-size:11px; color:var(--gray); margin-bottom:6px;">고전문성 · 저가</div>
+            <div style="font-size:13px; color:var(--gray)">빅4 패키지</div>
+          </div>
+          <div style="background:var(--gold-dim); border:1px solid var(--gold-border); border-radius:8px; padding:20px 12px;">
+            <div style="font-size:11px; color:var(--gold); margin-bottom:6px; font-weight:700;">고전문성 · 프리미엄</div>
+            <div style="font-size:13px; font-weight:700; color:var(--gold)">PENTA SCHOOL ✓</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:20px 12px;">
+            <div style="font-size:11px; color:var(--gray); margin-bottom:6px;">저전문성 · 저가</div>
+            <div style="font-size:13px; color:var(--gray)">책나무·리드인</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:20px 12px;">
+            <div style="font-size:11px; color:var(--gray); margin-bottom:6px;">저전문성 · 프리미엄</div>
+            <div style="font-size:13px; color:var(--gray)">시장 공백</div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:12px; font-size:11px; color:var(--gray)">X축 = 전문성 / Y축 = 프리미엄</div>
+      </div>
+
+      <div class="matrix-box">
+        <h4>포지셔닝 원칙</h4>
+        <ul>
+          <li>동시 등록 불가 — 프리미엄 과목 간 쏠림 방지</li>
+          <li>정원 제한 — 반별 최대 8명 이하</li>
+          <li>입학 프로세스 5단계 — 진입 장벽 = 가치 증명</li>
+          <li>포트폴리오 심사 — 준비된 아이만 수강</li>
+          <li>부모 인터뷰 필수 — 교육 철학 정합성 확인</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 07 경쟁 분석 ── -->
+  <section id="경쟁분석">
+    <div class="pill">07 — 경쟁 분석</div>
+    <h2 class="sec-title">경쟁사 대비 포지셔닝</h2>
+    <p class="sec-desc">글쓰기 전문 프랜차이즈 0개 — 우리가 시장을 정의한다</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>브랜드</th>
+            <th>포지션</th>
+            <th>약점</th>
+            <th>펜타스쿨 대비</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>한우리</td>
+            <td style="color:var(--gray)">고학년 논술 중심</td>
+            <td style="color:var(--gray)">올드화, 초등 특화 없음</td>
+            <td class="check">✅ 우위</td>
+          </tr>
+          <tr>
+            <td>책나무·리드인</td>
+            <td style="color:var(--gray)">독서코칭이 본업</td>
+            <td style="color:var(--gray)">글쓰기 전문성 취약</td>
+            <td class="check">✅ 우위</td>
+          </tr>
+          <tr>
+            <td>빅4 (교원·대교·웅진·재능)</td>
+            <td style="color:var(--gray)">전과목 패키지</td>
+            <td style="color:var(--gray)">글쓰기를 일부로만 취급</td>
+            <td class="check">✅ 우위</td>
+          </tr>
+          <tr>
+            <td style="color:var(--gold)">PENTA SCHOOL</td>
+            <td style="color:var(--gold-dim); color:var(--gray-light)">초등 문해력 전문</td>
+            <td style="color:var(--gray)">—</td>
+            <td class="win">시장 선점</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── 08 공동창업자 ── -->
+  <section id="founders">
+    <div class="pill">08 — 공동창업자</div>
+    <h2 class="sec-title">브랜드를 만드는 사람들</h2>
+    <p class="sec-desc">교육 현장 경험 + 검증된 브랜드 파워 + 콘텐츠 전문성</p>
+
+    <div class="founder-grid">
+      <div class="founder-card">
+        <div class="f-role">Brand & Curriculum</div>
+        <div class="f-name">이은경</div>
+        <div class="f-stats">
+          <span class="f-stat">초등교사 15년</span>
+          <span class="f-stat">저서 60권+</span>
+          <span class="f-stat">유튜브 15만+</span>
+        </div>
+        <div class="f-desc">
+          "슬기로운 초등생활" 채널 운영. 초등 자기주도 공부법, 초등 매일 공부의 힘 등 베스트셀러 다수. 학부모 신뢰도와 브랜드 파워를 보유한 초등 교육 콘텐츠 전문가.
+        </div>
+        <div class="f-domain">
+          <span>브랜드</span>
+          <span>커리큘럼(초등)</span>
+          <span>교사 교육</span>
+        </div>
+      </div>
+
+      <div class="founder-card">
+        <div class="f-role">Content Partner</div>
+        <div class="f-name">달콤인문 (김문영)</div>
+        <div class="f-stats">
+          <span class="f-stat">초등교사 15년 퇴직</span>
+          <span class="f-stat">Zoom 대기자 1,000명</span>
+        </div>
+        <div class="f-desc">
+          @dalcom_in_moon. 집에서 Zoom 수업만으로 대기자 1,000명 보유. 인문학 독서·고전 전문. 논증과추론 커리큘럼을 이미 책으로 완성. 경인교대 출신 콘텐츠 파트너.
+        </div>
+        <div class="f-domain">
+          <span>인문학 독서</span>
+          <span>논증과추론</span>
+          <span>콘텐츠 파트너</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 09 로드맵 ── -->
+  <section id="로드맵">
+    <div class="pill">09 — 로드맵</div>
+    <h2 class="sec-title">2026 → 2027 실행 경로</h2>
+    <p class="sec-desc">법인 설립부터 가맹 확장까지 단계별 마일스톤</p>
+
+    <div class="roadmap-list">
+      <div class="rm-item">
+        <div class="rm-dot active"></div>
+        <div class="rm-content">
+          <div class="rm-date">2026.04</div>
+          <div class="rm-title">법인 설립</div>
+          <div class="rm-desc">행정사 통해 법인 설립 완료 · 초창패 업종 염두</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot"></div>
+        <div class="rm-content">
+          <div class="rm-date">2026.12</div>
+          <div class="rm-title">본점 인테리어 마감</div>
+          <div class="rm-desc">대치 또는 분당 · 인테리어 설계·시공 완료</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot"></div>
+        <div class="rm-content">
+          <div class="rm-date">2027.01 ~ 02</div>
+          <div class="rm-title">연구수업 시작</div>
+          <div class="rm-desc">커리큘럼 실증 · 포트폴리오 축적 · 강사 교육</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot"></div>
+        <div class="rm-content">
+          <div class="rm-date">2027 상반기</div>
+          <div class="rm-title">본점 정식 오픈</div>
+          <div class="rm-desc">PENTA SCHOOL 1호점 · 프리미엄 과정 런칭</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot"></div>
+        <div class="rm-content">
+          <div class="rm-date">2027 하반기 ~</div>
+          <div class="rm-title">가맹 확장</div>
+          <div class="rm-desc">직영 성과 기반 가맹 모집 시작 · 전국 확장</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 10 PENDING ── -->
+  <section id="pending">
+    <div class="pill">10 — Pending</div>
+    <h2 class="sec-title">결정 필요 항목</h2>
+    <p class="sec-desc">다음 단계 진행을 위해 확인·결정이 필요한 사항들</p>
+
+    <div class="pending-grid">
+      <div class="pending-card">
+        <div class="p-priority">🔴 긴급</div>
+        <div class="p-title">PENTA 5영역 정의</div>
+        <div class="p-desc">이은경 검토 후 확정 필요 — 커리큘럼 설계·특허 출원의 전제 조건</div>
+      </div>
+      <div class="pending-card">
+        <div class="p-priority">🔴 긴급</div>
+        <div class="p-title">커리큘럼 설계서 초안</div>
+        <div class="p-desc">이은경 작성 필요 — 기본 과정 + 프리미엄 9개 과목 세부 설계</div>
+      </div>
+      <div class="pending-card">
+        <div class="p-priority">🟡 중요</div>
+        <div class="p-title">브랜드 아이덴티티</div>
+        <div class="p-desc">로고·마스코트 시안 제작 필요 — 마스코트: 오각형 머리 요정 컨셉 확정</div>
+      </div>
+      <div class="pending-card">
+        <div class="p-priority">🟡 중요</div>
+        <div class="p-title">특허 출원 타당성</div>
+        <div class="p-desc">변리사 상담 필요 — 5차원 진단 + 전국 표준화 DB 묶음 출원 검토</div>
+      </div>
+      <div class="pending-card">
+        <div class="p-priority">🟡 중요</div>
+        <div class="p-title">심화 라인업 확장</div>
+        <div class="p-desc">추리논증(변호사 강사) 등 추가 과목 검토 — 아이디어 레벨, 추가 논의 필요</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="wrap">
+    <div class="f-brand">PENTA SCHOOL</div>
+    <div class="f-sub">대한민국 최초 초등 종합문해력 전문 프랜차이즈</div>
+    <div class="f-tags">
+      <span class="f-tag">초등 문해력</span>
+      <span class="f-tag">5영역 커리큘럼</span>
+      <span class="f-tag">니치 프리미엄</span>
+      <span class="f-tag">펜타 지수</span>
+      <span class="f-tag">Phase 0 사업설계</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

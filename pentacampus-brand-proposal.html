@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PENTA CAMPUS — 브랜드 기획안</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-dim: rgba(201, 168, 76, 0.2);
+      --bg: #0a0a0a;
+      --card: #1a1a1a;
+      --text: #f0f0f0;
+      --muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', sans-serif;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      border-top: 3px solid var(--gold);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .brand {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      background: radial-gradient(ellipse at 50% 60%, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .meta-pill {
+      background: var(--gold-dim);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--gold);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .pill-label {
+      display: inline-block;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 999px;
+      padding: 5px 16px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      border-left: 3px solid var(--gold);
+      padding-left: 16px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card-grid-2 { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    .card-grid-3 { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .card-grid-5 { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* PENDING BADGE */
+    .pending-badge {
+      display: inline-block;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px dashed rgba(201, 168, 76, 0.5);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 12px;
+    }
+
+    /* FLOW CHART */
+    .flow-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .flow-node {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 12px;
+      padding: 20px 24px;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .flow-node .node-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .flow-node .node-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 20px;
+      color: var(--gold);
+    }
+
+    .flow-paths {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .path-card {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .path-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .path-card span {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* REVENUE */
+    .revenue-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .revenue-list li {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 10px;
+      padding: 18px 24px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .revenue-list li.highlight {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.08);
+    }
+
+    .gold-em {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* OPS TABLE */
+    .ops-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ops-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .ops-label {
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      min-width: 120px;
+      padding-top: 1px;
+    }
+
+    .ops-value {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* ECOSYSTEM DIAGRAM */
+    .ecosystem {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .eco-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .eco-node {
+      border-radius: 10px;
+      padding: 16px 28px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .eco-node.active {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .eco-node.other {
+      background: rgba(255,255,255,0.07);
+      color: #ccc;
+    }
+
+    .eco-arrow {
+      font-size: 20px;
+      color: var(--gold);
+      padding: 0 14px;
+    }
+
+    .eco-desc {
+      font-size: 14px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ROADMAP */
+    .roadmap-list {
+      position: relative;
+      padding-left: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .roadmap-list::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.2));
+    }
+
+    .roadmap-item {
+      position: relative;
+    }
+
+    .roadmap-item::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg);
+    }
+
+    .roadmap-item .rm-date {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .roadmap-item .rm-title {
+      font-size: 15px;
+      color: #fff;
+    }
+
+    /* PENDING SECTION */
+    .pending-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .pending-card {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .pending-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .dot-red { background: #e55; }
+    .dot-yellow { background: #e8b04b; }
+
+    .pending-card .pc-text {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer strong {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">PENTA CAMPUS</div>
+  <ul class="nav-links">
+    <li><a href="#why">Why</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#courses">자격증</a></li>
+    <li><a href="#pipeline">파이프라인</a></li>
+    <li><a href="#revenue">수익</a></li>
+    <li><a href="#ops">운영</a></li>
+    <li><a href="#ecosystem">생태계</a></li>
+    <li><a href="#roadmap">로드맵</a></li>
+    <li><a href="#pending">Pending</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Brand Proposal</div>
+  <h1>강사를 키우는 곳</h1>
+  <p class="hero-sub">펜타스쿨 강사 파이프라인 — 부설 평생교육원 + 강사 양성 플랫폼</p>
+  <div class="hero-meta">
+    <span class="meta-pill">브랜드 · PENTA CAMPUS</span>
+    <span class="meta-pill">역할 · 강사 양성 · 취업 연결</span>
+    <span class="meta-pill">오픈 목표 · 2026년 10월</span>
+  </div>
+</div>
+
+<!-- 01 WHY -->
+<section id="why">
+  <div class="pill-label">01 — Why</div>
+  <h2 class="section-title">왜 펜타캠퍼스가 필요한가</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>문제: 1인 의존 리스크</h3>
+      <p>펜타스쿨이 성장할수록 강사 수요가 폭발한다. 현재 이은경 대표 1인 의존 구조는 확장의 병목이자 최대 리스크다.</p>
+    </div>
+    <div class="card">
+      <h3>해법: 구조적 강사 파이프라인</h3>
+      <p>자격증 과정을 통해 검증된 강사를 자동 공급하는 구조를 만든다. 수강 → 자격증 → 현장 투입의 일관된 흐름.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 MISSION -->
+<section id="mission">
+  <div class="pill-label">02 — Mission</div>
+  <h2 class="section-title">미션</h2>
+  <div class="card">
+    <h3>부설 평생교육원 + 강사 양성 플랫폼</h3>
+    <p style="margin-top:8px; font-size:15px; color: var(--text);">"수강 → 자격증 → 현장 투입"의 일관된 파이프라인으로, 펜타 그룹 전체에 검증된 인재를 공급한다.</p>
+  </div>
+</section>
+
+<!-- 03 COURSES -->
+<section id="courses">
+  <div class="pill-label">03 — 자격증 과정</div>
+  <h2 class="section-title">자격증 5개 과정</h2>
+  <div class="card-grid card-grid-3" style="margin-bottom:20px;">
+    <div class="card">
+      <h3>논증과추론</h3>
+      <p>달콤쌤 김문영 담당</p>
+    </div>
+    <div class="card">
+      <h3>사고력글쓰기 지도사</h3>
+      <p>논리적 글쓰기 교육 전문 강사 양성</p>
+    </div>
+    <div class="card">
+      <h3>인문독서 지도사</h3>
+      <p>인문 독서 기반 사고력 지도 전문가</p>
+    </div>
+    <div class="card">
+      <h3>하브루타토론 지도사</h3>
+      <p>질문 중심 토론 교육 전문 강사 양성</p>
+    </div>
+    <div class="card">
+      <h3>초등어휘·독해 지도사</h3>
+      <p>초등 맞춤 어휘·독해 교육 전문가</p>
+    </div>
+  </div>
+  <div class="pending-badge">PENDING — 세부 과목 구성 이은경 확정 필요</div>
+</section>
+
+<!-- 04 PIPELINE -->
+<section id="pipeline">
+  <div class="pill-label">04 — 수강→취업 파이프라인</div>
+  <h2 class="section-title">3가지 취업 경로</h2>
+
+  <div class="flow-wrap" style="margin-bottom: 32px;">
+    <div class="flow-node">
+      <div class="node-label">START</div>
+      <div class="node-title">자격증 수료</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="node-label">연결</div>
+      <div class="node-title">취업 매칭</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="node-label">3가지 경로</div>
+      <div class="node-title">현장 투입</div>
+    </div>
+  </div>
+
+  <div class="flow-paths">
+    <div class="path-card">
+      <div class="path-num">1</div>
+      <span>펜타스쿨 <strong>본점</strong> 강사 채용</span>
+    </div>
+    <div class="path-card">
+      <div class="path-num">2</div>
+      <span>펜타스쿨 <strong>가맹점</strong> 강사 공급</span>
+    </div>
+    <div class="path-card">
+      <div class="path-num">3</div>
+      <span>학교 <strong>방과후·특강</strong> 강사 연결</span>
+    </div>
+  </div>
+</section>
+
+<!-- 05 REVENUE -->
+<section id="revenue">
+  <div class="pill-label">05 — 수익 구조</div>
+  <h2 class="section-title">수익 모델</h2>
+  <ul class="revenue-list">
+    <li>
+      <strong>연수료 수입</strong> — 자격증 과정 수강료 (수강생 1인당)
+    </li>
+    <li>
+      <strong>취업 연결 수수료</strong> — 취업 성공 시 첫 월급 일부
+    </li>
+    <li class="highlight">
+      <span class="gold-em">첫 매출 1천만원 확정 건 있음</span> — 연수원 설립 비용 지원 포함, 첫 수익 발생 기반 이미 확보
+    </li>
+  </ul>
+</section>
+
+<!-- 06 OPS -->
+<section id="ops">
+  <div class="pill-label">06 — 운영 구조</div>
+  <h2 class="section-title">운영 방식</h2>
+  <div class="ops-list">
+    <div class="ops-row">
+      <div class="ops-label">운영 방식</div>
+      <div class="ops-value">온라인 운영 (오프라인 공간 불필요)</div>
+    </div>
+    <div class="ops-row">
+      <div class="ops-label">등록 주소</div>
+      <div class="ops-value">리마크영어국어학원 (2종 근린생활시설 확인 완료)</div>
+    </div>
+    <div class="ops-row">
+      <div class="ops-label">평생교육원 인가</div>
+      <div class="ops-value">진행 중 — 행정사 통해 처리 중, 비용 200만원</div>
+    </div>
+    <div class="ops-row">
+      <div class="ops-label">스케줄러</div>
+      <div class="ops-value">Cal.com 연동 예정</div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="pill-label">07 — 브랜드 생태계</div>
+  <h2 class="section-title">펜타 그룹 내 역할</h2>
+  <div class="ecosystem">
+    <div class="eco-flow">
+      <div class="eco-node active">캠퍼스<br/><small style="font-size:11px; font-weight:400;">강사 양성</small></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node other">웍스<br/><small style="font-size:11px;">취업 연결</small></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node other">스쿨<br/><small style="font-size:11px;">현장 배치</small></div>
+    </div>
+    <p class="eco-desc">"펜타캠퍼스는 그룹 전체의 인재 공급망"</p>
+  </div>
+</section>
+
+<!-- 08 ROADMAP -->
+<section id="roadmap">
+  <div class="pill-label">08 — 로드맵</div>
+  <h2 class="section-title">실행 일정</h2>
+  <div class="roadmap-list">
+    <div class="roadmap-item">
+      <div class="rm-date">2026.04</div>
+      <div class="rm-title">법인 설립</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-date">2026.06 – 09</div>
+      <div class="rm-title">자격증 과목 설계 + 강사 섭외</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-date">2026.10</div>
+      <div class="rm-title">1기 수강생 모집 오픈</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-date">2027.01</div>
+      <div class="rm-title">1기 수료 → 펜타스쿨 연구수업 강사 투입</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 PENDING -->
+<section id="pending">
+  <div class="pill-label">09 — Pending</div>
+  <h2 class="section-title">미결 사항</h2>
+  <div class="pending-grid">
+    <div class="pending-card">
+      <div class="pending-dot dot-red"></div>
+      <span class="pc-text">자격증 5과목 세부 구성 확정 (이은경)</span>
+    </div>
+    <div class="pending-card">
+      <div class="pending-dot dot-red"></div>
+      <span class="pc-text">수강료 책정</span>
+    </div>
+    <div class="pending-card">
+      <div class="pending-dot dot-yellow"></div>
+      <span class="pc-text">Cal.com 스케줄러 연동</span>
+    </div>
+    <div class="pending-card">
+      <div class="pending-dot dot-yellow"></div>
+      <span class="pc-text">평생교육원 인가 완료</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>PENTA CAMPUS</strong> — 펜타 그룹의 인재 공급망
+</footer>
+
+</body>
+</html>

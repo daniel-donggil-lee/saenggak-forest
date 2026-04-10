@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PENTA MALL — 브랜드 기획안</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-dim: rgba(201, 168, 76, 0.2);
+      --bg: #0a0a0a;
+      --card: #1a1a1a;
+      --text: #f0f0f0;
+      --muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', sans-serif;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      border-top: 3px solid var(--gold);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .brand {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      background: radial-gradient(ellipse at 50% 60%, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .meta-pill {
+      background: var(--gold-dim);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--gold);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .pill-label {
+      display: inline-block;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 999px;
+      padding: 5px 16px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      border-left: 3px solid var(--gold);
+      padding-left: 16px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card-grid-2 { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    .card-grid-3 { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .card-grid-4 { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* MISSION CARD */
+    .mission-block {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .mission-block h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .mission-block p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    /* PRODUCT HIGHLIGHT */
+    .product-block {
+      background: var(--card);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+
+    .product-block .pb-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .product-block h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .product-block .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--gold);
+    }
+
+    /* TABLE */
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tech-table th, .tech-table td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .tech-table th {
+      color: var(--gold);
+      font-weight: 700;
+      background: rgba(201, 168, 76, 0.06);
+    }
+
+    .tech-table td { color: var(--text); }
+
+    .tech-table tr:last-child td { border-bottom: none; }
+
+    /* REVENUE */
+    .revenue-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .revenue-list li {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 10px;
+      padding: 18px 24px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* ROADMAP */
+    .roadmap-list {
+      position: relative;
+      padding-left: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .roadmap-list::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.2));
+    }
+
+    .roadmap-item {
+      position: relative;
+    }
+
+    .roadmap-item::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg);
+    }
+
+    .roadmap-item .rm-date {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .roadmap-item .rm-title {
+      font-size: 15px;
+      color: #fff;
+    }
+
+    /* PENDING SECTION */
+    .pending-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .pending-card {
+      background: var(--card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .pending-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .dot-red { background: #e55; }
+    .dot-yellow { background: #e8b04b; }
+
+    .pending-card .pc-text {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer strong {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">PENTA MALL</div>
+  <ul class="nav-links">
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#first-product">첫 상품</a></li>
+    <li><a href="#range">상품 범위</a></li>
+    <li><a href="#tech">기술 스택</a></li>
+    <li><a href="#brand">브랜드 연계</a></li>
+    <li><a href="#revenue">수익</a></li>
+    <li><a href="#roadmap">로드맵</a></li>
+    <li><a href="#pending">Pending</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Brand Proposal</div>
+  <h1>교육을 쇼핑하다</h1>
+  <p class="hero-sub">초등 학부모를 위한 교육 큐레이션 쇼핑 플랫폼</p>
+  <div class="hero-meta">
+    <span class="meta-pill">브랜드 · PENTA MALL</span>
+    <span class="meta-pill">첫 상품 · 스터디플래너</span>
+    <span class="meta-pill">오픈 목표 · 2026년 8월</span>
+  </div>
+</div>
+
+<!-- 01 MISSION -->
+<section id="mission">
+  <div class="pill-label">01 — Mission</div>
+  <h2 class="section-title">미션</h2>
+  <div class="mission-block">
+    <h3>초등 학부모가 신뢰할 수 있는 교육 상품을 한 곳에서</h3>
+    <p>브론테 모델(큐레이션 커머스)을 레퍼런스로, 검증된 교육 상품만을 선별·큐레이션하여 제공한다. 단순 쇼핑몰이 아닌, 펜타 그룹의 교육 철학이 녹아있는 신뢰 플랫폼을 지향한다.</p>
+  </div>
+</section>
+
+<!-- 02 FIRST PRODUCT -->
+<section id="first-product">
+  <div class="pill-label">02 — 첫 상품</div>
+  <h2 class="section-title">스터디플래너 — 1호 상품</h2>
+  <div class="product-block">
+    <div class="pb-eyebrow">Launch Product</div>
+    <h3>스터디플래너</h3>
+    <div class="tag-list">
+      <span class="tag">POD (Print on Demand) 구조</span>
+      <span class="tag">마플샵 연동</span>
+      <span class="tag">주문 시 자동 인쇄+발송</span>
+      <span class="tag">재고 0</span>
+      <span class="tag">초기 비용 0</span>
+    </div>
+  </div>
+  <div class="card" style="border-color: rgba(201,168,76,0.35);">
+    <h3>임시 운영 전략</h3>
+    <p>법인 설립 전 이은경 개인사업자 스마트스토어로 먼저 운영. 법인 설립 완료 후 펜타몰 공식 채널로 이관.</p>
+  </div>
+</section>
+
+<!-- 03 PRODUCT RANGE -->
+<section id="range">
+  <div class="pill-label">03 — 상품 범위</div>
+  <h2 class="section-title">취급 상품 카테고리</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>교육 키트</h3>
+      <p>문해력 훈련 자료 세트 등 오프라인 학습 도구 패키지</p>
+    </div>
+    <div class="card">
+      <h3>온라인 강의 패키지</h3>
+      <p>펜타웍스 강사들의 온라인 강의 상품 입점</p>
+    </div>
+    <div class="card">
+      <h3>수강 패키지</h3>
+      <p>펜타캠퍼스 자격증 과정 연계 수강 상품</p>
+    </div>
+    <div class="card">
+      <h3>교육 굿즈</h3>
+      <p>펜타 브랜드 스터디 용품 (플래너, 다이어리, 문구류)</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 TECH STACK -->
+<section id="tech">
+  <div class="pill-label">04 — 기술 스택</div>
+  <h2 class="section-title">기술 구성</h2>
+  <div class="card" style="padding: 0; overflow: hidden;">
+    <table class="tech-table">
+      <thead>
+        <tr>
+          <th>카테고리</th>
+          <th>도구 / 서비스</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>결제</td>
+          <td>토스페이먼츠</td>
+          <td>네이버페이·카카오페이·카드 통합</td>
+        </tr>
+        <tr>
+          <td>인쇄/배송</td>
+          <td>마플샵 POD</td>
+          <td>재고 없는 구조</td>
+        </tr>
+        <tr>
+          <td>호스팅</td>
+          <td>GitHub Pages</td>
+          <td>정적, 무료</td>
+        </tr>
+        <tr>
+          <td>UI 레퍼런스</td>
+          <td>vercel.store</td>
+          <td>큐레이션 쇼핑몰 UI 참고</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 05 BRAND LINK -->
+<section id="brand">
+  <div class="pill-label">05 — 브랜드 연계</div>
+  <h2 class="section-title">펜타 브랜드 연결 구조</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>펜타스쿨</h3>
+      <p>교재·학습 굿즈 판매 채널로 연결</p>
+    </div>
+    <div class="card">
+      <h3>펜타웍스</h3>
+      <p>강사 온라인 강의 입점 플랫폼</p>
+    </div>
+    <div class="card">
+      <h3>펜타캠퍼스</h3>
+      <p>자격증 과정 수강 패키지 판매</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 REVENUE -->
+<section id="revenue">
+  <div class="pill-label">06 — 수익 구조</div>
+  <h2 class="section-title">수익 모델</h2>
+  <ul class="revenue-list">
+    <li>
+      <strong>자체 상품 판매 마진</strong> — 스터디플래너 등 자체 제작 상품의 판매 수익
+    </li>
+    <li>
+      <strong>입점 상품 수수료</strong> — 타 브랜드 연계 상품 판매 시 수수료 수취
+    </li>
+  </ul>
+</section>
+
+<!-- 07 ROADMAP -->
+<section id="roadmap">
+  <div class="pill-label">07 — 로드맵</div>
+  <h2 class="section-title">실행 일정</h2>
+  <div class="roadmap-list">
+    <div class="roadmap-item">
+      <div class="rm-date">2026.04</div>
+      <div class="rm-title">법인 설립 (선행 필수)</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-date">2026.04 – 05</div>
+      <div class="rm-title">PG사(토스페이먼츠) 계약</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-date">2026.06 – 07</div>
+      <div class="rm-title">쇼핑몰 개발 (3~4주)</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-date">2026.08</div>
+      <div class="rm-title">스터디플래너 1호 상품 오픈</div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 PENDING -->
+<section id="pending">
+  <div class="pill-label">08 — Pending</div>
+  <h2 class="section-title">미결 사항</h2>
+  <div class="pending-grid">
+    <div class="pending-card">
+      <div class="pending-dot dot-red"></div>
+      <span class="pc-text">법인 설립 완료 (선행 조건)</span>
+    </div>
+    <div class="pending-card">
+      <div class="pending-dot dot-red"></div>
+      <span class="pc-text">PG사 계약 (법인 설립 후 1~2주)</span>
+    </div>
+    <div class="pending-card">
+      <div class="pending-dot dot-red"></div>
+      <span class="pc-text">사업 범위 확정 (이은경 합의: 교육만? 커머스까지?)</span>
+    </div>
+    <div class="pending-card">
+      <div class="pending-dot dot-yellow"></div>
+      <span class="pc-text">스마트스토어 → 펜타몰 이관 타이밍</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>PENTA MALL</strong> — 교육을 쇼핑하다
+</footer>
+
+</body>
+</html>
