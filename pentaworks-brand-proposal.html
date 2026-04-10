@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>펜타웍스 (PENTA WORKS) — 브랜드 기획서</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --black: #0a0a0a;
+    --gray-900: #111;
+    --gray-700: #333;
+    --gray-500: #666;
+    --gray-300: #999;
+    --gray-100: #f5f5f5;
+    --gray-50: #fafafa;
+    --white: #ffffff;
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --border: #e8e8e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── 커버 ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+  .cover::before {
+    content: 'WORKS';
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(80px, 14vw, 200px);
+    font-weight: 900;
+    color: rgba(201,168,76,0.05);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cover-tag {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    padding: 6px 14px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 100px;
+    display: inline-block;
+  }
+  .cover h1 {
+    font-size: clamp(48px, 8vw, 100px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 32px;
+    flex-wrap: wrap;
+  }
+  .cover-meta-item .label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cover-meta-item .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* ── 섹션 공통 ── */
+  .section {
+    padding: 96px 10%;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--black);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    background: var(--gold);
+    padding: 4px 14px;
+    border-radius: 100px;
+  }
+  .section-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    position: relative;
+    padding-left: 20px;
+  }
+  .section-title::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.1em; bottom: 0.1em;
+    width: 5px;
+    background: var(--gold);
+    border-radius: 3px;
+  }
+  .section-desc {
+    font-size: 16px;
+    color: var(--gray-500);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 56px;
+  }
+
+  /* ── 그리드 공통 ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+
+  /* ── 카드 ── */
+  .card {
+    background: var(--gray-50);
+    padding: 36px 32px;
+    transition: background 0.2s;
+  }
+  .card:hover { background: var(--gray-100); }
+  .card.dark { background: var(--black); }
+  .card-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .card.dark .card-title { color: var(--white); }
+  .card-desc {
+    font-size: 14px;
+    color: var(--gray-500);
+    line-height: 1.7;
+  }
+  .card.dark .card-desc { color: rgba(255,255,255,0.5); }
+  .card-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(201,168,76,0.2);
+    letter-spacing: -0.04em;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  /* ── 풀 박스 ── */
+  .pool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+  .pool-item {
+    background: var(--gray-50);
+    padding: 48px;
+    border-left: 4px solid var(--gold);
+  }
+  .pool-badge {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .pool-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .pool-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pool-list li {
+    font-size: 14px;
+    color: var(--gray-700);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .pool-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.55em;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ── 수요처 테이블 ── */
+  .demand-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 48px;
+  }
+  .demand-table thead th {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gray-300);
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--black);
+  }
+  .demand-table tbody td {
+    font-size: 14px;
+    color: var(--gray-700);
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .demand-table tbody tr:last-child td { border-bottom: none; }
+  .demand-table tbody tr:hover td { background: var(--gray-50); }
+
+  /* ── BM 그리드 ── */
+  .bm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 32px;
+  }
+  .bm-item {
+    background: var(--gray-50);
+    padding: 36px 32px;
+    border-left: 3px solid var(--gold);
+  }
+  .bm-type {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .bm-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .bm-rate {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--black);
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .bm-desc {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.6;
+  }
+
+  /* ── 파이프라인 ── */
+  .pipeline {
+    background: var(--black);
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .pipeline-step {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    padding: 0 16px;
+  }
+  .pipeline-step .ps-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pipeline-step .ps-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .pipeline-step .ps-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+  .pipeline-arrow {
+    font-size: 24px;
+    color: var(--gold);
+    flex-shrink: 0;
+    padding: 0 8px;
+  }
+
+  /* ── 파트너 카드 ── */
+  .partner-card {
+    background: var(--gray-50);
+    padding: 48px;
+    border-left: 4px solid var(--gold);
+  }
+  .partner-role {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .partner-name {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--black);
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .partner-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-700);
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+  .partner-strategy {
+    background: var(--black);
+    padding: 24px 28px;
+    margin-top: 20px;
+  }
+  .partner-strategy .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .partner-strategy p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+  }
+
+  /* ── 로드맵 ── */
+  .roadmap-stack { display: flex; flex-direction: column; gap: 2px; }
+  .roadmap-item {
+    background: var(--gray-50);
+    padding: 28px 36px;
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    gap: 24px;
+  }
+  .roadmap-item.active { background: var(--black); }
+  .roadmap-phase {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .roadmap-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .roadmap-item.active .roadmap-title { color: var(--white); }
+  .roadmap-desc {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.5;
+  }
+  .roadmap-item.active .roadmap-desc { color: rgba(255,255,255,0.5); }
+  .roadmap-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+  }
+
+  /* ── 미결 사항 ── */
+  .pending-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .pending-item {
+    background: var(--gray-50);
+    padding: 24px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .pending-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .pending-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .pending-desc {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.6;
+  }
+
+  /* ── 반응형 ── */
+  @media (max-width: 900px) {
+    .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+    .pool-grid, .bm-grid { grid-template-columns: 1fr; }
+    .pipeline { flex-direction: column; gap: 16px; }
+    .pipeline-arrow { transform: rotate(90deg); }
+    .roadmap-item { grid-template-columns: 1fr; }
+    .roadmap-badge { display: none; }
+  }
+  @media (max-width: 600px) {
+    .section { padding: 64px 6%; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .cover { padding: 60px 6%; }
+    .cover-meta { flex-wrap: wrap; gap: 24px; }
+    .pending-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════ COVER ══════════════════════════════════ -->
+<section class="cover">
+  <div class="cover-tag">Brand Proposal · 2026</div>
+  <h1>PENTA<br><span>WORKS</span></h1>
+  <p class="cover-sub">교육 인재 에이전시<br>검증된 강사를 연결하고, 신규 강사의 취업을 잇는다</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="label">Version</div>
+      <div class="value">v1.0 — 2026.04</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">분류</div>
+      <div class="value">내부용 (CONFIDENTIAL)</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">운영</div>
+      <div class="value">이동길 (이은경 네트워크)</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Phase</div>
+      <div class="value">P0 — 사업 설계</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ 01 미션 ══════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">01 — Mission</div>
+  <h2 class="section-title">교육 인재가<br>필요한 곳에 연결한다</h2>
+  <p class="section-desc">이은경의 검증된 강사 네트워크와 펜타캠퍼스의 신규 수료생을 학교·기업·지자체·가맹점에 연결한다. 공급과 수요가 만나는 구조가 펜타웍스의 전부다.</p>
+
+  <div style="background: var(--black); padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+    <div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 16px;">Core Business</div>
+      <div style="font-size: clamp(22px, 3vw, 32px); font-weight: 800; color: var(--white); line-height: 1.35; letter-spacing: -0.02em; margin-bottom: 24px;">
+        강연 판매 + 취업 연결<br>두 개의 수익 축
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0;"></div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.6);">시니어 강사 → 강연 1회성 판매 (고단가, 수수료 20~30%)</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0;"></div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.6);">주니어 강사 → 취업 연결 (첫 월급 N% 또는 소개비 고정)</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0;"></div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.6);">법인 설립 후 용역 계약 구조로 운영</div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2); padding: 20px 24px; border-radius: 4px;">
+        <div style="font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 6px;">강연 수수료</div>
+        <div style="font-size: 32px; font-weight: 900; color: var(--white); letter-spacing: -0.03em;">20~30%</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px;">섭외비 기준</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2); padding: 20px 24px; border-radius: 4px;">
+        <div style="font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 6px;">취업 연결</div>
+        <div style="font-size: 32px; font-weight: 900; color: var(--white); letter-spacing: -0.03em;">소개비 고정</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px;">첫 월급 N% 또는 고정 수수료</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ 02 공급 풀 ══════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">02 — Supply Pool</div>
+  <h2 class="section-title">두 개의<br>공급 풀</h2>
+  <p class="section-desc">즉시 가동 가능한 시니어 풀과, 지속 공급되는 주니어 풀. 펜타웍스만의 구조적 해자다.</p>
+
+  <div class="pool-grid">
+    <div class="pool-item">
+      <div class="pool-badge">시니어 풀</div>
+      <div class="pool-title">이은경 네트워크</div>
+      <ul class="pool-list">
+        <li>부모교육·초등교육 분야 검증된 강사</li>
+        <li>팔로워 15만 — 즉시 가동 가능한 채널</li>
+        <li>저서 60권 — 신뢰도와 브랜드 파워</li>
+        <li>강연 1회성 판매 (고단가)</li>
+        <li>기존 강사 네트워크로 즉시 시작 가능</li>
+      </ul>
+    </div>
+    <div class="pool-item">
+      <div class="pool-badge">주니어 풀</div>
+      <div class="pool-title">펜타캠퍼스 수료생</div>
+      <ul class="pool-list">
+        <li>자격증 취득 후 현장 투입 준비 완료</li>
+        <li>학원·방과후·가맹점 취업 연결 (지속)</li>
+        <li>캠퍼스 → 웍스 파이프라인 구조</li>
+        <li>지속적·예측 가능한 공급 확보</li>
+        <li>펜타스쿨 가맹 확장에 따라 수요도 동반 성장</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 파이프라인 -->
+  <div class="pipeline">
+    <div class="pipeline-step">
+      <div class="ps-label">Step 1</div>
+      <div class="ps-name">펜타캠퍼스</div>
+      <div class="ps-sub">자격증 과정 수강</div>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step">
+      <div class="ps-label">Step 2</div>
+      <div class="ps-name">수료 & 자격증</div>
+      <div class="ps-sub">강사 풀 등록</div>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step">
+      <div class="ps-label">Step 3</div>
+      <div class="ps-name">펜타웍스 매칭</div>
+      <div class="ps-sub">수요처 연결</div>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step">
+      <div class="ps-label">Step 4</div>
+      <div class="ps-name">펜타스쿨 가맹</div>
+      <div class="ps-sub">독립 or 직영 채용</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ 03 수요처 ══════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">03 — Demand</div>
+  <h2 class="section-title">4개의<br>수요처</h2>
+  <p class="section-desc">교육 인재가 필요한 곳은 어디에나 있다. 펜타웍스가 연결한다.</p>
+
+  <table class="demand-table">
+    <thead>
+      <tr>
+        <th style="width:25%">수요처</th>
+        <th style="width:35%">필요한 것</th>
+        <th>펜타웍스 솔루션</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight: 700;">학교</td>
+        <td>방과후 강사, 학부모 강연</td>
+        <td style="color: var(--gray-500);">주니어 풀 취업 연결 + 시니어 강연 섭외</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700;">기업</td>
+        <td>직원 대상 부모교육 프로그램</td>
+        <td style="color: var(--gray-500);">이은경 네트워크 강사 섭외 (고단가)</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700;">지자체·도서관</td>
+        <td>평생학습 강연, 부모교육 워크숍</td>
+        <td style="color: var(--gray-500);">시니어 강사 섭외 + 커리큘럼 설계</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700;">펜타스쿨 가맹점</td>
+        <td>현장 강사, 가맹점 운영 인력</td>
+        <td style="color: var(--gray-500);">캠퍼스 수료생 취업 연결 (지속 공급)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background: var(--gray-50); padding: 40px 48px;">
+    <div class="section-label" style="margin-bottom: 16px;">선순환 구조</div>
+    <p style="font-size: 15px; color: var(--gray-700); line-height: 1.8;">
+      펜타스쿨 가맹이 늘수록 → 강사 수요 증가 → 캠퍼스 수강생 증가 → 웍스 공급 확대 → 다시 가맹 지원 강화. 펜타 생태계가 성장할수록 펜타웍스의 가치도 자동으로 커진다.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ 04 핵심 자산 ══════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">04 — Core Assets</div>
+  <h2 class="section-title">따라할 수 없는<br>3가지 자산</h2>
+  <p class="section-desc">펜타웍스는 자산 기반 사업이다. 이은경의 네트워크와 신뢰도는 돈으로 살 수 없다.</p>
+
+  <div class="grid-3" style="margin-bottom: 48px;">
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-label">팔로워 15만</div>
+      <div class="card-title">이은경 채널</div>
+      <div class="card-desc">부모교육 수요층이 그대로 타겟이다. 강사 섭외 제안 → 즉시 노출 가능한 채널 보유. 마케팅비 0원.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-label">저서 60권</div>
+      <div class="card-title">브랜드 파워</div>
+      <div class="card-desc">검증된 교육 작가의 네트워크. 인접 분야 강사들이 자연스럽게 연결된다. 신뢰가 이미 구축된 상태.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-label">지속 공급</div>
+      <div class="card-title">캠퍼스 파이프라인</div>
+      <div class="card-desc">펜타캠퍼스가 주니어 강사를 지속적으로 양성한다. 공급이 고갈되지 않는 구조.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ 05 파운딩 파트너 ══════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">05 — Founding Partner</div>
+  <h2 class="section-title">첫 번째<br>파운딩 파트너</h2>
+  <p class="section-desc">사례를 만드는 것이 먼저다. 첫 번째 파트너를 통해 모델을 검증한다.</p>
+
+  <div class="partner-card" style="margin-bottom: 2px;">
+    <div class="partner-role">Track B Candidate — 온라인 교육 사업자</div>
+    <div class="partner-name">홍현주 (@hienjew_hong)</div>
+    <div class="partner-tags">
+      <span class="tag">헬런원격평생교육원</span>
+      <span class="tag">팔로워 1.9만</span>
+      <span class="tag">영어학박사</span>
+      <span class="tag">UNC-Chapel Hill PostDoc</span>
+      <span class="tag">TESOL 운영</span>
+    </div>
+    <p style="font-size: 14px; color: var(--gray-500); line-height: 1.8; margin-bottom: 20px;">
+      한국외대 영어학박사, 교사 대상 에듀테크 강의(구글 AI 활용, 수업·평가 자동화) 전문. 은경누나가 매년 TESOL 홍보물 디자인을 도와줌 → 이미 관계 있음. 제자들이 온라인 영어 사업자 → "굴비 전략" (1명 뚫으면 연쇄 고객 가능).
+    </p>
+    <div class="partner-strategy">
+      <div class="label">접근 전략</div>
+      <p>TESOL 10기 홍보물 디자인 새로 제작해주기 → 자연스럽게 펜타웍스 소개. 직접 판매가 아닌 협업 프레이밍으로 시작.</p>
+    </div>
+  </div>
+
+  <div style="background: var(--gray-50); padding: 32px 40px; border-left: 4px solid var(--gold);">
+    <div style="font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">굴비 전략</div>
+    <p style="font-size: 14px; color: var(--gray-700); line-height: 1.8;">홍현주 1명 뚫으면 → TESOL 수강생(온라인 영어 사업자) 연쇄 연결 가능. 강사 에이전시의 성장 방식.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ 06 성장 로드맵 ══════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">06 — Roadmap</div>
+  <h2 class="section-title">단계별<br>성장 로드맵</h2>
+  <p class="section-desc">지금 당장 이은경 네트워크로 시작해서, 캠퍼스 파이프라인이 가동되는 시점에 본격 확장한다.</p>
+
+  <div class="roadmap-stack">
+    <div class="roadmap-item active">
+      <div class="roadmap-phase">Phase 1<br>현재</div>
+      <div>
+        <div class="roadmap-title">시니어 네트워크 가동</div>
+        <div class="roadmap-desc">이은경 강사 네트워크로 강연 섭외 시작. 수수료 구조 검증. 법인 설립 준비.</div>
+      </div>
+      <div class="roadmap-badge">즉시 시작</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">Phase 2<br>2026 Q4</div>
+      <div>
+        <div class="roadmap-title">주니어 풀 가동</div>
+        <div class="roadmap-desc">펜타캠퍼스 연수과정 오픈(10월) → 수료생 취업 연결 시작. 강사 프로필 플랫폼 구축.</div>
+      </div>
+      <div class="roadmap-badge">캠퍼스 연동</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">Phase 3<br>2027</div>
+      <div>
+        <div class="roadmap-title">가맹 강사 공급</div>
+        <div class="roadmap-desc">펜타스쿨 가맹점 오픈 → 현장 강사 우선 공급 채널. 수요처 다변화.</div>
+      </div>
+      <div class="roadmap-badge">가맹 연동</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">Phase 4<br>2027+</div>
+      <div>
+        <div class="roadmap-title">플랫폼화</div>
+        <div class="roadmap-desc">강사 등록·섭외·정산 자동화 플랫폼. 외부 교육 기관으로 수요처 확장.</div>
+      </div>
+      <div class="roadmap-badge">SaaS 전환</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ 07 미결 사항 ══════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">07 — Pending</div>
+  <h2 class="section-title">미결 사항</h2>
+  <p class="section-desc">결정 대기 중인 항목들.</p>
+
+  <div class="pending-grid">
+    <div class="pending-item">
+      <div class="pending-dot"></div>
+      <div>
+        <div class="pending-title">강사 프로필 입력 페이지</div>
+        <div class="pending-desc">`사풀입력/index.html` 제작. 이름·경력·저서·강연 주제·프로필 사진 등록.</div>
+      </div>
+    </div>
+    <div class="pending-item">
+      <div class="pending-dot"></div>
+      <div>
+        <div class="pending-title">강사 에이전시 계약서</div>
+        <div class="pending-desc">강사와 펜타웍스 간 수수료·권리·의무 명시 계약서 초안 작성.</div>
+      </div>
+    </div>
+    <div class="pending-item">
+      <div class="pending-dot"></div>
+      <div>
+        <div class="pending-title">수수료 구조 확정</div>
+        <div class="pending-desc">강연 20~30% / 취업 연결 수수료율 — 이은경누나와 합의 필요.</div>
+      </div>
+    </div>
+    <div class="pending-item">
+      <div class="pending-dot"></div>
+      <div>
+        <div class="pending-title">직업소개업 등록</div>
+        <div class="pending-desc">취업 연결 시 직업소개업 등록 필요 여부 법률 검토 (행정사 상담).</div>
+      </div>
+    </div>
+    <div class="pending-item">
+      <div class="pending-dot"></div>
+      <div>
+        <div class="pending-title">홍현주 TESOL 홍보물</div>
+        <div class="pending-desc">TESOL 10기 홍보물 디자인 제작 → 자연스러운 파운딩 파트너 제안 연결.</div>
+      </div>
+    </div>
+    <div class="pending-item">
+      <div class="pending-dot"></div>
+      <div>
+        <div class="pending-title">법인 설립 후 구조 확정</div>
+        <div class="pending-desc">법인 설립 완료 후 용역 계약 구조로 전환. 현재는 개인사업자 기준 운영.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
