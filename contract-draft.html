@@ -480,6 +480,7 @@
 <div class="print-bar no-print">
   <button onclick="window.print()">인쇄 / PDF 저장</button>
 </div>
+<div id="debug-banner" class="no-print" style="position:fixed;top:0;left:0;right:0;background:#fffbdd;color:#333;padding:8px 16px;font-size:12px;font-family:monospace;border-bottom:1px solid #e0c000;z-index:9999;">[DEBUG] 초기화 중...</div>
 
 <div class="page">
 
@@ -1681,6 +1682,7 @@ function toggleComment(articleId) {
 }
 
 async function loadComments() {
+  const dbg = document.getElementById('debug-banner');
   try {
     const res = await fetch(API);
     const data = await res.json();
@@ -1688,9 +1690,10 @@ async function loadComments() {
     allComments = rows.slice(1).filter(r => r[0]).map(r => ({
       article: r[0], author: r[1], text: r[2], date: r[3], status: r[4]
     }));
+    if (dbg) dbg.textContent = '[DEBUG] 서버 로드 성공: 총 ' + allComments.length + '개 댓글. 키 목록=' + Object.keys(data).join(',');
     renderAllComments();
   } catch (e) {
-    // 오프라인 시 localStorage에서 로드
+    if (dbg) dbg.textContent = '[DEBUG] 서버 로드 실패: ' + e.message;
     const saved = localStorage.getItem('contract_comments');
     if (saved) {
       allComments = JSON.parse(saved);
