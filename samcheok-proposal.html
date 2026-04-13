@@ -258,10 +258,13 @@
   }
   .cover-emblem .ring-text {
     fill: var(--gold);
-    font-size: 8px;
+    font-size: 7px;
     font-weight: 600;
-    letter-spacing: 6px;
+    letter-spacing: 2.7px;
     font-family: 'Pretendard', sans-serif;
+  }
+  .cover-emblem .ring-text.bot {
+    letter-spacing: 5.3px;
   }
   .cover-emblem .ring {
     fill: none;
@@ -275,10 +278,12 @@
   }
   .cover-emblem .year {
     fill: var(--gold);
-    font-size: 22px;
+    font-size: 19px;
     font-weight: 800;
     font-family: 'Georgia', serif;
-    letter-spacing: 2px;
+    letter-spacing: 1.2px;
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
   }
   .cover-emblem .label {
     fill: rgba(255,255,255,0.9);
@@ -862,21 +867,21 @@
   <svg class="cover-emblem" viewBox="0 0 200 200">
     <defs>
       <path id="top-arc" d="M 20,100 A 80,80 0 0 1 180,100" />
-      <path id="bot-arc" d="M 20,100 A 80,80 0 0 0 180,100" />
+      <path id="bot-arc" d="M 14,100 A 86,86 0 0 0 186,100" />
     </defs>
-    <circle class="ring" cx="100" cy="100" r="88" />
-    <circle class="ring" cx="100" cy="100" r="82" />
-    <circle class="inner-ring" cx="100" cy="100" r="62" />
+    <circle class="ring" cx="100" cy="100" r="92" />
+    <circle class="ring" cx="100" cy="100" r="74" />
+    <circle class="inner-ring" cx="100" cy="100" r="58" />
     <text class="ring-text">
       <textPath href="#top-arc" startOffset="50%" text-anchor="middle">SELF-DIRECTED LEARNING CAMP</textPath>
     </text>
-    <text class="ring-text">
+    <text class="ring-text bot">
       <textPath href="#bot-arc" startOffset="50%" text-anchor="middle">SAMCHEOK · SNU MENTORS</textPath>
     </text>
     <circle class="dot" cx="18" cy="100" r="1.8" />
     <circle class="dot" cx="182" cy="100" r="1.8" />
     <text class="label" x="100" y="78" text-anchor="middle">EST. 2026</text>
-    <text class="year" x="100" y="114" text-anchor="middle">4 WEEKS</text>
+    <text class="year" x="100" y="114" text-anchor="middle"><tspan dy="-3">4</tspan><tspan dy="3">·WEEKS</tspan></text>
     <text class="label" x="100" y="134" text-anchor="middle">LEVEL · UP</text>
     <line x1="70" y1="145" x2="130" y2="145" stroke="var(--gold)" stroke-width="0.5" opacity="0.5" />
   </svg>
@@ -887,7 +892,7 @@
       <div class="to">삼척시 · 교육특구추진단</div>
     </div>
     <div class="cover-from">
-      <strong>범잡는 포수</strong>
+      <strong>(주)범잡은포수</strong>
       교육기획 · 운영 총괄<br>
       대표 이은경
     </div>
@@ -934,7 +939,7 @@
     </p>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">02 / 14</div>
 </div>
 
@@ -1010,7 +1015,7 @@
     </p>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">03 / 14</div>
 </div>
 
@@ -1093,7 +1098,7 @@
     </div>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">04 / 14</div>
 </div>
 
@@ -1164,7 +1169,7 @@
     </tbody>
   </table>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">05 / 14</div>
 </div>
 
@@ -1235,7 +1240,7 @@
     </tbody>
   </table>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">06 / 14</div>
 </div>
 
@@ -1306,7 +1311,7 @@
     </tbody>
   </table>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">07 / 14</div>
 </div>
 
@@ -1377,7 +1382,7 @@
     </tbody>
   </table>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">08 / 14</div>
 </div>
 
@@ -1450,7 +1455,7 @@
     </div>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">09 / 14</div>
 </div>
 
@@ -1509,7 +1514,7 @@
     <p style="font-size:9.5pt">두 진단은 단발 검사에 그치지 않고 <strong>4주 내내 코칭의 기준점</strong>으로 활용됩니다. 프로그램 종료 후에는 리포트 형태로 가정으로 연결되어, 캠프 이후에도 유지 가능한 자기주도 학습 루틴 형성의 기반이 됩니다.</p>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">10 / 14</div>
 </div>
 
@@ -1522,7 +1527,7 @@
   <div class="mentor-banner">
     <div class="snu-seal">SNU</div>
     <div class="txt">
-      전 멘토진은 <strong>서울대학교 재학생 또는 졸업생</strong>으로 구성되며, 범잡는 포수의 사전 교육 과정(멘토링 스킬·진단도구 이해·윤리 규정)을 이수한 후 투입됩니다. 멘토 최종 프로필은 계약 체결 후 확정·공유 드립니다.
+      전 멘토진은 <strong>서울대학교 재학생 또는 졸업생</strong>으로 구성되며, (주)범잡은포수의 사전 교육 과정(멘토링 스킬·진단도구 이해·윤리 규정)을 이수한 후 투입됩니다. 멘토 최종 프로필은 계약 체결 후 확정·공유 드립니다.
     </div>
   </div>
 
@@ -1577,7 +1582,7 @@
     </div>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">11 / 14</div>
 </div>
 
@@ -1652,7 +1657,7 @@
     <p style="font-size:9.5pt">가정과 캠프가 <strong>같은 진단 데이터·같은 피드백 방식</strong>을 공유할 때, 학생은 일관된 메시지 속에서 습관을 형성합니다. 우리의 리포트는 학부모가 '무엇을 보고·어떻게 말할지'를 구체적으로 안내하여 가정과 캠프를 하나의 흐름으로 연결합니다.</p>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">12 / 14</div>
 </div>
 
@@ -1722,7 +1727,7 @@
     </div>
   </div>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">13 / 14</div>
 </div>
 
@@ -1734,7 +1739,7 @@
 
   <div class="contact-box">
     <div class="co">OPERATED BY</div>
-    <div class="name">범잡는 포수</div>
+    <div class="name">(주)범잡은포수</div>
     <div class="tagline">교육 콘텐츠 기획·운영 전문 · 삼척시 교육특구사업 운영 파트너</div>
     <div class="contact-grid">
       <div class="contact-item"><div class="k">대표</div><div class="v">이 은 경</div></div>
@@ -1748,7 +1753,7 @@
   <div class="grid-3">
     <div class="card">
       <h3>기획 · 총괄</h3>
-      <p style="font-size:9pt">범잡는 포수 (대표 이은경)<br>프로그램 설계 · 삼척시 협업 · 전체 운영 책임</p>
+      <p style="font-size:9pt">(주)범잡은포수 (대표 이은경)<br>프로그램 설계 · 삼척시 협업 · 전체 운영 책임</p>
     </div>
     <div class="card">
       <h3>멘토링 운영</h3>
@@ -1767,7 +1772,7 @@
       <p style="font-size:9pt">사업 총괄·예산·학생 모집 · 행정 지원</p>
     </div>
     <div class="card gold">
-      <h3 style="color:var(--accent)">범잡는 포수</h3>
+      <h3 style="color:var(--accent)">(주)범잡은포수</h3>
       <p style="font-size:9pt">프로그램 기획·멘토 관리·운영 실무 일체</p>
     </div>
     <div class="card gold">
@@ -1780,7 +1785,7 @@
     감사합니다.
   </p>
 
-  <div class="page-brand">SAMCHEOK × 범잡는 포수 × 서울대 멘토</div>
+  <div class="page-brand">SAMCHEOK × (주)범잡은포수 × 서울대 멘토</div>
   <div class="page-num">14 / 14</div>
 </div>
 
