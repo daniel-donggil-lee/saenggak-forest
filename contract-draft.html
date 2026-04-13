@@ -299,6 +299,10 @@
   .comment-item .comment-author.eunkyung { color: #c0392b; }
   .comment-item .comment-author.donggil { color: #2980b9; }
   .comment-item .comment-text { color: var(--text-sub); }
+  .comment-actions { margin-left: auto; display: inline-flex; gap: 8px; }
+  .comment-actions a { color: #888; font-size: 11px; text-decoration: none; }
+  .comment-actions a:hover { color: var(--accent); text-decoration: underline; }
+  .comment-item .comment-meta { display: flex; align-items: center; gap: 8px; }
 
   .comment-input-row {
     display: flex;
@@ -584,12 +588,12 @@
   </div>
   <div class="guide">
     <div class="guide-title">쉬운 해설 — 지분이란?</div>
-    <p><strong>지분 = 회사의 소유 비율</strong>입니다. 회사가 피자 한 판이라면, 은경 누나가 6조각, 동길이가 4조각을 가지는 것과 같습니다.</p>
+    <p><strong>지분 = 회사의 소유 비율</strong>입니다. 회사가 피자 한 판이라면, 이이은경가 6조각, 동길이가 4조각을 가지는 것과 같습니다.</p>
 
     <p><strong>지분이 영향을 미치는 것:</strong></p>
     <div class="example-box">
       <div class="ex-title">예시: 회사가 1년에 1억 원 순이익을 냈을 때 (단순 지분 기준)</div>
-      <div class="ex-row"><span class="ex-label">은경 (51%)</span><span class="ex-value">5,100만 원</span></div>
+      <div class="ex-row"><span class="ex-label">이은경 (51%)</span><span class="ex-value">5,100만 원</span></div>
       <div class="ex-row"><span class="ex-label">동길 (49%)</span><span class="ex-value">4,900만 원</span></div>
       <p style="font-size:0.9em;color:#666;margin-top:8px;">단, 펜타는 <strong>제8조 차등배당</strong>에 따라 경제권 50:50으로 배당합니다. 위 표는 지분율의 개념 설명용입니다.</p>
     </div>
@@ -597,10 +601,10 @@
     <p><strong>"현물출자"</strong>란 현금 대신 가치 있는 것을 넣는 것입니다:</p>
     <div class="example-box">
       <div class="ex-title">출자 구성 예시 (자본금 1억 기준, 51:49 비율)</div>
-      <div class="ex-row"><span class="ex-label">은경: 현금 2,100만 + 콘텐츠 IP 3,000만</span><span class="ex-value">= 5,100만 (51%)</span></div>
+      <div class="ex-row"><span class="ex-label">이은경: 현금 2,100만 + 콘텐츠 IP 3,000만</span><span class="ex-value">= 5,100만 (51%)</span></div>
       <div class="ex-row"><span class="ex-label">동길: 현금 2,900만 + AI시스템 2,000만</span><span class="ex-value">= 4,900만 (49%)</span></div>
     </div>
-    <p>콘텐츠 IP란 은경 누나의 저서, 강연 콘텐츠, '슬기로운 초등생활' 브랜드를 회사에 빌려주는 권리를 말합니다. 이것의 가치를 얼마로 볼 것인지는 둘이 합의하거나 전문가(감정평가사)에게 맡깁니다.</p>
+    <p>콘텐츠 IP란 이이은경의 저서, 강연 콘텐츠, '슬기로운 초등생활' 브랜드를 회사에 빌려주는 권리를 말합니다. 이것의 가치를 얼마로 볼 것인지는 둘이 합의하거나 전문가(감정평가사)에게 맡깁니다.</p>
 
     <h4 style="margin-top:20px; color: var(--accent);">왜 51:49인가 — 각자의 기여 가치</h4>
 
@@ -679,8 +683,8 @@
     <p><strong>"지분 희석"</strong>이란? 나중에 투자자가 들어오면 파이가 커지면서 내 비율이 줄어드는 것입니다:</p>
     <div class="example-box">
       <div class="ex-title">예시: 투자자가 20% 지분을 가져가면</div>
-      <div class="ex-row"><span class="ex-label">투자 전 — 은경 51% : 동길 49%</span><span class="ex-value"></span></div>
-      <div class="ex-row"><span class="ex-label">투자 후 — 은경 40.8% : 동길 39.2% : 투자자 20%</span><span class="ex-value"></span></div>
+      <div class="ex-row"><span class="ex-label">투자 전 — 이은경 51% : 동길 49%</span><span class="ex-value"></span></div>
+      <div class="ex-row"><span class="ex-label">투자 후 — 이은경 40.8% : 동길 39.2% : 투자자 20%</span><span class="ex-value"></span></div>
       <div class="ex-row"><span class="ex-label">이 시점에 과반 붕괴 → 제17조 5카드로 방어</span><span class="ex-value green">복수의결권·비대칭 신주 등</span></div>
     </div>
   </div>
@@ -708,10 +712,10 @@
   <p class="clause"><span class="num">④</span> <strong>주대표가 아닌 당사자</strong>는 주대표의 결정에 대해 서면으로 이의를 제기할 수 있으며, 이 경우 주대표는 7일 이내에 상대방과 재논의하여야 한다. 재논의 후에도 이견이 있는 경우 최종 결정권은 주대표에게 있다. 단, 주대표가 <strong>신의성실 의무·선관주의 의무를 중대하게 위반</strong>하여 결정한 경우, 주대표 외 당사자는 제6조 제3항의 분쟁절차 및 제16조의 Put Option 트리거(제④항 중대 신뢰 붕괴)를 원용할 수 있다.</p>
   <div class="guide">
     <div class="guide-title">쉬운 해설 — 역할 분담</div>
-    <p>쉽게 말하면: <strong>은경 누나 = 콘텐츠 + 얼굴</strong>, <strong>동길 = 경영 + 기술</strong>입니다.</p>
-    <p>은경 누나가 "무엇을 가르칠지, 어떻게 가르칠지"를 만들고, 동길이가 "어떻게 운영하고, 어떻게 확장할지"를 책임집니다.</p>
-    <p>쉽게 말하면: <strong>동길 = 집행 책임자</strong> (맡은 일을 알아서 처리), <strong>은경 누나 = 최종 결정자</strong> (방향이 맞는지 판단)입니다.</p>
-    <p>동길이가 시스템을 만들고 가맹점을 관리하는 건 동길이 몫이지만, 회사 전체의 방향과 판단에 대한 <strong>최종 결정권은 대표이사인 은경 누나</strong>에게 있습니다.</p>
+    <p>쉽게 말하면: <strong>이이은경 = 콘텐츠 + 얼굴</strong>, <strong>동길 = 경영 + 기술</strong>입니다.</p>
+    <p>이이은경가 "무엇을 가르칠지, 어떻게 가르칠지"를 만들고, 동길이가 "어떻게 운영하고, 어떻게 확장할지"를 책임집니다.</p>
+    <p>쉽게 말하면: <strong>동길 = 집행 책임자</strong> (맡은 일을 알아서 처리), <strong>이이은경 = 최종 결정자</strong> (방향이 맞는지 판단)입니다.</p>
+    <p>동길이가 시스템을 만들고 가맹점을 관리하는 건 동길이 몫이지만, 회사 전체의 방향과 판단에 대한 <strong>최종 결정권은 대표이사인 이이은경</strong>에게 있습니다.</p>
     <p>단, <strong>큰 돈(1,000만 원+), 투자 유치, 임원 인사</strong> 같은 중요사항은 대표이사라 해도 혼자 결정할 수 없고, <strong>반드시 둘이 합의</strong>해야 합니다 (제6조). 이는 양 주주의 공동 결정권을 보장하는 장치입니다.</p>
   </div>
 </div>
@@ -814,11 +818,11 @@
     <p>돈을 받는 방법은 세 가지입니다:</p>
     <div class="example-box">
       <div class="ex-title">연매출 10억, 순이익 2억인 해의 예시</div>
-      <div class="ex-row"><span class="ex-label">① 월급 (동일)</span><span class="ex-value">은경 500만/월 = 동길 500만/월</span></div>
-      <div class="ex-row"><span class="ex-label">② 배당 (50:50)</span><span class="ex-value">은경 5,000만 : 동길 5,000만</span></div>
+      <div class="ex-row"><span class="ex-label">① 월급 (동일)</span><span class="ex-value">이은경 500만/월 = 동길 500만/월</span></div>
+      <div class="ex-row"><span class="ex-label">② 배당 (50:50)</span><span class="ex-value">이은경 5,000만 : 동길 5,000만</span></div>
       <div class="ex-row"><span class="ex-label">③ 엑싯 (50:50)</span><span class="ex-value">나중에 회사 팔 때만 적용</span></div>
     </div>
-    <p>"재투자 필요분을 우선 확보"란, 이익이 2억 나왔다고 2억 전부 나눠 가지지 않고, <strong>회사 성장에 필요한 돈을 먼저 남겨두고 나머지를 나눈다</strong>는 뜻입니다. 예를 들어 1억을 재투자하고 나머지 1억을 50:50으로 나누면 은경 5,000만, 동길 5,000만 원입니다.</p>
+    <p>"재투자 필요분을 우선 확보"란, 이익이 2억 나왔다고 2억 전부 나눠 가지지 않고, <strong>회사 성장에 필요한 돈을 먼저 남겨두고 나머지를 나눈다</strong>는 뜻입니다. 예를 들어 1억을 재투자하고 나머지 1억을 50:50으로 나누면 이은경 5,000만, 동길 5,000만 원입니다.</p>
     <p><strong>왜 지분(51:49)이 아닌 50:50으로 배당하나?</strong> 지분은 여성기업 자격과 대표성(갑 과반)을 반영하지만, 회사가 만들어내는 경제적 가치는 두 사람의 노력이 동등하므로, <strong>경제권(배당·엑싯)은 50:50</strong>으로 합의했습니다. 이를 "차등배당"이라 하며, 정관에 근거 조항을 둡니다.</p>
   </div>
 </div>
@@ -848,14 +852,14 @@
     <div class="guide-title">쉬운 해설 — 엑싯이란? (이 계약서의 가장 중요한 부분)</div>
     <p><strong>엑싯(Exit)</strong>이란 회사를 매각하거나, 상장(IPO)해서 주식을 파는 것입니다. 쉽게 말해 <strong>"회사를 키워서 큰 돈으로 바꾸는 순간"</strong>입니다.</p>
 
-    <p>운영 중 지분은 51:49이지만, 배당·엑싯 등 모든 경제권은 <strong>50:50으로 나눕니다.</strong> 왜냐하면 은경 누나의 콘텐츠와 동길이의 시스템, 종류는 다르지만 회사를 키운 가치는 동등하다고 보기 때문입니다.</p>
+    <p>운영 중 지분은 51:49이지만, 배당·엑싯 등 모든 경제권은 <strong>50:50으로 나눕니다.</strong> 왜냐하면 이이은경의 콘텐츠와 동길이의 시스템, 종류는 다르지만 회사를 키운 가치는 동등하다고 보기 때문입니다.</p>
 
     <div class="example-box">
       <div class="ex-title">예시 1: 2031년에 회사를 500억에 매각한다면</div>
       <div class="ex-row"><span class="ex-label">매각 대금</span><span class="ex-value">500억 원</span></div>
       <div class="ex-row"><span class="ex-label">(-) 부채·비용·세금</span><span class="ex-value">-50억 원</span></div>
       <div class="ex-row"><span class="ex-label">= 순수 엑싯 대금</span><span class="ex-value highlight">450억 원</span></div>
-      <div class="ex-row" style="border-top: 2px solid #ddd; padding-top: 8px;"><span class="ex-label"><strong>은경 (50%)</strong></span><span class="ex-value highlight">225억 원</span></div>
+      <div class="ex-row" style="border-top: 2px solid #ddd; padding-top: 8px;"><span class="ex-label"><strong>이은경 (50%)</strong></span><span class="ex-value highlight">225억 원</span></div>
       <div class="ex-row"><span class="ex-label"><strong>동길 (50%)</strong></span><span class="ex-value highlight">225억 원</span></div>
     </div>
 
@@ -863,12 +867,12 @@
     <div class="vs-box">
       <div class="vs-card">
         <div class="vs-label">51:49 (지분율)</div>
-        <div class="vs-amount">은경 229.5억<br>동길 220.5억</div>
+        <div class="vs-amount">이은경 229.5억<br>동길 220.5억</div>
       </div>
       <div class="vs-divider">vs</div>
       <div class="vs-card" style="border-color: #4a6741; background: #f8fdf6;">
         <div class="vs-label" style="color: #4a6741; font-weight:600;">50:50 (엑싯 약정) ✓</div>
-        <div class="vs-amount">은경 225억<br>동길 225억</div>
+        <div class="vs-amount">이은경 225억<br>동길 225억</div>
       </div>
     </div>
     <p>지분 51:49와 엑싯 약정 50:50의 차이는 약 4.5억. 작아 보이지만 <strong>"끝까지 함께 가서 큰 결과를 만들자"</strong>는 상징적 균형이며, 기여 대등성을 경제권에서 명확히 못 박습니다.</p>
@@ -876,7 +880,7 @@
     <div class="example-box">
       <div class="ex-title">예시 2: 회사가 상장(IPO)하면?</div>
       <div class="ex-row"><span class="ex-label">IPO 후 시가총액 1,000억</span><span class="ex-value"></span></div>
-      <div class="ex-row"><span class="ex-label">은경 보유 주식 가치 (50%)</span><span class="ex-value green">500억 원</span></div>
+      <div class="ex-row"><span class="ex-label">이은경 보유 주식 가치 (50%)</span><span class="ex-value green">500억 원</span></div>
       <div class="ex-row"><span class="ex-label">동길 보유 주식 가치 (50%)</span><span class="ex-value green">500억 원</span></div>
     </div>
     <p>단, 회사를 팔지 말지는 <strong>둘 다 동의해야</strong> 합니다. 한쪽이 "팔자"고 해도 다른 한쪽이 "아니"라고 하면 못 팝니다.</p>
@@ -884,14 +888,14 @@
     <div class="example-box" style="background: #fff8e1; border-left: 4px solid #f9a825;">
       <div class="ex-title" style="color: #e65100;">예시 3: 투자 유치 후 엑싯하면? (가장 현실적 시나리오)</div>
       <p style="margin-bottom: 12px;">시리즈A에서 VC가 <strong>30억 투자 → 20% 지분</strong>을 가져간 상황이라면:</p>
-      <div class="ex-row"><span class="ex-label">투자 전 지분</span><span class="ex-value">은경 51% / 동길 49%</span></div>
-      <div class="ex-row"><span class="ex-label">투자 후 지분 (희석)</span><span class="ex-value">은경 40.8% / 동길 39.2% / VC 20%</span></div>
+      <div class="ex-row"><span class="ex-label">투자 전 지분</span><span class="ex-value">이은경 51% / 동길 49%</span></div>
+      <div class="ex-row"><span class="ex-label">투자 후 지분 (희석)</span><span class="ex-value">이은경 40.8% / 동길 39.2% / VC 20%</span></div>
       <div class="ex-row" style="border-top: 2px solid #ddd; padding-top: 8px;"><span class="ex-label">매각 대금</span><span class="ex-value">500억 원</span></div>
       <div class="ex-row"><span class="ex-label">(-) 부채·비용·세금</span><span class="ex-value">-30억 원</span></div>
       <div class="ex-row"><span class="ex-label">(-) VC 우선배분 (1x)</span><span class="ex-value">-30억 원 <small>(투자원금 회수)</small></span></div>
       <div class="ex-row"><span class="ex-label">(-) VC 잔여분배 (20%)</span><span class="ex-value">-88억 원 <small>(440억×20%)</small></span></div>
       <div class="ex-row"><span class="ex-label"><strong>= 창업자 몫</strong></span><span class="ex-value highlight"><strong>352억 원</strong></span></div>
-      <div class="ex-row" style="border-top: 2px solid #4a6741; padding-top: 8px; background: #f8fdf6;"><span class="ex-label"><strong>은경 (50%)</strong></span><span class="ex-value highlight">176억 원</span></div>
+      <div class="ex-row" style="border-top: 2px solid #4a6741; padding-top: 8px; background: #f8fdf6;"><span class="ex-label"><strong>이은경 (50%)</strong></span><span class="ex-value highlight">176억 원</span></div>
       <div class="ex-row" style="background: #f8fdf6;"><span class="ex-label"><strong>동길 (50%)</strong></span><span class="ex-value highlight">176억 원</span></div>
     </div>
 
@@ -909,12 +913,12 @@
       <div class="vs-box">
         <div class="vs-card">
           <div class="vs-label">지분율대로 (40.8:39.2)</div>
-          <div class="vs-amount">은경 179.5억<br>동길 172.5억<br><small style="color:#999;">차이 7억</small></div>
+          <div class="vs-amount">이은경 179.5억<br>동길 172.5억<br><small style="color:#999;">차이 7억</small></div>
         </div>
         <div class="vs-divider">vs</div>
         <div class="vs-card" style="border-color: #4a6741; background: #f8fdf6;">
           <div class="vs-label" style="color: #4a6741; font-weight:600;">50:50 약정 ✓</div>
-          <div class="vs-amount">은경 176억<br>동길 176억<br><small style="color:#4a6741;">차이 0원</small></div>
+          <div class="vs-amount">이은경 176억<br>동길 176억<br><small style="color:#4a6741;">차이 0원</small></div>
         </div>
       </div>
       <p>투자 유치로 지분이 희석되어도 <strong>50:50 약정은 그대로 유지</strong>됩니다. 이것이 을(동길)의 핵심 보호 장치입니다.</p>
@@ -948,20 +952,20 @@
     <p>만약 팔고 싶다면:</p>
     <div class="example-box">
       <div class="ex-title">예시: 동길이가 자기 지분을 외부인 A에게 팔고 싶을 때</div>
-      <div class="ex-row"><span class="ex-label">1. 동길 → 은경에게 통보</span><span class="ex-value">"A가 내 지분 49%를 20억에 사겠다고 합니다"</span></div>
-      <div class="ex-row"><span class="ex-label">2. 우선매수권 발동</span><span class="ex-value">은경이 같은 조건(20억)에 직접 살 수 있음</span></div>
-      <div class="ex-row"><span class="ex-label">3. 은경이 안 사면</span><span class="ex-value">A에게 매각 진행 가능</span></div>
+      <div class="ex-row"><span class="ex-label">1. 동길 → 이은경에게 통보</span><span class="ex-value">"A가 내 지분 49%를 20억에 사겠다고 합니다"</span></div>
+      <div class="ex-row"><span class="ex-label">2. 우선매수권 발동</span><span class="ex-value">이은경이 같은 조건(20억)에 직접 살 수 있음</span></div>
+      <div class="ex-row"><span class="ex-label">3. 이은경이 안 사면</span><span class="ex-value">A에게 매각 진행 가능</span></div>
     </div>
 
     <div class="example-box" style="background: #fff3e0; border-left: 4px solid #e65100;">
       <div class="ex-title" style="color: #e65100;">지분 가격에 이견이 있으면?</div>
       <p>사는 쪽은 싸게, 파는 쪽은 비싸게 원하는 게 당연합니다. 이걸 대비한 규정입니다:</p>
       <div class="ex-row"><span class="ex-label">1단계: 둘이 합의</span><span class="ex-value">서로 납득하면 그 금액으로 끝</span></div>
-      <div class="ex-row"><span class="ex-label">2단계: 각자 회계법인 1곳씩</span><span class="ex-value">은경 측 1곳 + 동길 측 1곳</span></div>
+      <div class="ex-row"><span class="ex-label">2단계: 각자 회계법인 1곳씩</span><span class="ex-value">이은경 측 1곳 + 동길 측 1곳</span></div>
       <div class="ex-row"><span class="ex-label">3단계: 차이 20% 이내면?</span><span class="ex-value green">두 평가액의 평균으로 끝 (비용 절약)</span></div>
       <div class="ex-row"><span class="ex-label">4단계: 차이 20% 초과면?</span><span class="ex-value highlight">제3의 회계법인 추가 → 3곳 중 중앙값</span></div>
-      <p style="margin-top: 8px; font-size: 0.9em;">예: 은경 측 80억, 동길 측 90억 → 차이 12.5% → <strong>평균 85억</strong>으로 끝.<br>
-      반대로 은경 측 60억, 동길 측 100억 → 차이 66% → 제3법인 투입 → 85억 나오면 <strong>중앙값 85억</strong> 채택.<br>
+      <p style="margin-top: 8px; font-size: 0.9em;">예: 이은경 측 80억, 동길 측 90억 → 차이 12.5% → <strong>평균 85억</strong>으로 끝.<br>
+      반대로 이은경 측 60억, 동길 측 100억 → 차이 66% → 제3법인 투입 → 85억 나오면 <strong>중앙값 85억</strong> 채택.<br>
       한쪽이 터무니없는 금액을 불러도 중앙값에는 영향이 없으므로 조작이 불가능합니다.</p>
     </div>
 
@@ -976,7 +980,7 @@
       <p style="margin-top: 8px; font-size: 0.9em;">파는 쪽도 보호됩니다 — 돈을 못 받으면 지분을 도로 가져올 수 있으니까요.</p>
     </div>
 
-    <p><strong>Tag-along Right</strong>란? 한쪽이 지분을 팔 때 다른 한쪽도 <strong>같은 조건으로 함께 팔 수 있는 권리</strong>입니다. 예를 들어 동길이가 A에게 팔면, 은경 누나도 원하면 같은 가격에 자기 지분도 A에게 팔 수 있습니다. 이건 <strong>"나만 빠지고 너만 남는" 상황을 막는 안전장치</strong>입니다.</p>
+    <p><strong>Tag-along Right</strong>란? 한쪽이 지분을 팔 때 다른 한쪽도 <strong>같은 조건으로 함께 팔 수 있는 권리</strong>입니다. 예를 들어 동길이가 A에게 팔면, 이이은경도 원하면 같은 가격에 자기 지분도 A에게 팔 수 있습니다. 이건 <strong>"나만 빠지고 너만 남는" 상황을 막는 안전장치</strong>입니다.</p>
   </div>
 </div>
 
@@ -996,9 +1000,9 @@
     <p><strong>"경업 금지"</strong>란 같은 업종의 사업을 따로 하지 않겠다는 약속입니다.</p>
     <div class="example-box">
       <div class="ex-title">허용되는 것 / 안 되는 것</div>
-      <div class="ex-row"><span class="ex-label">은경: 책 쓰기, 유튜브, 강연</span><span class="ex-value green">허용 (기존 활동)</span></div>
+      <div class="ex-row"><span class="ex-label">이은경: 책 쓰기, 유튜브, 강연</span><span class="ex-value green">허용 (기존 활동)</span></div>
       <div class="ex-row"><span class="ex-label">동길: 기존 운영 사업</span><span class="ex-value green">허용 (기존 사업)</span></div>
-      <div class="ex-row"><span class="ex-label">은경: 다른 글쓰기 프랜차이즈 만들기</span><span class="ex-value highlight">금지</span></div>
+      <div class="ex-row"><span class="ex-label">이은경: 다른 글쓰기 프랜차이즈 만들기</span><span class="ex-value highlight">금지</span></div>
       <div class="ex-row"><span class="ex-label">동길: 다른 초등 교육 프랜차이즈 만들기</span><span class="ex-value highlight">금지</span></div>
     </div>
     <p>이 약속은 계약 기간 중 + <strong>끝난 후 2년간</strong> 유효합니다. 즉, 나가더라도 2년간은 경쟁 사업을 못 합니다.</p>
@@ -1077,10 +1081,10 @@
 
     <div class="example-box">
       <div class="ex-title">대칭 구조 — 지분율 51:49이어도 탈퇴 정산은 50:50 기준</div>
-      <div class="ex-row"><span class="ex-label">은경 Bad Leaver → 50% × 50%</span><span class="ex-value highlight"><strong>25억</strong></span></div>
+      <div class="ex-row"><span class="ex-label">이은경 Bad Leaver → 50% × 50%</span><span class="ex-value highlight"><strong>25억</strong></span></div>
       <div class="ex-row"><span class="ex-label">동길 Bad Leaver → 50% × 50%</span><span class="ex-value"><strong>25억</strong></span></div>
-      <div class="ex-row"><span class="ex-label">은경/동길 Good Leaver → 50% × 70%</span><span class="ex-value"><strong>35억</strong></span></div>
-      <div class="ex-row"><span class="ex-label">은경/동길 완주 → 50% × 100%</span><span class="ex-value green"><strong>50억</strong></span></div>
+      <div class="ex-row"><span class="ex-label">이은경/동길 Good Leaver → 50% × 70%</span><span class="ex-value"><strong>35억</strong></span></div>
+      <div class="ex-row"><span class="ex-label">이은경/동길 완주 → 50% × 100%</span><span class="ex-value green"><strong>50억</strong></span></div>
     </div>
     <p>지분율이 51:49이지만 정산 기준은 <strong>경제권 50:50</strong>으로 대칭 설계됩니다. 두 사람이 동일한 Good/Bad 할인을 받고, 완주 vs 중도의 격차(50억 vs 25억)가 명확한 인센티브로 작동합니다.</p>
 
@@ -1131,13 +1135,13 @@
     <p>이 조항은 매우 중요합니다. 핵심을 정리하면:</p>
     <div class="example-box">
       <div class="ex-title">누구 것인가?</div>
-      <div class="ex-row"><span class="ex-label">은경이 이미 낸 책 60권</span><span class="ex-value green">은경 것 (회사에 빌려줌)</span></div>
+      <div class="ex-row"><span class="ex-label">이은경이 이미 낸 책 60권</span><span class="ex-value green">이은경 것 (회사에 빌려줌)</span></div>
       <div class="ex-row"><span class="ex-label">동길이 만든 기존 AI 시스템</span><span class="ex-value green">동길 것 (회사에 빌려줌)</span></div>
       <div class="ex-row"><span class="ex-label">회사에서 새로 만든 커리큘럼</span><span class="ex-value">회사 것</span></div>
       <div class="ex-row"><span class="ex-label">회사에서 새로 개발한 AI 엔진</span><span class="ex-value">회사 것</span></div>
       <div class="ex-row"><span class="ex-label">'주식회사 펜타' 브랜드</span><span class="ex-value">회사 것</span></div>
     </div>
-    <p>만약 회사가 해산되면, <strong>기존 IP(은경의 책, 동길의 시스템)는 각자에게 돌아갑니다.</strong> 회사에서 새로 만든 것들만 회사 소유입니다.</p>
+    <p>만약 회사가 해산되면, <strong>기존 IP(이은경의 책, 동길의 시스템)는 각자에게 돌아갑니다.</strong> 회사에서 새로 만든 것들만 회사 소유입니다.</p>
     <p>이렇게 하면 최악의 경우(회사가 망해도) <strong>각자 원래 가지고 있던 것은 지킬 수 있습니다.</strong></p>
   </div>
 </div>
@@ -1169,7 +1173,7 @@
 
     <p><strong>왜 필요한가?</strong> 계약서 쓴 직후에 한 사람이 나가버리면, 아무 일도 안 했는데 지분만 가져가는 불공정한 상황이 생깁니다. 베스팅은 이걸 막습니다.</p>
 
-    <p><strong>은경 누나 기준으로 보면:</strong></p>
+    <p><strong>이이은경 기준으로 보면:</strong></p>
     <div class="timeline-mini">
       <div class="tm-item active">
         <span class="tm-pct">12.75%</span>
@@ -1190,7 +1194,7 @@
     </div>
 
     <div class="example-box">
-      <div class="ex-title">시나리오별 예시 (은경 기준, 전체 51% 중)</div>
+      <div class="ex-title">시나리오별 예시 (이은경 기준, 전체 51% 중)</div>
       <div class="ex-row"><span class="ex-label">6개월째 나가면</span><span class="ex-value highlight">0% (1년 클리프 미달 → 전부 소멸)</span></div>
       <div class="ex-row"><span class="ex-label">1년째 나가면</span><span class="ex-value">12.75% 확정 (나머지 38.25%는 동길에게)</span></div>
       <div class="ex-row"><span class="ex-label">2년째 나가면</span><span class="ex-value">25.5% 확정 (나머지 25.5%는 동길에게)</span></div>
@@ -1686,7 +1690,7 @@ async function loadComments() {
     const data = await res.json();
     const rows = data[SHEET] || [];
     allComments = rows.slice(1).filter(r => r[0]).map(r => ({
-      article: r[0], author: r[1], text: r[2], date: r[3], status: r[4]
+      article: r[0], author: r[1], text: r[2], date: r[3], status: r[4], id: r[5] || ''
     }));
     renderAllComments();
   } catch (e) {
@@ -1715,15 +1719,24 @@ function renderAllComments() {
 
     list.innerHTML = comments.map(c => {
       const authorClass = c.author === '이은경' ? 'eunkyung' : 'donggil';
-      return `<div class="comment-item">
+      const actions = c.id ? `
+          <span class="comment-actions">
+            <a href="#" onclick="editComment('${c.id}');return false;">수정</a>
+            <a href="#" onclick="deleteComment('${c.id}');return false;">삭제</a>
+          </span>` : '';
+      return `<div class="comment-item" data-id="${c.id}">
         <div class="comment-meta">
           <span class="comment-author ${authorClass}">${c.author}</span>
-          <span>${c.date}</span>
+          <span>${c.date}</span>${actions}
         </div>
         <div class="comment-text">${escapeHtml(c.text)}</div>
       </div>`;
     }).join('');
   });
+}
+
+function genId() {
+  return 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
 async function submitComment(articleId) {
@@ -1741,24 +1754,22 @@ async function submitComment(articleId) {
     String(now.getHours()).padStart(2, '0') + ':' +
     String(now.getMinutes()).padStart(2, '0');
 
-  const comment = { article: articleId, author, text, date: dateStr, status: '' };
+  const id = genId();
+  const comment = { article: articleId, author, text, date: dateStr, status: '', id };
 
-  // 즉시 UI 반영
   allComments.push(comment);
   renderAllComments();
   input.value = '';
   status.textContent = '저장 중...';
   status.className = 'comment-status';
 
-  // localStorage 백업
   localStorage.setItem('contract_comments', JSON.stringify(allComments));
 
-  // Google Sheets에 저장
   try {
     const payload = JSON.stringify({
       action: 'append',
       sheet: SHEET,
-      values: [articleId, author, text, dateStr, '']
+      values: [articleId, author, text, dateStr, '', id]
     });
     await fetch(API + '?payload=' + encodeURIComponent(payload));
     status.textContent = '저장 완료';
@@ -1766,6 +1777,37 @@ async function submitComment(articleId) {
   } catch (e) {
     status.textContent = '오프라인 — 로컬에 저장됨 (다음 접속 시 동기화)';
     status.className = 'comment-status error';
+  }
+}
+
+async function deleteComment(id) {
+  if (!confirm('이 댓글을 삭제할까요?')) return;
+  const c = allComments.find(x => x.id === id);
+  if (!c) return;
+  allComments = allComments.filter(x => x.id !== id);
+  renderAllComments();
+  try {
+    const payload = JSON.stringify({ action: 'deleteById', sheet: SHEET, id });
+    await fetch(API + '?payload=' + encodeURIComponent(payload));
+  } catch (e) {
+    alert('서버 삭제 실패 — 네트워크를 확인해주세요');
+  }
+}
+
+async function editComment(id) {
+  const c = allComments.find(x => x.id === id);
+  if (!c) return;
+  const newText = prompt('댓글 수정', c.text);
+  if (newText === null) return;
+  const trimmed = newText.trim();
+  if (!trimmed) return;
+  c.text = trimmed;
+  renderAllComments();
+  try {
+    const payload = JSON.stringify({ action: 'updateById', sheet: SHEET, id, text: trimmed });
+    await fetch(API + '?payload=' + encodeURIComponent(payload));
+  } catch (e) {
+    alert('서버 수정 실패 — 네트워크를 확인해주세요');
   }
 }
 
