@@ -413,25 +413,18 @@
     background: rgba(201,168,76,0.2); color: #C9A84C; font-weight: 700;
   }
   .project-link:hover .pl-phase { background: rgba(255,255,255,0.2); color: #fff; }
+  .project-link .pl-count {
+    background: #C9A84C; color: #0a0a0a; font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 10px; margin-left: 6px;
+  }
   @media (max-width: 640px) {
     .projects-banner { padding: 12px 20px; }
   }
 </style>
-<div class="projects-banner">
+<div class="projects-banner" id="projectsBanner">
   <div class="projects-banner-inner">
     <span class="projects-banner-label">진행 프로젝트</span>
-    <a class="project-link" href="pentacampus/">
-      <span class="pl-name">펜타캠퍼스 사이트</span>
-      <span class="pl-phase">Phase 0</span>
-    </a>
-    <a class="project-link" href="booktree/">
-      <span class="pl-name">책나무 연수원 + 협회</span>
-      <span class="pl-phase">제안</span>
-    </a>
-    <a class="project-link" href="pentamall/gongu-research.html">
-      <span class="pl-name">펜타몰 공구 시장조사</span>
-      <span class="pl-phase">리서치</span>
-    </a>
+    <span id="projectsBannerItems" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"></span>
   </div>
 </div>
 
@@ -725,7 +718,55 @@ async function loadData() {
   renderTabs();
   renderPanel();
   renderWeekly();
+  renderProjectsBanner();
   localStorage.setItem('brainstorm_prev', JSON.stringify(allData));
+}
+
+// ─── 진행 프로젝트 배너 (동적) ───
+const PROJECT_SITES = {
+  '펜타캠퍼스': { href: 'pentacampus/', label: '사이트' },
+  '책나무': { href: 'booktree/', label: '연수원·협회' },
+  '펜타몰': { href: 'pentamall/gongu-research.html', label: '공구 리서치' },
+  '펜타스쿨': { href: '#', label: '본점' },
+  '펜타웍스': { href: '#', label: '컨설팅' },
+  '펜타북스': { href: '#', label: '출판' },
+  '펜타랩': { href: '#', label: '솔루션' }
+};
+
+function renderProjectsBanner() {
+  const el = document.getElementById('projectsBannerItems');
+  if (!el) return;
+  const counts = {};
+  ['할일', '의사결정'].forEach(sheet => {
+    const config = SHEET_CONFIG[sheet];
+    const pIdx = config.columns.indexOf('프로젝트');
+    if (pIdx < 0) return;
+    const rows = (allData[sheet] || []).slice(2);
+    rows.forEach(r => {
+      const title = (r[1]||'').trim();
+      if (!title || title.startsWith('[아카이브')) return;
+      if (sheet === '할일' && (r[4]||'') === '완료') return;
+      const p = (r[pIdx]||'').trim();
+      if (!p || p === '공통') return;
+      counts[p] = (counts[p]||0) + 1;
+    });
+  });
+
+  const items = Object.keys(PROJECT_SITES).filter(p => counts[p] || PROJECT_SITES[p].href !== '#');
+  if (!items.length) {
+    el.innerHTML = '<span style="color:rgba(255,255,255,0.6);font-size:12px">진행 중인 프로젝트 없음</span>';
+    return;
+  }
+  el.innerHTML = items.map(p => {
+    const info = PROJECT_SITES[p];
+    const cnt = counts[p] || 0;
+    const badge = cnt > 0 ? `<span class="pl-count">${cnt}</span>` : '';
+    return `<a class="project-link" href="${info.href}" title="${info.label}">
+      <span class="pl-name">${p}</span>
+      <span class="pl-phase">${info.label}</span>
+      ${badge}
+    </a>`;
+  }).join('');
 }
 
 // ─── 이번 주 반드시 ───
