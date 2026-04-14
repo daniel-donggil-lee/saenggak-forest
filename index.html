@@ -208,12 +208,47 @@
   .pfilter-chip:hover { transform: translateY(-1px); }
   .pfilter-chip b { font-weight: 700; margin-left: 3px; opacity: 0.7; }
   .pfilter-chip.clear { background: #fee; color: #c00; }
+  .depts {
+    display: flex; gap: 2px; padding: 8px 40px 0;
+    background: #0a0a0a; border-bottom: 1px solid #1a1a1a;
+    flex-wrap: wrap;
+  }
+  .dept-tab {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 14px; font-size: 13px; color: rgba(255,255,255,0.6);
+    cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.15s;
+    border: 1px solid transparent; border-bottom: none;
+  }
+  .dept-tab:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  .dept-tab.active {
+    color: #0a0a0a; background: #fafbfc; font-weight: 700;
+    border-color: #e8e8e8;
+  }
+  .dept-icon { font-size: 15px; }
+  .dept-name { font-weight: inherit; }
+  .dept-count {
+    background: rgba(255,255,255,0.1); color: inherit;
+    padding: 1px 7px; border-radius: 10px; font-size: 11px; font-weight: 600;
+  }
+  .dept-tab.active .dept-count { background: #C9A84C; color: #fff; }
+  .dept-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+  .dept-stat {
+    color: rgba(255,255,255,0.8); font-size: 12px;
+    padding: 4px 10px; background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+  }
+  .dept-stat b { color: #C9A84C; font-weight: 700; margin-left: 4px; }
+  .dept-sites { display: flex; gap: 8px; margin-left: auto; }
   .subtabs {
     display: flex; gap: 0; align-items: center;
     padding: 8px 40px 10px; background: #fafbfc;
     border-bottom: 1px solid #e8e8e8; flex-wrap: wrap;
     width: 100%; flex-basis: 100%;
   }
+  .subtabs-group { display: flex; gap: 0; align-items: center; flex-wrap: wrap; }
+  .subtabs-divider { width: 1px; background: #d1d9e0; margin: 0 12px; align-self: stretch; }
+  .subtab.global { opacity: 0.75; }
+  .subtab.global.active { opacity: 1; }
   .subtab {
     padding: 6px 12px; font-size: 13px; color: #656d76; cursor: pointer;
     border-radius: 6px; display: flex; align-items: center; gap: 4px;
@@ -422,9 +457,8 @@
   }
 </style>
 <div class="projects-banner" id="projectsBanner">
-  <div class="projects-banner-inner">
-    <span class="projects-banner-label">진행 프로젝트</span>
-    <span id="projectsBannerItems" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"></span>
+  <div class="projects-banner-inner" id="deptBannerInner">
+    <span class="projects-banner-label" id="deptBannerLabel">부서 선택 시 표시</span>
   </div>
 </div>
 
@@ -568,16 +602,23 @@
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
 const SHEET_ORDER = ['공지사항', '로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항', '리포트', '마케팅'];
-const TAB_GROUPS = [
-  { name: '공지사항', children: ['공지사항'] },
-  { name: '실행', children: ['로드맵', '할일'] },
-  { name: '회의록', children: ['회의록'] },
-  { name: '브레인스토밍', children: ['아이디어', '조사', '의사결정', '합의사항'] },
-  { name: '리포트', children: ['리포트', '마케팅'] }
-];
-function findPrimary(leaf) {
-  const g = TAB_GROUPS.find(g => g.children.includes(leaf));
-  return g ? g.name : leaf;
+const DEPTS = ['전체', '공통', '펜타스쿨', '펜타캠퍼스', '펜타웍스', '펜타몰', '펜타북스', '펜타랩', '책나무'];
+const DEPT_META = {
+  '전체':     { icon: '📋', sites: [], desc: '모든 부서 통합' },
+  '공통':     { icon: '🌐', sites: [], desc: '법인·지분·공동 운영' },
+  '펜타스쿨': { icon: '🏫', sites: [], desc: '초등 문해력 본점·가맹' },
+  '펜타캠퍼스': { icon: '🎓', sites: [{ label: '사이트', href: 'pentacampus/' }], desc: '연수원 + 강사 양성' },
+  '펜타웍스': { icon: '💼', sites: [], desc: '학원 자동화 컨설팅' },
+  '펜타몰':   { icon: '🛍️', sites: [{ label: '공구 리서치', href: 'pentamall/gongu-research.html' }], desc: '큐레이션 쇼핑' },
+  '펜타북스': { icon: '📚', sites: [], desc: '자체 출판' },
+  '펜타랩':   { icon: '🔬', sites: [], desc: '펜타 지수·시스템' },
+  '책나무':   { icon: '🌳', sites: [{ label: '연수원 제안', href: 'booktree/' }], desc: 'B2B 납품 프로젝트' }
+};
+const FUNCTIONAL_TABS = ['로드맵', '할일', '의사결정', '아이디어', '조사', '합의사항'];
+const GLOBAL_TABS = ['공지사항', '회의록', '리포트'];
+function sheetHasProjectCol(sheet) {
+  const c = SHEET_CONFIG[sheet];
+  return c && c.columns && c.columns.includes('프로젝트');
 }
 
 const REPORTS = [
@@ -612,7 +653,7 @@ const SHEET_CONFIG = {
   '로드맵': {
     sub: '마일스톤',
     desc: '<strong>Phase별 마일스톤과 목표일.</strong> 전체 사업 진행 상황을 한눈에.',
-    columns: ['Phase', '마일스톤', '목표일', '상태', '담당', '완료일', '비고'],
+    columns: ['Phase', '마일스톤', '목표일', '상태', '담당', '완료일', '비고', '프로젝트'],
   },
   '할일': {
     sub: '태스크',
@@ -627,12 +668,12 @@ const SHEET_CONFIG = {
   '아이디어': {
     sub: '구상',
     desc: '<strong>검증 전 구상들.</strong> 구체화되면 조사 또는 의사결정으로 이동.',
-    columns: ['카테고리', '항목', '내용', '출처', '검증방법', '비고'],
+    columns: ['카테고리', '항목', '내용', '출처', '검증방법', '비고', '프로젝트'],
   },
   '조사': {
     sub: '데이터 수집',
     desc: '<strong>결정에 필요한 데이터 수집.</strong> 완료되면 의사결정의 근거/데이터에 반영.',
-    columns: ['카테고리', '조사 항목', '목적', '상태', '결과 요약', '비고'],
+    columns: ['카테고리', '조사 항목', '목적', '상태', '결과 요약', '비고', '리포트', '프로젝트'],
   },
   '의사결정': {
     sub: '선택지 + 근거',
@@ -642,7 +683,7 @@ const SHEET_CONFIG = {
   '합의사항': {
     sub: '확정',
     desc: '이동길 + 이은경이 <strong>확정한 전제 조건과 역할분담</strong>. 더 이상 논의 불필요.',
-    columns: ['카테고리', '항목', '내용', '담당', '비고'],
+    columns: ['카테고리', '항목', '내용', '담당', '비고', '프로젝트'],
   },
   '공지사항': {
     sub: '공지',
@@ -672,7 +713,8 @@ const PERSON_COLORS = {
 const INLINE_DATA = {}; // API 폴백용 — API가 정상 작동하므로 빈 객체로 유지
 
 let allData = {};
-let currentTab = '공지사항';
+let currentTab = '할일';
+let currentDept = '전체';
 let projectFilter = '';
 let editingRow = null;
 let changeMap = {}; // { 'sheetName-rowIdx': 'new' | 'edited' }
@@ -718,7 +760,7 @@ async function loadData() {
   renderTabs();
   renderPanel();
   renderWeekly();
-  renderProjectsBanner();
+  renderDeptBanner();
   localStorage.setItem('brainstorm_prev', JSON.stringify(allData));
 }
 
@@ -733,40 +775,35 @@ const PROJECT_SITES = {
   '펜타랩': { href: '#', label: '솔루션' }
 };
 
-function renderProjectsBanner() {
-  const el = document.getElementById('projectsBannerItems');
-  if (!el) return;
-  const counts = {};
-  ['할일', '의사결정'].forEach(sheet => {
-    const config = SHEET_CONFIG[sheet];
-    const pIdx = config.columns.indexOf('프로젝트');
-    if (pIdx < 0) return;
-    const rows = (allData[sheet] || []).slice(2);
-    rows.forEach(r => {
-      const title = (r[1]||'').trim();
-      if (!title || title.startsWith('[아카이브')) return;
-      if (sheet === '할일' && (r[4]||'') === '완료') return;
-      const p = (r[pIdx]||'').trim();
-      if (!p || p === '공통') return;
-      counts[p] = (counts[p]||0) + 1;
-    });
-  });
+function renderDeptBanner() {
+  const inner = document.getElementById('deptBannerInner');
+  const label = document.getElementById('deptBannerLabel');
+  if (!inner || !label) return;
 
-  const items = Object.keys(PROJECT_SITES).filter(p => counts[p] || PROJECT_SITES[p].href !== '#');
-  if (!items.length) {
-    el.innerHTML = '<span style="color:rgba(255,255,255,0.6);font-size:12px">진행 중인 프로젝트 없음</span>';
-    return;
-  }
-  el.innerHTML = items.map(p => {
-    const info = PROJECT_SITES[p];
-    const cnt = counts[p] || 0;
-    const badge = cnt > 0 ? `<span class="pl-count">${cnt}</span>` : '';
-    return `<a class="project-link" href="${info.href}" title="${info.label}">
-      <span class="pl-name">${p}</span>
-      <span class="pl-phase">${info.label}</span>
-      ${badge}
-    </a>`;
-  }).join('');
+  const meta = DEPT_META[currentDept];
+  const deptTotals = {};
+  FUNCTIONAL_TABS.forEach(t => { deptTotals[t] = deptRowCount(currentDept, t); });
+  const activeTotal = deptTotals['할일'] || 0;
+  const decisions = deptTotals['의사결정'] || 0;
+  const ideas = deptTotals['아이디어'] || 0;
+
+  label.innerHTML = `${meta.icon} <b>${currentDept}</b> <span style="opacity:0.7;font-weight:400">${meta.desc}</span>`;
+
+  const siteLinks = (meta.sites || []).map(s =>
+    `<a class="project-link" href="${s.href}"><span class="pl-name">${s.label}</span></a>`
+  ).join('');
+
+  const stats = `
+    <span class="dept-stat">진행 할일 <b>${activeTotal}</b></span>
+    <span class="dept-stat">결정 대기 <b>${decisions}</b></span>
+    <span class="dept-stat">아이디어 <b>${ideas}</b></span>
+  `;
+
+  inner.innerHTML = `
+    <span class="projects-banner-label" id="deptBannerLabel">${label.innerHTML}</span>
+    <div class="dept-stats">${stats}</div>
+    ${siteLinks ? `<div class="dept-sites">${siteLinks}</div>` : ''}
+  `;
 }
 
 // ─── 이번 주 반드시 ───
@@ -955,40 +992,73 @@ function tabCount(name) {
   }).length;
 }
 
+function deptRowCount(dept, sheet) {
+  const rows = (allData[sheet] || []).slice(2);
+  const hasProj = sheetHasProjectCol(sheet);
+  const pIdx = hasProj ? SHEET_CONFIG[sheet].columns.indexOf('프로젝트') : -1;
+  return rows.filter(r => {
+    const title = (r[1]||'').trim();
+    if (!title || title.startsWith('[아카이브')) return false;
+    if (sheet === '할일' && (r[4]||'') === '완료') return false;
+    if (dept === '전체') return true;
+    if (!hasProj) return false;
+    return (r[pIdx]||'').trim() === dept;
+  }).length;
+}
+
+function deptTotal(dept) {
+  return FUNCTIONAL_TABS.reduce((sum, t) => sum + deptRowCount(dept, t), 0);
+}
+
 function renderTabs() {
   const bar = document.getElementById('tabBar');
-  const currentPrimary = findPrimary(currentTab);
+  const arrow = '<span class="sub-arrow">&rarr;</span>';
 
-  // 1차 탭
-  const primaryHtml = TAB_GROUPS.map(g => {
-    const active = g.name === currentPrimary ? 'active' : '';
-    const cnt = g.children.reduce((sum, c) => sum + tabCount(c), 0);
-    return `<div class="tab ${active}" onclick="switchPrimary('${g.name}')">
-      ${g.name}<span class="count">${cnt}</span>
+  const deptHtml = DEPTS.map(d => {
+    const meta = DEPT_META[d];
+    const active = d === currentDept ? 'active' : '';
+    const cnt = deptTotal(d);
+    return `<div class="dept-tab ${active}" onclick="switchDept('${d}')" title="${meta.desc}">
+      <span class="dept-icon">${meta.icon}</span><span class="dept-name">${d}</span><span class="dept-count">${cnt}</span>
     </div>`;
   }).join('');
 
-  // 2차 탭 (그룹이 2개 이상 children을 가질 때만)
-  const currentGroup = TAB_GROUPS.find(g => g.name === currentPrimary);
-  let secondaryHtml = '';
-  if (currentGroup && currentGroup.children.length > 1) {
-    const arrow = '<span class="sub-arrow">&rarr;</span>';
-    secondaryHtml = `<div class="subtabs">` + currentGroup.children.map((name, i) => {
-      if (name === '마케팅') {
-        return `${i > 0 ? arrow : ''}<div class="subtab" onclick="window.location.href='marketing.html'">📸 마케팅<span class="count">${CONTENT_COUNT}</span></div>`;
-      }
-      const config = SHEET_CONFIG[name];
-      const active = name === currentTab ? 'active' : '';
-      const cnt = tabCount(name);
-      const sub = config && config.sub ? `<span class="subtab-sub">${config.sub}</span>` : '';
-      const isFlow = currentPrimary === '브레인스토밍' && i > 0;
-      return `${isFlow ? arrow : ''}<div class="subtab ${active}" onclick="switchTab('${name}')">
-        ${name}<span class="count">${cnt}</span>${sub}
-      </div>`;
-    }).join('') + `</div>`;
-  }
+  const funcHtml = FUNCTIONAL_TABS.map((name, i) => {
+    const config = SHEET_CONFIG[name];
+    const active = name === currentTab ? 'active' : '';
+    const cnt = deptRowCount(currentDept, name);
+    const sub = config && config.sub ? `<span class="subtab-sub">${config.sub}</span>` : '';
+    const isFlow = i >= 3;
+    return `${isFlow ? arrow : ''}<div class="subtab ${active}" onclick="switchTab('${name}')">
+      ${name}<span class="count">${cnt}</span>${sub}
+    </div>`;
+  }).join('');
 
-  bar.innerHTML = primaryHtml + secondaryHtml;
+  const globalHtml = GLOBAL_TABS.map(name => {
+    const active = name === currentTab ? 'active' : '';
+    const cnt = tabCount(name);
+    return `<div class="subtab global ${active}" onclick="switchTab('${name}')">
+      ${name}<span class="count">${cnt}</span>
+    </div>`;
+  }).join('') + `<div class="subtab global" onclick="window.location.href='marketing.html'">📸 마케팅<span class="count">${CONTENT_COUNT}</span></div>`;
+
+  bar.innerHTML = `
+    <div class="depts">${deptHtml}</div>
+    <div class="subtabs">
+      <div class="subtabs-group">${funcHtml}</div>
+      <div class="subtabs-divider"></div>
+      <div class="subtabs-group global-group">${globalHtml}</div>
+    </div>
+  `;
+}
+
+function switchDept(dept) {
+  currentDept = dept;
+  projectFilter = '';
+  if (GLOBAL_TABS.includes(currentTab)) currentTab = '할일';
+  renderTabs();
+  renderPanel();
+  renderDeptBanner();
 }
 
 function renderProjectFilterBar(rows, colIdx) {
@@ -1015,14 +1085,6 @@ function setProjectFilter(p) {
   renderPanel();
 }
 
-function switchPrimary(groupName) {
-  const g = TAB_GROUPS.find(g => g.name === groupName);
-  if (!g) return;
-  // 이미 현재 그룹이면 무시, 아니면 첫 children으로 전환
-  if (findPrimary(currentTab) === groupName) return;
-  switchTab(g.children[0]);
-}
-
 function switchTab(name) {
   currentTab = name;
   renderTabs();
@@ -1030,9 +1092,16 @@ function switchTab(name) {
 }
 
 function renderPanel() {
+  renderDeptBanner();
   const config = SHEET_CONFIG[currentTab];
   const rows = allData[currentTab] || [];
-  const allDataRows = rows.slice(2).filter(r => r.some(c => c));
+  let allDataRows = rows.slice(2).filter(r => r.some(c => c));
+
+  // 부서 필터 적용 (프로젝트 컬럼 있는 시트만)
+  if (currentDept !== '전체' && sheetHasProjectCol(currentTab)) {
+    const pIdx = config.columns.indexOf('프로젝트');
+    allDataRows = allDataRows.filter(r => (r[pIdx]||'').trim() === currentDept);
+  }
 
   // 로드맵 전용 렌더링
   if (currentTab === '로드맵') {
@@ -1061,6 +1130,10 @@ function renderPanel() {
     if (!title || title.startsWith('[아카이브')) return false;
     const lastCol = r[r.length - 1] || '';
     if (lastCol.startsWith('[→')) return false;
+    if (currentDept !== '전체' && projectColIdx >= 0) {
+      const p = (r[projectColIdx]||'').trim();
+      if (p !== currentDept) return false;
+    }
     if (projectFilter && projectColIdx >= 0) {
       const p = (r[projectColIdx]||'').trim();
       if (p !== projectFilter) return false;
