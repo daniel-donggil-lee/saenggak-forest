@@ -653,7 +653,7 @@ const SHEET_CONFIG = {
   '로드맵': {
     sub: '마일스톤',
     desc: '<strong>Phase별 마일스톤과 목표일.</strong> 전체 사업 진행 상황을 한눈에.',
-    columns: ['Phase', '마일스톤', '목표일', '상태', '담당', '완료일', '비고', '프로젝트'],
+    columns: ['Phase', '마일스톤', '목표일', '상태', '담당', '완료일', '비고', '서브프로젝트', '프로젝트'],
   },
   '할일': {
     sub: '태스크',
@@ -1585,7 +1585,7 @@ function renderRoadmapPanel(config, rows, allDataRows) {
   // 프로젝트별 집계 (row[7] = 프로젝트)
   const projectStats = {};
   allDataRows.forEach(r => {
-    const proj = (r[7] || '').trim() || '미분류';
+    const proj = (r[8] || '').trim() || '미분류';
     if (!projectStats[proj]) projectStats[proj] = { total: 0, done: 0, inProgress: 0, next: null };
     projectStats[proj].total++;
     const status = (r[3] || '').trim();
@@ -1605,7 +1605,7 @@ function renderRoadmapPanel(config, rows, allDataRows) {
 
   // 필터 적용
   const filteredRows = currentProjectFilter
-    ? allDataRows.filter(r => ((r[7] || '').trim() || '미분류') === currentProjectFilter)
+    ? allDataRows.filter(r => ((r[8] || '').trim() || '미분류') === currentProjectFilter)
     : allDataRows;
 
   const total = filteredRows.length;
