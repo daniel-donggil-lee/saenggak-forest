@@ -344,6 +344,51 @@
   </div>
 </header>
 
+<!-- 진행 프로젝트 배너 -->
+<style>
+  .projects-banner {
+    background: #fff; border-bottom: 1px solid #d1d9e0;
+    padding: 16px 40px;
+  }
+  .projects-banner-inner {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .projects-banner-label {
+    font-size: 11px; letter-spacing: 0.18em; color: #656d76;
+    font-weight: 700; text-transform: uppercase; flex-shrink: 0;
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px; background: #0a0a0a; color: #fff;
+    border-radius: 6px; text-decoration: none;
+    font-size: 13px; font-weight: 600;
+    transition: all 0.15s;
+  }
+  .project-link:hover { background: #C9A84C; transform: translateY(-1px); }
+  .project-link .pl-name { color: #fff; }
+  .project-link .pl-phase {
+    font-size: 11px; padding: 2px 8px; border-radius: 8px;
+    background: rgba(201,168,76,0.2); color: #C9A84C; font-weight: 700;
+  }
+  .project-link:hover .pl-phase { background: rgba(255,255,255,0.2); color: #fff; }
+  @media (max-width: 640px) {
+    .projects-banner { padding: 12px 20px; }
+  }
+</style>
+<div class="projects-banner">
+  <div class="projects-banner-inner">
+    <span class="projects-banner-label">진행 프로젝트</span>
+    <a class="project-link" href="pentacampus/">
+      <span class="pl-name">펜타캠퍼스 사이트</span>
+      <span class="pl-phase">Phase 0</span>
+    </a>
+    <a class="project-link" href="booktree/">
+      <span class="pl-name">책나무 연수원 + 협회</span>
+      <span class="pl-phase">제안</span>
+    </a>
+  </div>
+</div>
+
 <div class="tabs" id="tabBar"></div>
 
 <main id="mainContent">
