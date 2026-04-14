@@ -159,6 +159,21 @@
   .progress-summary .progress-bar { max-width: 200px; height: 8px; }
   .progress-summary-label { font-size: 14px; font-weight: 600; color: #1f2328; }
 
+  /* Project drill-down */
+  .project-section { margin-bottom: 20px; }
+  .project-section-title { font-size: 12px; font-weight: 600; color: #656d76; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; padding-left: 2px; }
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .project-card { background: #fff; border: 1px solid #d1d9e0; border-radius: 8px; padding: 14px 16px; cursor: pointer; transition: all 0.15s; }
+  .project-card:hover { border-color: #0969da; box-shadow: 0 2px 8px rgba(9,105,218,0.1); }
+  .project-card.active { border-color: #0969da; background: #ddf4ff; }
+  .project-card-name { font-size: 14px; font-weight: 600; color: #1f2328; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .project-card-meta { display: flex; align-items: center; gap: 8px; }
+  .project-card-meta .progress-bar { flex: 1; max-width: none; height: 6px; }
+  .project-card-meta .progress-text { font-size: 11px; min-width: auto; }
+  .project-card-next { font-size: 12px; color: #656d76; margin-top: 6px; }
+  .project-filter-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #ddf4ff; border: 1px solid #0969da; border-radius: 12px; font-size: 12px; color: #0969da; font-weight: 600; margin-left: 10px; }
+  .project-filter-chip button { background: none; border: none; color: #0969da; cursor: pointer; font-size: 14px; padding: 0; line-height: 1; }
+
   /* Todo */
   .todo-group { background: #fff; border: 1px solid #d1d9e0; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
   .todo-group-header { padding: 12px 20px; background: #f6f8fa; border-bottom: 1px solid #d1d9e0; font-size: 13px; font-weight: 600; color: #656d76; display: flex; align-items: center; gap: 8px; }
@@ -397,6 +412,8 @@ const CATEGORIES = ['법인/거버넌스', '브랜드', '콘텐츠', '인력', '
 const PHASE_NAMES = {
   'P0': '사업 설계', 'P1': '콘텐츠 개발', 'P2': '본점 준비',
   'P3': '본점 운영', 'P4': '직영 확장', 'P5': '가맹 시작',
+  'Site-00': 'Discovery', 'Site-01': 'PRD', 'Site-02': 'IA', 'Site-03': 'User Flow',
+  'Site-04': 'Wireframe', 'Site-05': 'Mockup', 'Site-06': 'Prototype', 'Site-07': 'Launch',
 };
 const SHEET_CONFIG = {
   '로드맵': {
@@ -465,6 +482,16 @@ let allData = {};
 let currentTab = '공지사항';
 let editingRow = null;
 let changeMap = {}; // { 'sheetName-rowIdx': 'new' | 'edited' }
+let currentProjectFilter = null; // 로드맵 프로젝트 드릴다운 필터
+
+function setProjectFilter(name) {
+  currentProjectFilter = (currentProjectFilter === name) ? null : name;
+  renderPanel();
+}
+function clearProjectFilter() {
+  currentProjectFilter = null;
+  renderPanel();
+}
 
 function buildChangeMap(data) {
   const prev = JSON.parse(localStorage.getItem('brainstorm_prev') || '{}');
@@ -995,18 +1022,72 @@ function renderMeetingPanel(config, rows, allDataRows) {
 
 // ─── 로드맵 렌더링 ───
 function renderRoadmapPanel(config, rows, allDataRows) {
-  const total = allDataRows.length;
-  const done = allDataRows.filter(r => (r[3]||'') === '완료').length;
-  const inProgress = allDataRows.filter(r => (r[3]||'') === '진행중').length;
+  // 프로젝트별 집계 (row[7] = 프로젝트)
+  const projectStats = {};
+  allDataRows.forEach(r => {
+    const proj = (r[7] || '').trim() || '미분류';
+    if (!projectStats[proj]) projectStats[proj] = { total: 0, done: 0, inProgress: 0, next: null };
+    projectStats[proj].total++;
+    const status = (r[3] || '').trim();
+    if (status === '완료') projectStats[proj].done++;
+    else if (status === '진행중') projectStats[proj].inProgress++;
+    if (!projectStats[proj].next && status !== '완료' && r[1]) {
+      projectStats[proj].next = { name: r[1], date: r[2] || '' };
+    }
+  });
+  const projectNames = Object.keys(projectStats).sort((a, b) => {
+    if (a === '펜타캠퍼스-사이트') return -1;
+    if (b === '펜타캠퍼스-사이트') return 1;
+    if (a === '미분류') return 1;
+    if (b === '미분류') return -1;
+    return a.localeCompare(b, 'ko');
+  });
+
+  // 필터 적용
+  const filteredRows = currentProjectFilter
+    ? allDataRows.filter(r => ((r[7] || '').trim() || '미분류') === currentProjectFilter)
+    : allDataRows;
+
+  const total = filteredRows.length;
+  const done = filteredRows.filter(r => (r[3]||'') === '완료').length;
+  const inProgress = filteredRows.filter(r => (r[3]||'') === '진행중').length;
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  const filterChip = currentProjectFilter
+    ? `<span class="project-filter-chip">${currentProjectFilter} <button onclick="clearProjectFilter()" title="필터 해제">×</button></span>`
+    : '';
 
   let html = `
     <div class="panel-header">
-      <div class="panel-desc">${config.desc}</div>
+      <div class="panel-desc">${config.desc}${filterChip}</div>
       <button class="btn btn-primary" style="white-space:nowrap" onclick="openAddModal()">+ 추가</button>
     </div>
+  `;
+
+  // 프로젝트 드릴다운 카드 (필터 없을 때만 표시)
+  if (!currentProjectFilter && projectNames.length > 1) {
+    html += `<div class="project-section">
+      <div class="project-section-title">프로젝트별 보기 · 카드 클릭 시 해당 프로젝트만 필터</div>
+      <div class="project-grid">`;
+    projectNames.forEach(proj => {
+      const s = projectStats[proj];
+      const ppct = s.total > 0 ? Math.round((s.done / s.total) * 100) : 0;
+      const nextLabel = s.next ? `다음: ${s.next.name}${s.next.date ? ' · ' + s.next.date : ''}` : '모두 완료';
+      html += `<div class="project-card" onclick="setProjectFilter('${proj.replace(/'/g, "\\'")}')">
+        <div class="project-card-name">${proj}</div>
+        <div class="project-card-meta">
+          <div class="progress-bar"><div class="progress-fill progress-fill-blue" style="width:${ppct}%"></div></div>
+          <span class="progress-text">${s.done}/${s.total}</span>
+        </div>
+        <div class="project-card-next">${nextLabel}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  html += `
     <div class="progress-summary">
-      <span class="progress-summary-label">전체 진행률</span>
+      <span class="progress-summary-label">${currentProjectFilter ? currentProjectFilter + ' 진행률' : '전체 진행률'}</span>
       <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width:${pct}%"></div></div>
       <span class="progress-text">${done}/${total}</span>
       <span style="font-size:12px;color:#656d76">완료 ${done} · 진행중 ${inProgress} · 예정 ${total - done - inProgress}</span>
@@ -1014,9 +1095,9 @@ function renderRoadmapPanel(config, rows, allDataRows) {
   `;
 
   // Phase별 그룹핑
-  const phases = [...new Set(allDataRows.map(r => (r[0]||'').trim()).filter(Boolean))];
+  const phases = [...new Set(filteredRows.map(r => (r[0]||'').trim()).filter(Boolean))];
   phases.forEach(phase => {
-    const phaseRows = allDataRows.filter(r => (r[0]||'').trim() === phase);
+    const phaseRows = filteredRows.filter(r => (r[0]||'').trim() === phase);
     const phaseDone = phaseRows.filter(r => (r[3]||'') === '완료').length;
     const phasePct = phaseRows.length > 0 ? Math.round((phaseDone / phaseRows.length) * 100) : 0;
     const phaseLabel = PHASE_NAMES[phase] || phase;
