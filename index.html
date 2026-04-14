@@ -337,10 +337,15 @@
 
 <header>
   <h1><span>PENTA</span> 대시보드</h1>
-  <div class="header-meta">
-    이동길 + 이은경 | 2026-03 ~ |
-    <a href="https://docs.google.com/spreadsheets/d/1pdW8Xif8ZA75UbkAAbnn02wosNbO5kNnmuJ462E-nqw" target="_blank">Sheets 원본</a> |
-    <a href="penta-brand-strategy.html" target="_blank">브랜드 전략 보고서</a>
+  <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
+    <div class="search-wrap" style="position:relative;">
+      <input id="globalSearch" type="text" placeholder="🔍 전체 검색 (Ctrl+K)"
+        style="width:240px;padding:6px 12px;border:1px solid #d1d9e0;border-radius:6px;font-size:13px;font-family:inherit;"
+        oninput="runSearch()" onfocus="runSearch()" onblur="setTimeout(()=>closeSearch(),200)">
+      <div id="searchResults" style="display:none;position:absolute;top:100%;right:0;margin-top:4px;width:420px;max-height:400px;overflow-y:auto;background:#fff;border:1px solid #d1d9e0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.1);z-index:100;"></div>
+    </div>
+    <span style="color:#656d76;">이동길 + 이은경</span>
+    <a href="https://docs.google.com/spreadsheets/d/1pdW8Xif8ZA75UbkAAbnn02wosNbO5kNnmuJ462E-nqw" target="_blank">Sheets</a>
   </div>
 </header>
 
@@ -386,6 +391,104 @@
       <span class="pl-name">책나무 연수원 + 협회</span>
       <span class="pl-phase">제안</span>
     </a>
+  </div>
+</div>
+
+<!-- 이번 주 반드시 -->
+<style>
+  .weekly {
+    background: #fff; border-bottom: 1px solid #d1d9e0;
+    padding: 20px 40px;
+  }
+  .weekly-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 14px; flex-wrap: wrap; gap: 8px;
+  }
+  .weekly-title {
+    font-size: 13px; letter-spacing: 0.18em; color: #0a0a0a;
+    font-weight: 800; text-transform: uppercase;
+  }
+  .weekly-title .accent { color: #C9A84C; }
+  .weekly-deadline { font-size: 12px; color: #656d76; }
+  .weekly-deadline b { color: #0a0a0a; }
+  .weekly-cols {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .weekly-col {
+    border: 1px solid #e8e8e8; border-radius: 8px; padding: 14px 16px;
+    background: #fafafa;
+  }
+  .weekly-col h4 {
+    font-size: 12px; font-weight: 700; color: #0a0a0a;
+    letter-spacing: 0.08em; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .weekly-col h4 .cnt {
+    font-size: 10px; background: #F5EFD9; color: #a8892f;
+    padding: 1px 7px; border-radius: 8px; font-weight: 700;
+  }
+  .weekly-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 7px 0; border-bottom: 1px dashed #e8e8e8;
+    font-size: 13px; line-height: 1.45;
+  }
+  .weekly-item:last-child { border-bottom: none; }
+  .weekly-item input[type=checkbox] { margin-top: 3px; flex-shrink: 0; cursor: pointer; }
+  .weekly-item .txt { flex: 1; color: #1f2328; word-break: break-word; }
+  .weekly-item.done .txt { text-decoration: line-through; color: #9ca3af; }
+  .weekly-item .meta { font-size: 10px; color: #9ca3af; margin-left: 6px; }
+  .weekly-item .del {
+    background: none; border: none; color: #d1d9e0; cursor: pointer;
+    font-size: 14px; padding: 0 4px; flex-shrink: 0;
+  }
+  .weekly-item .del:hover { color: #dc2626; }
+  .weekly-empty { font-size: 12px; color: #9ca3af; padding: 8px 0; }
+  .weekly-add {
+    display: flex; gap: 6px; margin-top: 10px;
+  }
+  .weekly-add input {
+    flex: 1; padding: 6px 10px; border: 1px solid #d1d9e0;
+    border-radius: 5px; font-size: 12px; font-family: inherit;
+  }
+  .weekly-add input:focus { outline: none; border-color: #C9A84C; }
+  .weekly-add select {
+    padding: 6px 8px; border: 1px solid #d1d9e0; border-radius: 5px;
+    font-size: 11px; font-family: inherit; background: #fff;
+  }
+  .weekly-add button {
+    padding: 6px 12px; background: #0a0a0a; color: #fff; border: none;
+    border-radius: 5px; font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+  .weekly-add button:hover { background: #C9A84C; }
+  @media (max-width: 720px) {
+    .weekly { padding: 16px 20px; }
+    .weekly-cols { grid-template-columns: 1fr; }
+  }
+</style>
+<div class="weekly">
+  <div class="weekly-head">
+    <div class="weekly-title">⚡ 이번 주 <span class="accent">반드시</span></div>
+    <div class="weekly-deadline" id="weeklyDeadline">—</div>
+  </div>
+  <div class="weekly-cols">
+    <div class="weekly-col">
+      <h4>이은경 <span class="cnt" id="eCnt">0/5</span></h4>
+      <div id="eList"><div class="weekly-empty">항목 없음</div></div>
+      <div class="weekly-add">
+        <input id="eInput" type="text" placeholder="항목 입력" onkeydown="if(event.key==='Enter')addWeekly('이은경')">
+        <select id="eAuthor"><option>이은경</option><option>이동길</option></select>
+        <button onclick="addWeekly('이은경')">+</button>
+      </div>
+    </div>
+    <div class="weekly-col">
+      <h4>이동길 <span class="cnt" id="dCnt">0/5</span></h4>
+      <div id="dList"><div class="weekly-empty">항목 없음</div></div>
+      <div class="weekly-add">
+        <input id="dInput" type="text" placeholder="항목 입력" onkeydown="if(event.key==='Enter')addWeekly('이동길')">
+        <select id="dAuthor"><option>이동길</option><option>이은경</option></select>
+        <button onclick="addWeekly('이동길')">+</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -568,8 +671,166 @@ async function loadData() {
   changeMap = buildChangeMap(allData);
   renderTabs();
   renderPanel();
+  renderWeekly();
   localStorage.setItem('brainstorm_prev', JSON.stringify(allData));
 }
+
+// ─── 이번 주 반드시 ───
+function getThisFridayNoon() {
+  const now = new Date();
+  const dow = now.getDay(); // 0=일 ... 5=금
+  const d = new Date(now);
+  if (dow === 5 && now.getHours() >= 12) {
+    d.setDate(d.getDate() + 7);
+  } else {
+    const diff = (5 - dow + 7) % 7;
+    d.setDate(d.getDate() + diff);
+  }
+  d.setHours(12, 0, 0, 0);
+  return d;
+}
+function fmtDate(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function renderWeekly() {
+  const rows = allData['이번주'] || [];
+  const deadline = getThisFridayNoon();
+  const deadlineStr = fmtDate(deadline);
+  const now = new Date();
+  const msLeft = deadline - now;
+  const hLeft = Math.max(0, Math.floor(msLeft / (1000*60*60)));
+  const dLeft = Math.floor(hLeft / 24);
+  const leftTxt = dLeft > 0 ? `${dLeft}일 ${hLeft%24}시간 남음` : `${hLeft}시간 남음`;
+  document.getElementById('weeklyDeadline').innerHTML = `마감 <b>${deadlineStr} (금) 12:00</b> · ${leftTxt}`;
+
+  const items = rows.map((r, i) => ({ row: r, idx: i })).filter(o =>
+    o.idx >= 2 && o.row && (o.row[1]||'').trim() && (o.row[5]||'') === deadlineStr
+  );
+  const render = (who, listId, cntId) => {
+    const mine = items.filter(o => (o.row[0]||'') === who);
+    document.getElementById(cntId).textContent = `${mine.filter(o => (o.row[3]||'') === '완료').length}/${mine.length}`;
+    const el = document.getElementById(listId);
+    if (mine.length === 0) { el.innerHTML = '<div class="weekly-empty">항목 없음</div>'; return; }
+    el.innerHTML = mine.map(o => {
+      const done = (o.row[3]||'') === '완료';
+      const author = (o.row[2]||'').trim();
+      const authorTag = author && author !== who ? `<span class="meta">← ${author}</span>` : '';
+      return `<div class="weekly-item ${done?'done':''}">
+        <input type="checkbox" ${done?'checked':''} onchange="toggleWeekly(${o.idx}, this.checked)">
+        <span class="txt">${escapeHtml(o.row[1])}${authorTag}</span>
+        <button class="del" onclick="deleteWeekly(${o.idx})" title="삭제">×</button>
+      </div>`;
+    }).join('');
+  };
+  render('이은경', 'eList', 'eCnt');
+  render('이동길', 'dList', 'dCnt');
+}
+function escapeHtml(s) {
+  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+async function addWeekly(who) {
+  const inputId = who === '이은경' ? 'eInput' : 'dInput';
+  const authorId = who === '이은경' ? 'eAuthor' : 'dAuthor';
+  const input = document.getElementById(inputId);
+  const text = input.value.trim();
+  if (!text) return;
+  const author = document.getElementById(authorId).value;
+  const deadline = fmtDate(getThisFridayNoon());
+  const today = fmtDate(new Date());
+  try {
+    await gasPost({ action: 'append', sheet: '이번주', values: [who, text, author, '대기', today, deadline] });
+    input.value = '';
+    showToast('추가 완료');
+    setTimeout(() => loadData(), 800);
+  } catch (e) { showToast('추가 실패'); }
+}
+async function toggleWeekly(rowIdx, checked) {
+  const row = (allData['이번주'] || [])[rowIdx] || [];
+  const values = [...row];
+  while (values.length < 6) values.push('');
+  values[3] = checked ? '완료' : '대기';
+  try {
+    await gasPost({ action: 'update', sheet: '이번주', range: `A${rowIdx+1}:F${rowIdx+1}`, values });
+    setTimeout(() => loadData(), 600);
+  } catch (e) { showToast('업데이트 실패'); }
+}
+async function deleteWeekly(rowIdx) {
+  try {
+    await gasPost({ action: 'clear', sheet: '이번주', range: `A${rowIdx+1}:F${rowIdx+1}` });
+    setTimeout(() => loadData(), 600);
+  } catch (e) { showToast('삭제 실패'); }
+}
+
+// ─── 글로벌 검색 ───
+const SEARCH_LABELS = {
+  '로드맵': '🗺️', '할일': '✅', '회의록': '📝', '아이디어': '💡',
+  '조사': '🔬', '의사결정': '⚖️', '합의사항': '🤝', '공지사항': '📢',
+  '이번주': '⚡', '마케팅': '📸'
+};
+function runSearch() {
+  const q = document.getElementById('globalSearch').value.trim().toLowerCase();
+  const box = document.getElementById('searchResults');
+  if (!q) { box.style.display = 'none'; return; }
+  const hits = [];
+  Object.keys(allData || {}).forEach(sheet => {
+    const rows = allData[sheet] || [];
+    rows.forEach((row, idx) => {
+      if (idx < 2 || !row) return;
+      const joined = row.join(' | ').toLowerCase();
+      if (joined.includes(q)) {
+        const title = (row[1] || row[0] || '').trim();
+        const snippet = row.filter(c => c).join(' · ').slice(0, 100);
+        hits.push({ sheet, idx, title, snippet });
+      }
+    });
+  });
+  // 리포트 검색
+  (REPORTS || []).forEach(r => {
+    if ((r.title + ' ' + r.desc).toLowerCase().includes(q)) {
+      hits.push({ sheet: '리포트', file: r.file, title: r.title, snippet: r.desc });
+    }
+  });
+  if (hits.length === 0) {
+    box.innerHTML = '<div style="padding:14px;color:#9ca3af;font-size:13px;">검색 결과 없음</div>';
+  } else {
+    box.innerHTML = hits.slice(0, 30).map(h => {
+      const icon = SEARCH_LABELS[h.sheet] || '📄';
+      const action = h.file
+        ? `onclick="window.open('${h.file}','_blank')"`
+        : `onclick="jumpToResult('${h.sheet}', ${h.idx})"`;
+      return `<div ${action} style="padding:10px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;font-size:13px;" onmouseover="this.style.background='#f6f8fa'" onmouseout="this.style.background='#fff'">
+        <div style="color:#C9A84C;font-size:11px;font-weight:700;margin-bottom:2px;">${icon} ${h.sheet}</div>
+        <div style="color:#1f2328;font-weight:600;">${escapeHtml(h.title)}</div>
+        <div style="color:#656d76;font-size:11px;margin-top:2px;">${escapeHtml(h.snippet)}</div>
+      </div>`;
+    }).join('');
+  }
+  box.style.display = 'block';
+}
+function closeSearch() {
+  document.getElementById('searchResults').style.display = 'none';
+}
+function jumpToResult(sheet, idx) {
+  closeSearch();
+  document.getElementById('globalSearch').value = '';
+  if (sheet === '이번주') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+  if (SHEET_ORDER.includes(sheet)) {
+    switchTab(sheet);
+    setTimeout(() => {
+      const cards = document.querySelectorAll('[data-row-idx]');
+      cards.forEach(c => { if (parseInt(c.dataset.rowIdx) === idx) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+    }, 300);
+  }
+}
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('globalSearch').focus();
+  }
+});
 
 function getPersonInfo(name) {
   const n = (name || '').trim();
