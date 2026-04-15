@@ -752,7 +752,7 @@
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
-const SHEET_ORDER = ['공지사항', '로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항', '리포트', '마케팅'];
+const SHEET_ORDER = ['공지사항', '로드맵', '할일', '회의록', '논의', '아이디어', '조사', '의사결정', '합의사항', '리포트', '마케팅'];
 const DEPTS = ['펜타스쿨', '펜타캠퍼스', '펜타웍스', '펜타몰', '펜타북스', '펜타랩', '본부'];
 const DEPT_META = {
   '펜타스쿨': { icon: '🏫', sites: [], desc: '초등 문해력 본점·가맹' },
@@ -771,7 +771,10 @@ function normalizeDept(v) {
 }
 const FUNCTIONAL_TABS = ['할일', '로드맵', '기록'];
 const GLOBAL_TABS = ['공지사항', '리포트'];
-const ARCHIVE_SOURCES = ['아이디어', '조사', '의사결정', '합의사항', '회의록'];
+// 논의 시트 = 아이디어→조사→결정→합의 생애주기 통합 (2026-04-15)
+// 회의록은 별도 소스로 유지 (생애주기 아님, 이벤트 기록)
+const DISCUSSION_STATUSES = ['아이디어', '조사중', '결정대기', '합의', '보류', '폐기'];
+const ARCHIVE_SOURCES = ['아이디어', '조사', '의사결정', '합의사항', '회의록']; // 레거시 호환용, 점진 제거 예정
 function sheetHasProjectCol(sheet) {
   const c = SHEET_CONFIG[sheet];
   return c && c.columns && c.columns.includes('프로젝트');
@@ -841,6 +844,11 @@ const SHEET_CONFIG = {
     sub: '확정',
     desc: '이동길 + 이은경이 <strong>확정한 전제 조건과 역할분담</strong>. 더 이상 논의 불필요.',
     columns: ['카테고리', '항목', '내용', '담당', '비고', '프로젝트'],
+  },
+  '논의': {
+    sub: '생애주기',
+    desc: '<strong>아이디어→조사→결정→합의</strong>를 한 카드의 상태 전환으로 관리.',
+    columns: ['카테고리', '제목', '내용', '상태', '담당', '프로젝트', '서브프로젝트', '우선순위', '선택지', '근거/메모', '리포트링크', '생성일', '최종수정일', '이력'],
   },
   '기록': {
     sub: '통합',
@@ -1891,58 +1899,78 @@ function setArchiveSource(s) {
 
 function renderArchivePanel() {
   const panel = document.getElementById('panel');
-  const SOURCE_META = {
-    '아이디어':  { tag: '아이디어', color: '#8B6FD3', bg: '#f2ecfb' },
-    '조사':      { tag: '조사',     color: '#3b82f6', bg: '#e6f0ff' },
-    '의사결정':  { tag: '결정',     color: '#C9A84C', bg: '#faf4e4' },
-    '합의사항':  { tag: '합의',     color: '#10b981', bg: '#e5f7ef' },
-    '회의록':    { tag: '회의록',   color: '#6b6b6b', bg: '#eeeeee' },
+  // 상태별 색상 (생애주기 6단계 + 회의록)
+  const STATUS_META = {
+    '아이디어':   { tag: '아이디어', color: '#8B6FD3', bg: '#f2ecfb' },
+    '조사중':     { tag: '조사중',   color: '#3b82f6', bg: '#e6f0ff' },
+    '결정대기':   { tag: '결정대기', color: '#C9A84C', bg: '#faf4e4' },
+    '합의':       { tag: '합의',     color: '#10b981', bg: '#e5f7ef' },
+    '보류':       { tag: '보류',     color: '#9ca3af', bg: '#f0f0f0' },
+    '폐기':       { tag: '폐기',     color: '#dc2626', bg: '#fee2e2' },
+    '회의록':     { tag: '회의록',   color: '#6b6b6b', bg: '#eeeeee' },
   };
+
   const items = [];
-  ARCHIVE_SOURCES.forEach(src => {
-    const cfg = SHEET_CONFIG[src];
-    const rows = (allData[src] || []).slice(2);
-    const hasProj = sheetHasProjectCol(src);
-    const pIdx = hasProj ? cfg.columns.indexOf('프로젝트') : -1;
-    rows.forEach((r, idx) => {
-      const title = (r[1] || '').trim();
-      if (!title || title.startsWith('[아카이브')) return;
-      if (currentDept && (!hasProj || normalizeDept(r[pIdx]) !== currentDept)) return;
-      const meta = SOURCE_META[src];
-      let body = '';
-      if (src === '회의록') body = (r[3] || '') + (r[5] ? ' · ' + r[5] : '');
-      else if (src === '아이디어') body = r[2] || '';
-      else if (src === '조사') body = (r[2] || '') + (r[4] ? ' — ' + r[4] : '');
-      else if (src === '의사결정') body = (r[3] || '') + (r[6] ? ' · ' + r[6] : '');
-      else if (src === '합의사항') body = (r[2] || '') + (r[4] ? ' · ' + r[4] : '');
-      items.push({
-        src, meta, title, body,
-        category: r[0] || '',
-        assignee: r[src === '의사결정' ? 5 : src === '합의사항' ? 3 : -1] || '',
-        rowIdx: idx + 2,
-      });
+
+  // 1. 논의 시트 — 생애주기 통합
+  const discRows = (allData['논의'] || []).slice(2);
+  discRows.forEach((r, idx) => {
+    const title = (r[1] || '').trim();
+    if (!title) return;
+    const status = (r[3] || '').trim() || '아이디어';
+    const proj = normalizeDept(r[5]);
+    if (currentDept && proj !== currentDept) return;
+    const meta = STATUS_META[status] || STATUS_META['아이디어'];
+    const bodyParts = [r[2], r[8], r[9]].filter(x => x && x.trim());
+    items.push({
+      src: '논의', status, meta, title,
+      body: bodyParts.join(' · '),
+      category: r[0] || '',
+      assignee: r[4] || '',
+      priority: r[7] || '',
+      rowIdx: idx + 2,
     });
   });
 
-  const counts = { '전체': items.length };
-  ARCHIVE_SOURCES.forEach(s => { counts[s] = items.filter(i => i.src === s).length; });
+  // 2. 회의록 시트 — 별도 소스 (생애주기 아님)
+  const mtgRows = (allData['회의록'] || []).slice(2);
+  mtgRows.forEach((r, idx) => {
+    const title = (r[1] || '').trim();
+    if (!title || title.startsWith('[아카이브')) return;
+    items.push({
+      src: '회의록', status: '회의록', meta: STATUS_META['회의록'], title,
+      body: (r[3] || '') + (r[5] ? ' · ' + r[5] : ''),
+      category: r[0] || '',
+      assignee: r[2] || '',
+      priority: '',
+      rowIdx: idx + 2,
+    });
+  });
 
-  const filtered = archiveSourceFilter === '전체'
-    ? items
-    : items.filter(i => i.src === archiveSourceFilter);
+  const FILTERS = ['전체', ...DISCUSSION_STATUSES, '회의록'];
+  const counts = { '전체': items.filter(i => i.src === '논의').length };
+  DISCUSSION_STATUSES.forEach(s => { counts[s] = items.filter(i => i.status === s).length; });
+  counts['회의록'] = items.filter(i => i.src === '회의록').length;
 
-  const chips = ['전체', ...ARCHIVE_SOURCES].map(s => {
+  let filtered;
+  if (archiveSourceFilter === '전체') filtered = items.filter(i => i.src === '논의');
+  else if (archiveSourceFilter === '회의록') filtered = items.filter(i => i.src === '회의록');
+  else filtered = items.filter(i => i.status === archiveSourceFilter);
+
+  const chips = FILTERS.map(s => {
     const active = archiveSourceFilter === s;
-    const meta = SOURCE_META[s];
+    const meta = STATUS_META[s];
     const color = s === '전체' ? '#0a0a0a' : (meta ? meta.color : '#0a0a0a');
+    const label = s === '전체' ? s : meta.tag;
     return `<span class="archive-chip ${active?'on':''}" onclick="setArchiveSource('${s}')"
-      style="${active?'background:'+color+';color:#fff;border-color:'+color:''}">${s==='전체'?s:SOURCE_META[s].tag}<b>${counts[s]||0}</b></span>`;
+      style="${active?'background:'+color+';color:#fff;border-color:'+color:''}">${label}<b>${counts[s]||0}</b></span>`;
   }).join('');
 
   const config = SHEET_CONFIG['기록'];
   let html = `
     <div class="panel-header">
       <div class="panel-desc">${config.desc}</div>
+      <button class="btn btn-primary" style="white-space:nowrap" onclick="openAddModalFor('논의')">+ 논의 추가</button>
     </div>
     <div class="archive-chips">${chips}</div>
     <div class="archive-list">
@@ -1952,11 +1980,13 @@ function renderArchivePanel() {
     html += `<div style="padding:40px;text-align:center;color:#999">기록이 없습니다.</div>`;
   } else {
     filtered.forEach(it => {
+      const prioTag = it.priority && it.priority !== '보류'
+        ? `<span class="priority-tag priority-${it.priority==='긴급'?'urgent':'important'}">${escapeHtml(it.priority)}</span>` : '';
       html += `
         <div class="archive-card" onclick="openEditModal('${it.src}', ${it.rowIdx})">
           <div class="archive-tag" style="background:${it.meta.bg};color:${it.meta.color}">${it.meta.tag}</div>
           <div class="archive-body">
-            <div class="archive-title">${escapeHtml(it.title)}</div>
+            <div class="archive-title">${escapeHtml(it.title)}${prioTag}</div>
             ${it.body ? `<div class="archive-desc">${escapeHtml(it.body).slice(0, 200)}${it.body.length>200?'…':''}</div>` : ''}
             <div class="archive-meta">
               ${it.category ? `<span>${escapeHtml(it.category)}</span>` : ''}
@@ -1969,6 +1999,12 @@ function renderArchivePanel() {
   }
   html += `</div>`;
   panel.innerHTML = html;
+}
+
+// 특정 시트에 새 항목 추가 (현재 탭과 무관)
+function openAddModalFor(sheet) {
+  currentTab = sheet;
+  openAddModal();
 }
 
 function escapeHtml(s) {
