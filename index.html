@@ -499,6 +499,14 @@
   .lc-stat b { font-size: 18px; font-weight: 700; color: #1f2328; display: block; margin-bottom: 2px; }
   .lc-next { font-size: 12px; color: #656d76; margin-top: 4px; }
   .lc-next b { font-weight: 600; color: #C9A84C; }
+  .lc-sp { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; }
+  .lc-sp-badge { background: #F5EFD9; color: #C9A84C; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+  .lc-sp-badge b { font-size: 13px; margin-left: 2px; }
+  .lc-sp-preview { color: #656d76; }
+  .lc-sp-empty { color: #9ca3af; font-style: italic; }
+  .landing-card.hq .lc-sp-badge { background: rgba(201,168,76,0.2); color: #C9A84C; }
+  .landing-card.hq .lc-sp-preview { color: rgba(255,255,255,0.7); }
+  .landing-card.hq .lc-sp-empty { color: rgba(255,255,255,0.4); }
   .landing-header {
     display: flex; justify-content: space-between; align-items: baseline;
     margin-bottom: 20px;
@@ -841,6 +849,26 @@ function routeView() {
   renderWeekly();
 }
 
+function subProjectsOfDept(dept) {
+  const names = new Set();
+  for (const sheet of FUNCTIONAL_TABS) {
+    const cfg = SHEET_CONFIG[sheet];
+    if (!cfg || !cfg.columns) continue;
+    const pIdx = cfg.columns.indexOf('프로젝트');
+    const spIdx = cfg.columns.indexOf('서브프로젝트');
+    if (pIdx < 0 || spIdx < 0) continue;
+    const rows = (allData[sheet] || []).slice(2);
+    rows.forEach(r => {
+      const title = (r[1]||'').trim();
+      if (!title || title.startsWith('[아카이브') || title.startsWith('✓')) return;
+      if (normalizeDept(r[pIdx]) !== dept) return;
+      const sp = (r[spIdx]||'').trim();
+      if (sp) names.add(sp);
+    });
+  }
+  return names;
+}
+
 function nextMilestone(dept) {
   const rows = (allData['로드맵'] || []).slice(2);
   const pIdx = SHEET_CONFIG['로드맵'].columns.indexOf('프로젝트');
@@ -865,6 +893,9 @@ function renderLanding() {
     const todoCnt = deptRowCount(d, '할일');
     const decCnt = deptRowCount(d, '의사결정');
     const ideaCnt = deptRowCount(d, '아이디어');
+    const spSet = subProjectsOfDept(d);
+    const spCount = spSet.size;
+    const spPreview = Array.from(spSet).slice(0, 3).join(' · ');
     const next = nextMilestone(d);
     const nextHtml = next
       ? `<div class="lc-next">다음: <b>${escapeHtml(next.title)}</b>${next.due?` · ${escapeHtml(next.due)}`:''}</div>`
@@ -876,6 +907,10 @@ function renderLanding() {
         <span class="lc-name">${d}</span>
       </div>
       <div class="lc-desc">${meta.desc}</div>
+      <div class="lc-sp">
+        <span class="lc-sp-badge">서브프로젝트 <b>${spCount}</b></span>
+        ${spPreview ? `<span class="lc-sp-preview">${escapeHtml(spPreview)}${spCount>3?` 외 ${spCount-3}`:''}</span>` : `<span class="lc-sp-empty">미등록</span>`}
+      </div>
       ${nextHtml}
       <div class="lc-stats">
         <div class="lc-stat"><b>${todoCnt}</b>진행 할일</div>
