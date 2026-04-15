@@ -408,7 +408,7 @@
 <body>
 
 <header>
-  <h1><span>PENTA</span> 대시보드</h1>
+  <h1 onclick="backToLanding()" style="cursor:pointer" title="랜딩으로"><span>PENTA</span> 대시보드</h1>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
     <div class="search-wrap" style="position:relative;">
       <input id="globalSearch" type="text" placeholder="🔍 전체 검색 (Ctrl+K)"
@@ -1987,9 +1987,8 @@ async function toggleTodoStatus(rowIdx) {
   renderTabs();
   renderPanel();
 
-  // API는 백그라운드로
-  const endCol = String.fromCharCode(64 + config.columns.length);
-  gasPost({ action: 'update', sheet: '할일', range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}`, values });
+  // API: 상태(E) + 완료일(F) 2칸만 업데이트
+  gasPost({ action: 'update', sheet: '할일', range: `E${rowIdx + 1}:F${rowIdx + 1}`, values: [values[4], values[5]] });
 }
 
 function openFeedbackModal() {
