@@ -821,7 +821,7 @@ function buildChangeMap(data) {
 
 async function loadData() {
   try {
-    const res = await fetch(API);
+    const res = await fetch(API + '?_=' + Date.now(), { cache: 'no-store' });
     allData = await res.json();
   } catch (e) {
     allData = INLINE_DATA;
@@ -1591,8 +1591,8 @@ function closeModal() {
 }
 
 async function gasPost(payload) {
-  const url = API + '?payload=' + encodeURIComponent(JSON.stringify(payload));
-  await fetch(url);
+  const url = API + '?payload=' + encodeURIComponent(JSON.stringify(payload)) + '&_=' + Date.now();
+  await fetch(url, { cache: 'no-store' });
 }
 
 async function saveItem() {
@@ -1607,7 +1607,7 @@ async function saveItem() {
     }
     closeModal();
     showToast(editingRow !== null ? '수정 완료' : '추가 완료');
-    setTimeout(() => loadData(), 1000);
+    setTimeout(() => loadData(), 1500);
   } catch (e) { showToast('저장 실패'); }
 }
 
@@ -1618,7 +1618,7 @@ async function deleteRow(rowIdx) {
   try {
     await gasPost({ action: 'clear', sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}` });
     showToast('삭제 완료');
-    setTimeout(() => loadData(), 1000);
+    setTimeout(() => loadData(), 1500);
   } catch (e) { showToast('삭제 실패'); }
 }
 
@@ -1633,7 +1633,7 @@ async function archiveCard(rowIdx) {
   try {
     await gasPost({ action: 'update', sheet: currentTab, range: `A${rowIdx + 1}:${endCol}${rowIdx + 1}`, values });
     showToast('아카이브로 이동');
-    setTimeout(() => loadData(), 1000);
+    setTimeout(() => loadData(), 1500);
   } catch (e) { showToast('아카이브 실패'); }
 }
 
