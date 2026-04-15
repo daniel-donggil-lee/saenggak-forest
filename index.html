@@ -1366,15 +1366,27 @@ function deptRowCount(dept, sheet) {
     return ARCHIVE_SOURCES.reduce((sum, s) => sum + deptRowCount(dept, s), 0);
   }
   const rows = (allData[sheet] || []).slice(2);
+  const cfg = SHEET_CONFIG[sheet];
   const hasProj = sheetHasProjectCol(sheet);
-  const pIdx = hasProj ? SHEET_CONFIG[sheet].columns.indexOf('프로젝트') : -1;
+  const pIdx = hasProj ? cfg.columns.indexOf('프로젝트') : -1;
+  const spIdx = cfg && cfg.columns ? cfg.columns.indexOf('서브프로젝트') : -1;
+  // 서브프로젝트 필터 활성 시: 할일은 마일스톤 매칭으로 lookup
+  const msSet = (subprojectFilter && sheet === '할일' && dept)
+    ? milestonesOfSubproject(dept, subprojectFilter) : null;
   return rows.filter(r => {
     const title = (r[1]||'').trim();
     if (!title || title.startsWith('[아카이브')) return false;
     if (sheet === '할일' && (r[4]||'') === '완료') return false;
-    if (!dept) return true;
-    if (!hasProj) return false;
-    return normalizeDept(r[pIdx]) === dept;
+    if (dept) {
+      if (!hasProj) return false;
+      if (normalizeDept(r[pIdx]) !== dept) return false;
+    }
+    if (subprojectFilter) {
+      if (msSet) return msSet.has((r[0]||'').trim());
+      if (spIdx < 0) return false;
+      return (r[spIdx]||'').trim() === subprojectFilter;
+    }
+    return true;
   }).length;
 }
 
@@ -2282,6 +2294,13 @@ function renderTodoPanel(config, rows, allDataRows) {
       <span>완료 ${completed.length}건</span>
     </div>
   `;
+
+  if (!active.length && !completed.length) {
+    html += `<div style="padding:40px;text-align:center;color:#9ca3af">${subprojectFilter ? '「'+escapeHtml(subprojectFilter)+'」 서브프로젝트에 할일이 없습니다.' : '할일이 없습니다.'}</div>`;
+    document.getElementById('mainContent').innerHTML = html;
+    fetchFeedback();
+    return;
+  }
 
   // 마일스톤별 그룹핑 (미완료) — 빈 마일스톤도 "(마일스톤 미지정)"로 묶어 표시
   const milestones = [...new Set(active.map(r => (r[0]||'').trim()))];
