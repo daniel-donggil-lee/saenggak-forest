@@ -1435,11 +1435,15 @@ function renderTabs() {
   }).join('') + `<div class="subtab global" onclick="window.location.href='marketing.html'">📸 마케팅<span class="count">${CONTENT_COUNT}</span></div>`;
 
   // 부서 진입 시에는 공지사항/리포트/마케팅 전역 탭 숨김 (랜딩에서만 노출)
-  bar.innerHTML = `
-    <div class="depts">${deptHtml}</div>
+  // 서브프로젝트 진입 시에는 기능 탭바도 숨김 (통합 포커스 뷰로 전환)
+  const subtabsHtml = subprojectFilter ? '' : `
     <div class="subtabs">
       <div class="subtabs-group">${funcHtml}</div>
     </div>
+  `;
+  bar.innerHTML = `
+    <div class="depts">${deptHtml}</div>
+    ${subtabsHtml}
   `;
 }
 
@@ -1482,8 +1486,161 @@ function switchTab(name) {
   renderPanel();
 }
 
+// 서브프로젝트 포커스 뷰 — 진행률·로드맵·할일·논의·리포트를 한 화면에 통합
+function renderSubprojectFocus() {
+  const dept = currentDept;
+  const sp = subprojectFilter;
+  const main = document.getElementById('mainContent');
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  // 로드맵 수집
+  const roadCfg = SHEET_CONFIG['로드맵'];
+  const roadPIdx = roadCfg.columns.indexOf('프로젝트');
+  const roadSpIdx = roadCfg.columns.indexOf('서브프로젝트');
+  const roadRows = (allData['로드맵']||[]).slice(2).filter(r => {
+    const title = (r[1]||'').trim();
+    if (!title || title.startsWith('[아카이브')) return false;
+    if (normalizeDept(r[roadPIdx]) !== dept) return false;
+    return (r[roadSpIdx]||'').trim() === sp;
+  });
+  const roadDone = roadRows.filter(r => (r[3]||'') === '완료').length;
+  const roadPct = roadRows.length ? Math.round(roadDone/roadRows.length*100) : 0;
+
+  // 할일 수집 (할일은 서브프로젝트 컬럼이 없어 마일스톤 매칭)
+  const msSet = milestonesOfSubproject(dept, sp);
+  const todoRows = (allData['할일']||[]).slice(2).filter(r => {
+    if (!(r[1]||'').trim()) return false;
+    return msSet.has((r[0]||'').trim());
+  });
+  const todoActive = todoRows.filter(r => (r[4]||'') !== '완료');
+  const todoDone = todoRows.filter(r => (r[4]||'') === '완료');
+
+  // 논의 수집
+  const disCfg = SHEET_CONFIG['논의'] || {columns:['카테고리','제목','내용','상태','담당','프로젝트','서브프로젝트']};
+  const disPIdx = disCfg.columns.indexOf('프로젝트');
+  const disSpIdx = disCfg.columns.indexOf('서브프로젝트');
+  const disStIdx = disCfg.columns.indexOf('상태');
+  const disRows = (allData['논의']||[]).slice(2).filter(r => {
+    const title = (r[1]||'').trim();
+    if (!title || title.startsWith('[아카이브')) return false;
+    if (disPIdx >= 0 && normalizeDept(r[disPIdx]) !== dept) return false;
+    if (disSpIdx >= 0 && (r[disSpIdx]||'').trim() !== sp) return false;
+    return true;
+  });
+
+  // 리포트
+  const reps = REPORTS.filter(r => r.dept === dept && (r.sp||'') === sp);
+
+  // HTML
+  const deptMeta = DEPT_META[dept] || {icon:'', desc:''};
+  let html = `
+    <div class="panel-header">
+      <div class="panel-desc"><strong>${deptMeta.icon} ${dept} · ${escapeHtml(sp)}</strong> 서브프로젝트 포커스 뷰.
+        <a onclick="setSubprojectFilter('')" style="margin-left:10px;cursor:pointer;color:#0969da">← 전체 보기</a>
+      </div>
+    </div>
+
+    <div class="progress-summary">
+      <span class="progress-summary-label">로드맵 진행률</span>
+      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width:${roadPct}%"></div></div>
+      <span class="progress-text">${roadDone}/${roadRows.length}</span>
+      <span style="font-size:12px;color:#656d76">할일 ${todoActive.length}건 · 논의 ${disRows.length}건 · 리포트 ${reps.length}건</span>
+    </div>
+  `;
+
+  // 로드맵 섹션
+  html += `<div class="section-title" style="margin-top:24px">🗺️ 로드맵 마일스톤 (${roadRows.length})</div>`;
+  if (!roadRows.length) {
+    html += `<div style="padding:16px;color:#9ca3af">등록된 마일스톤이 없습니다.</div>`;
+  } else {
+    const rawRoad = allData['로드맵']||[];
+    roadRows.forEach(row => {
+      const realIdx = rawRoad.indexOf(row);
+      const status = row[3]||'예정';
+      const sc = status==='예정'?'status-scheduled':status==='진행중'?'status-progress':status==='완료'?'status-done':'status-delayed';
+      const pi = getPersonInfo(row[4]||'');
+      html += `<div class="roadmap-row" onclick="openEditModal(${realIdx},'로드맵')">
+        <span class="roadmap-milestone">${escapeHtml(row[1]||'')}</span>
+        <span class="roadmap-date">${formatDateWithDay(row[5]||row[2]||'')}</span>
+        <span class="dot ${pi.dot}" style="width:20px;height:20px;font-size:9px">${pi.label}</span>
+        <span class="status-badge ${sc}">${status}</span>
+      </div>`;
+    });
+  }
+
+  // 할일 섹션
+  html += `<div class="section-title" style="margin-top:24px">✅ 할일 (미완료 ${todoActive.length} · 완료 ${todoDone.length})</div>`;
+  if (!todoActive.length && !todoDone.length) {
+    html += `<div style="padding:16px;color:#9ca3af">등록된 할일이 없습니다.</div>`;
+  } else {
+    const rawTodo = allData['할일']||[];
+    const grouped = {};
+    todoActive.forEach(r => {
+      const ms = (r[0]||'').trim() || '(마일스톤 미지정)';
+      (grouped[ms] = grouped[ms] || []).push(r);
+    });
+    Object.keys(grouped).forEach(ms => {
+      html += `<div class="todo-group"><div class="todo-group-header">${escapeHtml(ms)}</div>`;
+      grouped[ms].forEach(row => {
+        const realIdx = rawTodo.indexOf(row);
+        const pi = getPersonInfo(row[2]||'');
+        const due = row[3]||'';
+        const dueDate = due ? new Date(due) : null;
+        const isOverdue = dueDate && dueDate < today;
+        const status = row[4]||'대기';
+        html += `<div class="todo-row" onclick="openEditModal(${realIdx},'할일')">
+          <span class="todo-title">${escapeHtml(row[1]||'')}</span>
+          <span class="todo-due ${isOverdue?'overdue':''}">${due?formatDateWithDay(due):''}</span>
+          <span class="dot ${pi.dot}" style="width:20px;height:20px;font-size:9px">${pi.label}</span>
+          <span class="status-badge status-${status==='완료'?'done':status==='진행중'?'progress':'scheduled'}">${status}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+  }
+
+  // 논의 섹션
+  html += `<div class="section-title" style="margin-top:24px">💭 논의 (${disRows.length})</div>`;
+  if (!disRows.length) {
+    html += `<div style="padding:16px;color:#9ca3af">등록된 논의가 없습니다.</div>`;
+  } else {
+    const rawDis = allData['논의']||[];
+    disRows.forEach(row => {
+      const realIdx = rawDis.indexOf(row);
+      const st = disStIdx>=0 ? (row[disStIdx]||'') : '';
+      html += `<div class="todo-row" onclick="openEditModal(${realIdx},'논의')">
+        <span class="todo-title">${escapeHtml(row[1]||'')}</span>
+        <span class="status-badge">${escapeHtml(st)}</span>
+      </div>`;
+    });
+  }
+
+  // 리포트 섹션
+  html += `<div class="section-title" style="margin-top:24px">📄 리포트 (${reps.length})</div>`;
+  if (!reps.length) {
+    html += `<div style="padding:16px;color:#9ca3af">연결된 리포트가 없습니다.</div>`;
+  } else {
+    html += `<div class="report-grid">`;
+    reps.forEach(r => {
+      const gIdx = REPORTS.indexOf(r);
+      html += `<div class="report-card" onclick="openReport(${gIdx})">
+        <div class="report-title">${escapeHtml(r.title)}</div>
+        <div class="report-desc">${escapeHtml(r.desc||'')}</div>
+        <div class="report-meta"><span>${r.date||''}</span><span class="report-cat">${r.category||''}</span></div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  main.innerHTML = html;
+}
+
 function renderPanel() {
   renderDeptBanner();
+  // 서브프로젝트 포커스 모드: 해당 프로젝트만 한 화면에 통합
+  if (currentDept && subprojectFilter) {
+    return renderSubprojectFocus();
+  }
   const config = SHEET_CONFIG[currentTab];
   const rows = allData[currentTab] || [];
   let allDataRows = rows.slice(2).filter(r => r.some(c => c));
@@ -1804,7 +1961,8 @@ function openAddModal() {
   document.getElementById('modal').classList.add('show');
 }
 
-function openEditModal(rowIdx) {
+function openEditModal(rowIdx, sheetOverride) {
+  if (sheetOverride) currentTab = sheetOverride;
   editingRow = rowIdx;
   const config = SHEET_CONFIG[currentTab];
   const row = (allData[currentTab] || [])[rowIdx] || [];
