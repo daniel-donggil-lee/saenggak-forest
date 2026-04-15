@@ -2365,30 +2365,36 @@ function renderRoadmapPanel(config, rows, allDataRows) {
     </div>
   `;
 
-  // Phase별 그룹핑 (완료 제외)
+  // 부서 안에서는 서브프로젝트별 그룹, 랜딩/전체에서는 Phase별 그룹
+  const groupBySp = !!currentDept;
   const activeRows = filteredRows.filter(r => (r[3]||'') !== '완료');
   const completedRows = filteredRows.filter(r => (r[3]||'') === '완료');
-  const phases = [...new Set(activeRows.map(r => (r[0]||'').trim()).filter(Boolean))];
-  phases.forEach(phase => {
-    const phaseRowsAll = filteredRows.filter(r => (r[0]||'').trim() === phase);
-    const phaseRows = activeRows.filter(r => (r[0]||'').trim() === phase);
-    const phaseDone = phaseRowsAll.filter(r => (r[3]||'') === '완료').length;
-    const phasePct = phaseRowsAll.length > 0 ? Math.round((phaseDone / phaseRowsAll.length) * 100) : 0;
-    // Phase 레이블은 펜타스쿨/본부 컨텍스트에서만 표시 (P2=본점 준비 등은 펜타스쿨 기준)
-    const showPhaseLabel = !currentDept || currentDept === '펜타스쿨' || currentDept === '본부';
-    const phaseLabel = showPhaseLabel ? (PHASE_NAMES[phase] || '') : '';
-    const phaseTitle = phaseLabel ? `${phase}: ${phaseLabel}` : phase;
+  const keyOf = r => groupBySp ? ((r[7]||'').trim() || '(미분류)') : ((r[0]||'').trim());
+  const groupKeys = [...new Set(activeRows.map(keyOf).filter(Boolean))];
+  groupKeys.forEach(gk => {
+    const groupAll = filteredRows.filter(r => keyOf(r) === gk);
+    const groupActive = activeRows.filter(r => keyOf(r) === gk);
+    const groupDone = groupAll.filter(r => (r[3]||'') === '완료').length;
+    const groupPct = groupAll.length > 0 ? Math.round((groupDone / groupAll.length) * 100) : 0;
+    let groupTitle;
+    if (groupBySp) {
+      groupTitle = gk;
+    } else {
+      const showPhaseLabel = !currentDept || currentDept === '펜타스쿨' || currentDept === '본부';
+      const phaseLabel = showPhaseLabel ? (PHASE_NAMES[gk] || '') : '';
+      groupTitle = phaseLabel ? `${gk}: ${phaseLabel}` : gk;
+    }
 
     html += `<div class="roadmap-group">
       <div class="roadmap-group-header">
-        <span class="roadmap-group-title">${phaseTitle}</span>
+        <span class="roadmap-group-title">${groupTitle}</span>
         <div style="display:flex;align-items:center;gap:8px">
-          <div class="progress-bar"><div class="progress-fill progress-fill-blue" style="width:${phasePct}%"></div></div>
-          <span class="progress-text">${phaseDone}/${phaseRowsAll.length}</span>
+          <div class="progress-bar"><div class="progress-fill progress-fill-blue" style="width:${groupPct}%"></div></div>
+          <span class="progress-text">${groupDone}/${groupAll.length}</span>
         </div>
       </div>`;
 
-    phaseRows.forEach(row => {
+    groupActive.forEach(row => {
       const realIdx = rows.indexOf(row);
       const milestone = row[1] || '';
       const date = row[2] || '';
