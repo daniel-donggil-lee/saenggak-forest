@@ -455,6 +455,63 @@
   @media (max-width: 640px) {
     .projects-banner { padding: 12px 20px; }
   }
+
+  /* Landing page — 7 dept cards */
+  .landing {
+    padding: 32px 40px 60px;
+  }
+  .landing-title {
+    font-size: 28px; font-weight: 700; color: #1f2328; margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  .landing-sub {
+    font-size: 14px; color: #656d76; margin-bottom: 32px;
+  }
+  .landing-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .landing-card {
+    background: #fff; border: 1px solid #d1d9e0; border-radius: 14px;
+    padding: 28px 26px; cursor: pointer; transition: all 0.2s;
+    display: flex; flex-direction: column; gap: 14px; min-height: 180px;
+    position: relative; overflow: hidden;
+  }
+  .landing-card:hover {
+    border-color: #C9A84C; box-shadow: 0 8px 24px rgba(201,168,76,0.12);
+    transform: translateY(-2px);
+  }
+  .landing-card.hq {
+    background: #0a0a0a; color: #fff; border-color: #0a0a0a;
+  }
+  .landing-card.hq:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .landing-card.hq .lc-desc { color: rgba(255,255,255,0.7); }
+  .landing-card.hq .lc-stat { color: rgba(255,255,255,0.9); }
+  .landing-card.hq .lc-stat b { color: #C9A84C; }
+  .landing-card.hq .lc-next { color: rgba(255,255,255,0.6); }
+  .lc-head { display: flex; align-items: center; gap: 12px; }
+  .lc-icon { font-size: 32px; line-height: 1; }
+  .lc-name { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .lc-desc { font-size: 13px; color: #656d76; line-height: 1.5; flex: 1; }
+  .lc-stats { display: flex; gap: 14px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); }
+  .landing-card.hq .lc-stats { border-top-color: rgba(255,255,255,0.1); }
+  .lc-stat { font-size: 12px; color: #656d76; }
+  .lc-stat b { font-size: 18px; font-weight: 700; color: #1f2328; display: block; margin-bottom: 2px; }
+  .lc-next { font-size: 12px; color: #656d76; margin-top: 4px; }
+  .lc-next b { font-weight: 600; color: #C9A84C; }
+  .landing-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 20px;
+  }
+  .landing-header .btn { font-size: 12px; padding: 4px 10px; }
+
+  /* Back to landing button */
+  .back-to-landing {
+    padding: 6px 12px; background: #fff; border: 1px solid #d1d9e0;
+    border-radius: 6px; font-size: 12px; color: #656d76; cursor: pointer;
+    margin-right: 8px; transition: all 0.15s;
+  }
+  .back-to-landing:hover { background: #f6f8fa; color: #1f2328; }
 </style>
 <div class="projects-banner" id="projectsBanner">
   <div class="projects-banner-inner" id="deptBannerInner">
@@ -602,18 +659,22 @@
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
 const SHEET_ORDER = ['공지사항', '로드맵', '할일', '회의록', '아이디어', '조사', '의사결정', '합의사항', '리포트', '마케팅'];
-const DEPTS = ['전체', '공통', '펜타스쿨', '펜타캠퍼스', '펜타웍스', '펜타몰', '펜타북스', '펜타랩', '책나무'];
+const DEPTS = ['펜타스쿨', '펜타캠퍼스', '펜타웍스', '펜타몰', '펜타북스', '펜타랩', '본부'];
 const DEPT_META = {
-  '전체':     { icon: '📋', sites: [], desc: '모든 부서 통합' },
-  '공통':     { icon: '🌐', sites: [], desc: '법인·지분·공동 운영' },
   '펜타스쿨': { icon: '🏫', sites: [], desc: '초등 문해력 본점·가맹' },
   '펜타캠퍼스': { icon: '🎓', sites: [{ label: '사이트', href: 'pentacampus/' }], desc: '연수원 + 강사 양성' },
   '펜타웍스': { icon: '💼', sites: [], desc: '학원 자동화 컨설팅' },
   '펜타몰':   { icon: '🛍️', sites: [{ label: '공구 리서치', href: 'pentamall/gongu-research.html' }], desc: '큐레이션 쇼핑' },
   '펜타북스': { icon: '📚', sites: [], desc: '자체 출판' },
-  '펜타랩':   { icon: '🔬', sites: [], desc: '펜타 지수·시스템' },
-  '책나무':   { icon: '🌳', sites: [{ label: '연수원 제안', href: 'booktree/' }], desc: 'B2B 납품 프로젝트' }
+  '펜타랩':   { icon: '🔬', sites: [{ label: '책나무 연수원', href: 'booktree/' }], desc: '펜타 지수·솔루션·B2B 납품 (책나무 포함)' },
+  '본부':     { icon: '🏛️', sites: [], desc: '법인·계약·절차·시스템' }
 };
+// 레거시 시트값 매핑: 공통→본부, 책나무→펜타랩
+const DEPT_ALIAS = { '공통': '본부', '책나무': '펜타랩' };
+function normalizeDept(v) {
+  const t = (v||'').trim();
+  return DEPT_ALIAS[t] || t;
+}
 const FUNCTIONAL_TABS = ['로드맵', '할일', '의사결정', '아이디어', '조사', '합의사항'];
 const GLOBAL_TABS = ['공지사항', '회의록', '리포트'];
 function sheetHasProjectCol(sheet) {
@@ -713,8 +774,9 @@ const PERSON_COLORS = {
 const INLINE_DATA = {}; // API 폴백용 — API가 정상 작동하므로 빈 객체로 유지
 
 let allData = {};
+let viewMode = 'landing';  // 'landing' | 'dept'
 let currentTab = '할일';
-let currentDept = '전체';
+let currentDept = null;
 let projectFilter = '';
 let editingRow = null;
 let changeMap = {}; // { 'sheetName-rowIdx': 'new' | 'edited' }
@@ -757,11 +819,95 @@ async function loadData() {
     allData = INLINE_DATA;
   }
   changeMap = buildChangeMap(allData);
-  renderTabs();
-  renderPanel();
-  renderWeekly();
-  renderDeptBanner();
+  routeView();
   localStorage.setItem('brainstorm_prev', JSON.stringify(allData));
+}
+
+function routeView() {
+  const tabBar = document.getElementById('tabBar');
+  const banner = document.getElementById('projectsBanner');
+  const main = document.getElementById('mainContent');
+  if (viewMode === 'landing') {
+    if (tabBar) tabBar.style.display = 'none';
+    if (banner) banner.style.display = 'none';
+    renderLanding();
+  } else {
+    if (tabBar) tabBar.style.display = '';
+    if (banner) banner.style.display = '';
+    renderTabs();
+    renderPanel();
+    renderDeptBanner();
+  }
+  renderWeekly();
+}
+
+function nextMilestone(dept) {
+  const rows = (allData['로드맵'] || []).slice(2);
+  const pIdx = SHEET_CONFIG['로드맵'].columns.indexOf('프로젝트');
+  const candidates = rows.filter(r => {
+    const title = (r[1]||'').trim();
+    if (!title || title.startsWith('[아카이브') || title.startsWith('✓')) return false;
+    if ((r[3]||'') === '완료') return false;
+    return normalizeDept(r[pIdx]) === dept;
+  });
+  candidates.sort((a, b) => {
+    const da = (a[2]||'9999'), db = (b[2]||'9999');
+    return da.localeCompare(db);
+  });
+  if (!candidates.length) return null;
+  return { title: candidates[0][1], due: candidates[0][2] };
+}
+
+function renderLanding() {
+  const main = document.getElementById('mainContent');
+  const cards = DEPTS.map(d => {
+    const meta = DEPT_META[d];
+    const todoCnt = deptRowCount(d, '할일');
+    const decCnt = deptRowCount(d, '의사결정');
+    const ideaCnt = deptRowCount(d, '아이디어');
+    const next = nextMilestone(d);
+    const nextHtml = next
+      ? `<div class="lc-next">다음: <b>${escapeHtml(next.title)}</b>${next.due?` · ${escapeHtml(next.due)}`:''}</div>`
+      : `<div class="lc-next">다음 마일스톤 없음</div>`;
+    const hq = d === '본부' ? 'hq' : '';
+    return `<div class="landing-card ${hq}" onclick="enterDept('${d}')">
+      <div class="lc-head">
+        <span class="lc-icon">${meta.icon}</span>
+        <span class="lc-name">${d}</span>
+      </div>
+      <div class="lc-desc">${meta.desc}</div>
+      ${nextHtml}
+      <div class="lc-stats">
+        <div class="lc-stat"><b>${todoCnt}</b>진행 할일</div>
+        <div class="lc-stat"><b>${decCnt}</b>결정 대기</div>
+        <div class="lc-stat"><b>${ideaCnt}</b>아이디어</div>
+      </div>
+    </div>`;
+  }).join('');
+  main.innerHTML = `
+    <div class="landing">
+      <div class="landing-header">
+        <div>
+          <div class="landing-title">PENTA 대시보드</div>
+          <div class="landing-sub">부서 카드를 눌러 진행 상황을 확인하세요</div>
+        </div>
+      </div>
+      <div class="landing-grid">${cards}</div>
+    </div>`;
+}
+
+function enterDept(dept) {
+  viewMode = 'dept';
+  currentDept = dept;
+  projectFilter = '';
+  if (GLOBAL_TABS.includes(currentTab)) currentTab = '할일';
+  routeView();
+}
+function backToLanding() {
+  viewMode = 'landing';
+  currentDept = null;
+  projectFilter = '';
+  routeView();
 }
 
 // ─── 진행 프로젝트 배너 (동적) ───
@@ -1000,9 +1146,9 @@ function deptRowCount(dept, sheet) {
     const title = (r[1]||'').trim();
     if (!title || title.startsWith('[아카이브')) return false;
     if (sheet === '할일' && (r[4]||'') === '완료') return false;
-    if (dept === '전체') return true;
+    if (!dept) return true;
     if (!hasProj) return false;
-    return (r[pIdx]||'').trim() === dept;
+    return normalizeDept(r[pIdx]) === dept;
   }).length;
 }
 
@@ -1014,7 +1160,8 @@ function renderTabs() {
   const bar = document.getElementById('tabBar');
   const arrow = '<span class="sub-arrow">&rarr;</span>';
 
-  const deptHtml = DEPTS.map(d => {
+  const backBtn = `<div class="dept-tab" onclick="backToLanding()" title="랜딩으로" style="background:rgba(255,255,255,0.08);color:#C9A84C;font-weight:600">← 부서 선택</div>`;
+  const deptHtml = backBtn + DEPTS.map(d => {
     const meta = DEPT_META[d];
     const active = d === currentDept ? 'active' : '';
     const cnt = deptTotal(d);
@@ -1053,12 +1200,11 @@ function renderTabs() {
 }
 
 function switchDept(dept) {
+  viewMode = 'dept';
   currentDept = dept;
   projectFilter = '';
   if (GLOBAL_TABS.includes(currentTab)) currentTab = '할일';
-  renderTabs();
-  renderPanel();
-  renderDeptBanner();
+  routeView();
 }
 
 function renderProjectFilterBar(rows, colIdx) {
@@ -1098,9 +1244,9 @@ function renderPanel() {
   let allDataRows = rows.slice(2).filter(r => r.some(c => c));
 
   // 부서 필터 적용 (프로젝트 컬럼 있는 시트만)
-  if (currentDept !== '전체' && sheetHasProjectCol(currentTab)) {
+  if (currentDept && sheetHasProjectCol(currentTab)) {
     const pIdx = config.columns.indexOf('프로젝트');
-    allDataRows = allDataRows.filter(r => (r[pIdx]||'').trim() === currentDept);
+    allDataRows = allDataRows.filter(r => normalizeDept(r[pIdx]) === currentDept);
   }
 
   // 로드맵 전용 렌더링
@@ -1130,8 +1276,8 @@ function renderPanel() {
     if (!title || title.startsWith('[아카이브')) return false;
     const lastCol = r[r.length - 1] || '';
     if (lastCol.startsWith('[→')) return false;
-    if (currentDept !== '전체' && projectColIdx >= 0) {
-      const p = (r[projectColIdx]||'').trim();
+    if (currentDept && projectColIdx >= 0) {
+      const p = normalizeDept(r[projectColIdx]);
       if (p !== currentDept) return false;
     }
     if (projectFilter && projectColIdx >= 0) {
@@ -1311,11 +1457,11 @@ function renderPanel() {
   }
 }
 
-const PROJECTS = ['펜타스쿨', '펜타캠퍼스', '펜타웍스', '펜타몰', '펜타북스', '펜타랩', '책나무', '공통'];
+const PROJECTS = ['펜타스쿨', '펜타캠퍼스', '펜타웍스', '펜타몰', '펜타북스', '펜타랩', '본부'];
 const PROJECT_COLORS = {
   '펜타스쿨': '#E8F5E9', '펜타캠퍼스': '#E3F2FD', '펜타웍스': '#FFF3E0',
   '펜타몰': '#FCE4EC', '펜타북스': '#F3E5F5', '펜타랩': '#E0F2F1',
-  '책나무': '#FFF8E1', '공통': '#ECEFF1'
+  '본부': '#ECEFF1'
 };
 
 function buildFieldHtml(col, i, val) {
