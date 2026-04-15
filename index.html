@@ -1487,12 +1487,13 @@ function switchTab(name) {
   renderPanel();
 }
 
-// 서브프로젝트 포커스 뷰 — 진행률·로드맵·할일·논의·리포트를 한 화면에 통합
+// 서브프로젝트 포커스 뷰 — booktree 스타일, 한눈에 보이는 타임라인
 function renderSubprojectFocus() {
   const dept = currentDept;
   const sp = subprojectFilter;
   const main = document.getElementById('mainContent');
   const today = new Date(); today.setHours(0,0,0,0);
+  injectSpFocusStyles();
 
   // 로드맵 수집
   const roadCfg = SHEET_CONFIG['로드맵'];
@@ -1532,96 +1533,160 @@ function renderSubprojectFocus() {
   // 리포트
   const reps = REPORTS.filter(r => r.dept === dept && (r.sp||'') === sp);
 
-  // HTML
+  // HTML - booktree 스타일
   const deptMeta = DEPT_META[dept] || {icon:'', desc:''};
-  let html = `
-    <div class="panel-header">
-      <div class="panel-desc"><strong>${deptMeta.icon} ${dept} · ${escapeHtml(sp)}</strong> 서브프로젝트 포커스 뷰.
-        <a onclick="setSubprojectFilter('')" style="margin-left:10px;cursor:pointer;color:#0969da">← 전체 보기</a>
-      </div>
-    </div>
+  const rawRoad = allData['로드맵']||[];
+  const rawTodo = allData['할일']||[];
+  const rawDis = allData['논의']||[];
 
-    <div class="progress-summary">
-      <span class="progress-summary-label">로드맵 진행률</span>
-      <div class="progress-bar"><div class="progress-fill progress-fill-green" style="width:${roadPct}%"></div></div>
-      <span class="progress-text">${roadDone}/${roadRows.length}</span>
-      <span style="font-size:12px;color:#656d76">할일 ${todoActive.length}건 · 논의 ${disRows.length}건 · 리포트 ${reps.length}건</span>
-    </div>
+  // 마일스톤 정렬: 날짜 오름차순
+  const sortedRoad = [...roadRows].sort((a,b) => {
+    const da = a[2]||'9999', db = b[2]||'9999';
+    return da.localeCompare(db);
+  });
+
+  // 대표 기간 (최초~마지막 목표일)
+  const dates = sortedRoad.map(r => r[2]).filter(Boolean).sort();
+  const periodText = dates.length ? `${dates[0]} ~ ${dates[dates.length-1]}` : '미정';
+  // 담당 집계
+  const people = [...new Set(sortedRoad.map(r => r[4]).filter(Boolean))].join(', ') || '미정';
+  // 현재 단계: 진행중 있으면 "진행중", 아니면 완료 비율에 따라
+  let stage = '예정';
+  if (roadDone === roadRows.length && roadRows.length > 0) stage = '완료';
+  else if (sortedRoad.some(r => (r[3]||'') === '진행중')) stage = '진행중';
+
+  let html = `
+    <div class="sp-focus">
+      <div class="sp-focus-topbar">
+        <a class="sp-back" onclick="setSubprojectFilter('')">← ${escapeHtml(dept)} 전체</a>
+      </div>
+
+      <div class="sp-hero">
+        <div class="sp-hero-eyebrow">${deptMeta.icon} ${escapeHtml(dept.toUpperCase())} · ${escapeHtml(sp.toUpperCase())}</div>
+        <h1 class="sp-hero-title">${escapeHtml(sp)}</h1>
+        <div class="sp-hero-sub">${escapeHtml(deptMeta.desc || '')}</div>
+
+        <div class="sp-meta">
+          <div class="sp-meta-item"><span class="sp-meta-lbl">단계</span><span class="sp-meta-badge sp-stage-${stage}">${stage}</span></div>
+          <div class="sp-meta-item"><span class="sp-meta-lbl">진행</span><span class="sp-meta-val">${roadDone}/${roadRows.length}</span></div>
+          <div class="sp-meta-item"><span class="sp-meta-lbl">담당</span><span class="sp-meta-val">${escapeHtml(people)}</span></div>
+          <div class="sp-meta-item"><span class="sp-meta-lbl">기간</span><span class="sp-meta-val">${escapeHtml(periodText)}</span></div>
+        </div>
+
+        <div class="sp-progress"><div class="sp-progress-fill" style="width:${roadPct}%"></div></div>
+      </div>
   `;
 
-  // 로드맵 섹션
-  html += `<div class="section-title" style="margin-top:24px">🗺️ 로드맵 마일스톤 (${roadRows.length})</div>`;
-  if (!roadRows.length) {
-    html += `<div style="padding:16px;color:#9ca3af">등록된 마일스톤이 없습니다.</div>`;
+  // 마일스톤 타임라인 (booktree 스타일: M1, M2...)
+  html += `
+    <div class="sp-section">
+      <div class="sp-section-head">
+        <div><span class="sp-section-eyebrow">MILESTONES</span><h2 class="sp-section-title">진행 단계</h2></div>
+        <button class="sp-add-btn" onclick="openAddForSheet('로드맵','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 마일스톤 추가</button>
+      </div>
+  `;
+  if (!sortedRoad.length) {
+    html += `<div class="sp-empty">아직 등록된 마일스톤이 없습니다. <a onclick="openAddForSheet('로드맵','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 첫 마일스톤 추가</a></div>`;
   } else {
-    const rawRoad = allData['로드맵']||[];
-    roadRows.forEach(row => {
+    html += `<div class="sp-timeline">`;
+    sortedRoad.forEach((row, i) => {
       const realIdx = rawRoad.indexOf(row);
       const status = row[3]||'예정';
-      const sc = status==='예정'?'status-scheduled':status==='진행중'?'status-progress':status==='완료'?'status-done':'status-delayed';
-      const pi = getPersonInfo(row[4]||'');
-      html += `<div class="roadmap-row" onclick="openEditModal(${realIdx},'로드맵')">
-        <span class="roadmap-milestone">${escapeHtml(row[1]||'')}</span>
-        <span class="roadmap-date">${formatDateWithDay(row[5]||row[2]||'')}</span>
-        <span class="dot ${pi.dot}" style="width:20px;height:20px;font-size:9px">${pi.label}</span>
-        <span class="status-badge ${sc}">${status}</span>
-      </div>`;
+      const done = status === '완료';
+      const inProgress = status === '진행중';
+      const stepCls = done ? 'done' : inProgress ? 'active' : 'pending';
+      const title = escapeHtml(row[1]||'');
+      const note = escapeHtml(row[6]||'');
+      const date = row[2]||'';
+      html += `
+        <div class="sp-mile ${stepCls}" onclick="openEditModal(${realIdx},'로드맵')">
+          <div class="sp-mile-dot">${done ? '✓' : (i+1)}</div>
+          <div class="sp-mile-body">
+            <div class="sp-mile-label">M${i+1}</div>
+            <div class="sp-mile-title">${title}</div>
+            ${note ? `<div class="sp-mile-note">${note}</div>` : ''}
+          </div>
+          <div class="sp-mile-date">${date ? formatDateWithDay(date) : ''}</div>
+        </div>
+      `;
     });
+    html += `</div>`;
   }
+  html += `</div>`;
 
-  // 할일 섹션
-  html += `<div class="section-title" style="margin-top:24px">✅ 할일 (미완료 ${todoActive.length} · 완료 ${todoDone.length})</div>`;
+  // 할일
+  html += `
+    <div class="sp-section">
+      <div class="sp-section-head">
+        <div><span class="sp-section-eyebrow">TASKS</span><h2 class="sp-section-title">할일 <span class="sp-count">${todoActive.length}</span></h2></div>
+        <button class="sp-add-btn" onclick="openAddForSheet('할일','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 할일 추가</button>
+      </div>
+  `;
   if (!todoActive.length && !todoDone.length) {
-    html += `<div style="padding:16px;color:#9ca3af">등록된 할일이 없습니다.</div>`;
+    html += `<div class="sp-empty">등록된 할일이 없습니다. <a onclick="openAddForSheet('할일','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 첫 할일 추가</a></div>`;
   } else {
-    const rawTodo = allData['할일']||[];
-    const grouped = {};
-    todoActive.forEach(r => {
-      const ms = (r[0]||'').trim() || '(마일스톤 미지정)';
-      (grouped[ms] = grouped[ms] || []).push(r);
-    });
-    Object.keys(grouped).forEach(ms => {
-      html += `<div class="todo-group"><div class="todo-group-header">${escapeHtml(ms)}</div>`;
-      grouped[ms].forEach(row => {
-        const realIdx = rawTodo.indexOf(row);
-        const pi = getPersonInfo(row[2]||'');
-        const due = row[3]||'';
-        const dueDate = due ? new Date(due) : null;
-        const isOverdue = dueDate && dueDate < today;
-        const status = row[4]||'대기';
-        html += `<div class="todo-row" onclick="openEditModal(${realIdx},'할일')">
-          <span class="todo-title">${escapeHtml(row[1]||'')}</span>
-          <span class="todo-due ${isOverdue?'overdue':''}">${due?formatDateWithDay(due):''}</span>
-          <span class="dot ${pi.dot}" style="width:20px;height:20px;font-size:9px">${pi.label}</span>
+    html += `<div class="sp-list">`;
+    todoActive.forEach(row => {
+      const realIdx = rawTodo.indexOf(row);
+      const pi = getPersonInfo(row[2]||'');
+      const due = row[3]||'';
+      const dueDate = due ? new Date(due) : null;
+      const isOverdue = dueDate && dueDate < today;
+      const status = row[4]||'대기';
+      html += `
+        <div class="sp-item" onclick="openEditModal(${realIdx},'할일')">
+          <span class="sp-item-title">${escapeHtml(row[1]||'')}</span>
+          <span class="sp-item-ms">${escapeHtml(row[0]||'')}</span>
+          <span class="sp-item-due ${isOverdue?'overdue':''}">${due ? formatDateWithDay(due) : ''}</span>
+          <span class="dot ${pi.dot}" style="width:22px;height:22px;font-size:10px">${pi.label}</span>
           <span class="status-badge status-${status==='완료'?'done':status==='진행중'?'progress':'scheduled'}">${status}</span>
         </div>`;
+    });
+    if (todoDone.length) {
+      html += `<div class="sp-subheader" onclick="this.nextElementSibling.classList.toggle('show'); this.classList.toggle('open')">▶ 완료 ${todoDone.length}건</div><div class="sp-done-list">`;
+      todoDone.forEach(row => {
+        const realIdx = rawTodo.indexOf(row);
+        html += `<div class="sp-item done" onclick="openEditModal(${realIdx},'할일')"><span class="sp-item-title">${escapeHtml(row[1]||'')}</span><span class="status-badge status-done">완료</span></div>`;
       });
       html += `</div>`;
-    });
+    }
+    html += `</div>`;
   }
+  html += `</div>`;
 
-  // 논의 섹션
-  html += `<div class="section-title" style="margin-top:24px">💭 논의 (${disRows.length})</div>`;
+  // 논의
+  html += `
+    <div class="sp-section">
+      <div class="sp-section-head">
+        <div><span class="sp-section-eyebrow">DISCUSSIONS</span><h2 class="sp-section-title">논의 <span class="sp-count">${disRows.length}</span></h2></div>
+        <button class="sp-add-btn" onclick="openAddForSheet('논의','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 논의 추가</button>
+      </div>
+  `;
   if (!disRows.length) {
-    html += `<div style="padding:16px;color:#9ca3af">등록된 논의가 없습니다.</div>`;
+    html += `<div class="sp-empty">등록된 논의가 없습니다. <a onclick="openAddForSheet('논의','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 첫 논의 추가</a></div>`;
   } else {
-    const rawDis = allData['논의']||[];
+    html += `<div class="sp-list">`;
     disRows.forEach(row => {
       const realIdx = rawDis.indexOf(row);
       const st = disStIdx>=0 ? (row[disStIdx]||'') : '';
-      html += `<div class="todo-row" onclick="openEditModal(${realIdx},'논의')">
-        <span class="todo-title">${escapeHtml(row[1]||'')}</span>
+      html += `<div class="sp-item" onclick="openEditModal(${realIdx},'논의')">
+        <span class="sp-item-title">${escapeHtml(row[1]||'')}</span>
         <span class="status-badge">${escapeHtml(st)}</span>
       </div>`;
     });
+    html += `</div>`;
   }
+  html += `</div>`;
 
-  // 리포트 섹션
-  html += `<div class="section-title" style="margin-top:24px">📄 리포트 (${reps.length})</div>`;
-  if (!reps.length) {
-    html += `<div style="padding:16px;color:#9ca3af">연결된 리포트가 없습니다.</div>`;
-  } else {
-    html += `<div class="report-grid">`;
+  // 리포트
+  if (reps.length) {
+    html += `
+      <div class="sp-section">
+        <div class="sp-section-head">
+          <div><span class="sp-section-eyebrow">REPORTS</span><h2 class="sp-section-title">리포트 <span class="sp-count">${reps.length}</span></h2></div>
+        </div>
+        <div class="report-grid">
+    `;
     reps.forEach(r => {
       const gIdx = REPORTS.indexOf(r);
       html += `<div class="report-card" onclick="openReport(${gIdx})">
@@ -1630,10 +1695,103 @@ function renderSubprojectFocus() {
         <div class="report-meta"><span>${r.date||''}</span><span class="report-cat">${r.category||''}</span></div>
       </div>`;
     });
-    html += `</div>`;
+    html += `</div></div>`;
   }
 
+  html += `</div>`; // sp-focus
   main.innerHTML = html;
+}
+
+function openAddForSheet(sheet, sp, dept) {
+  currentTab = sheet;
+  openAddModal();
+  // 새 항목 프리셋: 서브프로젝트/프로젝트 필드 자동 입력
+  setTimeout(() => {
+    const cfg = SHEET_CONFIG[sheet];
+    if (!cfg) return;
+    const spIdx = cfg.columns.indexOf('서브프로젝트');
+    const pIdx = cfg.columns.indexOf('프로젝트');
+    if (spIdx >= 0 && sp) {
+      const el = document.getElementById(`field_${spIdx}`);
+      if (el) el.value = sp;
+    }
+    if (pIdx >= 0 && dept) {
+      const el = document.getElementById(`field_${pIdx}`);
+      if (el) el.value = dept;
+    }
+  }, 50);
+}
+
+function injectSpFocusStyles() {
+  if (document.getElementById('sp-focus-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'sp-focus-styles';
+  s.textContent = `
+    .sp-focus { max-width: 920px; margin: 0 auto; padding: 24px 16px 80px; color: #1d1d1f; }
+    .sp-focus-topbar { padding: 8px 0 20px; }
+    .sp-back { font-size: 13px; color: #656d76; cursor: pointer; text-decoration: none; }
+    .sp-back:hover { color: #0969da; }
+    .sp-hero { padding: 8px 0 24px; border-bottom: 1px solid #e7e7e7; margin-bottom: 32px; }
+    .sp-hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; color: #C9A84C; font-weight: 600; margin-bottom: 10px; }
+    .sp-hero-title { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 10px; color: #1d1d1f; }
+    .sp-hero-sub { font-size: 15px; color: #656d76; margin-bottom: 24px; }
+    .sp-meta { display: flex; flex-wrap: wrap; gap: 28px; padding: 14px 18px; background: #fafafa; border: 1px solid #eee; border-radius: 10px; margin-bottom: 16px; }
+    .sp-meta-item { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+    .sp-meta-lbl { color: #8a8a8e; font-size: 12px; }
+    .sp-meta-val { color: #1d1d1f; font-weight: 500; }
+    .sp-meta-badge { padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+    .sp-stage-진행중 { background: #e7f3ff; color: #0969da; }
+    .sp-stage-완료 { background: #dcfce7; color: #16a34a; }
+    .sp-stage-예정 { background: #fef3c7; color: #b45309; }
+    .sp-progress { height: 6px; background: #eee; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+    .sp-progress-fill { height: 100%; background: linear-gradient(90deg, #C9A84C, #16a34a); transition: width 0.4s; }
+
+    .sp-section { margin-bottom: 40px; }
+    .sp-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+    .sp-section-eyebrow { font-size: 10px; letter-spacing: 0.14em; color: #C9A84C; font-weight: 700; display: block; margin-bottom: 4px; }
+    .sp-section-title { font-size: 20px; font-weight: 600; margin: 0; color: #1d1d1f; }
+    .sp-count { font-size: 14px; color: #8a8a8e; font-weight: 400; margin-left: 6px; }
+    .sp-add-btn { background: #1d1d1f; color: #fff; border: none; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 500; cursor: pointer; }
+    .sp-add-btn:hover { background: #C9A84C; }
+
+    .sp-empty { padding: 32px 16px; text-align: center; color: #8a8a8e; font-size: 14px; border: 1px dashed #e5e5e5; border-radius: 10px; }
+    .sp-empty a { color: #0969da; cursor: pointer; margin-left: 6px; font-weight: 500; }
+
+    .sp-timeline { display: flex; flex-direction: column; gap: 4px; }
+    .sp-mile { display: grid; grid-template-columns: 44px 1fr auto; gap: 16px; align-items: center; padding: 16px 12px; border-bottom: 1px solid #f4f4f4; cursor: pointer; transition: background 0.15s; }
+    .sp-mile:hover { background: #fafafa; }
+    .sp-mile-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+    .sp-mile.done .sp-mile-dot { background: #16a34a; color: #fff; }
+    .sp-mile.active .sp-mile-dot { background: #C9A84C; color: #fff; }
+    .sp-mile.pending .sp-mile-dot { background: #fff; border: 1.5px solid #d9d9d9; color: #8a8a8e; }
+    .sp-mile-label { font-size: 11px; color: #C9A84C; font-weight: 600; letter-spacing: 0.08em; }
+    .sp-mile-title { font-size: 15px; font-weight: 500; color: #1d1d1f; margin-top: 2px; }
+    .sp-mile-note { font-size: 12px; color: #8a8a8e; margin-top: 3px; }
+    .sp-mile-date { font-size: 12px; color: #8a8a8e; white-space: nowrap; }
+
+    .sp-list { display: flex; flex-direction: column; gap: 2px; }
+    .sp-item { display: grid; grid-template-columns: 1fr auto auto auto auto; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.15s; font-size: 13px; }
+    .sp-item:hover { background: #fafafa; }
+    .sp-item-title { font-weight: 500; color: #1d1d1f; }
+    .sp-item-ms { font-size: 11px; color: #C9A84C; }
+    .sp-item-due { font-size: 12px; color: #656d76; }
+    .sp-item-due.overdue { color: #dc2626; font-weight: 600; }
+    .sp-item.done { opacity: 0.55; }
+    .sp-subheader { font-size: 12px; color: #8a8a8e; cursor: pointer; padding: 12px 0 6px; user-select: none; }
+    .sp-subheader.open::before { content: ''; } /* handled by ▶/▼ in text */
+    .sp-done-list { display: none; }
+    .sp-done-list.show { display: flex; flex-direction: column; gap: 2px; }
+
+    @media (max-width: 640px) {
+      .sp-hero-title { font-size: 32px; }
+      .sp-meta { gap: 16px; padding: 12px; }
+      .sp-mile { grid-template-columns: 36px 1fr; }
+      .sp-mile-date { grid-column: 2; font-size: 11px; }
+      .sp-item { grid-template-columns: 1fr auto; }
+      .sp-item-ms, .sp-item-due, .sp-item .dot { display: none; }
+    }
+  `;
+  document.head.appendChild(s);
 }
 
 function renderPanel() {
