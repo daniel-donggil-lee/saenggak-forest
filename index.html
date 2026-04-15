@@ -2374,11 +2374,14 @@ function renderRoadmapPanel(config, rows, allDataRows) {
     const phaseRows = activeRows.filter(r => (r[0]||'').trim() === phase);
     const phaseDone = phaseRowsAll.filter(r => (r[3]||'') === '완료').length;
     const phasePct = phaseRowsAll.length > 0 ? Math.round((phaseDone / phaseRowsAll.length) * 100) : 0;
-    const phaseLabel = PHASE_NAMES[phase] || phase;
+    // Phase 레이블은 펜타스쿨/본부 컨텍스트에서만 표시 (P2=본점 준비 등은 펜타스쿨 기준)
+    const showPhaseLabel = !currentDept || currentDept === '펜타스쿨' || currentDept === '본부';
+    const phaseLabel = showPhaseLabel ? (PHASE_NAMES[phase] || '') : '';
+    const phaseTitle = phaseLabel ? `${phase}: ${phaseLabel}` : phase;
 
     html += `<div class="roadmap-group">
       <div class="roadmap-group-header">
-        <span class="roadmap-group-title">${phase}: ${phaseLabel}</span>
+        <span class="roadmap-group-title">${phaseTitle}</span>
         <div style="display:flex;align-items:center;gap:8px">
           <div class="progress-bar"><div class="progress-fill progress-fill-blue" style="width:${phasePct}%"></div></div>
           <span class="progress-text">${phaseDone}/${phaseRowsAll.length}</span>
