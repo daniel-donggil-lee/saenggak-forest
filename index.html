@@ -337,6 +337,36 @@
   .archive-desc { font-size: 13px; color: #656d76; line-height: 1.5; margin-bottom: 6px; }
   .archive-meta { font-size: 11px; color: #8b8b8b; display: flex; gap: 6px; }
 
+  /* 산출물 링크 카드 */
+  .deliverables-section {
+    margin: 16px 0 20px; padding: 14px 16px;
+    background: #fff; border: 1px solid #e8e8e8; border-radius: 10px;
+  }
+  .deliverables-header {
+    font-size: 11px; font-weight: 700; color: #1f2328; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .deliverables-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px;
+  }
+  .deliv-card {
+    display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none;
+    background: #faf8f2; border: 1px solid #e8dfc5; transition: all 0.15s;
+    color: inherit;
+  }
+  .deliv-card:hover {
+    border-color: #C9A84C; transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(201,168,76,0.15);
+  }
+  .deliv-card.done { background: #f2f2f2; border-color: #e0e0e0; opacity: 0.75; }
+  .deliv-top { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .deliv-status {
+    font-size: 10px; font-weight: 700; color: #fff; padding: 2px 8px; border-radius: 4px;
+  }
+  .deliv-date { font-size: 10px; color: #8b8b8b; }
+  .deliv-title { font-size: 13px; font-weight: 600; color: #1f2328; margin-bottom: 2px; }
+  .deliv-meta { font-size: 10px; color: #8b8b8b; }
+
   /* 피드백 피드 (광역 댓글) */
   .feedback-feed {
     margin: 12px 0 20px; padding: 14px 16px;
@@ -2105,6 +2135,7 @@ function renderTodoPanel(config, rows, allDataRows) {
       <div class="panel-desc">${config.desc}</div>
       <button class="btn btn-primary" style="white-space:nowrap" onclick="openAddModal()">+ 추가</button>
     </div>
+    ${renderDeliverables()}
     <div class="todo-summary">
       <span><strong>미완료</strong> ${active.length}건</span>
       <span>이번 주 <strong>${thisWeek.length}</strong>건</span>
@@ -2172,6 +2203,48 @@ function renderTodoPanel(config, rows, allDataRows) {
 
   document.getElementById('mainContent').innerHTML = html;
   fetchFeedback();
+}
+
+// ─── 산출물 링크 렌더링 ───
+// 로드맵의 비고 열에서 URL을 감지해 "🔗 산출물" 카드로 노출.
+// 완료된 마일스톤은 회색, 진행중/대기는 골드 테두리로 표시.
+function renderDeliverables() {
+  const roadmapRows = (allData['로드맵'] || []).slice(2);
+  const cfg = SHEET_CONFIG['로드맵'];
+  const pIdx = cfg.columns.indexOf('프로젝트');
+  const items = [];
+  roadmapRows.forEach(r => {
+    const note = r[6] || '';
+    const urlMatch = note.match(/https?:\/\/[^\s]+/);
+    if (!urlMatch) return;
+    if (currentDept && normalizeDept(r[pIdx]) !== currentDept) return;
+    items.push({
+      milestone: r[1] || '',
+      date: r[2] || '',
+      status: r[3] || '대기',
+      url: urlMatch[0],
+      project: r[pIdx] || ''
+    });
+  });
+  if (!items.length) return '';
+  const cards = items.map(it => {
+    const done = it.status === '완료';
+    const statusColor = done ? '#10b981' : it.status === '진행중' ? '#C9A84C' : '#6b6b6b';
+    return `<a class="deliv-card ${done ? 'done' : ''}" href="${escapeHtml(it.url)}" target="_blank" rel="noopener">
+      <div class="deliv-top">
+        <span class="deliv-status" style="background:${statusColor}">${it.status}</span>
+        <span class="deliv-date">${it.date || ''}</span>
+      </div>
+      <div class="deliv-title">🔗 ${escapeHtml(it.milestone)}</div>
+      <div class="deliv-meta">${escapeHtml(it.project)}</div>
+    </a>`;
+  }).join('');
+  return `
+    <div class="deliverables-section">
+      <div class="deliverables-header">📎 산출물 링크 (${items.length})</div>
+      <div class="deliverables-grid">${cards}</div>
+    </div>
+  `;
 }
 
 // ─── 최근 피드백 로드 (DanielFlow Comment 광역) ───
