@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PENTA CAMPUS — 마스터 강사 자격증 과정 설계서</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+<style>
+:root{
+  --black:#0a0a0a;
+  --gold:#C9A84C;
+  --gold-light:#E5C97A;
+  --white:#ffffff;
+  --gray-50:#fafafa;
+  --gray-100:#f5f5f5;
+  --gray-200:#e5e5e5;
+  --gray-400:#a3a3a3;
+  --gray-600:#525252;
+  --gray-800:#262626;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  color:var(--black);
+  background:var(--white);
+  line-height:1.6;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  letter-spacing:-0.01em;
+}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1100px;margin:0 auto;padding:0 80px;}
+section.chapter{max-width:1100px;margin:0 auto;padding:120px 80px;}
+section{padding:120px 0;border-bottom:1px solid var(--gray-200);}
+section:last-child{border-bottom:none;}
+
+/* ---------- Typography ---------- */
+h1{font-size:64px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;}
+h2{font-size:36px;font-weight:700;line-height:1.2;letter-spacing:-0.02em;margin-bottom:24px;}
+h3{font-size:24px;font-weight:600;line-height:1.3;margin-bottom:16px;}
+h4{font-size:18px;font-weight:600;margin-bottom:10px;}
+p{margin-bottom:14px;color:var(--gray-800);}
+.lead{font-size:20px;color:var(--gray-600);line-height:1.6;}
+.ch-num{color:var(--gold);font-weight:800;}
+.small{font-size:13px;color:var(--gray-600);}
+strong{font-weight:700;color:var(--black);}
+
+/* ---------- TOC Sidebar ---------- */
+.toc{
+  position:fixed;top:0;left:0;width:240px;height:100vh;
+  background:var(--black);color:var(--white);
+  padding:32px 24px;overflow-y:auto;z-index:100;
+  border-right:1px solid var(--gray-800);
+}
+.toc .brand{
+  font-size:16px;font-weight:800;color:var(--gold);
+  letter-spacing:0.1em;margin-bottom:6px;
+}
+.toc .brand-sub{font-size:11px;color:var(--gray-400);margin-bottom:32px;letter-spacing:0.1em;}
+.toc ul{list-style:none;}
+.toc li{margin-bottom:4px;}
+.toc a{
+  display:block;padding:8px 12px;
+  color:var(--gray-400);font-size:13px;
+  text-decoration:none;border-radius:4px;
+  transition:all .2s;border-left:2px solid transparent;
+}
+.toc a:hover{color:var(--white);background:var(--gray-800);}
+.toc a.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,0.08);}
+.toc .toc-label{
+  font-size:10px;color:var(--gray-600);letter-spacing:0.15em;
+  text-transform:uppercase;margin:20px 0 8px 12px;
+}
+.main{margin-left:240px;}
+
+/* ---------- Hero ---------- */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:var(--black);color:var(--white);
+  padding:80px 40px;position:relative;overflow:hidden;
+}
+.hero-inner{text-align:center;max-width:900px;position:relative;z-index:2;}
+.emblem{width:120px;height:120px;margin:0 auto 48px;}
+.emblem svg{width:100%;height:100%;}
+.hero h1{color:var(--white);margin-bottom:24px;}
+.hero h1 .accent{color:var(--gold);}
+.hero .sub{font-size:20px;color:var(--gray-400);margin-bottom:48px;line-height:1.6;}
+.hero .meta{
+  font-size:13px;color:var(--gold);letter-spacing:0.15em;
+  text-transform:uppercase;padding-top:32px;
+  border-top:1px solid var(--gray-800);display:inline-block;
+  padding-left:40px;padding-right:40px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle at 20% 30%, rgba(201,168,76,0.08) 0%, transparent 50%),
+                   radial-gradient(circle at 80% 70%, rgba(201,168,76,0.05) 0%, transparent 50%);
+  pointer-events:none;
+}
+
+/* ---------- Numbers Grid ---------- */
+.numbers{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:40px;
+  margin:64px 0;padding:48px 0;
+  border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);
+}
+.num-item{text-align:center;}
+.num-big{
+  font-size:96px;font-weight:800;line-height:1;
+  color:var(--black);letter-spacing:-0.04em;
+  display:block;margin-bottom:12px;
+}
+.num-big .unit{font-size:32px;color:var(--gold);font-weight:700;}
+.num-desc{font-size:13px;color:var(--gray-600);line-height:1.5;}
+
+/* ---------- Callout ---------- */
+.callout{
+  background:var(--black);color:var(--white);
+  padding:40px;border-radius:4px;margin:32px 0;
+  border-left:4px solid var(--gold);
+}
+.callout h4{color:var(--gold);margin-bottom:16px;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;}
+.callout p,.callout li{color:rgba(255,255,255,0.85);}
+.callout strong{color:var(--white);}
+.callout ul{padding-left:20px;margin-top:12px;}
+.callout .source{font-size:12px;color:var(--gold);margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.15);letter-spacing:0.05em;}
+
+/* ---------- Gold box ---------- */
+.goldbox{
+  border:2px solid var(--gold);padding:32px;
+  margin:32px 0;border-radius:4px;background:rgba(201,168,76,0.03);
+}
+.goldbox h4{color:var(--gold);margin-bottom:12px;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;}
+
+/* ---------- Tables ---------- */
+table{
+  width:100%;border-collapse:collapse;margin:24px 0;
+  font-size:14px;background:var(--white);
+}
+thead{border-top:2px solid var(--gold);border-bottom:1px solid var(--black);}
+th{
+  text-align:left;padding:14px 12px;font-weight:700;
+  background:var(--white);color:var(--black);font-size:13px;
+  letter-spacing:0.02em;
+}
+td{
+  padding:12px;border-bottom:1px solid var(--gray-200);
+  vertical-align:top;color:var(--gray-800);line-height:1.5;
+}
+tbody tr:nth-child(even){background:var(--gray-50);}
+tbody tr:hover{background:rgba(201,168,76,0.05);}
+td.num{font-weight:700;color:var(--gold);white-space:nowrap;width:40px;text-align:center;}
+
+/* ---------- Chapter Headers ---------- */
+.chapter-head{
+  padding:80px 0 40px;border-bottom:1px solid var(--gray-200);margin-bottom:48px;
+}
+.chapter-label{
+  font-size:12px;color:var(--gold);font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;
+}
+.chapter-title{font-size:48px;font-weight:800;line-height:1.15;letter-spacing:-0.02em;}
+.chapter-anchor{
+  display:inline-block;font-size:14px;color:var(--gray-600);
+  margin-top:16px;padding:6px 14px;background:var(--gray-100);
+  border-radius:999px;
+}
+
+/* ---------- 5절 section header ---------- */
+.sect-head{
+  display:flex;align-items:baseline;gap:16px;
+  margin:64px 0 24px;padding-bottom:12px;
+  border-bottom:2px solid var(--black);
+}
+.sect-num{
+  font-size:48px;font-weight:800;color:var(--gold);
+  line-height:1;letter-spacing:-0.03em;
+}
+.sect-title{font-size:28px;font-weight:700;}
+
+/* ---------- pill ---------- */
+.pill{
+  display:inline-block;padding:4px 12px;border-radius:999px;
+  background:var(--black);color:var(--white);
+  font-size:11px;letter-spacing:0.1em;font-weight:600;
+  text-transform:uppercase;margin-right:6px;
+}
+.pill-gold{background:var(--gold);color:var(--black);}
+.pill-out{background:transparent;border:1px solid var(--black);color:var(--black);}
+
+/* ---------- 2 column grid ---------- */
+.cols-2{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:24px 0;}
+.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:24px 0;}
+.cols-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:24px 0;}
+
+.card{
+  padding:28px;border:1px solid var(--gray-200);border-radius:4px;
+  background:var(--white);transition:all .2s;
+}
+.card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+.card h4{margin-bottom:8px;}
+.card .label{
+  font-size:11px;color:var(--gold);letter-spacing:0.1em;
+  text-transform:uppercase;font-weight:700;margin-bottom:10px;
+}
+
+/* ---------- TOC nav list ---------- */
+ul.clean{list-style:none;padding:0;margin:16px 0;}
+ul.clean li{padding:10px 0;border-bottom:1px dotted var(--gray-200);color:var(--gray-800);}
+ul.clean li:last-child{border-bottom:none;}
+ul.bull{padding-left:24px;margin:12px 0;}
+ul.bull li{margin-bottom:8px;color:var(--gray-800);}
+
+/* ---------- Diagram ---------- */
+.diagram{
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  margin:32px 0;flex-wrap:wrap;
+}
+.dia-box{
+  padding:20px 28px;border:1px solid var(--black);
+  font-weight:600;font-size:14px;text-align:center;
+  background:var(--white);min-width:140px;
+}
+.dia-box.gold{background:var(--gold);border-color:var(--gold);color:var(--black);}
+.dia-box.dark{background:var(--black);color:var(--white);}
+.dia-arrow{color:var(--gold);font-size:24px;font-weight:800;}
+
+/* ---------- Footer ---------- */
+footer{
+  background:var(--black);color:var(--white);
+  padding:60px 40px;text-align:center;
+}
+footer .emblem-small{width:48px;height:48px;margin:0 auto 20px;}
+footer .emblem-small svg{width:100%;height:100%;}
+footer p{color:rgba(255,255,255,0.6);margin-bottom:8px;font-size:13px;}
+footer .brand-line{color:var(--gold);font-weight:700;letter-spacing:0.2em;font-size:12px;text-transform:uppercase;margin-top:16px;}
+
+/* ---------- Anchor links ---------- */
+a.anchor-link{color:var(--gold);text-decoration:none;font-size:13px;margin-left:8px;opacity:0;}
+h2:hover a.anchor-link, h3:hover a.anchor-link{opacity:1;}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1024px){
+  .toc{position:static;width:100%;height:auto;padding:16px;}
+  .toc ul{display:flex;flex-wrap:wrap;gap:4px;}
+  .toc li{margin:0;}
+  .toc .toc-label{width:100%;margin:8px 0 4px;}
+  .main,footer{margin-left:0;}
+  h1{font-size:44px;}
+  .chapter-title{font-size:32px;}
+  .numbers{grid-template-columns:repeat(2,1fr);}
+  .num-big{font-size:64px;}
+  .cols-2,.cols-3,.cols-4{grid-template-columns:1fr;}
+  .wrap{padding:0 24px;}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .toc{display:none;}
+  .main,footer{margin-left:0;}
+  @page{size:A4;margin:25mm;}
+  body{font-size:11pt;line-height:1.5;}
+  h1{font-size:28pt;}
+  h2{font-size:18pt;}
+  h3{font-size:14pt;}
+  section{padding:20px 0;page-break-inside:avoid;border-bottom:none;}
+  .chapter-head{page-break-before:always;padding:0 0 20px;}
+  .hero{min-height:auto;page-break-after:always;padding:40px 20px;}
+  table{font-size:9pt;page-break-inside:avoid;}
+  th,td{padding:6px 8px;}
+  .callout,.goldbox{page-break-inside:avoid;border:1px solid #000;}
+  .callout{background:#f0f0f0;color:#000;}
+  .callout p,.callout li,.callout strong{color:#000;}
+  .num-big{font-size:48pt;}
+  a{color:#000;text-decoration:none;}
+  footer{background:#fff;color:#000;border-top:1px solid #000;}
+  footer p, footer .brand-line{color:#000;}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== TOC ==================== -->
+<nav class="toc" id="toc">
+  <div class="brand">PENTA CAMPUS</div>
+  <div class="brand-sub">MASTERBOOK 2026</div>
+  <div class="toc-label">Overview</div>
+  <ul>
+    <li><a href="#hero">표지</a></li>
+    <li><a href="#toc-sec">목차</a></li>
+    <li><a href="#intro">인트로 — 설계 철학</a></li>
+  </ul>
+  <div class="toc-label">Tier 0 · 루트 (선수 필수)</div>
+  <ul>
+    <li><a href="#ch0">Ch.0 종합문해력 전문가</a></li>
+  </ul>
+  <div class="toc-label">Tier 1 · 핵심 5과정</div>
+  <ul>
+    <li><a href="#ch1">Ch.1 인문독서</a></li>
+    <li><a href="#ch2">Ch.2 논증과추론</a></li>
+    <li><a href="#ch3">Ch.3 시사분석훈련</a></li>
+    <li><a href="#ch4">Ch.4 요약구조화</a></li>
+    <li><a href="#ch5">Ch.5 근거기반토론</a></li>
+  </ul>
+  <div class="toc-label">Tier 2 · 후보군 7과정</div>
+  <ul>
+    <li><a href="#ch6">Ch.6 질문설계</a></li>
+    <li><a href="#ch7">Ch.7 개념어체계화</a></li>
+    <li><a href="#ch8">Ch.8 사고력에세이</a></li>
+    <li><a href="#ch9">Ch.9 논제분석훈련</a></li>
+    <li><a href="#ch10">Ch.10 구조설계논술</a></li>
+    <li><a href="#ch11">Ch.11 자료기반토론</a></li>
+    <li><a href="#ch12">Ch.12 하브루타토론</a></li>
+  </ul>
+  <div class="toc-label">Appendix</div>
+  <ul>
+    <li><a href="#apx-law">평생교육법 매트릭스</a></li>
+    <li><a href="#apx-anchor">해외 앵커 총정리</a></li>
+    <li><a href="#apx-rubric">평가·루브릭</a></li>
+    <li><a href="#apx-roadmap">확산 로드맵</a></li>
+  </ul>
+</nav>
+
+<div class="main">
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="emblem">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="60,8 112,46 92,108 28,108 8,46" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+        <polygon points="60,22 98,50 83,98 37,98 22,50" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+        <text x="60" y="74" font-family="Pretendard, sans-serif" font-size="42" font-weight="800" fill="#C9A84C" text-anchor="middle">P</text>
+      </svg>
+    </div>
+    <h1>PENTA CAMPUS<br><span class="accent">마스터 강사 자격증 과정 설계서</span></h1>
+    <p class="sub">평생교육법 2학점 · 30시간 · 13과정 (루트 1 + 핵심 5 + 후보 7) × 해외 검증 교수법<br>Train-the-Trainer × PENTA 5영역 × 국제 앵커 3축</p>
+    <div class="meta">발행 2026-04-15 · 공동대표 이은경 · 이동길</div>
+  </div>
+</section>
+
+<!-- ==================== TOC SECTION ==================== -->
+<section id="toc-sec" class="wrap">
+  <h2>목차 — 13과정 (루트 1 + 핵심 5 + 후보 7)</h2>
+  <p class="lead">본 설계서는 펜타캠퍼스 평생교육원이 2026년 10월 개강하는 마스터 강사 자격증 과정의 완전한 설계 문서입니다. <strong>3-tier 구조</strong> — Tier 0 루트 1과정(선수 필수) · Tier 1 핵심 5과정(풀 뎁스) · Tier 2 후보군 7과정(확장 라인업) — 으로 재편되었습니다. 풀 뎁스 6과정(루트 + 핵심 5)은 <strong>해외 검증 앵커 이론 + 교사 양성 10차시 + 학생 12주/24주 커리큘럼 + 커리어 연결</strong>의 5절 동일 구조로 기술됩니다.</p>
+  <div class="cols-3">
+    <div class="card">
+      <div class="label">Tier 0 · Root</div>
+      <h4>종합문해력 전문가</h4>
+      <p class="small">PENTA 5영역 통합 메타 과정. 강사 이은경 확정. 심화 12과정 수강 전 <strong>선수 필수</strong>. NRP + Scarborough + CASEL 3축.</p>
+    </div>
+    <div class="card">
+      <div class="label">Tier 1 · Core 5</div>
+      <h4>핵심 5과정</h4>
+      <p class="small">인문독서 · 논증과추론 · 시사분석훈련 · 요약구조화 · 근거기반토론. 풀 뎁스 5절 상세 + 학생 12/24주 커리큘럼.</p>
+    </div>
+    <div class="card">
+      <div class="label">Tier 2 · Candidate 7</div>
+      <h4>확장 후보군 7과정</h4>
+      <p class="small">질문설계 · 개념어체계화 · 사고력에세이 · 논제분석훈련 · 구조설계논술 · 자료기반토론 · 하브루타토론. 카드형 경량 소개.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INTRO · 설계 철학 ==================== -->
+<section id="intro" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Chapter · Intro</div>
+    <h1 class="chapter-title">설계 철학</h1>
+    <div class="chapter-anchor">Train-the-Trainer × PENTA 5영역 × 해외 앵커 3축 × 3-tier 구조</div>
+  </div>
+
+  <h2>왜 마스터 강사 자격증인가</h2>
+  <p class="lead">펜타스쿨은 초등 종합문해력 프리미엄 프랜차이즈로 2027년부터 전국 확산합니다. 확산의 병목은 <strong>"교사 품질"</strong>입니다. 펜타캠퍼스는 교사 양성을 <strong>1인 카리스마에서 구조화된 자격 시스템</strong>으로 이전합니다. 모든 과정은 해외 검증 교수법을 앵커로 고정하고, 한국 초등 현장에 맞춰 재설계합니다. 본 설계서는 <strong>3-tier 구조 — 루트 1 + 핵심 5 + 후보 7 = 13과정</strong>으로 정리됩니다.</p>
+
+  <div class="numbers">
+    <div class="num-item">
+      <span class="num-big">30<span class="unit">h</span></span>
+      <div class="num-desc">180분 × 10차시<br>= 평생교육법 2학점</div>
+    </div>
+    <div class="num-item">
+      <span class="num-big">13<span class="unit">과정</span></span>
+      <div class="num-desc">루트 1 + 핵심 5 + 후보 7<br>5영역 전수 커버</div>
+    </div>
+    <div class="num-item">
+      <span class="num-big">15<span class="unit">종+</span></span>
+      <div class="num-desc">해외 검증 앵커<br>(NRP·Scarborough·CASEL·Shared Inquiry 외)</div>
+    </div>
+    <div class="num-item">
+      <span class="num-big">3<span class="unit">경로</span></span>
+      <div class="num-desc">펜타스쿨·가맹·방과후<br>취업 연결</div>
+    </div>
+    <div class="num-item">
+      <span class="num-big">24<span class="unit">주</span></span>
+      <div class="num-desc">학생 심화반<br>최장 운영 단위</div>
+    </div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">01</div><div class="sect-title">PENTA 5영역 × 13과정 매핑</div></div>
+  <table>
+    <thead>
+      <tr><th style="width:60px">영역</th><th>정의</th><th>루트 (Tier 0)</th><th>핵심 (Tier 1) · 후보 (Tier 2)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>P</strong> 독해</td><td>텍스트 핵심·추론·맥락 파악</td><td rowspan="5"><strong>종합문해력 전문가</strong><br><span class="small">(PENTA 통합 메타 · 선수 필수)</span></td><td>인문독서 · <span class="small">시사분석훈련</span></td></tr>
+      <tr><td><strong>E</strong> 어휘</td><td>개념어 체계화, 배경지식 확장</td><td><span class="small">(후보) 개념어체계화</span></td></tr>
+      <tr><td><strong>N</strong> 사고</td><td>논리·비판·질문 설계</td><td>논증과추론 · 시사분석훈련 · <span class="small">(후보) 질문설계 · 논제분석훈련</span></td></tr>
+      <tr><td><strong>T</strong> 표현</td><td>구조적 글쓰기, 에세이, 논술</td><td>요약구조화 · <span class="small">(후보) 사고력에세이 · 구조설계논술</span></td></tr>
+      <tr><td><strong>A</strong> 소통</td><td>말하기·토론·발표, 설득</td><td>근거기반토론 · <span class="small">(후보) 자료기반토론 · 하브루타토론</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">02</div><div class="sect-title">두 겹 구조 — 10차시 양성 → 12/24주 학생반</div></div>
+  <p>모든 자격증 과정은 <strong>교사 양성 10차시(30시간) → 학생 12주 기본반(3-4학년) → 학생 24주 심화반(5-6학년)</strong>의 두 겹 구조로 설계됩니다. 양성 과정 수료자는 바로 학생반 커리큘럼을 라이선스 없이 운용할 수 있습니다.</p>
+  <div class="diagram">
+    <div class="dia-box gold">교사 양성<br>10차시 · 30시간</div>
+    <div class="dia-arrow">→</div>
+    <div class="dia-box">자격증 발급</div>
+    <div class="dia-arrow">→</div>
+    <div class="dia-box dark">학생 12주 기본반<br>3-4학년</div>
+    <div class="dia-arrow">→</div>
+    <div class="dia-box dark">학생 24주 심화반<br>5-6학년</div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">03</div><div class="sect-title">공통 설계 원칙</div></div>
+  <div class="cols-2">
+    <div class="goldbox">
+      <h4>교수법 편중 원칙</h4>
+      <p>이론 강의는 1~3차시에 집중하고, 4차시부터는 마이크로티칭·루브릭·상담·윤리 등 "어떻게 가르칠까"에 시간을 전부 배정합니다. "내용 전달"이 아닌 "체계화 코치" 정체성.</p>
+    </div>
+    <div class="goldbox">
+      <h4>해외 앵커 병행</h4>
+      <p>13과정 모두 국제적으로 검증된 교수법을 앵커로 선정하되, 한국 초등 현장에 맞춘 "펜타 고유 특화"를 반드시 병행합니다. 직수입이 아닌 현장 이식.</p>
+    </div>
+    <div class="goldbox">
+      <h4>루브릭 캘리브레이션</h4>
+      <p>강사 간 채점 편차 ±1점 이내를 모든 과목 7차시 공통 목표로 설정. 가맹 확산 시 품질 일관성의 근간.</p>
+    </div>
+    <div class="goldbox">
+      <h4>정답 번호 사전 배정 금지</h4>
+      <p>토론·논술 산출물에서 "어느 입장이 이기는가"를 미리 정하지 않습니다. 수업 구조와 증거 흐름에 따라 결론이 열려 있어야 사고력이 자랍니다.</p>
+    </div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">04</div><div class="sect-title">3경로 취업 연결</div></div>
+  <div class="cols-3">
+    <div class="card">
+      <div class="label">Path 1</div>
+      <h4>펜타스쿨 직영·가맹</h4>
+      <p class="small">대치·분당 본점 우선 채용. 전국 가맹점 파견 강사. 시급 4~6만원 + 성과급.</p>
+    </div>
+    <div class="card">
+      <div class="label">Path 2</div>
+      <h4>학교 방과후</h4>
+      <p class="small">초등 방과후 독서논술·토론·글쓰기 전담. 회당 8~15만원.</p>
+    </div>
+    <div class="card">
+      <div class="label">Path 3</div>
+      <h4>홈 스쿨링 · 1:4 자영</h4>
+      <p class="small">펜타 공식 라이선스로 가정·공부방 1:4 그룹 운영. 학생당 월 25~35만원.</p>
+    </div>
+  </div>
+  <p class="small" style="margin-top:16px;">※ 2년 이상 실적 + 동료 평가 통과 시 <strong>마스터 트레이너</strong>로 승급하여 자격증 과정 공동 강의 가능.</p>
+</section>
+
+<!-- ==================== CH.0 종합문해력 전문가 (Tier 0 루트) ==================== -->
+<!-- SSoT: ~/Desktop/0.NEWBIZ_MASTER/7.펜타/펜타캠퍼스/curriculum/curriculum_종합문해력전문가.md -->
+<section id="ch0" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Chapter 0 · Tier 0 ROOT · PENTA 전체 (P·E·N·T·A 통합)</div>
+    <h1 class="chapter-title"><span class="ch-num">0.</span> 종합문해력 전문가 <span class="pill pill-gold">루트 · 선수 필수</span></h1>
+    <div class="chapter-anchor">NRP 5 Pillars + Scarborough's Reading Rope (2001) + CASEL SEL Framework</div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">1</div><div class="sect-title">과목 정의 + 해외 앵커</div></div>
+  <div class="goldbox">
+    <h4>Anchor 1 — National Reading Panel 5 Pillars of Reading (2000)</h4>
+    <p>미국 NICHD가 1997~2000년 위촉한 32명 독해 전문가 패널이 정리한 초등 읽기 5축: <strong>Phonemic Awareness · Phonics · Fluency · Vocabulary · Comprehension</strong>. 미국 K-12 읽기 교육의 글로벌 표준. 펜타는 한글 특성상 Phonics를 "한글 해독 유창성"으로 국소화하고, Vocabulary·Comprehension을 PENTA의 E·P로 확장 매핑.</p>
+    <div class="source">SOURCE · NICHD National Reading Panel Report (2000)</div>
+  </div>
+  <div class="goldbox">
+    <h4>Anchor 2 — Scarborough's Reading Rope (Hollis Scarborough, 2001)</h4>
+    <p><strong>Language Comprehension 줄</strong>(배경지식·어휘·언어구조·담화·문해추론) + <strong>Word Recognition 줄</strong>(음운인식·해독·자동화)이 시간에 따라 꼬여 <strong>숙련된 독자(Skilled Reading)</strong>로 수렴. 초등 3~6학년은 이미 해독 단계를 지나 Language Comprehension 줄을 두껍게 꼬아야 할 시기 — 펜타 심화 12과정의 설계 근거.</p>
+    <div class="source">SOURCE · Scarborough, H. (2001). <em>Connecting Early Language and Literacy to Later Reading (Dis)abilities</em></div>
+  </div>
+  <div class="goldbox">
+    <h4>Anchor 3 — CASEL SEL Framework</h4>
+    <p>Collaborative for Academic, Social, and Emotional Learning. <strong>5역량</strong>: Self-Awareness · Self-Management · Social Awareness · Relationship Skills · Responsible Decision-Making. 문해력 수업은 교사-학생 관계의 품질에 얹힌다 → 강사의 SEL 역량이 학습 성취를 좌우. 학부모 신뢰·학생 동기부여의 뿌리.</p>
+    <div class="source">SOURCE · CASEL (casel.org)</div>
+  </div>
+  <p><strong>결합 근거</strong>: NRP는 "무엇을 가르칠까"(콘텐츠 축)를, Scarborough는 "어떻게 엮일까"(발달 축)를, CASEL은 "누가 가르치나"(관계 축)를 제공. 세 축이 교차하는 자리에 <strong>이은경의 15년 한국 초등 방법론</strong>을 앉혀 펜타의 루트 과정을 구성.</p>
+
+  <table>
+    <thead><tr><th style="width:120px">항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>영역</td><td>PENTA <strong>전체</strong> (P·E·N·T·A) — 5영역 통합 메타 과정</td></tr>
+      <tr><td>국내 앵커</td><td>이은경 초등교사 15년 현장 방법론(슬기로운초등생활 15만 구독자 누적 노하우, 베스트셀러 60여 권)</td></tr>
+      <tr><td>대상</td><td>초등 3~6학년 담당 예정 강사 · 학부모 교육 희망자</td></tr>
+      <tr><td>강사</td><td><strong>확정 — 이은경</strong> (초등교사 15년 · 교육 작가 60여 권 · 유튜브 슬기로운초등생활 운영)</td></tr>
+      <tr><td>형태 · 과정</td><td>1:4 · 90분 · 기본 12주 / 심화 24주 (학생) · 10차시 30시간 (교사 자격증)</td></tr>
+      <tr><td>위상</td><td><strong>루트 과정 — 심화 12과정 수강 전 선수 필수</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>펜타 고유 특화</h3>
+  <ul class="bull">
+    <li><strong>PENTA 5영역 상위 매핑</strong>: P 독해 ← NRP Comprehension + Scarborough Language Comprehension / E 어휘 ← NRP Vocabulary + 사고도구어 학년 체계(1~4수준) / N 사고 ← Scarborough Verbal Reasoning + Literacy Knowledge / T 표현 ← 장르별 쓰기 계단 / A 소통 ← CASEL Relationship Skills + 교실 토론 문화</li>
+    <li><strong>이은경의 한국 초등 현장 방법론</strong>: 매일 10분 필사·독서록 3줄·가정 학습 점검표·학부모 주간 리포트 서사 — 15년 교실 + 유튜브 15만 구독자로 누적 검증된 루틴을 강사가 그대로 이식</li>
+    <li><strong>심화 12과정 라우팅 맵</strong>: 학생 프로파일(펜타 지수 레이더)을 근거로 어떤 심화 과정이 먼저인지 근거 기반 추천 (E 약 → 개념어체계화, N 약 → 논증과추론·질문설계, T 약 → 구조설계논술·사고력에세이)</li>
+    <li><strong>강사가 기르는 능력</strong>: 한 아이의 독해 문제가 어휘에서 오는지 사고 구조에서 오는지 표현 훈련 부족에서 오는지 변별하는 PENTA 메타인지</li>
+  </ul>
+
+  <h3>왜 이 앵커인가</h3>
+  <p>한국 초등 독서논술·문해력 시장은 "교사 1인의 카리스마"에 의존하는 구조가 지배적이다. 이를 구조화된 자격 체계로 전환하려면 글로벌 표준 + 발달 이론 + 관계 이론의 3축이 동시에 필요하다. NRP(2000)는 콘텐츠 표준을, Scarborough's Rope(2001)는 학년대별 발달 우선순위를, CASEL은 강사의 관계 역량을 정의한다. 셋을 한 과정에서 동시에 다루어야만 "어떤 강사가 봐도 같은 진단·같은 처방·같은 학부모 서사"가 가능해진다.</p>
+  <p>이은경의 한국 초등 현장 노하우는 위 3축이 한국 교실에 어떻게 착지하는지를 보여주는 살아있는 연결고리이다. 유튜브 슬기로운초등생활 15만 구독자와 베스트셀러 60여 권은 "이론이 한국 학부모 언어로 번역된 사례"의 누적 증명이다. 루트 과정의 본질은 이 번역 능력의 복제이다.</p>
+
+  <h4>근거 자료</h4>
+  <ul class="small">
+    <li><a href="https://www.nichd.nih.gov/publications/pubs/nrp/findings" target="_blank">NICHD — National Reading Panel Findings (2000)</a></li>
+    <li><a href="https://improvingliteracy.org/brief/scarboroughs-reading-rope" target="_blank">National Center on Improving Literacy — Scarborough's Reading Rope</a></li>
+    <li><a href="https://casel.org/fundamentals-of-sel/what-is-the-casel-framework/" target="_blank">CASEL — What Is the CASEL Framework</a></li>
+    <li>Scarborough, H. S. (2001). <em>Connecting Early Language and Literacy to Later Reading (Dis)abilities: Evidence, Theory, and Practice</em></li>
+  </ul>
+
+  <div class="sect-head"><div class="sect-num">2</div><div class="sect-title">10차시 교사 양성 (180분 × 10 = 30시간 · 평생교육법 2학점)</div></div>
+  <p class="small"><strong>수강 대상</strong>: 초등교사·학원강사·독서논술 지도자·학부모 교육 희망자 (현장 경력 2년 이상 우대) · <strong>수료 조건</strong>: 80% 출석 + 마이크로티칭 1회 + 최종 과제(학생 1명 가상 포트폴리오 + 심화 과정 추천서) · <strong>수료 후 특권</strong>: 펜타캠퍼스 심화 12과정 수강 자격 획득(이 과정 없이는 심화 수강 불가)</p>
+  <table>
+    <thead><tr><th class="num">차시</th><th>제목</th><th>핵심 목표</th><th>주요 활동 (180분)</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>OT + 초등 문해력 진단 개관</td><td>PENTA 5영역 체계·펜타 지수 측정 원리·이은경 루트 과정의 위상 이해</td><td>강의 60분(NRP·Scarborough·CASEL 3축 + PENTA 매핑) + 펜타 지수 사전 체험 60분(본인이 학생이라 가정하고 5영역 자가 측정) + 심화 12과정 지도 개관 60분</td><td>자기 PENTA 레이더 + 심화 12과정 지도</td></tr>
+      <tr><td class="num">2</td><td>P 독해 — 연령별 텍스트·배경지식·5전략</td><td>초3~6 텍스트 난이도 판별, 예측·질문·추론·요약·종합 5전략을 초등 발문으로 번역</td><td>학년별 샘플 텍스트 6종 난이도 측정 60분 + 5전략 발문 설계 90분 + 배경지식 주입 루틴 30분(이은경 시범)</td><td>5전략 발문 카드 30장</td></tr>
+      <tr><td class="num">3</td><td>E 어휘 — Tier 1·2·3 + 사고도구어 학년 매핑</td><td>Beck·McKeown 3계층 어휘 + 온독지수 사고도구어 1~4수준을 초3~6에 배분</td><td>Tier 2 어휘 추출 실습 90분(교과서 3종) + 사고도구어 학년 배분표 작성 60분 + 어휘 노출 루틴(7번 만나기) 30분</td><td>학년별 Tier 2 어휘 리스트</td></tr>
+      <tr><td class="num">4</td><td>N 사고 — 질문 설계·추론·비판적 읽기 공통 기반</td><td>심화(논증과추론·질문설계·논제분석)에 앞서 모든 강사가 공유할 "질문 습관" 장착</td><td>6 Types of Questions(Socratic) 초등 번역 60분 + 추론 루틴 "그래서?·왜?·만약?" 60분 + 비판적 읽기 샘플 5종 60분</td><td>공통 발문 체크리스트</td></tr>
+      <tr><td class="num">5</td><td>T 표현 — 장르 계단(서사→설명→논설)</td><td>초3 일기·초4 설명문·초5 독서록·초6 논설 단락의 장르 계단 이해</td><td>장르별 모델 텍스트 해부 90분 + 초등 글쓰기 루브릭 5등급 설계 60분 + 이은경 "3줄→5줄→단락" 계단 시범 30분</td><td>장르별 루브릭 5종</td></tr>
+      <tr><td class="num">6</td><td>A 소통 — 토론·발표·경청 규칙과 교실 역동</td><td>CASEL Relationship Skills를 초등 교실 규칙으로 번역, 발언 독점·침묵 대응</td><td>경청 3규칙(말 자르지 않기·상대 요약하기·질문 1개) 시연 60분 + 4인 라운드 토론 시뮬 60분 + 문제 학생 케이스 60분</td><td>교실 규칙 포스터</td></tr>
+      <tr><td class="num">7</td><td>이은경 한국 초등 현장 방법론</td><td>학부모 상담·생활지도·가정 학습 연계 — 15년 교실과 슬기로운초등생활 누적 노하우</td><td>매일 10분 필사·독서록 3줄·주간 리포트 서사 60분 + 학부모 상담 3유형 롤플레이 60분 + 가정 학습 점검표 설계 60분</td><td>학부모 상담 대본 3편 + 가정 점검표</td></tr>
+      <tr><td class="num">8</td><td>심화 12과정 매핑 — 학생 프로파일 라우팅</td><td>펜타 지수 레이더를 보고 어떤 심화 과정을 추천할지 근거 기반 판단</td><td>가상 학생 프로파일 8종 분석 90분(P낮음·E낮음·N낮음·T낮음·A낮음·균형형·영재형·부진형) + 과정 추천서 작성 실습 60분 + 상호 점검 30분</td><td>학생 유형별 추천 매트릭스</td></tr>
+      <tr><td class="num">9</td><td>마이크로티칭 — 10분 수업 시연 + 피드백</td><td>PENTA 5영역 중 본인이 가장 자신 있는 영역으로 초등 3~4 대상 10분 수업</td><td>각 수강생 10분 시연 × 전원 + 동료 피드백(PENTA 어느 영역을 건드렸나 집중) + 강사 코칭</td><td>동영상 + 자기 평가지</td></tr>
+      <tr><td class="num">10</td><td>최종 시연 + 수료 + 심화 과정 진로 선택</td><td>20분 풀사이클 시연(진단→수업→포트폴리오→학부모 리포트) + 심화 과정 1지망 선택</td><td>수강생 20분 × 전원 최종 시연 + 심사 3인 평가 + 심화 과정 오리엔테이션 + 수료식</td><td>자격증 발급, 심화 수강권 + 가상 학생 포트폴리오</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <h4>교수법 편중 원칙</h4>
+    <p>1차시만 이론에 집중하고, 2~6차시는 PENTA 5영역 각각을 한 차시씩 깊이 파되 전부 "어떻게 가르칠까"에 배정. 7차시는 이은경 방법론 전수, 8차시는 심화 라우팅, 9~10차시는 시연. 루트 과정은 <strong>이은경의 15년 현장 노하우를 강사 10명에게 복제하는 것</strong>이 목적.</p>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">3</div><div class="sect-title">학생 12주 기본반 (3-4학년)</div></div>
+  <p><strong>슬로건</strong>: "PENTA 5영역 한 바퀴 — 우리 아이가 어디가 강하고 어디가 약한지 보이는 12주"</p>
+  <table>
+    <thead><tr><th class="num">주</th><th>주제</th><th>PENTA 영역</th><th>핵심 기법</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>오리엔테이션 + 펜타 지수 사전 측정</td><td>전체</td><td>5영역 진단지 풀이</td><td>나의 PENTA 레이더 1차</td></tr>
+      <tr><td class="num">2</td><td>"한 편의 이야기를 따라가며" (서사 독해)</td><td>P 독해</td><td>예측·질문 2전략</td><td>서사 지도 1장</td></tr>
+      <tr><td class="num">3</td><td>"설명하는 글은 어떻게 생겼을까"</td><td>P 독해</td><td>요약·구조 전략</td><td>설명문 구조도</td></tr>
+      <tr><td class="num">4</td><td>"오늘의 단어 10개" (교과서 Tier 2)</td><td>E 어휘</td><td>어휘 노출 루틴</td><td>내 어휘 노트 10개</td></tr>
+      <tr><td class="num">5</td><td>"비슷한 말·반대말·함께 쓰는 말"</td><td>E 어휘</td><td>어휘 망(Word Web)</td><td>어휘 망 5개</td></tr>
+      <tr><td class="num">6</td><td>"왜냐하면을 말해 보기"</td><td>N 사고</td><td>주장-근거 1쌍</td><td>논증 카드 1장</td></tr>
+      <tr><td class="num">7</td><td>"질문을 만드는 아이" (6 Types 축약)</td><td>N 사고</td><td>명료화·가정 질문</td><td>질문 카드 10장</td></tr>
+      <tr><td class="num">8</td><td>"일기를 설명문으로 바꿔 보기"</td><td>T 표현</td><td>장르 변환</td><td>변환 단락 1편</td></tr>
+      <tr><td class="num">9</td><td>"독서록 3줄 → 5줄 계단"</td><td>T 표현</td><td>이은경 쓰기 계단</td><td>독서록 5편 누적</td></tr>
+      <tr><td class="num">10</td><td>"경청 3규칙으로 4인 토론"</td><td>A 소통</td><td>경청 규칙 체화</td><td>토론 기록지</td></tr>
+      <tr><td class="num">11</td><td>"짝꿍에게 내 책을 소개하기" (북토크)</td><td>A 소통</td><td>2분 발표</td><td>발표 영상</td></tr>
+      <tr><td class="num">12</td><td>펜타 지수 사후 측정 + 포트폴리오 공유</td><td>전체</td><td>성장 비교</td><td>레이더 1차→2차 + 포트폴리오 1호 + 심화 1지망 추천서</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">4</div><div class="sect-title">학생 24주 심화반 (5-6학년)</div></div>
+  <p><strong>슬로건</strong>: "PENTA 5영역을 스스로 진단하고 스스로 보완하는 아이 — 중학 진입 레디니스"</p>
+  <h4>1~12주 (PENTA 5영역 1라운드 심화)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>주제</th><th>PENTA</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>펜타 지수 사전 측정 + 심화 OT</td><td>전체</td><td>5영역 심화 진단</td></tr>
+      <tr><td class="num">2</td><td>배경지식 주입 — "모르는 글 읽어내기"</td><td>P</td><td>사전 활성화·스키마</td></tr>
+      <tr><td class="num">3</td><td>사설 구조 해부 (문제-원인-주장)</td><td>P</td><td>논설 구조도</td></tr>
+      <tr><td class="num">4</td><td>사고도구어 3수준 정복</td><td>E</td><td>사고도구어 30개</td></tr>
+      <tr><td class="num">5</td><td>한자어·비유어·다의어</td><td>E</td><td>Tier 3 심화</td></tr>
+      <tr><td class="num">6</td><td>Warrant(숨은 전제) 처음 만나기</td><td>N</td><td>전제 발굴</td></tr>
+      <tr><td class="num">7</td><td>6 Types 전체 발문 만들기</td><td>N</td><td>소크라테스 발문</td></tr>
+      <tr><td class="num">8</td><td>논설 단락 — 주장·근거·연결이유</td><td>T</td><td>논설 단락</td></tr>
+      <tr><td class="num">9</td><td>독서 에세이 — "나와 이 책"</td><td>T</td><td>에세이 구조</td></tr>
+      <tr><td class="num">10</td><td>2:2 구조 토론 입문</td><td>A</td><td>역할 배정·Rebuttal</td></tr>
+      <tr><td class="num">11</td><td>5분 발표 — 내 주장 1편</td><td>A</td><td>구조 발표</td></tr>
+      <tr><td class="num">12</td><td>중간 펜타 지수 + 포트폴리오 1차</td><td>전체</td><td>성장 비교</td></tr>
+    </tbody>
+  </table>
+  <h4>13~24주 (교차 심화 + 심화 12과정 프리뷰)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>주제</th><th>PENTA</th><th>프리뷰 대상 심화 과정</th></tr></thead>
+    <tbody>
+      <tr><td class="num">13</td><td>인문 독서 프리뷰 (달콤쌤 자료 연계)</td><td>P·E</td><td>Ch.1 인문독서</td></tr>
+      <tr><td class="num">14</td><td>개념어 체계화 프리뷰</td><td>E·N</td><td>Ch.7 개념어체계화</td></tr>
+      <tr><td class="num">15</td><td>논증과추론 프리뷰 (Toulmin 6요소 맛보기)</td><td>N·T</td><td>Ch.2 논증과추론</td></tr>
+      <tr><td class="num">16</td><td>질문 설계 프리뷰 (QFT)</td><td>N</td><td>Ch.6 질문설계</td></tr>
+      <tr><td class="num">17</td><td>시사 분석 프리뷰 (Lateral Reading)</td><td>P·N</td><td>Ch.3 시사분석훈련</td></tr>
+      <tr><td class="num">18</td><td>요약 구조화 프리뷰 (GIST 20어절)</td><td>P·T</td><td>Ch.4 요약구조화</td></tr>
+      <tr><td class="num">19</td><td>근거기반 토론 프리뷰 (Evidence Card)</td><td>N·A</td><td>Ch.5 근거기반토론</td></tr>
+      <tr><td class="num">20</td><td>자료기반 토론 프리뷰 (그래프 해석)</td><td>P·A</td><td>Ch.11 자료기반토론</td></tr>
+      <tr><td class="num">21</td><td>사고력 에세이 프리뷰</td><td>T</td><td>Ch.8 사고력에세이</td></tr>
+      <tr><td class="num">22</td><td>구조설계 논술 프리뷰</td><td>T·N</td><td>Ch.10 구조설계논술</td></tr>
+      <tr><td class="num">23</td><td>하브루타 토론 프리뷰</td><td>N·A</td><td>Ch.12 하브루타토론</td></tr>
+      <tr><td class="num">24</td><td>펜타 지수 사후 + 심화 과정 진로 상담</td><td>전체</td><td>최종 레이더 + 2지망 추천서 발급</td></tr>
+    </tbody>
+  </table>
+  <p class="small">※ 24주 마무리: 펜타 지수 사전→중간→사후 3회 레이더, 24편 포트폴리오, 공개 발표 10분(학부모 참관), 심화 12과정 중 <strong>2지망 추천서</strong> 발급(강한 2영역 + 보완 1영역 기준).</p>
+
+  <div class="sect-head"><div class="sect-num">5</div><div class="sect-title">심화 12과정 분기표 — 어느 과정이 어느 영역으로 가는가</div></div>
+  <table>
+    <thead><tr><th>학생 프로파일</th><th>약점 영역</th><th>1지망 추천 심화 과정</th><th>2지망</th></tr></thead>
+    <tbody>
+      <tr><td>독해는 좋은데 토론이 약함</td><td>A 소통</td><td>Ch.5 근거기반토론 / Ch.12 하브루타토론</td><td>Ch.11 자료기반토론</td></tr>
+      <tr><td>어휘 빈곤 · 개념어 부족</td><td>E 어휘</td><td>Ch.7 개념어체계화</td><td>Ch.1 인문독서</td></tr>
+      <tr><td>주장은 있는데 근거 부재</td><td>N 사고</td><td>Ch.2 논증과추론 / Ch.6 질문설계</td><td>Ch.9 논제분석훈련</td></tr>
+      <tr><td>아이디어는 풍부, 글로 못 옮김</td><td>T 표현</td><td>Ch.8 사고력에세이 / Ch.10 구조설계논술</td><td>Ch.4 요약구조화</td></tr>
+      <tr><td>뉴스/미디어 무비판 수용</td><td>N·P</td><td>Ch.3 시사분석훈련</td><td>Ch.6 질문설계</td></tr>
+      <tr><td>균형형 (전 영역 평균)</td><td>—</td><td>Ch.1 인문독서 (PENTA 균형 강화)</td><td>Ch.4 요약구조화</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">6</div><div class="sect-title">수료 후 커리어 · 펜타 지수 연동</div></div>
+  <table>
+    <thead><tr><th style="width:80px">펜타 영역</th><th>이 과정에서 기르는 능력</th></tr></thead>
+    <tbody>
+      <tr><td><strong>P</strong></td><td>서사·설명·논설 3장르 구조 독해, 배경지식 활성화, 5전략</td></tr>
+      <tr><td><strong>E</strong></td><td>Tier 2 어휘 200개·사고도구어 3수준·어휘 망</td></tr>
+      <tr><td><strong>N</strong></td><td>주장-근거 1쌍(기본)·Warrant 발굴(심화)·6 Types 발문</td></tr>
+      <tr><td><strong>T</strong></td><td>3줄→5줄→단락→에세이 4단 계단</td></tr>
+      <tr><td><strong>A</strong></td><td>경청 3규칙·4인 라운드·2:2 구조 토론·5분 발표</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><strong>루트 과정 고유 지표</strong>: 학생이 스스로 "나는 어디가 강하고 어디가 약한가"를 언어화하는 <strong>메타인지</strong>. 이 능력이 심화 12과정의 출발선을 만든다.</p>
+  <div class="cols-4">
+    <div class="card"><div class="label">Path 1</div><h4>펜타스쿨 정규 강사</h4><p class="small">루트 과정 수료가 모든 강사의 출발점</p></div>
+    <div class="card"><div class="label">Path 2</div><h4>학교 방과후·공공도서관</h4><p class="small">초등 문해력 전반을 다룰 수 있는 유일한 자격</p></div>
+    <div class="card"><div class="label">Path 3</div><h4>홈 스쿨링·학부모 코칭</h4><p class="small">이은경 방법론 가정 보급</p></div>
+    <div class="card"><div class="label">Path 4</div><h4>마스터 트레이너</h4><p class="small">2년 실적 후 루트 과정 공동 강의</p></div>
+  </div>
+</section>
+
+<!-- ==================== CH.1 인문독서 ==================== -->
+<section id="ch1" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Chapter 1 · PENTA P (독해)</div>
+    <h1 class="chapter-title"><span class="ch-num">1.</span> 인문독서</h1>
+    <div class="chapter-anchor">Shared Inquiry (Great Books Foundation, 1947)</div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">1</div><div class="sect-title">과목 정의 + 해외 앵커</div></div>
+  <div class="goldbox">
+    <h4>Anchor — Shared Inquiry™ Method</h4>
+    <p><strong>The Great Books Foundation</strong> (시카고, 1947 창립). 창립자 Robert M. Hutchins·Mortimer Adler의 "Great Books" 운동에서 출발. 80년간 미국 K-12 독서토론 교수법의 표준.</p>
+    <p><strong>핵심 원리 5가지</strong>: ① 텍스트 기반 토론(Text-Based Discussion) ② 해석 유보(Interpretive Authority Suspension) ③ 3종 질문(Factual / Interpretive / Evaluative) ④ 재독(再讀) 5단계 ⑤ 7~10초 Wait Time</p>
+    <p><strong>공식 교사 연수</strong>: Shared Inquiry Essentials 100-level 배지 = 10시간 (라이브 5h×2 또는 6h 라이브 + 4h 온디맨드)</p>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:120px">항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>영역</td><td>PENTA P (독해)</td></tr>
+      <tr><td>대상</td><td>초등 3~6학년 (기본반 3-4 / 심화반 5-6)</td></tr>
+      <tr><td>강사</td><td><strong>확정 — 김문영 (달콤쌤)</strong>, 경인교대 인천캠, 《세계소설이 묻고 역사가 답하다》 저자 (상상스퀘어, 2026)</td></tr>
+      <tr><td>형태</td><td>1:4 그룹 수업 · 90분/회</td></tr>
+      <tr><td>과정</td><td>기본 12주 / 심화 24주</td></tr>
+    </tbody>
+  </table>
+
+  <h3>펜타 고유 특화</h3>
+  <ul class="bull">
+    <li><strong>세계사 앵커 병행</strong>: 원조 Shared Inquiry 텍스트 단독 탐구 원칙에 "역사가 답하다" 25분 블록 삽입 (한국 초등 세계사 배경지식 보완)</li>
+    <li><strong>"나라면 어떻게 했을까?" 감정이입 단계 고정</strong>: 초등 3~4학년 도덕적 추상 사고 한계를 감정이입 프롬프트로 완충</li>
+    <li><strong>2:2 구조 토론 → 논증 단락 쓰기(5~6학년)</strong>: Shared Inquiry(공유 탐구) + Toulmin Model(툴민 논증 모형) 3요소(Claim-Grounds-Warrant) 결합</li>
+  </ul>
+
+  <h3>왜 이 앵커인가</h3>
+  <p>Shared Inquiry는 "텍스트 안에 답이 하나로 고정되지 않는다"는 전제 위에서, 학생이 근거 문장을 직접 찾아 해석을 제시하고 다른 해석과 맞대어 보는 80년 검증된 독서 토론법. 교사는 정답 전달자가 아니라 절차 운영자 역할만 맡는다. 초등 인문독서의 가장 큰 실패 지점인 "교사의 해설 일방 전달"을 구조적으로 차단할 수 있다는 점에서, 펜타 인문독서 과목의 1차 앵커로 선정. 7~10초 Wait Time(생각 시간 침묵 규칙)과 3종 질문(사실·해석·평가) 설계는 그대로 강사 양성 10차시 드릴로 이식.</p>
+  <p>Toulmin Model(툴민 논증 모형)은 초5~6 심화 단계에서 학생이 토론 이후 "내 해석의 근거"를 문장 단위로 구조화할 때 결합. 주장(Claim)–근거(Grounds)–연결이유(Warrant) 3요소로 축소해 초등 인지 부담을 낮추고, 1~4주 구두 토론 → 8~12주 논증 단락 쓰기로 자연스럽게 전이시킨다.</p>
+
+  <h4>근거 자료</h4>
+  <ul class="small">
+    <li><a href="https://www.greatbooks.org/" target="_blank">Great Books Foundation — Shared Inquiry 공식 사이트</a></li>
+    <li><a href="https://www.greatbooks.org/teachers-professionals/professional-learning/" target="_blank">Great Books Foundation — Shared Inquiry Essentials 100-level 교사 연수</a></li>
+    <li><a href="https://owl.purdue.edu/owl/general_writing/academic_writing/historical_perspectives_on_argumentation/toulmin_argument.html" target="_blank">Purdue OWL — Toulmin Argument</a></li>
+    <li>Stephen Toulmin, <em>The Uses of Argument</em> (Cambridge University Press, 1958/2003)</li>
+  </ul>
+
+  <div class="sect-head"><div class="sect-num">2</div><div class="sect-title">10차시 교사 양성</div></div>
+  <p class="small"><strong>수강 대상</strong>: 초등교사·학원강사·독서논술 지도자 (2년+ 우대) · <strong>수료 조건</strong>: 80% 출석 + 마이크로티칭 1회 + 최종 커리큘럼 재구성 과제</p>
+  <table>
+    <thead><tr><th class="num">차시</th><th>제목</th><th>핵심 목표</th><th>주요 활동 (180분)</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>오리엔테이션 + Shared Inquiry 개관</td><td>해석 유보 패러다임 수용, 정답 강박 탈피</td><td>강의 60분(Great Books 역사·3종 질문) + 데모 수업 참관 60분(안데르센 단편) + Q&A·학습 서약 60분</td><td>학습 서약서, 정답 유보 자기선언문</td></tr>
+      <tr><td class="num">2</td><td>Interpretive Question 작성법</td><td>정답 하나가 고정되지 않되 본문 근거가 있는 질문 20개 작성</td><td>좋은·나쁜 질문 20 비교 60분 + 《일리아스》·《돈키호테》 Interpretive Q 10개 설계 90분 + 상호 첨삭 30분</td><td>Interpretive Question 10개 포트폴리오</td></tr>
+      <tr><td class="num">3</td><td>교수법 기본기 — 발문·경청·Wait Time</td><td>7~10초 침묵 견디기, 3종 후속 질문 자동화</td><td>Wait Time 롤플레이 60분(타이머 강제) + 3종 후속 질문 드릴 90분 + 자기 영상 점검 30분</td><td>후속 질문 대본 + 침묵 로그</td></tr>
+      <tr><td class="num">4</td><td>학생 12주/24주 커리큘럼 해독</td><td>30작품 시대별 배치 원리와 학년별 난이도 계단 이해</td><td>김문영 저서 30작품 구조 분석 90분 + 기본 12주 vs 심화 24주 비교 60분 + 반별 맞춤 재배열 30분</td><td>반별 맞춤 12주 배열표</td></tr>
+      <tr><td class="num">5</td><td>마이크로티칭 1차 — Focus Question 운영</td><td>10분 모의 수업으로 해석 유보 실전</td><td>수강생 10분 시연(Focus Question 1개) × 전원 + 동료 피드백 + 강사 코칭</td><td>동영상 + 자기평가지</td></tr>
+      <tr><td class="num">6</td><td>학부모 상담 & 포트폴리오 운영</td><td>"논술 대비"가 아닌 "사고력·독서 습관"으로 설득</td><td>샘플 상담 시나리오 60분 + 포트폴리오 스크랩북 실습 60분 + 모의 상담 3회</td><td>샘플 상담 대본, 포트폴리오 템플릿</td></tr>
+      <tr><td class="num">7</td><td>평가·루브릭 캘리브레이션</td><td>학생 글·발언 공통 기준 채점</td><td>5등급 루브릭 설계 90분 + 동일 샘플 5편 교차 채점 60분 + 편차 조정 30분</td><td>펜타 인문독서 공통 루브릭 v1</td></tr>
+      <tr><td class="num">8</td><td>문제 학생 대응·교실 운영</td><td>불안형·침묵형·독점형 학생 대응</td><td>3유형 케이스 스터디 90분 + 발언권 토큰·근거 카드 도구 시연 60분 + 관리 체크리스트 30분</td><td>문제 학생 대응 매뉴얼</td></tr>
+      <tr><td class="num">9</td><td>펜타 브랜드 철학·윤리</td><td>PENTA 5영역 내재화, 에르메스 프리미엄 포지셔닝</td><td>PENTA 5영역 연결 60분 + 프랜차이즈 윤리 60분 + 교사 윤리 서약 워크숍 60분</td><td>교사 윤리 서약서</td></tr>
+      <tr><td class="num">10</td><td>최종 시연 + 수료 평가</td><td>20분 풀사이클 시연(Prereading→토론→Postdiscussion Writing)</td><td>수강생 20분 × 전원 최종 시연 + 심사위원 3인 평가 + 수료식</td><td>자격증 발급, 최종 과제 제출</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <h4>교수법 편중 원칙</h4>
+    <p>10차시 어디에도 "작품 줄거리 요약 강의"가 없습니다. 콘텐츠 지식은 김문영 저서 사전 숙독 과제로 대체하고, 차시 시간은 전부 "어떻게 가르칠까"(질문 설계·해석 유보·Wait Time·루브릭·상담)에 배정합니다.</p>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">3</div><div class="sect-title">학생 12주 기본반 (3-4학년)</div></div>
+  <p><strong>슬로건</strong>: "세계 영웅들의 이야기 속으로, 역사 탐험 시작!"</p>
+  <h4>표준 플로우 (90분)</h4>
+  <table>
+    <thead><tr><th>파트</th><th style="width:80px">시간</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>세계소설이 묻다</td><td>20분</td><td>교사 스토리텔링 줄거리 전달 → 책 속 핵심 질문 제시</td></tr>
+      <tr><td>소설을 탐구하다</td><td>15분</td><td>작가 소개 + "왜 이 이야기를 썼을까?"</td></tr>
+      <tr><td>역사가 답하다</td><td>25분</td><td>시대 배경 설명(지도/이미지) → 오늘날과 연결</td></tr>
+      <tr><td>나라면 어떻게 했을까?</td><td>25분</td><td>4인 자유 토론 → 짧은 글쓰기(3-5문장) → 발표</td></tr>
+      <tr><td>마무리</td><td>5분</td><td>핵심 키워드 3개 정리 + 다음 시간 예고</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead><tr><th class="num">주</th><th>작품</th><th>시대</th><th>핵심 주제</th><th>토론 질문</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>일리아스·오디세이아</td><td>고대</td><td>신화 속 영웅, 분노와 귀환</td><td>"아킬레우스는 왜 화가 났을까? 나라면 싸웠을까?"</td></tr>
+      <tr><td class="num">2</td><td>로빈후드</td><td>중세</td><td>정의, 봉건제도</td><td>"도둑질이 정의가 될 수 있을까?"</td></tr>
+      <tr><td class="num">3</td><td>돈키호테</td><td>중세</td><td>꿈과 현실, 기사도</td><td>"돈키호테는 바보일까, 용감한 사람일까?"</td></tr>
+      <tr><td class="num">4</td><td>동방견문록</td><td>중세</td><td>탐험, 문명 교류</td><td>"마르코 폴로는 왜 긴 여행을 떠났을까?"</td></tr>
+      <tr><td class="num">5</td><td>로빈슨 크루소</td><td>근대</td><td>생존, 자립, 도전</td><td>"무인도에서 혼자 살아야 한다면 가장 먼저 할 일은?"</td></tr>
+      <tr><td class="num">6</td><td>걸리버 여행기</td><td>근대</td><td>상대적 크기, 사회 풍자</td><td>"소인국에서 내가 거인이라면 어떻게 행동해야 할까?"</td></tr>
+      <tr><td class="num">7</td><td>올리버 트위스트</td><td>근대</td><td>빈곤, 어린이 권리</td><td>"올리버가 '더 주세요'라고 한 것은 잘못일까?"</td></tr>
+      <tr><td class="num">8</td><td>80일간의 세계일주</td><td>근대</td><td>도전, 약속, 세계 지리</td><td>"80일 안에 세계를 돌 수 있다는 내기, 너라면 받겠어?"</td></tr>
+      <tr><td class="num">9</td><td>노트르담의 꼽추</td><td>근대</td><td>외모 편견, 진정한 아름다움</td><td>"콰지모도는 왜 사람들에게 미움을 받았을까?"</td></tr>
+      <tr><td class="num">10</td><td>안네의 일기</td><td>현대</td><td>2차 세계대전, 희망</td><td>"벽장 속에 숨어 지내도 희망을 가질 수 있을까?"</td></tr>
+      <tr><td class="num">11</td><td>동물농장</td><td>현대</td><td>권력, 평등, 배신</td><td>"'모든 동물은 평등하다'는 말이 왜 거짓말이 됐을까?"</td></tr>
+      <tr><td class="num">12</td><td>페스트 (종합)</td><td>현대</td><td>연대, 위기 극복</td><td>"전염병이 돌 때 도망가는 것과 남아서 싸우는 것 중 어느 것이 맞을까?"</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">4</div><div class="sect-title">학생 24주 심화반 (5-6학년)</div></div>
+  <p><strong>슬로건</strong>: "세계소설이 묻는다 — 역사가 내 생각에 답한다"</p>
+  <p class="small">1~12주: 기본반 작품을 심화 논제로 재진행 (찬반 논제 설정, 2:2 구조 토론, Toulmin 3요소 결합). 13~24주는 다음과 같이 확장.</p>
+  <h4>13~24주 — 심화 확장</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>작품</th><th>시대</th><th>핵심 주제</th><th>토론 논제</th></tr></thead>
+    <tbody>
+      <tr><td class="num">13</td><td>명상록</td><td>고대</td><td>스토아 철학, 자기 수양</td><td>"황제처럼 권력을 가졌을 때 절제하는 것이 가능할까?"</td></tr>
+      <tr><td class="num">14</td><td>군주론</td><td>중세</td><td>리더십, 권력의 본질</td><td>"좋은 리더는 사랑받아야 할까, 두려움의 대상이 되어야 할까?"</td></tr>
+      <tr><td class="num">15</td><td>베니스의 상인</td><td>중세</td><td>법과 자비, 차별</td><td>"살 1파운드를 요구하는 계약은 법적으로 유효한가?"</td></tr>
+      <tr><td class="num">16</td><td>니벨룽겐의 노래</td><td>중세</td><td>명예와 복수</td><td>"복수는 정당한 행동인가, 악의 반복인가?"</td></tr>
+      <tr><td class="num">17</td><td>종의 기원</td><td>근대</td><td>과학과 종교의 충돌</td><td>"과학적 진실이 기존 믿음과 충돌할 때 어느 것을 따라야 하나?"</td></tr>
+      <tr><td class="num">18</td><td>레 미제라블</td><td>근대</td><td>법 vs 정의, 계급 불평등</td><td>"빵 훔친 장발장을 19년 감금한 것은 정당한가?"</td></tr>
+      <tr><td class="num">19</td><td>죄와 벌</td><td>현대</td><td>범죄의 심리, 양심</td><td>"악한 사람을 죽이는 것은 도덕적으로 허용될 수 있는가?"</td></tr>
+      <tr><td class="num">20</td><td>1984</td><td>현대</td><td>전체주의, 감시 사회</td><td>"사회의 안전을 위해 개인의 프라이버시를 감시하는 것은 정당한가?"</td></tr>
+      <tr><td class="num">21</td><td>자유론</td><td>근대</td><td>자유와 사회의 제한</td><td>"타인에게 해를 끼치지 않는다면 무엇이든 해도 되는가?"</td></tr>
+      <tr><td class="num">22</td><td>국부론</td><td>근대</td><td>자본주의의 시작</td><td>"보이지 않는 손에만 맡기면 세상은 공평해질 수 있는가?"</td></tr>
+      <tr><td class="num">23</td><td>위대한 개츠비</td><td>현대</td><td>아메리칸 드림</td><td>"꿈을 위해 자신의 정체성을 바꾸는 것은 정당한가?"</td></tr>
+      <tr><td class="num">24</td><td>자본론 (종합)</td><td>현대</td><td>노동 착취, 자본주의 비판</td><td>"자본주의 사회에서 공정한 분배는 가능한가?"</td></tr>
+    </tbody>
+  </table>
+  <p class="small">※ 24주 마무리: 포트폴리오 제출 — 12편 논증 단락 묶음 + 최종 에세이 "내가 바꾸고 싶은 역사적 불의" (A4 2장)</p>
+
+  <div class="sect-head"><div class="sect-num">5</div><div class="sect-title">수료 후 커리어 · 펜타 지수 연동</div></div>
+  <table>
+    <thead><tr><th style="width:80px">펜타 영역</th><th>이 수업에서 기르는 능력</th></tr></thead>
+    <tbody>
+      <tr><td><strong>P</strong> 독해</td><td>세계 소설 줄거리 독해, 역사 배경 텍스트 이해</td></tr>
+      <tr><td><strong>E</strong> 어휘</td><td>시대별 개념어(봉건제·진화론·전체주의) 습득</td></tr>
+      <tr><td><strong>N</strong> 사고</td><td>역사적 인과관계 파악, 도덕적 딜레마 분석</td></tr>
+      <tr><td><strong>T</strong> 표현</td><td>3-5문장 글쓰기(기본) / 논증 단락 쓰기(심화)</td></tr>
+      <tr><td><strong>A</strong> 소통</td><td>4인 토론, 2:2 구조 토론, 발표</td></tr>
+    </tbody>
+  </table>
+  <div class="cols-4">
+    <div class="card"><div class="label">Path 1</div><h4>펜타스쿨 정규 강사</h4></div>
+    <div class="card"><div class="label">Path 2</div><h4>학교 방과후</h4></div>
+    <div class="card"><div class="label">Path 3</div><h4>홈 스쿨링 1:4</h4></div>
+    <div class="card"><div class="label">Path 4</div><h4>마스터 트레이너</h4></div>
+  </div>
+</section>
+
+<!-- ==================== CH.2 논증과추론 ==================== -->
+<section id="ch2" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Chapter 2 · PENTA N (사고)</div>
+    <h1 class="chapter-title"><span class="ch-num">2.</span> 논증과추론</h1>
+    <div class="chapter-anchor">Toulmin 6요소 + Paul-Elder Framework + Socratic 6 Types</div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">1</div><div class="sect-title">과목 정의 + 해외 앵커</div></div>
+  <div class="goldbox">
+    <h4>Anchor 1 — Toulmin Argument Model (툴민 논증 모형, 1958)</h4>
+    <p>Stephen Toulmin, <em>The Uses of Argument</em> (Cambridge UP). <strong>6요소</strong>: Claim(주장) · Data/Grounds(근거·자료) · Warrant(연결이유·숨은 전제) · Backing(뒷받침·권위 있는 추가 증거) · Qualifier(한정어·"대체로·아마") · Rebuttal(반박 예상·반증 조건). 형식논리(삼단논법)가 실제 삶의 논증을 설명하지 못한다는 비판에서 출발해, 수사학·작문·과학·법학 교육의 세계 표준 논증 분석 도구가 됨(Purdue OWL 채택).</p>
+    <div class="source">SOURCE · Purdue OWL · Cambridge UP</div>
+  </div>
+  <div class="goldbox">
+    <h4>Anchor 2 — Paul-Elder Critical Thinking Framework (폴–엘더 비판적 사고 프레임)</h4>
+    <p>Foundation for Critical Thinking(미국 비판적사고재단, criticalthinking.org). Richard Paul·Linda Elder 공동 개발. <strong>8 Elements of Thought(사고의 8요소)</strong>: Purpose(목적) · Question(질문) · Information(정보) · Inference(추론) · Concepts(개념) · Assumptions(가정) · Implications(함의) · Point of view(관점). <strong>9 Intellectual Standards(지적 기준 9개)</strong>: Clarity(명료성) · Accuracy(정확성) · Precision(정밀성) · Relevance(관련성) · Depth(깊이) · Breadth(넓이) · Logic(논리) · Significance(중요성) · Fairness(공정성). <strong>Intellectual Traits(지적 덕성)</strong>: 지적 겸손·용기·끈기·공정성.</p>
+    <div class="source">SOURCE · Foundation for Critical Thinking</div>
+  </div>
+  <p><strong>결합 근거</strong>: Toulmin이 논증의 <em>구조</em>를 6칸으로 분해하고, Paul-Elder는 그 구조가 얼마나 질 높은지 9기준으로 평가. 학생이 자기 논증을 구조화(Toulmin) → 기준으로 검토(Paul-Elder) → 소크라테스 발문으로 심화하는 <strong>메타인지 3단 고리</strong>를 형성한다.</p>
+
+  <h3>왜 이 앵커인가</h3>
+  <p>초등 논증 수업의 공통 실패 원인은 두 가지. 하나는 "주장만 세고 근거가 없는" 구조적 빈약, 다른 하나는 "근거는 있는데 주장과 어떻게 이어지는지 설명 못 하는" 연결이유(Warrant) 누락이다. Toulmin Model은 이 두 지점을 정확히 분해해 보여주는 도구. Paul-Elder Framework는 여기에 "정확한가·관련 있는가·공정한가"를 묻는 검증 체크리스트를 얹는다. 두 앵커를 결합하면 학생은 자기 논증을 스스로 구조화·검토·수정하는 메타인지 사이클을 체화할 수 있다. 한국 초등 논술 관습이 강조해온 "논리적 글쓰기"를 불투명한 직관에서 투명한 공정으로 바꿔 주는 설계다.</p>
+
+  <h4>근거 자료</h4>
+  <ul class="small">
+    <li><a href="https://owl.purdue.edu/owl/general_writing/academic_writing/historical_perspectives_on_argumentation/toulmin_argument.html" target="_blank">Purdue OWL — Toulmin Argument</a></li>
+    <li>Stephen Toulmin, <em>The Uses of Argument</em> (Cambridge University Press, 1958/2003)</li>
+    <li><a href="https://www.criticalthinking.org/pages/our-concept-of-critical-thinking/411" target="_blank">Foundation for Critical Thinking — Paul-Elder Framework</a></li>
+    <li><a href="https://www.criticalthinking.org/store/products/the-miniature-guide-to-critical-thinking-concepts-and-tools-8th-edition/183" target="_blank">Paul &amp; Elder, <em>The Miniature Guide to Critical Thinking</em> (8th ed.)</a></li>
+  </ul>
+
+  <table>
+    <thead><tr><th style="width:120px">항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>영역</td><td>PENTA N (사고)</td></tr>
+      <tr><td>대상</td><td>초등 3~6학년</td></tr>
+      <tr><td>강사</td><td>섭외 대상 (법조인/철학·논리학 전공 교사 우선, 김문영 공동 자문)</td></tr>
+      <tr><td>형태 · 과정</td><td>1:4 · 90분 · 기본 12주 / 심화 24주</td></tr>
+    </tbody>
+  </table>
+
+  <h3>펜타 고유 특화</h3>
+  <ul class="bull">
+    <li><strong>초3~4 3요소 축소</strong>: Claim-Grounds-Warrant만 도입, Backing·Qualifier·Rebuttal은 초5~6 확장</li>
+    <li><strong>"반박=무례" 완충 장치</strong>: Rebuttal을 "상대방 말도 일리가 있는데, 그래도 내 주장이 맞다고 보는 이유"로 재정의</li>
+    <li><strong>3층 계단 논제</strong>: 초3~4 학급 단위(급식·체육·숙제), 초5~6 사회 이슈(스마트폰·환경) + 짧은 사설·칼럼</li>
+  </ul>
+
+  <div class="sect-head"><div class="sect-num">2</div><div class="sect-title">10차시 교사 양성</div></div>
+  <table>
+    <thead><tr><th class="num">차시</th><th>제목</th><th>핵심 목표</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>오리엔테이션 + Toulmin·Paul-Elder 개관</td><td>두 이론의 결합 구조 이해, 자기 논증 습관 진단</td><td>자기 논증 분해표</td></tr>
+      <tr><td class="num">2</td><td>Warrant(숨은 전제) 발굴 훈련</td><td>암묵적 Warrant 말로 꺼내는 "왜냐하면의 왜냐하면" 드릴</td><td>Warrant 발굴 체크리스트</td></tr>
+      <tr><td class="num">3</td><td>Paul-Elder 9 Standards 내재화</td><td>5기준(Clarity·Accuracy·Relevance·Logic·Fairness)을 한국어 발문으로 번역</td><td>9기준 발문 카드 27장</td></tr>
+      <tr><td class="num">4</td><td>학생 12/24주 커리큘럼 해독</td><td>논제 난이도 계단과 3→6요소 확장 설계 이해</td><td>반별 논제 재배열표</td></tr>
+      <tr><td class="num">5</td><td>마이크로티칭 1차 — 3요소 논증 카드</td><td>초3~4 Claim-Grounds-Warrant 빈칸 카드 10분 시연</td><td>동영상 + 자기평가지</td></tr>
+      <tr><td class="num">6</td><td>학부모 상담 & 포트폴리오 운영</td><td>"비판적 사고와 품격 있는 토론"으로 설득</td><td>샘플 상담 대본, 템플릿</td></tr>
+      <tr><td class="num">7</td><td>평가·루브릭 캘리브레이션</td><td>6요소 × 5기준 결합 루브릭 제작</td><td>펜타 논증 공통 루브릭 v1</td></tr>
+      <tr><td class="num">8</td><td>문제 학생 대응·교실 운영</td><td>침묵형·독점형·감정형 학생 대응, Fairness 토큰</td><td>문제 학생 대응 매뉴얼</td></tr>
+      <tr><td class="num">9</td><td>펜타 브랜드 철학·윤리 + 지적 덕성</td><td>Intellectual Humility를 한국 권위주의 교실에서 모델링</td><td>교사 윤리 서약서</td></tr>
+      <tr><td class="num">10</td><td>최종 시연 + 수료 평가</td><td>20분 풀사이클 (논제→3/6요소→2:2 반박→자가 평가)</td><td>자격증 발급</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">3</div><div class="sect-title">학생 12주 기본반 (3-4학년)</div></div>
+  <p><strong>슬로건</strong>: "왜냐하면의 왜냐하면을 말할 수 있는 아이"</p>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제</th><th>유형</th><th>핵심 기법</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>"숙제는 꼭 있어야 할까?"</td><td>학급 생활</td><td>3요소 입문 / Claim 선언</td><td>논증 카드 1장</td></tr>
+      <tr><td class="num">2</td><td>"급식 남기면 안 될까?"</td><td>학급 생활</td><td>Grounds 3개 찾기</td><td>논증 카드 + 3문장 단락</td></tr>
+      <tr><td class="num">3</td><td>"체육 시간은 일주일에 몇 번이 적당할까?"</td><td>학급 생활</td><td>Warrant 말로 꺼내기</td><td>Warrant 10개 수집</td></tr>
+      <tr><td class="num">4</td><td>"친구와 싸웠을 때 먼저 사과하는 사람이 맞을까?"</td><td>관계 윤리</td><td>"왜냐하면의 왜냐하면" 2단</td><td>대화 스크립트</td></tr>
+      <tr><td class="num">5</td><td>"학교에 휴대폰을 가져와도 될까?"</td><td>학교 규칙</td><td>찬반 입장 바꿔 말하기</td><td>역할 교체 단락</td></tr>
+      <tr><td class="num">6</td><td>"용돈은 매달 정해진 금액이 좋을까, 심부름마다?"</td><td>가정 생활</td><td>Grounds 신뢰성(Accuracy)</td><td>근거 신뢰도표</td></tr>
+      <tr><td class="num">7</td><td>"동물을 키우는 건 꼭 좋은 일일까?"</td><td>일상 윤리</td><td>양면 사고 / 보류 입장</td><td>3입장 단락</td></tr>
+      <tr><td class="num">8</td><td>"학원을 많이 다니는 게 공부에 도움이 될까?"</td><td>학습</td><td>Relevance 기준 훈련</td><td>근거 관련성 체크</td></tr>
+      <tr><td class="num">9</td><td>"거짓말은 언제나 나쁜 걸까?"</td><td>도덕</td><td>예외 상황 / Qualifier 맛보기</td><td>한정어 연습</td></tr>
+      <tr><td class="num">10</td><td>"우리 반 규칙을 투표로 정하는 게 좋을까?"</td><td>공동체</td><td>4인 2:2 첫 토론</td><td>토론 기록지</td></tr>
+      <tr><td class="num">11</td><td>"만화와 책 중 무엇이 더 좋을까?"</td><td>문화</td><td>Fairness — 반대 입장 대변</td><td>상대 입장 대변 단락</td></tr>
+      <tr><td class="num">12</td><td>"우리 반에 가장 필요한 것은 무엇인가?" (종합)</td><td>학급 종합</td><td>3요소 풀사이클</td><td>논증 단락 + 발표</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">4</div><div class="sect-title">학생 24주 심화반 (5-6학년)</div></div>
+  <p><strong>슬로건</strong>: "6요소로 내 주장을 짓고, 9기준으로 내가 내 논증을 검토한다"</p>
+  <h4>1~12주 (사회 이슈 중심)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>"초등학생에게 스마트폰을 사줘야 하는가?"</td><td>6요소 입문</td></tr>
+      <tr><td class="num">2</td><td>"동물원은 필요한가?"</td><td>Backing 탐색</td></tr>
+      <tr><td class="num">3</td><td>"학원은 필수인가, 선택인가?"</td><td>Qualifier</td></tr>
+      <tr><td class="num">4</td><td>"초등 시험 성적을 공개해야 하는가?"</td><td>Rebuttal 도입</td></tr>
+      <tr><td class="num">5</td><td>"배달 플라스틱을 법으로 금지해야 하는가?"</td><td>자료(통계) 활용 Grounds</td></tr>
+      <tr><td class="num">6</td><td>"AI에게 학교 숙제를 시켜도 되는가?"</td><td>Point of view 다양화</td></tr>
+      <tr><td class="num">7</td><td>"부모가 자녀의 SNS를 감시해도 되는가?"</td><td>Fairness 5기준</td></tr>
+      <tr><td class="num">8</td><td>"방학을 줄이고 학기를 늘리는 게 좋을까?"</td><td>Depth vs Breadth</td></tr>
+      <tr><td class="num">9</td><td>"게임은 공부에 방해가 되는가?"</td><td>Assumption 드러내기</td></tr>
+      <tr><td class="num">10</td><td>"기본소득은 도입해야 하는가?"</td><td>Backing 신뢰 출처</td></tr>
+      <tr><td class="num">11</td><td>"청소년 아이돌 데뷔는 제한해야?"</td><td>Implications 탐색</td></tr>
+      <tr><td class="num">12</td><td>"우리 사회가 가장 시급히 바꿔야 할 것은?"</td><td>6요소 풀사이클 + 9기준</td></tr>
+    </tbody>
+  </table>
+  <h4>13~24주 (사설·칼럼·학술 발췌)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">13</td><td>"표현의 자유에 한계가 있어야 하는가?"</td><td>8 Elements 전체 적용</td></tr>
+      <tr><td class="num">14</td><td>"기후변화는 개인 책임인가, 기업 책임인가?"</td><td>복수 Warrant 비교</td></tr>
+      <tr><td class="num">15</td><td>"CCTV 증설은 정당한가?"</td><td>Qualifier·Rebuttal 정교화</td></tr>
+      <tr><td class="num">16</td><td>"최저임금 인상은 옳은가?"</td><td>Information 출처 검증</td></tr>
+      <tr><td class="num">17</td><td>"AI가 사람의 일자리를 대체해도 괜찮은가?"</td><td>Consequences 예측</td></tr>
+      <tr><td class="num">18</td><td>"대학은 꼭 가야 하는가?"</td><td>Point of view 3관점</td></tr>
+      <tr><td class="num">19</td><td>"안락사는 허용되어야 하는가?"</td><td>Fairness × Intellectual Humility</td></tr>
+      <tr><td class="num">20</td><td>"인공지능 창작물은 누구의 것인가?"</td><td>Concepts 정의</td></tr>
+      <tr><td class="num">21</td><td>"선거 연령을 낮춰야 하는가?"</td><td>Significance 판단</td></tr>
+      <tr><td class="num">22</td><td>"플라스틱 세금은 효과적인가?"</td><td>정책 효과 Backing</td></tr>
+      <tr><td class="num">23</td><td>"학교 폭력 가해자 신상 공개는 정당한가?"</td><td>관계 보호 Rebuttal 심화</td></tr>
+      <tr><td class="num">24</td><td>"내가 대통령이 된다면 가장 먼저 할 일은?"</td><td>9기준 전수 점검 + 발표</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">5</div><div class="sect-title">수료 후 커리어 · 펜타 지수 연동</div></div>
+  <p>N 사고 영역 주 교집합. <strong>Toulmin 6요소 구조화 · Warrant 발굴 · Paul-Elder 9기준 자가 평가</strong>가 핵심 성장 지표. 수료자 4경로: 펜타스쿨 정규 강사 / 학교 방과후·논술학원 특강 / 홈 스쿨링 라이선스 / 마스터 트레이너.</p>
+</section>
+
+<!-- ==================== CH.3 시사분석훈련 (Tier 1 Core) ==================== -->
+<!-- SSoT: ~/Desktop/0.NEWBIZ_MASTER/7.펜타/펜타캠퍼스/curriculum/curriculum_시사분석훈련.md -->
+<section id="ch3" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Chapter 3 · Tier 1 CORE · PENTA P·N (A 보조)</div>
+    <h1 class="chapter-title"><span class="ch-num">3.</span> 시사분석훈련</h1>
+    <div class="chapter-anchor">News Literacy Project Checkology® + Stanford Civic Online Reasoning (Digital Inquiry Group)</div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">1</div><div class="sect-title">과목 정의 + 해외 앵커</div></div>
+  <div class="goldbox">
+    <h4>Anchor 1 — News Literacy Project · Checkology® (NLP, 2008~)</h4>
+    <p>미국 비영리(워싱턴 D.C.). 퓰리처상 수상 기자 Alan C. Miller가 LA Times 퇴직 후 설립. NAMLE 공식 파트너. 전 세계 180개국 4만+ 교사·100만+ 학생 누적. <strong>5 Information Neighborhoods</strong>: Journalism · Publicity/Propaganda · Advertising · Opinion · Raw Information. <strong>IMVAIN 6기준</strong>: Independent · Multiple · Verify · Authoritative · Informed · Named.</p>
+    <div class="source">SOURCE · newslit.org · get.checkology.org</div>
+  </div>
+  <div class="goldbox">
+    <h4>Anchor 2 — Stanford Civic Online Reasoning (SHEG → Digital Inquiry Group, 2016~)</h4>
+    <p>Stanford 2016년 연구: 중·고생 80%가 광고와 기사를 구별 못 함 → 전국 충격. 핵심 3질문: <strong>"Who's behind the information? / What's the evidence? / What do other sources say?"</strong>. <strong>Lateral Reading</strong> — Fact-checker처럼 의심 사이트에서 머무르지 말고 새 탭을 열어 그 사이트를 다른 출처에서 검증.</p>
+    <div class="source">SOURCE · cor.inquirygroup.org</div>
+  </div>
+  <p><strong>결합 근거</strong>: NLP는 "뉴스의 지형"(5 Neighborhoods + IMVAIN)을, Stanford COR은 "디지털 환경 검증 동작"(Lateral Reading + 3질문)을 제공. 둘이 합쳐져야 뉴스 생태계 이해 + 실전 검증 동작이 동시에 장착된다.</p>
+
+  <table>
+    <thead><tr><th style="width:120px">항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>영역</td><td>PENTA P·N 중심, A 보조</td></tr>
+      <tr><td>대상</td><td>초등 3~6학년 (기본반 3-4 / 심화반 5-6)</td></tr>
+      <tr><td>강사</td><td>섭외 대상 (기자 출신·사회과 교사·미디어 교육 전문가 우선)</td></tr>
+      <tr><td>형태 · 과정</td><td>1:4 · 90분 · 기본 12주 / 심화 24주</td></tr>
+      <tr><td>선수 과정</td><td><strong>Ch.0 종합문해력 전문가 수료 필수</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>펜타 고유 특화</h3>
+  <ul class="bull">
+    <li><strong>한국 소재 밀착</strong>: 연합뉴스·어린이조선·EBS뉴스·네이버 댓글·유튜브 쇼츠·인스타 카드뉴스·카카오뷰를 실제 수업 재료로. 해외 미디어 예시는 보조</li>
+    <li><strong>"의심=예의 없음" 한국 정서 완충</strong>: IMVAIN을 "이 기사가 믿을 만한 친구라면 어떤 친구인지 확인하는 절차"로 재정의. 출처 검증을 비난이 아닌 <strong>존중의 형식</strong>으로 프레이밍</li>
+    <li><strong>초등 발달 계단</strong>: 초3~4는 5 Neighborhoods 분류 + 제목 vs 본문 불일치 감지까지, 초5~6는 IMVAIN·Lateral Reading·Bias/Framing 전면 도입</li>
+    <li><strong>Bias/Framing 분석</strong>: 동일 사건 3사 보도 비교(제목·사진·단어) → 프레임 3유형(선택·강조·누락) 감지</li>
+  </ul>
+
+  <h3>왜 이 앵커인가</h3>
+  <p>한국 초등 학부모의 가장 큰 불안 중 하나는 "아이가 유튜브에서 본 정보를 그대로 믿는다"이다. 시사분석훈련은 이 불안을 정면으로 다룬다. NLP Checkology는 K-12 뉴스 리터러시의 사실상 표준이며, Stanford COR은 디지털 환경 검증 동작의 최신 연구 기반이다. 두 앵커가 합쳐져야 "뉴스란 무엇인가"(생태계 이해) + "이 화면을 어떻게 검증하나"(실전 동작)가 동시에 장착된다.</p>
+  <p>한국 초등 시장에는 미디어 리터러시를 다루는 학원이 거의 없다. 펜타가 이 자리를 선점하면, 학부모 설득 메시지는 "비판적 미디어 교육"보다 "<strong>아이의 안전한 정보 소비 습관</strong>"으로 프레이밍되어 진입 장벽이 낮아진다.</p>
+
+  <h4>근거 자료</h4>
+  <ul class="small">
+    <li><a href="https://newslit.org/our-story/" target="_blank">News Literacy Project — Our Story</a></li>
+    <li><a href="https://get.checkology.org/" target="_blank">Checkology® Virtual Classroom</a></li>
+    <li><a href="https://cor.inquirygroup.org/" target="_blank">Civic Online Reasoning — Digital Inquiry Group</a></li>
+    <li><a href="https://stacks.stanford.edu/file/gf151tb4868/Civic%20Online%20Reasoning%20National%20Portrait.pdf" target="_blank">Stanford SHEG — Civic Online Reasoning National Portrait</a></li>
+  </ul>
+
+  <div class="sect-head"><div class="sect-num">2</div><div class="sect-title">10차시 교사 양성</div></div>
+  <p class="small"><strong>수강 대상</strong>: 초등교사·학원강사·기자 출신·사회과 교사·미디어 교육 활동가 · <strong>수료 조건</strong>: 80% 출석 + 마이크로티칭 1회 + 최종 과제(한국 뉴스 20편으로 수업 교재 재구성)</p>
+  <table>
+    <thead><tr><th class="num">차시</th><th>제목</th><th>핵심 목표</th><th>주요 활동 (180분)</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>OT + 뉴스 리터러시 지형</td><td>NLP·Stanford COR 개관, 한국 뉴스 생태계 지도</td><td>강의 60분(Checkology 5 Neighborhoods + COR 3질문) + 한국 미디어 10종 분류 60분 + 본인 피드 진단 60분</td><td>한국 뉴스 지형 지도</td></tr>
+      <tr><td class="num">2</td><td>5 Information Neighborhoods 숙달</td><td>기사·사설·광고·선전·원자료 5분류의 초등 번역</td><td>실제 기사 30편 분류 90분(연합·조선·한겨레·어린이조선) + 경계 사례 토론 60분(네이티브 광고·협찬 기사) + 분류 루브릭 30분</td><td>5분류 판별 카드 30장</td></tr>
+      <tr><td class="num">3</td><td>IMVAIN 6기준 내재화</td><td>출처 평가 6기준을 초등 발문으로 번역</td><td>각 기준별 발문 3개씩 설계 90분(총 18개) + Named vs 익명 사례 60분 + 한국 언론의 "관계자에 따르면" 해부 30분</td><td>IMVAIN 발문 카드 18장</td></tr>
+      <tr><td class="num">4</td><td>Lateral Reading 실전 훈련</td><td>의심 사이트에서 머무르지 않고 옆으로 읽는 동작을 강사가 먼저 체화</td><td>수상한 사이트 10종 실습 90분(직접 탭 열어 검증) + 검색어 설계 60분("사이트명 fact check") + 검증 시간 측정 30분</td><td>Lateral Reading 체크리스트</td></tr>
+      <tr><td class="num">5</td><td>Claim Spotting + Bias/Framing</td><td>제목·사진·단어 선택·순서의 프레임 분석</td><td>동일 사건 3사 보도 비교 60분 + 프레임 3유형(선택·강조·누락) 60분 + 학생 수업 설계 60분</td><td>프레임 분석 양식</td></tr>
+      <tr><td class="num">6</td><td>학생 12주/24주 커리큘럼 해독</td><td>주차별 소재 선정 기준·난이도 계단·가정 연계 이해</td><td>기본 12주 소재 전수 분석 90분 + 심화 24주 추가 12주 심화 포인트 60분 + 반별 재배열 30분</td><td>주차별 한국 뉴스 소재 풀</td></tr>
+      <tr><td class="num">7</td><td>마이크로티칭 1차 — "제목 뒤집기" 워크숍</td><td>초3~4 대상 제목과 본문이 어긋난 기사 5편으로 10분 수업</td><td>각 수강생 10분 시연 × 전원 + 동료 피드백 + 강사 코칭</td><td>동영상 + 자기 평가지</td></tr>
+      <tr><td class="num">8</td><td>학부모 상담 + 디지털 미디어 지도</td><td>"뉴스 리터러시=언론 혐오 아님, 비판적 읽기와 민주적 시민성"으로 설득</td><td>샘플 상담 시나리오 60분 + 가정 미디어 규칙 설계 60분 + 모의 상담 3회 60분</td><td>학부모 상담 대본 + 가정 규칙</td></tr>
+      <tr><td class="num">9</td><td>평가·루브릭 캘리브레이션</td><td>출처 평가·프레임 분석 5등급 루브릭 제작</td><td>루브릭 설계 90분(5 Neighborhoods·IMVAIN·Lateral·Framing 4축) + 동일 학생 분석 5편 교차 채점 60분 + 편차 조정 30분</td><td>시사 분석 공통 루브릭 v1</td></tr>
+      <tr><td class="num">10</td><td>최종 시연 + 수료</td><td>20분 풀사이클(뉴스 1편 → 5분류 → IMVAIN → Lateral → 프레임 → 결론)</td><td>수강생 20분 × 전원 + 심사 3인 + 수료식</td><td>자격증, 한국 뉴스 20편 교재 재구성 과제</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <h4>교수법 편중 원칙</h4>
+    <p>1·2·3차시에 이론·분류·기준을 집중 투입하고, 4차시부터는 Lateral Reading 실전·프레임 해부·마이크로티칭·상담·루브릭으로 전환. "어떻게 가르칠까"에 후반부 전부 배정.</p>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">3</div><div class="sect-title">학생 12주 기본반 (3-4학년)</div></div>
+  <p><strong>슬로건</strong>: "이 뉴스, 누가 쓴 거지? 무슨 근거로? 다른 사람은 뭐래?"</p>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제/소재</th><th>유형</th><th>핵심 기법</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>"이건 뉴스일까 광고일까?" 학급 소식지·유튜브 썸네일 10종</td><td>학급/생활</td><td>5분류 입문</td><td>분류 카드 10장</td></tr>
+      <tr><td class="num">2</td><td>어린이조선 오늘자 톱기사 1편</td><td>일반 뉴스</td><td>기사 구조(역피라미드)</td><td>구조 지도 1장</td></tr>
+      <tr><td class="num">3</td><td>"급식 메뉴 바뀐 소식" 학교 공지문 vs 학부모 카톡</td><td>학급</td><td>원자료 vs 2차 정보</td><td>비교표</td></tr>
+      <tr><td class="num">4</td><td>EBS뉴스 어린이판 1편</td><td>공영 뉴스</td><td>출처 3질문(누가·근거·다른 말)</td><td>3질문지</td></tr>
+      <tr><td class="num">5</td><td>"날씨 소식과 공기질 소식" 기사 3편</td><td>생활 뉴스</td><td>숫자·단위 정확성</td><td>숫자 점검표</td></tr>
+      <tr><td class="num">6</td><td>유튜브 쇼츠 1편(어린이 대상 교육 채널)</td><td>영상 미디어</td><td>영상 광고 vs 콘텐츠</td><td>영상 분류</td></tr>
+      <tr><td class="num">7</td><td>"학교 앞 횡단보도 사고" 지역 뉴스 2사 비교</td><td>지역 뉴스</td><td>제목 비교</td><td>제목 대조표</td></tr>
+      <tr><td class="num">8</td><td>인스타 카드뉴스 3장(팔로워 많은 계정)</td><td>SNS 미디어</td><td>의견 vs 사실</td><td>의견·사실 분리</td></tr>
+      <tr><td class="num">9</td><td>"새 게임 출시" 리뷰 기사와 광고</td><td>광고·협찬</td><td>협찬·뒷광고 구별</td><td>협찬 표시 찾기</td></tr>
+      <tr><td class="num">10</td><td>네이버 뉴스 댓글 TOP 5</td><td>댓글 문화</td><td>댓글=의견 이해</td><td>댓글 분석지</td></tr>
+      <tr><td class="num">11</td><td>"AI가 만든 가짜 사진" 샘플 5장</td><td>AI 합성</td><td>이미지 의심 3단계</td><td>가짜 판별표</td></tr>
+      <tr><td class="num">12</td><td>종합 — "이번 주 내가 본 뉴스 1편 분석"</td><td>자유</td><td>3질문 풀사이클</td><td>뉴스 분석지 A4 1장 + 포트폴리오 1호</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">4</div><div class="sect-title">학생 24주 심화반 (5-6학년)</div></div>
+  <p><strong>슬로건</strong>: "한 페이지에 머무르지 않는다 — 옆으로 읽어라(Lateral Reading)"</p>
+  <h4>1~12주 (기본 훈련 — 국내 뉴스 중심)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제/소재</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Lateral Reading 입문 — 수상한 사이트 3종</td><td>탭 열기 훈련</td></tr>
+      <tr><td class="num">2</td><td>연합뉴스 오늘자 기사 1편</td><td>IMVAIN 6기준</td></tr>
+      <tr><td class="num">3</td><td>동일 사건 3사 비교(조선·한겨레·경향)</td><td>제목·사진·단어 대조</td></tr>
+      <tr><td class="num">4</td><td>사설 1편(신문 오피니언)</td><td>의견·사실 분리 정교화</td></tr>
+      <tr><td class="num">5</td><td>협찬·네이티브 광고 기사</td><td>협찬 표시법·광고심의</td></tr>
+      <tr><td class="num">6</td><td>유튜브 채널 1개 분석(뉴스형 크리에이터)</td><td>수익 구조·Sponsorship</td></tr>
+      <tr><td class="num">7</td><td>네이버 뉴스 댓글 + 실검 상관</td><td>댓글 여론 착시</td></tr>
+      <tr><td class="num">8</td><td>카카오뷰·뉴스레터 1편</td><td>큐레이션 편향</td></tr>
+      <tr><td class="num">9</td><td>인스타 카드뉴스 vs 기사 원문</td><td>축약 손실·왜곡</td></tr>
+      <tr><td class="num">10</td><td>짧은 쇼츠 3편(1분 이하 뉴스 요약)</td><td>맥락 탈락 복원</td></tr>
+      <tr><td class="num">11</td><td>설문조사 보도 1편</td><td>표본·질문 편향</td></tr>
+      <tr><td class="num">12</td><td>중간 종합 — 한국 뉴스 1편 풀 분석</td><td>5 Neighborhoods + IMVAIN + Lateral</td></tr>
+    </tbody>
+  </table>
+  <h4>13~24주 (심화 — 주제·사례 중심)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제/소재</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">13</td><td>선거 보도 — 여론조사 해석</td><td>Response Rate·질문 순서</td></tr>
+      <tr><td class="num">14</td><td>재난 보도 — 속보의 위험</td><td>초기 보도 오류 패턴</td></tr>
+      <tr><td class="num">15</td><td>건강 뉴스 — "00에 좋다" 기사</td><td>인과 vs 상관·표본</td></tr>
+      <tr><td class="num">16</td><td>과학 뉴스 — 논문 vs 보도</td><td>원 논문 접근·p-hacking 개념</td></tr>
+      <tr><td class="num">17</td><td>경제 뉴스 — 그래프 착시</td><td>Y축 절단·비율 왜곡</td></tr>
+      <tr><td class="num">18</td><td>국제 뉴스 — 외신 번역 편향</td><td>원문 비교·번역 누락</td></tr>
+      <tr><td class="num">19</td><td>AI 합성 이미지·딥페이크</td><td>역이미지 검색·메타데이터</td></tr>
+      <tr><td class="num">20</td><td>루머·음모론 생태계</td><td>루머 확산 3단계</td></tr>
+      <tr><td class="num">21</td><td>기자의 오보 사례 분석</td><td>정정·사과 추적</td></tr>
+      <tr><td class="num">22</td><td>사진 저널리즘 — 크롭·캡션</td><td>프레임·맥락</td></tr>
+      <tr><td class="num">23</td><td>내 피드 감사(Audit) — 1주일 소비 뉴스 지도화</td><td>에코체임버 진단</td></tr>
+      <tr><td class="num">24</td><td>최종 — "내가 선택한 한국 이슈 1건 심층 분석"</td><td>전 기법 통합 + A4 2장 + 10분 발표</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">5</div><div class="sect-title">수료 후 커리어 · 펜타 지수 연동</div></div>
+  <p>P 독해(기사·사설·카드뉴스·쇼츠 정확 독해) · N 사고(IMVAIN·Lateral Reading·Bias/Framing) 주 교집합. 수료자 4경로:</p>
+  <div class="cols-4">
+    <div class="card"><div class="label">Path 1</div><h4>펜타스쿨 정규 강사</h4></div>
+    <div class="card"><div class="label">Path 2</div><h4>학교 방과후·도서관 미디어 리터러시</h4></div>
+    <div class="card"><div class="label">Path 3</div><h4>홈 스쿨링 1:4 라이선스</h4></div>
+    <div class="card"><div class="label">Path 4</div><h4>마스터 트레이너</h4></div>
+  </div>
+</section>
+
+<!-- ==================== CH.4 요약구조화 (Tier 1 Core) ==================== -->
+<!-- SSoT: ~/Desktop/0.NEWBIZ_MASTER/7.펜타/펜타캠퍼스/curriculum/curriculum_요약구조화.md -->
+<section id="ch4" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Chapter 4 · Tier 1 CORE · PENTA P·T</div>
+    <h1 class="chapter-title"><span class="ch-num">4.</span> 요약구조화</h1>
+    <div class="chapter-anchor">Harvey &amp; Goudvis "Strategies That Work" (2017) + SWBST + GIST (Cunningham, 1982)</div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">1</div><div class="sect-title">과목 정의 + 해외 앵커</div></div>
+  <div class="goldbox">
+    <h4>Anchor 1 — Stephanie Harvey &amp; Anne Goudvis, 《Strategies That Work》 (Stenhouse 2000 / 3rd ed. 2017)</h4>
+    <p>미국 K-8 독해 교사 전문성 개발의 표준 교재. 수천 개 학군 채택. <strong>6 Comprehension Strategies</strong>: Making Connections · Asking Questions · Visualizing · Inferring · <strong>Determining Importance</strong> · <strong>Summarizing/Synthesizing</strong>. 본 과목은 마지막 두 전략(Determining Importance + Summarizing/Synthesizing)을 두 축으로.</p>
+    <div class="source">SOURCE · Stenhouse / Routledge · PEBC Denver</div>
+  </div>
+  <div class="goldbox">
+    <h4>Anchor 2 — SWBST (Somebody-Wanted-But-So-Then) + GIST (Cunningham, 1982)</h4>
+    <p><strong>SWBST</strong>: 서사 5요소 요약 프레임. 누가(Somebody) · 원했다(Wanted) · 그러나(But) · 그래서(So) · 마침내(Then). Reading Rockets·K20 Center·Smekens Education 등 K-6 미국 표준. <strong>GIST (Generating Interactions between Schemata and Text)</strong>: Cunningham(1982). 설명문을 정확히 <strong>20단어/20어절</strong>로 압축하는 제약 기반 훈련. ReadWriteThink(NCTE·IRA) 표준 레슨.</p>
+    <div class="source">SOURCE · Reading Rockets · ReadWriteThink (NCTE/IRA)</div>
+  </div>
+  <p><strong>결합 근거</strong>: Harvey &amp; Goudvis가 요약의 "전략적 기반"을, SWBST가 "서사 장르 공식"을, GIST가 "설명 장르 제약 훈련"을 제공. 논설은 Claim-Evidence Map으로 보강해 <strong>3장르 풀세트</strong> 완성. 국내 앵커: 2022 개정 국어과 [4국02-05]·[6국02-02]와 정면 일치.</p>
+
+  <table>
+    <thead><tr><th style="width:120px">항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>영역</td><td>PENTA P·T 중심</td></tr>
+      <tr><td>대상</td><td>초등 3~6학년 (기본반 3-4 / 심화반 5-6)</td></tr>
+      <tr><td>강사</td><td>섭외 대상 (국어 교사·독서논술 지도자 우선)</td></tr>
+      <tr><td>형태 · 과정</td><td>1:4 · 90분 · 기본 12주 / 심화 24주</td></tr>
+      <tr><td>선수 과정</td><td><strong>Ch.0 종합문해력 전문가 수료 필수</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>펜타 고유 특화</h3>
+  <ul class="bull">
+    <li><strong>2022 개정 성취기준 정합</strong>: 초3~4 [4국02-05] "글의 중심 내용을 확인하고 정리한다" + 초5~6 [6국02-02] "글의 구조를 고려하여 글 전체의 내용을 요약한다"를 주차별 매핑 → 학교 국어 성취도 직접 연결을 학부모에게 증명</li>
+    <li><strong>2색 하이라이트 훈련</strong>: 노랑=중요 / 연두=흥미롭지만 중요하지 않음 — Determining Importance를 눈에 보이는 동작으로 환원</li>
+    <li><strong>시각 정리표 5종 상시 비치</strong>: 타임라인·피라미드·비교표·마인드맵·매그넷(Magnet Summary)을 교실 벽 포스터로</li>
+    <li><strong>Retell → Summarize → Synthesize 계단</strong>: 초3은 Retell, 초4~5는 Summarize, 초6은 Synthesize로 학년 계단</li>
+  </ul>
+
+  <h3>왜 이 앵커인가</h3>
+  <p>한국 국어 교육에서 요약은 전통적으로 "중심 문장 찾기 + 문단 요약" 위주 — 텍스트를 잘게 자르는 경향이 강하다. Harvey &amp; Goudvis 프레임의 차별점은 <strong>Whole-Text Summary</strong>(글 전체를 한 호흡에 요약) 지향이며, 이는 한국 초등에 부족한 고차 스킬이다. SWBST는 서사 장르를 5칸 한 장에, GIST는 설명문을 20어절 한 문장에 압축하는 도구. 두 도구의 제약이 만들어내는 "선별 강제"가 곧 사고력의 본질이다.</p>
+  <p>더불어 Harvey &amp; Goudvis가 강조하는 <strong>Determining Importance(중요도 가리기)</strong>는 "축약이 아니라 선택이다"라는 요약 교육의 제1명제이다. 2색 하이라이트로 교실에서 즉시 정착 가능하다.</p>
+
+  <h4>근거 자료</h4>
+  <ul class="small">
+    <li><a href="https://www.routledge.com/Strategies-That-Work-Teaching-Comprehension-for-Engagement-Understanding-and-Building-Knowledge-Grades-K-8/Harvey-Goudvis/p/book/9781625310637" target="_blank">Strategies That Work (3rd ed.) — Routledge</a></li>
+    <li><a href="https://www.readwritethink.org/classroom-resources/lesson-plans/gist-summarizing-strategy-content" target="_blank">Get the GIST: A Summarizing Strategy — ReadWriteThink (NCTE/IRA)</a></li>
+    <li><a href="https://www.smekenseducation.com/summarize-stories-with-somebody-wanted-but-so-then/" target="_blank">SWBST — Smekens Education</a></li>
+    <li><a href="https://www.readingrockets.org/classroom/classroom-strategies/summarizing" target="_blank">Summarizing — Reading Rockets</a></li>
+  </ul>
+
+  <div class="sect-head"><div class="sect-num">2</div><div class="sect-title">10차시 교사 양성</div></div>
+  <p class="small"><strong>수강 대상</strong>: 초등교사·국어 교사·독서논술 지도자 · <strong>수료 조건</strong>: 80% 출석 + 마이크로티칭 1회 + 최종 과제(3장르 요약 루브릭 + 12편 학생 샘플 채점)</p>
+  <table>
+    <thead><tr><th class="num">차시</th><th>제목</th><th>핵심 목표</th><th>주요 활동 (180분)</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>OT + 요약의 이론 지형</td><td>Harvey &amp; Goudvis 6전략 중 Determining Importance·Summarizing 집중 이해</td><td>강의 60분(6전략 개관 + 본 과목 2축 배치) + 본인 요약 습관 진단 60분 + 2022 개정 성취기준 해독 60분</td><td>자기 요약 진단표</td></tr>
+      <tr><td class="num">2</td><td>SWBST — 서사 장르 공식</td><td>5요소 공식을 초등 동화·교과서 이야기에 적용</td><td>동화 5편 SWBST 분해 90분(어린왕자·흥부전·마지막 잎새·샬롯의 거미줄·만복이네 떡집) + 학년별 난이도 계단 60분 + 발문 카드 30분</td><td>SWBST 발문 카드 15장</td></tr>
+      <tr><td class="num">3</td><td>GIST — 설명문 20어절 제약 훈련</td><td>제약이 만드는 압축력을 교사 자신이 먼저 체화</td><td>설명문 5편 GIST 작성 90분(20어절 엄수) + 한 문장(40자) 버전 60분 + 실패 사례 공유 30분</td><td>GIST 교사 샘플 10편</td></tr>
+      <tr><td class="num">4</td><td>Determining Importance 2색 하이라이트</td><td>"중요" vs "흥미롭지만 중요 아님" 구별 훈련</td><td>동일 텍스트 3편 2색 하이라이트 90분(수강생 편차 분석) + 편차 조정 토론 60분 + 초등 발문 설계 30분</td><td>2색 하이라이트 가이드</td></tr>
+      <tr><td class="num">5</td><td>논설 — Claim-Evidence Map</td><td>논설문에서 주장·근거·연결이유 추출 후 도식화</td><td>짧은 사설 5편 Claim-Evidence Map 90분 + SWBST·GIST와 구별 지점 60분 + 3장르 혼합 텍스트 대응 30분</td><td>Claim-Evidence Map 템플릿</td></tr>
+      <tr><td class="num">6</td><td>시각 정리표 5종 마스터</td><td>타임라인·피라미드·비교표·마인드맵·매그넷 사용 맥락</td><td>각 도구별 적합 텍스트 매칭 90분 + 교실 포스터 디자인 60분 + 학생 오사용 사례 30분</td><td>시각 도구 5종 포스터</td></tr>
+      <tr><td class="num">7</td><td>Retell → Summarize → Synthesize 계단</td><td>3단 계단의 차이를 한국어 발화 레벨에서 구별</td><td>Retell 시연(초3) 60분 + Summarize 시연(초4~5) 60분 + Synthesize 시연(초6) 60분</td><td>3단 시범 영상</td></tr>
+      <tr><td class="num">8</td><td>마이크로티칭 — SWBST 워크숍 10분</td><td>초3~4 대상 SWBST 5칸 카드로 10분 수업</td><td>각 수강생 10분 시연 × 전원 + 동료 피드백 + 강사 코칭</td><td>동영상 + 자기 평가지</td></tr>
+      <tr><td class="num">9</td><td>평가·루브릭 + 학부모 상담</td><td>3장르 요약 5등급 루브릭 + "요약=기억력 아님, 사고력" 설득</td><td>루브릭 설계 90분(정확성·완결성·압축성·구조 4축) + 교차 채점 60분 + 학부모 상담 롤플레이 30분</td><td>3장르 루브릭 v1 + 상담 대본</td></tr>
+      <tr><td class="num">10</td><td>최종 시연 + 수료</td><td>20분 풀사이클(장르 판별→도구 선택→2색 하이라이트→요약 작성→시각 정리표)</td><td>수강생 20분 × 전원 + 심사 3인 + 수료식</td><td>자격증, 12편 학생 샘플 채점 과제</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <h4>교수법 편중 원칙</h4>
+    <p>1~5차시는 3장르별 도구 마스터, 6차시는 시각화, 7차시는 발달 계단, 8~10차시는 시연. 이론 강의는 1차시에만 집중 투입.</p>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">3</div><div class="sect-title">학생 12주 기본반 (3-4학년)</div></div>
+  <p><strong>슬로건</strong>: "한 장으로 정리되는 아이 — 5칸·20어절·2색 하이라이트"</p>
+  <table>
+    <thead><tr><th class="num">주</th><th>텍스트/주제</th><th>장르</th><th>핵심 기법</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>OT — 요약이 뭐지? 사례 비교</td><td>통합</td><td>베껴쓰기 vs 요약 구분</td><td>요약 자가 진단</td></tr>
+      <tr><td class="num">2</td><td>"흥부전" 축약본</td><td>서사</td><td>SWBST 5요소 입문</td><td>SWBST 카드 1장</td></tr>
+      <tr><td class="num">3</td><td>"만복이네 떡집" 1장</td><td>서사</td><td>SWBST + 주인공 감정</td><td>SWBST + 감정 라인</td></tr>
+      <tr><td class="num">4</td><td>교과서 설명문 "동물의 한살이"</td><td>설명</td><td>GIST 20어절 입문</td><td>GIST 1편</td></tr>
+      <tr><td class="num">5</td><td>"왜 식물은 빛을 찾을까" 과학 설명문</td><td>설명</td><td>2색 하이라이트</td><td>하이라이트본 + GIST</td></tr>
+      <tr><td class="num">6</td><td>사설 발췌 "학교 앞 보행로 안전"</td><td>논설</td><td>Claim-Evidence Map 입문</td><td>Map 1장</td></tr>
+      <tr><td class="num">7</td><td>역사 일화 "세종의 훈민정음"</td><td>서사/설명 혼합</td><td>타임라인 시각 도구</td><td>타임라인 1장</td></tr>
+      <tr><td class="num">8</td><td>동화 3편 짧게 — 교차 Retell</td><td>서사</td><td>Retell 2분 발표</td><td>Retell 음성 3편</td></tr>
+      <tr><td class="num">9</td><td>위인 전기 1편</td><td>서사</td><td>피라미드 정리</td><td>피라미드 1장</td></tr>
+      <tr><td class="num">10</td><td>설명문 2편 비교 "개와 고양이 습성"</td><td>설명</td><td>비교표</td><td>비교표 1장</td></tr>
+      <tr><td class="num">11</td><td>독서감상문 1편 요약</td><td>혼합</td><td>마인드맵</td><td>마인드맵 1장</td></tr>
+      <tr><td class="num">12</td><td>종합 — "이번 달 내가 읽은 책 1권"</td><td>자유</td><td>장르 판별→도구 선택 풀사이클</td><td>SWBST 또는 GIST + 매그넷 요약 + 포트폴리오 1호</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">4</div><div class="sect-title">학생 24주 심화반 (5-6학년)</div></div>
+  <p><strong>슬로건</strong>: "여러 글을 한 장에 종합하는 아이 — Retell·Summarize·Synthesize 3단 계단"</p>
+  <h4>1~12주 (장르 5구조 완전 마스터)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>텍스트/주제</th><th>구조</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>심화 OT — 3단 계단 개관</td><td>통합</td><td>Retell·Summarize·Synthesize 구별</td></tr>
+      <tr><td class="num">2</td><td>묘사 구조 — 풍경·인물 묘사문</td><td>묘사</td><td>감각 5채널 추출</td></tr>
+      <tr><td class="num">3</td><td>순서 구조 — 과학 실험 절차</td><td>순서</td><td>타임라인·플로차트</td></tr>
+      <tr><td class="num">4</td><td>비교 구조 — "도시 쥐와 시골 쥐" 변형</td><td>비교</td><td>벤다이어그램·T-차트</td></tr>
+      <tr><td class="num">5</td><td>인과 구조 — "왜 공룡은 멸종했을까"</td><td>인과</td><td>원인→결과 사슬</td></tr>
+      <tr><td class="num">6</td><td>문제해결 구조 — 환경 문제 칼럼</td><td>문제해결</td><td>Problem-Solution Map</td></tr>
+      <tr><td class="num">7</td><td>혼합 구조 판별 — 신문 기사 3편</td><td>혼합</td><td>구조 5지선다 판별</td></tr>
+      <tr><td class="num">8</td><td>SWBST 심화 — 장편 동화 1장</td><td>서사 심화</td><td>복수 인물 SWBST</td></tr>
+      <tr><td class="num">9</td><td>GIST 심화 — 과학 칼럼 20어절</td><td>설명 심화</td><td>GIST 연속 3편</td></tr>
+      <tr><td class="num">10</td><td>논설 심화 — 짧은 사설 1편</td><td>논설 심화</td><td>Claim-Evidence + Warrant 언급</td></tr>
+      <tr><td class="num">11</td><td>Retell → Summarize 전환 연습</td><td>방법 전환</td><td>다시 말하기 vs 요약 구별</td></tr>
+      <tr><td class="num">12</td><td>중간 종합 — 1달 독서 1권 Whole-Text Summary</td><td>종합</td><td>책 1권을 A4 1장</td></tr>
+    </tbody>
+  </table>
+  <h4>13~24주 (Synthesize — 복수 글 종합 요약)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>텍스트/주제</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">13</td><td>Synthesis Matrix 입문 — "환경" 주제 글 2편</td><td>매트릭스 세로(출처)·가로(쟁점)</td></tr>
+      <tr><td class="num">14</td><td>3편 종합 — "AI와 아이들"</td><td>공통·차이 추출</td></tr>
+      <tr><td class="num">15</td><td>상반 관점 2편 — "학원 vs 자기주도"</td><td>대립 구조 정리</td></tr>
+      <tr><td class="num">16</td><td>과학 3편 — "수면과 학습"</td><td>증거 누적 요약</td></tr>
+      <tr><td class="num">17</td><td>역사 2편 — 사건의 다른 해석</td><td>해석 다원화</td></tr>
+      <tr><td class="num">18</td><td>인물 3편 — 한 인물 여러 전기</td><td>인물 입체화</td></tr>
+      <tr><td class="num">19</td><td>통계 1편 + 기사 1편 — 숫자와 서사 결합</td><td>수치와 사례 결합</td></tr>
+      <tr><td class="num">20</td><td>원문(책 1장) + 해설 1편</td><td>Primary vs Secondary</td></tr>
+      <tr><td class="num">21</td><td>동화 1편 + 비평 1편</td><td>텍스트 vs 메타</td></tr>
+      <tr><td class="num">22</td><td>내 관심 주제 3편 수집</td><td>Synthesis Matrix 완결</td></tr>
+      <tr><td class="num">23</td><td>Evolution of Thought 초안</td><td>"처음 생각→읽은 뒤→지금 생각"</td></tr>
+      <tr><td class="num">24</td><td>최종 — Evolution of Thought 에세이</td><td>3편 종합 + 자기 변화 서술 + A4 2장 + 10분 발표</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">5</div><div class="sect-title">수료 후 커리어 · 펜타 지수 연동</div></div>
+  <p>P 독해(3장르 정확 독해, 5구조 판별, Determining Importance) · T 표현(SWBST/GIST/Claim-Evidence/Synthesis Matrix/최종 에세이) 주 교집합. 수료자 4경로:</p>
+  <div class="cols-4">
+    <div class="card"><div class="label">Path 1</div><h4>펜타스쿨 정규 강사</h4></div>
+    <div class="card"><div class="label">Path 2</div><h4>학교 방과후·독서논술학원 특강</h4></div>
+    <div class="card"><div class="label">Path 3</div><h4>홈 스쿨링·학습지 교재 연구 라이선스</h4></div>
+    <div class="card"><div class="label">Path 4</div><h4>마스터 트레이너</h4></div>
+  </div>
+</section>
+
+<!-- ==================== CH.5 근거기반토론 (Tier 1 Core) ==================== -->
+<!-- SSoT: ~/Desktop/0.NEWBIZ_MASTER/7.펜타/펜타캠퍼스/curriculum/curriculum_근거기반토론.md -->
+<section id="ch5" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Chapter 5 · Tier 1 CORE · PENTA N·A (T 보조)</div>
+    <h1 class="chapter-title"><span class="ch-num">5.</span> 근거기반토론</h1>
+    <div class="chapter-anchor">Middle School Public Debate Program (Claremont, 2003~) + NSDA Debate Evidence Guide</div>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">1</div><div class="sect-title">과목 정의 + 해외 앵커</div></div>
+  <div class="goldbox">
+    <h4>Anchor 1 — Middle School Public Debate Program (MSPDP)</h4>
+    <p>Claremont Colleges Debate Outreach(미국 클레어몬트대학 컨소시엄, 2003~). 전 세계 수천 학교 채택. <strong>표준 4:4 포맷</strong>: 찬성 제1입론(5분) → 반대 제1입론(5분) → 찬성 제2입론(5분) → 반대 제2입론(5분) → 찬·반 반론(3분 × 2) → 찬·반 최종(3분 × 2). 정책 토론(CX)의 속도전·증거 폭격을 제거하고 <strong>일반 청중이 이해할 수 있는 수사·논증</strong>에 집중 — 초등 적합.</p>
+    <div class="source">SOURCE · middleschooldebate.com · Claremont Colleges</div>
+  </div>
+  <div class="goldbox">
+    <h4>Anchor 2 — NSDA Debate Evidence Guide (National Speech &amp; Debate Association)</h4>
+    <p>전미 중·고교 토론 연맹의 증거 운용 표준. <strong>Evidence Card 3요소</strong>: Citation(출처 전체 서지) · Quotation(직접 인용, 자의적 변경 금지) · Tagline(이 근거가 무엇을 증명하는지 한 줄). <strong>3축 평가</strong>: Credibility(권위·독립성) · Relevance(쟁점 적합) · Sufficiency(충분성). Ethical Evidence Rules — 출처 조작·문맥 왜곡·말줄임 남용 금지.</p>
+    <div class="source">SOURCE · speechanddebate.org</div>
+  </div>
+  <p><strong>결합 근거</strong>: MSPDP가 "토론의 형식"(4:4 포맷 + CX)을, NSDA가 "근거의 윤리와 기술"(Evidence Card + 3축)을 제공. 한국 초등에 둘을 결합해 <strong>형식 + 근거 윤리</strong> 두 축을 동시 장착.</p>
+
+  <table>
+    <thead><tr><th style="width:120px">항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>영역</td><td>PENTA N·A 중심, T 보조</td></tr>
+      <tr><td>대상</td><td>초등 3~6학년 (기본반 3-4 / 심화반 5-6)</td></tr>
+      <tr><td>강사</td><td>섭외 대상 (토론대회 지도 경력자·법조인 우선)</td></tr>
+      <tr><td>형태 · 과정</td><td>1:4 · 90분 · 기본 12주 / 심화 24주</td></tr>
+      <tr><td>선수 과정</td><td><strong>Ch.0 종합문해력 전문가 수료 필수</strong></td></tr>
+      <tr><td>구분</td><td>Ch.11 자료기반토론(통계·그래프 기반)과 <strong>별개 과목</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>펜타 고유 특화 — 자료기반토론과의 경계 고정</h3>
+  <ul class="bull">
+    <li><strong>자료기반토론 = 데이터(정량) 입력</strong> / <strong>근거기반토론 = 토론 포맷 + 근거 카드 운용</strong></li>
+    <li>두 과목의 학생 준비물 차이: 자료기반은 그래프·통계표 / 근거기반은 <strong>인덱스 카드 10장 · 출처 서지 · Tagline</strong></li>
+    <li><strong>한국 초등 토론 문화 적응</strong>: "반박=무례" 정서를 "상대가 놓친 곳을 대신 짚어 주는 예의"로 재프레이밍. Cross-Examination을 "질문하는 예의"로 번역</li>
+    <li><strong>4:4 진입 계단</strong>: 초3~4는 1:1 소형 토론(3분씩)으로 진입, 초5~6는 MSPDP 4:4 풀포맷</li>
+    <li><strong>논증과추론과의 위계</strong>: Ch.2 논증과추론이 Toulmin 6요소로 단일 논증을 짓는 과목이라면, Ch.5 근거기반토론은 지어진 논증을 토론장에서 공격·방어. 둘 다 수강 권장</li>
+  </ul>
+
+  <h3>왜 이 앵커인가</h3>
+  <p>한국 초등 토론 시장은 "발표력 향상" 또는 "독서 토론" 위주이며, 정식 토론 포맷(4:4 풀포맷 + 교차조사 + 증거 카드)을 다루는 곳은 거의 없다. MSPDP는 미국 중학교 표준 포맷이지만 초5~6에 충분히 적용 가능하며, 정책 토론(CX)의 폭증·속도전이 제거되어 일반 청중도 이해할 수 있는 수사·논증에 집중한다. NSDA Evidence Guide는 출처 윤리(조작 금지·문맥 왜곡 금지)까지 다루어, 한국 초등에 부족한 <strong>증거 윤리 교육</strong>을 자연스럽게 장착시킨다.</p>
+  <p>이 두 앵커가 결합되면 학생은 "근거 없이 주장하지 않는다 + 출처를 정확히 인용한다 + 상대 논증을 예의 있게 공격한다"는 토론 시민성을 동시에 체화한다. 학부모 설득 메시지: "우리 아이가 무대에서 카드(증거)로 말한다."</p>
+
+  <h4>근거 자료</h4>
+  <ul class="small">
+    <li><a href="https://middleschooldebate.com/" target="_blank">Middle School Public Debate Program — Claremont Colleges</a></li>
+    <li><a href="https://www.speechanddebate.org/" target="_blank">National Speech &amp; Debate Association (NSDA)</a></li>
+    <li><a href="https://www.speechanddebate.org/wp-content/uploads/Code-of-Honor.pdf" target="_blank">NSDA Code of Honor &amp; Evidence Standards</a></li>
+  </ul>
+
+  <div class="sect-head"><div class="sect-num">2</div><div class="sect-title">10차시 교사 양성</div></div>
+  <p class="small"><strong>수강 대상</strong>: 초등교사·학원강사·토론대회 지도 경력자·법조인·로스쿨 출신 · <strong>수료 조건</strong>: 80% 출석 + 마이크로티칭 1회 + 최종 과제(논제 3개 Evidence Card 30장 제작 + 루브릭)</p>
+  <table>
+    <thead><tr><th class="num">차시</th><th>제목</th><th>핵심 목표</th><th>주요 활동 (180분)</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>OT + 토론 포맷 지형</td><td>MSPDP·NSDA 개관, 자료기반토론과의 경계 고정</td><td>강의 60분(MSPDP 4:4 + NSDA Evidence Guide) + 자료기반 vs 근거기반 경계 토론 60분 + 본인 토론 경험 진단 60분</td><td>경계 지도 + 자가 진단</td></tr>
+      <tr><td class="num">2</td><td>MSPDP 4:4 풀포맷 숙달</td><td>입론·반론·최종의 시간 배분과 역할</td><td>수강생이 찬·반 4인 되어 풀포맷 시연 90분(익숙한 논제로) + 타임키퍼 동작 60분 + 포맷 변주(CX 축약) 30분</td><td>포맷 체크리스트</td></tr>
+      <tr><td class="num">3</td><td>Evidence Card 3요소 제작</td><td>Citation·Quotation·Tagline 실전 제작</td><td>논제 1개 선정 후 Evidence Card 10장 제작 90분(신문·책·논문 혼합) + 윤리 위반 사례 30분 + 동료 교차 검토 60분</td><td>수강생별 Evidence Card 10장</td></tr>
+      <tr><td class="num">4</td><td>근거의 3축 평가 — 신뢰도·관련성·충분성</td><td>같은 근거도 논제에 따라 Relevance 달라짐 체험</td><td>동일 근거 카드 5장을 3개 논제에 배치 90분 + Credibility 위계(학술·언론·블로그) 60분 + Sufficiency 체크리스트 30분</td><td>3축 평가 양식</td></tr>
+      <tr><td class="num">5</td><td>Cross-Examination 5질문 유형</td><td>명료화·가정·근거·관점·함의 질문 실전</td><td>질문 유형별 예시 30개 수집 60분 + 모의 CX 2분 × 10회 실습 90분 + 좋은 질문·나쁜 질문 대조 30분</td><td>CX 질문 카드 30장</td></tr>
+      <tr><td class="num">6</td><td>Rebuttal 3유형</td><td>근거 약화·Warrant 공격·반례 제시</td><td>입론 샘플 5편에 Rebuttal 3유형 각각 적용 90분 + Rebuttal 단락 쓰기 60분 + 상호 점검 30분</td><td>Rebuttal 샘플 15편</td></tr>
+      <tr><td class="num">7</td><td>학생 12주/24주 커리큘럼 해독</td><td>논제 난이도 계단과 진입 동선 이해</td><td>기본 12주 논제 전수 분석 90분 + 심화 24주 대회 규격 대응 60분 + 반별 재배열 30분</td><td>논제 난이도 지도</td></tr>
+      <tr><td class="num">8</td><td>마이크로티칭 — "Evidence Card 워크숍" 10분</td><td>초5~6 대상 Evidence Card 1장 함께 짜기 10분 수업</td><td>각 수강생 10분 시연 × 전원 + 동료 피드백(3요소 완결성 집중) + 강사 코칭</td><td>동영상 + 자기 평가지</td></tr>
+      <tr><td class="num">9</td><td>평가·루브릭 + 학부모 상담</td><td>토론 루브릭(입론·CX·반론·최종 4영역) 제작 + "토론=말싸움 아님" 설득</td><td>루브릭 설계 90분(4영역 × 5등급) + 교차 채점 60분 + 학부모 상담 롤플레이 30분</td><td>토론 루브릭 v1 + 상담 대본</td></tr>
+      <tr><td class="num">10</td><td>최종 시연 + 수료</td><td>교사 수강생끼리 4:4 풀포맷 1회 + 심사</td><td>풀포맷 4:4 토론 시연 90분 + 심사위원 3인 평가 60분 + 수료식 30분</td><td>자격증, Evidence Card 30장 + 루브릭 제출</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <h4>교수법 편중 원칙</h4>
+    <p>1·2차시에 포맷, 3·4차시에 Evidence, 5·6차시에 CX·Rebuttal. 7차시부터 "어떻게 가르칠까"로 전환. 8~10차시는 시연·루브릭·최종.</p>
+  </div>
+
+  <div class="sect-head"><div class="sect-num">3</div><div class="sect-title">학생 12주 기본반 (3-4학년)</div></div>
+  <p><strong>슬로건</strong>: "내 주장엔 카드가 있다 — Evidence Card 10장과 함께 처음 무대에 서는 12주"</p>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제</th><th>유형</th><th>핵심 기법</th><th>산출물</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>OT — "토론은 말싸움일까?" 개념 정리</td><td>메타</td><td>정식 토론 vs 말다툼 구별</td><td>토론 약속 6조</td></tr>
+      <tr><td class="num">2</td><td>"학교 앞에 편의점이 많은 게 좋을까?"</td><td>생활</td><td>Evidence Card 입문(1장 제작)</td><td>Card 1장</td></tr>
+      <tr><td class="num">3</td><td>"학급 반려동물을 키워도 될까?"</td><td>학급</td><td>Citation 형식 익히기</td><td>Card 2장 누적</td></tr>
+      <tr><td class="num">4</td><td>"숙제는 선택이어도 될까?"</td><td>학습</td><td>Tagline 쓰기</td><td>Card 3장 + Tagline 연습</td></tr>
+      <tr><td class="num">5</td><td>"급식을 학생이 직접 정할 수 있게 하자"</td><td>학급</td><td>Quotation 직접 인용</td><td>Card 5장</td></tr>
+      <tr><td class="num">6</td><td>"체육 시간을 1시간 늘리자"</td><td>학교 제도</td><td>입론문 3~5문장 짜기</td><td>입론문 1편</td></tr>
+      <tr><td class="num">7</td><td>"학원보다 도서관에서 공부하는 게 낫다"</td><td>학습</td><td>1:1 소형 토론 첫 무대</td><td>1:1 토론 기록</td></tr>
+      <tr><td class="num">8</td><td>"학급 회장은 돌아가며 하자"</td><td>공동체</td><td>간단 Rebuttal 1회</td><td>반론 1줄</td></tr>
+      <tr><td class="num">9</td><td>"학교 폰 사용 허용 여부"</td><td>학교 규칙</td><td>Evidence 2장 비교</td><td>Card 7장 누적</td></tr>
+      <tr><td class="num">10</td><td>"가족여행은 교육일까 휴식일까"</td><td>가정</td><td>입론문 5~7문장으로 확장</td><td>입론문 2편</td></tr>
+      <tr><td class="num">11</td><td>"학급 문고 도서는 누가 정하나"</td><td>학급 제도</td><td>Cross-Examination 맛보기(1질문)</td><td>CX 1질문 설계</td></tr>
+      <tr><td class="num">12</td><td>최종 — 4:4 첫 시연(익숙한 논제)</td><td>종합</td><td>4:4 포맷 첫 경험</td><td>Card 10장 완성 + 토론 영상 + 포트폴리오 1호</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">4</div><div class="sect-title">학생 24주 심화반 (5-6학년)</div></div>
+  <p><strong>슬로건</strong>: "MSPDP 4:4 풀포맷 — 카드·질문·반론으로 무대에 서는 아이"</p>
+  <h4>1~12주 (본격 MSPDP 진입 + CX·Rebuttal 장착)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>심화 OT — MSPDP 포맷 완전 숙지</td><td>시간표·역할 분담</td></tr>
+      <tr><td class="num">2</td><td>"초등 휴대폰 사용을 법으로 제한하자"</td><td>Evidence Card 고도화(3요소)</td></tr>
+      <tr><td class="num">3</td><td>"학원비 상한제를 도입하자"</td><td>Credibility 평가</td></tr>
+      <tr><td class="num">4</td><td>"AI가 만든 숙제 제출을 허용하자"</td><td>Relevance 평가</td></tr>
+      <tr><td class="num">5</td><td>"학교 체벌을 부분적으로 허용하자" (변형 논제)</td><td>Sufficiency 평가</td></tr>
+      <tr><td class="num">6</td><td>"반려동물 등록을 의무화하자"</td><td>입론문 완전판(서론·본론·결론)</td></tr>
+      <tr><td class="num">7</td><td>"청소년 SNS 이용 시간을 법으로 제한하자"</td><td>CX 명료화 질문</td></tr>
+      <tr><td class="num">8</td><td>"학교 시험 성적 공개를 금지하자"</td><td>CX 근거 질문</td></tr>
+      <tr><td class="num">9</td><td>"동물원을 점진적으로 폐지하자"</td><td>Rebuttal — 근거 약화</td></tr>
+      <tr><td class="num">10</td><td>"재활용 분리배출을 어길 시 벌금 부과"</td><td>Rebuttal — Warrant 공격</td></tr>
+      <tr><td class="num">11</td><td>"초·중학생 선거권 도입"</td><td>Rebuttal — 반례 제시</td></tr>
+      <tr><td class="num">12</td><td>중간 — 4:4 풀포맷 토너먼트 1라운드</td><td>MSPDP 실전</td></tr>
+    </tbody>
+  </table>
+  <h4>13~24주 (대회 규격·전술·최종 대회)</h4>
+  <table>
+    <thead><tr><th class="num">주</th><th>논제</th><th>핵심 기법</th></tr></thead>
+    <tbody>
+      <tr><td class="num">13</td><td>"의무교육 기간을 고등학교까지 연장하자"</td><td>CX 가정 질문</td></tr>
+      <tr><td class="num">14</td><td>"자율주행차 사고 책임은 제조사에 있다"</td><td>CX 함의 질문</td></tr>
+      <tr><td class="num">15</td><td>"탄소세를 도입해야 한다"</td><td>복수 Evidence 묶음</td></tr>
+      <tr><td class="num">16</td><td>"청소년 노동 시간 상한을 강화하자"</td><td>Rebuttal 조합 3유형</td></tr>
+      <tr><td class="num">17</td><td>"전자책을 학교 정규 교재로 하자"</td><td>입론 프리미스 체인</td></tr>
+      <tr><td class="num">18</td><td>"공공데이터 전면 개방 의무화"</td><td>Evidence 출처 다양화</td></tr>
+      <tr><td class="num">19</td><td>"도시 내 쇼츠·릴스 제작 제한" (가상 논제)</td><td>Credibility·Relevance 교차</td></tr>
+      <tr><td class="num">20</td><td>"학교 폭력 가해 학생 신상 공개"</td><td>Fairness·Rebuttal 결합</td></tr>
+      <tr><td class="num">21</td><td>"초등 영재학교 신설"</td><td>정책 효과 Backing 검증</td></tr>
+      <tr><td class="num">22</td><td>"학교 내 CCTV 전면 설치"</td><td>최종 발언(Closing) 설계</td></tr>
+      <tr><td class="num">23</td><td>모의 대회 — 외부 심사 1회</td><td>외부 심사 대응</td></tr>
+      <tr><td class="num">24</td><td><strong>최종 토론 대회</strong> — 학부모 참관 4:4 공개 토너먼트</td><td>전 기법 통합 + Card 20장 바인더 + 입론문 A4 2장</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head"><div class="sect-num">5</div><div class="sect-title">수료 후 커리어 · 펜타 지수 연동</div></div>
+  <p>N 사고(3축 평가·CX 5질문·Rebuttal 3유형) · A 소통(MSPDP 4:4 풀포맷·CX·공개 발표) 주 교집합. T 표현(입론문·Rebuttal 단락·Closing·Tagline) 보조. 수료자 4경로:</p>
+  <div class="cols-4">
+    <div class="card"><div class="label">Path 1</div><h4>펜타스쿨 정규 강사</h4></div>
+    <div class="card"><div class="label">Path 2</div><h4>학교 토론부·대회 코치</h4></div>
+    <div class="card"><div class="label">Path 3</div><h4>홈 스쿨링 1:4 라이선스</h4></div>
+    <div class="card"><div class="label">Path 4</div><h4>마스터 트레이너</h4></div>
+  </div>
+</section>
+
+<!-- ==================== Tier 2 후보군 7과정 (경량 카드 그리드) ==================== -->
+<!-- 각 과목의 풀 커리큘럼 MD: ~/Desktop/0.NEWBIZ_MASTER/7.펜타/펜타캠퍼스/curriculum/ -->
+<section id="tier2" class="wrap">
+  <div class="chapter-head">
+    <div class="chapter-label">Tier 2 · CANDIDATE 7</div>
+    <h1 class="chapter-title">확장 후보 라인업 (Ch.6 ~ Ch.12)</h1>
+    <div class="chapter-anchor">시장 검증 후 Tier 1로 승격 가능 — 풀 커리큘럼은 별도 MD에 보관</div>
+  </div>
+
+  <h2>후보군 7과정 개요</h2>
+  <p class="lead">아래 7과정은 PENTA 5영역의 빈틈을 메우는 <strong>확장 후보 라인업</strong>입니다. 각 과정은 해외 검증 앵커가 확정되어 있으며, 기본 설계 문서가 펜타캠퍼스 <code>curriculum/</code> 폴더에 별도 MD로 보관됩니다. 학생 수요·강사 섭외 진척도에 따라 Tier 1 핵심으로 승격될 수 있습니다.</p>
+
+  <div class="cols-3" style="margin-top:32px;">
+
+    <div class="card" id="ch6">
+      <div class="label">Ch.6 · PENTA N 사고</div>
+      <h4>질문설계</h4>
+      <p class="small" style="color:var(--gold);font-weight:600;margin-bottom:8px;">Anchor — QFT (Right Question Institute) + Socratic Seminar</p>
+      <p class="small">학생이 스스로 질문을 만드는 능력을 4규칙(QFT)·6단계(Socratic) 발문 체계로 훈련. 답을 잘하는 아이가 아니라 <strong>질문을 잘 만드는 아이</strong>를 지향. 모든 심화 과정의 토론·탐구를 떠받치는 N 사고의 뿌리.</p>
+      <p class="small" style="margin-top:12px;"><span class="pill pill-out">후보군</span></p>
+    </div>
+
+    <div class="card" id="ch7">
+      <div class="label">Ch.7 · PENTA E 어휘</div>
+      <h4>개념어체계화</h4>
+      <p class="small" style="color:var(--gold);font-weight:600;margin-bottom:8px;">Anchor — Marzano 6-Step + Beck "Bringing Words to Life" (Tier 1·2·3)</p>
+      <p class="small">초등 학력 격차의 핵심 변수인 학술 어휘(Tier 2)와 교과 전문어(Tier 3)를 Marzano 6단계 절차와 의미 지도로 체계화. <strong>온독지수 사고도구어 1~4수준</strong>과 정합. PENTA 지수 E 영역 보강.</p>
+      <p class="small" style="margin-top:12px;"><span class="pill pill-out">후보군</span></p>
+    </div>
+
+    <div class="card" id="ch8">
+      <div class="label">Ch.8 · PENTA T 표현</div>
+      <h4>사고력에세이</h4>
+      <p class="small" style="color:var(--gold);font-weight:600;margin-bottom:8px;">Anchor — Lucy Calkins Units of Study + 6+1 Trait</p>
+      <p class="small">컬럼비아 TCRWP의 글쓰기 워크숍 모델 + Education Northwest 7항목 평가. 매일 20분 자기 글쓰기 루틴을 초등 1:4 그룹에 이식. 독서록 → 단락 → 4단 에세이의 T 표현 계단.</p>
+      <p class="small" style="margin-top:12px;"><span class="pill pill-out">후보군</span></p>
+    </div>
+
+    <div class="card" id="ch9">
+      <div class="label">Ch.9 · PENTA N 사고</div>
+      <h4>논제분석훈련</h4>
+      <p class="small" style="color:var(--gold);font-weight:600;margin-bottom:8px;">Anchor — Stasis Theory (Purdue OWL) + NSDA Policy Stock Issues</p>
+      <p class="small">한 논제를 사실·정의·가치·정책 4층(Stasis)으로 해체하고, 정책 토론의 5대 필수 쟁점(Stock Issues)으로 점검. 토론 전 "쟁점 지도" 그리는 능력. Ch.5 근거기반토론·Ch.10 구조설계논술의 입력.</p>
+      <p class="small" style="margin-top:12px;"><span class="pill pill-out">후보군</span></p>
+    </div>
+
+    <div class="card" id="ch10">
+      <div class="label">Ch.10 · PENTA T 표현</div>
+      <h4>구조설계논술</h4>
+      <p class="small" style="color:var(--gold);font-weight:600;margin-bottom:8px;">Anchor — Jane Schaffer CD:CM (1:2+) + Hochman TWR (Jossey-Bass 2017)</p>
+      <p class="small">미국 K-12 논술 지도의 두 표준 — Jane Schaffer "구체 세부 1 : 논평 2 이상" 비율 + The Writing Revolution의 문장-단락-논술 순차 설계. <strong>"사고의 두께"</strong>를 가시화하는 구조 훈련.</p>
+      <p class="small" style="margin-top:12px;"><span class="pill pill-out">후보군</span></p>
+    </div>
+
+    <div class="card" id="ch11">
+      <div class="label">Ch.11 · PENTA A 소통</div>
+      <h4>자료기반토론</h4>
+      <p class="small" style="color:var(--gold);font-weight:600;margin-bottom:8px;">Anchor — NSDA Public Forum + CER Framework (NGSS · McNeill·Krajcik)</p>
+      <p class="small">통계·그래프·도표 등 <strong>정량 자료를 읽고 해석</strong>해 토론 근거로 쓰는 데이터 리터러시 토론. CER(Claim-Evidence-Reasoning) 3요소로 단락 구조화. Ch.5 근거기반토론과 명확히 구분(데이터 입력 vs 카드 운용).</p>
+      <p class="small" style="margin-top:12px;"><span class="pill pill-out">후보군</span></p>
+    </div>
+
+    <div class="card" id="ch12">
+      <div class="label">Ch.12 · PENTA A 소통</div>
+      <h4>하브루타토론</h4>
+      <p class="small" style="color:var(--gold);font-weight:600;margin-bottom:8px;">Anchor — Beit Midrash Chevruta + Harkness Method (Phillips Exeter)</p>
+      <p class="small">유대 전통 2인 짝학습법(Holzer 6기술 — 경청·표명·지지·도전·집중·합의) + 미국 사립고 Phillips Exeter의 12인 원탁 토론. <strong>관계 기반 사고</strong>의 두 거장 모델을 한국 초등 1:4·1:12 구조로 이식.</p>
+      <p class="small" style="margin-top:12px;"><span class="pill pill-out">후보군</span></p>
+    </div>
+
+  </div>
+
+  <p class="small" style="margin-top:32px;">※ 각 과목의 10차시 교사 양성 + 12주 기본반 + 24주 심화반 풀 커리큘럼은 <code>~/Desktop/0.NEWBIZ_MASTER/7.펜타/펜타캠퍼스/curriculum/</code> 폴더의 개별 MD에 보관되어 있으며, 시장 검증 후 본 설계서로 끌어올립니다.</p>
+</section>
+
+<section id="appendix" class="chapter">
+  <div class="chapter-head"><span class="chap-label">Appendix</span><h2 class="chap-title">부록</h2><p class="chap-sub">학점 매트릭스 · 해외 앵커 총정리 · 수료 평가 · 전국 확산 로드맵</p></div>
+
+  <div class="sect-head" id="apx-law"><div class="sect-num">A</div><div class="sect-title">평생교육법 학점 매트릭스</div></div>
+  <table>
+    <thead><tr><th class="num">#</th><th>과정</th><th>계층</th><th>영역</th><th>시수</th><th>학점</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0</td><td>종합문해력 전문가</td><td>루트</td><td>P·E·N·T·A 전 영역</td><td>30시간 (180분 × 10차시)</td><td class="num">2학점</td></tr>
+      <tr><td class="num">1</td><td>인문독서</td><td>핵심</td><td>P 독해</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">2</td><td>논증과추론</td><td>핵심</td><td>N 사고</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">3</td><td>시사분석훈련</td><td>핵심</td><td>N 사고</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">4</td><td>요약구조화</td><td>핵심</td><td>T 표현</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">5</td><td>근거기반토론</td><td>핵심</td><td>A 소통</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">6</td><td>질문설계</td><td>후보</td><td>N 사고</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">7</td><td>개념어체계화</td><td>후보</td><td>E 어휘</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">8</td><td>사고력에세이</td><td>후보</td><td>T 표현</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">9</td><td>논제분석훈련</td><td>후보</td><td>N 사고</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">10</td><td>구조설계논술</td><td>후보</td><td>T 표현</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">11</td><td>자료기반토론</td><td>후보</td><td>A 소통</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td class="num">12</td><td>하브루타토론</td><td>후보</td><td>A 소통</td><td>30시간</td><td class="num">2학점</td></tr>
+      <tr><td colspan="4"><strong>합계 (루트 1 + 핵심 5 + 후보 7 = 13과정)</strong></td><td><strong>390시간</strong></td><td class="num"><strong>26학점</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="small">루트 과정(종합문해력 전문가)은 모든 심화 과정의 선수 요건입니다. 핵심 5과정은 2026년 10월 정식 개설, 후보 7과정은 2027년 순차 개설 예정입니다.</p>
+
+  <div class="sect-head" id="apx-anchor"><div class="sect-num">B</div><div class="sect-title">13과정 해외 앵커 총정리</div></div>
+  <table>
+    <thead><tr><th>계층</th><th>과정</th><th>해외 앵커</th><th>공식 출처</th></tr></thead>
+    <tbody>
+      <tr><td>루트</td><td>종합문해력 전문가</td><td>NRP 5 Pillars(미국 국가읽기위원회 5기둥) + Scarborough's Reading Rope(2001) + CASEL SEL 5역량</td><td><a href="https://www.nichd.nih.gov/publications/pubs/nrp/smallbook" target="_blank">NIH NRP</a> · <a href="https://www.readingrockets.org/topics/about-reading/articles/scarboroughs-reading-rope-groundbreaking-infographic" target="_blank">Reading Rockets</a> · <a href="https://casel.org/" target="_blank">casel.org</a></td></tr>
+      <tr><td>핵심</td><td>인문독서</td><td>Shared Inquiry (공유 탐구 · Great Books Foundation)</td><td><a href="https://www.greatbooks.org/" target="_blank">greatbooks.org</a></td></tr>
+      <tr><td>핵심</td><td>논증과추론</td><td>Toulmin Model(툴민 논증 모형) + Paul-Elder Critical Thinking(폴–엘더 비판적 사고)</td><td><a href="https://owl.purdue.edu/owl/general_writing/academic_writing/historical_perspectives_on_argumentation/toulmin_argument.html" target="_blank">Purdue OWL</a> · <a href="https://www.criticalthinking.org/" target="_blank">criticalthinking.org</a></td></tr>
+      <tr><td>핵심</td><td>시사분석훈련</td><td>News Literacy Project Checkology + Stanford Civic Online Reasoning(Lateral Reading · IMVAIN)</td><td><a href="https://newslit.org/educators/checkology/" target="_blank">newslit.org</a> · <a href="https://cor.stanford.edu/" target="_blank">cor.stanford.edu</a></td></tr>
+      <tr><td>핵심</td><td>요약구조화</td><td>Harvey &amp; Goudvis <em>Strategies That Work</em> + SWBST(서사 5요소) + GIST(20단어 요약)</td><td><a href="https://www.stenhouse.com/content/strategies-work-3rd-edition" target="_blank">Stenhouse</a> · <a href="https://www.readingrockets.org/classroom/classroom-strategies/story-maps" target="_blank">Reading Rockets</a></td></tr>
+      <tr><td>핵심</td><td>근거기반토론</td><td>MSPDP(Middle School Public Debate Program · Claremont) + NSDA Debate Evidence Guide</td><td><a href="https://www.middleschooldebate.com/" target="_blank">middleschooldebate.com</a> · <a href="https://www.speechanddebate.org/" target="_blank">NSDA</a></td></tr>
+      <tr><td>후보</td><td>질문설계</td><td>QFT(질문 형성 기법 · Right Question Institute) + Socratic Seminar(소크라테스식 발문)</td><td><a href="https://rightquestion.org/what-is-the-qft/" target="_blank">rightquestion.org</a> · <a href="https://www.criticalthinking.org/pages/socratic-teaching/606" target="_blank">Foundation for Critical Thinking</a></td></tr>
+      <tr><td>후보</td><td>개념어체계화</td><td>Marzano 6-Step(마르자노 6단계 어휘 지도법) + Beck <em>Bringing Words to Life</em>(벡 계층형 어휘)</td><td><a href="https://www.ascd.org/books/building-background-knowledge-for-academic-achievement" target="_blank">ASCD</a> · <a href="https://www.guilford.com/books/Bringing-Words-to-Life/Beck-McKeown-Kucan/9781462508167" target="_blank">Guilford Press</a></td></tr>
+      <tr><td>후보</td><td>사고력에세이</td><td>Lucy Calkins Units of Study(루시 칼킨스 글쓰기 워크숍) + 6+1 Trait(여섯+하나 특성 평가)</td><td><a href="https://readingandwritingproject.org/" target="_blank">TCRWP Columbia</a> · <a href="https://educationnorthwest.org/traits" target="_blank">Education Northwest</a></td></tr>
+      <tr><td>후보</td><td>논제분석훈련</td><td>Stasis Theory(쟁점 확정 이론) + NSDA Policy Stock Issues(정책 토론 5대 필수 쟁점)</td><td><a href="https://owl.purdue.edu/owl/general_writing/academic_writing/establishing_arguments/stasis_theory.html" target="_blank">Purdue OWL</a> · <a href="https://www.speechanddebate.org/introduction-to-policy-debate/" target="_blank">NSDA</a></td></tr>
+      <tr><td>후보</td><td>구조설계논술</td><td>Jane Schaffer CD:CM(구체 세부–논평 1:2+) + Hochman TWR(The Writing Revolution)</td><td><a href="https://www.curriculumassociates.com/products/jane-schaffer" target="_blank">Jane Schaffer Writing</a> · <a href="https://www.thewritingrevolution.org/" target="_blank">The Writing Revolution (Jossey-Bass 2017)</a></td></tr>
+      <tr><td>후보</td><td>자료기반토론</td><td>NSDA Public Forum(공개 토론 형식) + CER Framework(주장–증거–추론)</td><td><a href="https://www.speechanddebate.org/introduction-to-public-forum-debate/" target="_blank">NSDA Public Forum</a> · <a href="https://www.nextgenscience.org/" target="_blank">NGSS (McNeill/Krajcik)</a></td></tr>
+      <tr><td>후보</td><td>하브루타토론</td><td>Beit Midrash Chevruta(유대 전통 2인 짝학습법) + Harkness Method(하크니스 원탁 토론법)</td><td><a href="https://www.brandeis.edu/mandel/" target="_blank">Brandeis Mandel Center</a> · <a href="https://www.exeter.edu/excellence/how-youll-learn" target="_blank">Phillips Exeter</a></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sect-head" id="apx-rubric"><div class="sect-num">C</div><div class="sect-title">수료 평가 · 루브릭 종합</div></div>
+  <div class="cards-3">
+    <div class="card"><h4>공통 수료 조건</h4><p>80% 출석(8/10차시) + 마이크로티칭 1회(5차시) + 최종 재구성 과제(10차시) + 윤리강령 서약</p></div>
+    <div class="card"><h4>시연 평가</h4><p>10차시 최종 시연은 4인 심사위원단 루브릭 평가. 첫 회 미통과자 1회 재시도 기회</p></div>
+    <div class="card"><h4>Inter-rater 신뢰도</h4><p>7차시 루브릭 캘리브레이션에서 강사 간 점수 편차 ±1점 이내 달성 필수. 이를 통과 못한 기수는 전수 재훈련</p></div>
+  </div>
+  <p class="small">과목별 특화 루브릭: 인문독서(Shared Inquiry 발문 질·Interpretive Question 생성) · 논증과추론(Toulmin 6요소 추출·Paul-Elder 9기준) · 질문설계(QFT 4규칙·Bloom 6단계 분포) · 개념어체계화(Marzano 6단계 운영·의미 지도 품질) · 사고력에세이(6+1 Trait 7항목) · 논제분석훈련(Stasis 4층 진단 정확도·Stock Issues 5쟁점 충족) · 구조설계논술("사고의 두께" CM 1/2/3+반례 3단계) · 자료기반토론(CER 3점 척도·SR3 증거 평가) · 하브루타토론(Holzer 6기술 0-1-2-3·Harkness Map 참여 분포).</p>
+
+  <div class="sect-head" id="apx-roadmap"><div class="sect-num">D</div><div class="sect-title">전국 확산 로드맵</div></div>
+  <table>
+    <thead><tr><th>연도</th><th>단계</th><th>목표</th></tr></thead>
+    <tbody>
+      <tr><td class="num">2026</td><td>개원 (10월)</td><td>1기 수강생 모집, 루트 1 + 핵심 5 = 총 6과정 우선 개설 (종합문해력 전문가·인문독서·논증과추론·시사분석훈련·요약구조화·근거기반토론)</td></tr>
+      <tr><td class="num">2027</td><td>13과정 정식 운영</td><td>후보 7과정(질문설계·개념어체계화·사고력에세이·논제분석훈련·구조설계논술·자료기반토론·하브루타토론) 순차 개설 + 2기·3기 배출 + 펜타스쿨 본점(대치/분당) 연계</td></tr>
+      <tr><td class="num">2028</td><td>가맹 연결 본격화</td><td>수료생 취업 트랙 3경로(펜타스쿨·학교 방과후·홈스쿨링) 안정화, 누적 수료 500명 목표</td></tr>
+      <tr><td class="num">2029</td><td>B2B 라이선스</td><td>외부 학원·공교육 파견 라이선스, 펜타 지수 외부 진단 서비스 런칭</td></tr>
+      <tr><td class="num">2030</td><td>전국 표준화</td><td>누적 수료 2,000명, 해외 앵커 한국판 공식 파트너십 체결</td></tr>
+    </tbody>
+  </table>
+  <p class="small">커리어 경로 공통 구조: ① 펜타스쿨 직영·가맹 시급 4~6만 + 성과급 ② 학교 방과후 회당 8~15만 ③ 홈스쿨링·공부방 월 학생 1인 25~35만 ④ 펜타캠퍼스 인턴십 시급 5만 + 승급 루트. T영역(구조설계논술·사고력에세이) 전담 강사는 주 20시간 기준 월 400~550만.</p>
+</section>
+
+<footer class="site-foot">
+  <div class="foot-emblem">
+    <svg viewBox="0 0 64 64" width="48" height="48" aria-hidden="true">
+      <polygon points="32,6 58,24 48,56 16,56 6,24" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+      <text x="32" y="40" text-anchor="middle" fill="#C9A84C" font-family="Pretendard" font-weight="800" font-size="22">P</text>
+    </svg>
+  </div>
+  <p class="foot-brand">PENTA CAMPUS</p>
+  <p class="foot-meta">부설 평생교육원 · 마스터 강사 자격증 과정 13과정 (루트 1 + 핵심 5 + 후보 7) · 평생교육법 26학점</p>
+  <p class="foot-meta">campus.openpenta.com · 공동대표 이은경 · 이동길</p>
+  <p class="foot-meta small">본 문서는 펜타캠퍼스 내부 SSoT(Single Source of Truth) 설계 문서입니다. 2026-04-14.</p>
+</footer>
+
+</div><!-- /main -->
+
+<script>
+(function(){
+  // Smooth scroll
+  document.querySelectorAll('.toc a').forEach(a=>{
+    a.addEventListener('click',function(e){
+      var id=this.getAttribute('href');
+      if(id&&id.startsWith('#')){
+        var el=document.querySelector(id);
+        if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+      }
+    });
+  });
+  // Scroll-spy active
+  var sections=document.querySelectorAll('section[id], footer[id]');
+  var links=document.querySelectorAll('.toc a');
+  var map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        links.forEach(function(l){l.classList.remove('active');});
+        var id=en.target.id;
+        if(map[id])map[id].classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px',threshold:0});
+  sections.forEach(function(s){io.observe(s);});
+})();
+</script>
+</body>
+</html>
