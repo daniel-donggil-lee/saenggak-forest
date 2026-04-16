@@ -28,8 +28,9 @@
 
   /* Tabs */
   .tabs {
-    display: flex; background: #fff; border-bottom: 1px solid #d1d9e0;
-    padding: 0 40px; overflow-x: auto;
+    display: flex; flex-direction: column; background: #fff;
+    border-bottom: 1px solid #d1d9e0; padding: 0; overflow: visible;
+    position: relative; z-index: 100;
   }
   .tab {
     padding: 12px 20px; cursor: pointer; font-size: 14px; font-weight: 500;
@@ -214,12 +215,41 @@
     flex-wrap: wrap;
   }
   .dept-tab {
-    display: flex; align-items: center; gap: 6px;
+    display: flex; align-items: center; justify-content: center; gap: 6px; position: relative;
     padding: 8px 14px; font-size: 13px; color: rgba(255,255,255,0.6);
     cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.15s;
     border: 1px solid transparent; border-bottom: none;
+    flex: 1 1 0; min-width: 0;
   }
   .dept-tab:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  .dept-popover {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: #1a1a1a; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 0 8px 8px 8px; padding: 6px 0; min-width: 220px;
+    max-height: 60vh; overflow-y: auto;
+    z-index: 1001; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+  .dept-tab:hover .dept-popover,
+  .dept-popover:hover { display: block; }
+  .dept-popover-head {
+    padding: 8px 14px 6px; font-size: 10px; letter-spacing: 0.1em;
+    color: rgba(201,168,76,0.9); font-weight: 700; text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 4px;
+  }
+  .dept-popover-item {
+    padding: 8px 14px; color: rgba(255,255,255,0.85); font-size: 13px;
+    cursor: pointer; white-space: nowrap; display: flex; align-items: center;
+    justify-content: space-between; gap: 12px;
+  }
+  .dept-popover-item:hover { background: rgba(201,168,76,0.15); color: #C9A84C; }
+  .dept-popover-item .dp-cnt {
+    font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 500;
+  }
+  .dept-popover-item:hover .dp-cnt { color: #C9A84C; }
+  .dept-popover-empty {
+    padding: 10px 14px; color: rgba(255,255,255,0.4); font-size: 12px;
+    font-style: italic;
+  }
   .dept-tab.active {
     color: #0a0a0a; background: #fafbfc; font-weight: 700;
     border-color: #e8e8e8;
@@ -480,7 +510,7 @@
   @media (max-width: 768px) {
     header { padding: 16px 20px; flex-direction: column; gap: 8px; align-items: flex-start; }
     header h1 { font-size: 18px; }
-    .tabs { padding: 0 16px; }
+    .tabs { padding: 0; }
     .tab { padding: 10px 14px; font-size: 13px; }
     main { padding: 16px 16px; }
     .panel-header { flex-direction: column; align-items: stretch; }
@@ -777,7 +807,7 @@ const DEPT_META = {
   '펜타웍스': { icon: '💼', sites: [], desc: '인재·강사 에이전시' },
   '펜타몰':   { icon: '🛍️', sites: [{ label: '공구 리서치', href: 'pentamall/gongu-research.html' }], desc: '큐레이션 쇼핑' },
   '펜타북스': { icon: '📚', sites: [], desc: '자체 출판' },
-  '펜타랩':   { icon: '🔬', sites: [{ label: '책나무 연수원', href: 'booktree/' }], desc: '펜타 지수·솔루션·B2B 납품 (책나무 포함)' },
+  '펜타랩':   { icon: '🔬', sites: [{ label: '책나무 연수원', href: 'booktree/' }], desc: '솔루션·B2B 납품' },
   '본부':     { icon: '🏛️', sites: [], desc: '법인·계약·절차·시스템' }
 };
 // 레거시 시트값 매핑: 공통→본부, 책나무→펜타랩
@@ -803,8 +833,7 @@ const REPORTS = [
   { title: '펜타 지수 진단 결과 샘플', desc: '초4 이서진 샘플 — 오각형 레이더 차트·5영역 T점수·도서 추천·프리미엄 클래스 연결', file: 'https://daniel-donggil-lee.github.io/remark-report-engine/demo/penta-sample.html', date: '2026-04-02', category: 'PENTA', dept: '펜타스쿨', sp: '커리큘럼 개발' },
   { title: '책나무 학부모 리포트 샘플', desc: '책나무 가맹점 학부모에게 발송되는 HTML 리포트 데모 — 4영역 게이지·추이그래프·AI 코멘트', file: 'https://daniel-donggil-lee.github.io/remark-report-engine/demo/chaknamu-sample.html', date: '2026-04-02', category: 'B2B 사업', dept: '펜타랩', sp: '' },
   { title: '책나무 B2B 제안서', desc: '8섹션 풀스크린 제안서 — 5월 초 미팅용. Before/After·데모 QR·파일럿 조건 포함', file: 'https://daniel-donggil-lee.github.io/remark-report-engine/demo/chaknamu-proposal.html', date: '2026-04-02', category: 'B2B 사업', dept: '펜타랩', sp: '' },
-  { title: '책나무 원격연수원 사전전송 제안', desc: '슬초기획팀 사전전송용 — 책나무 원격연수원 공동 구축 제안. 펜타캠퍼스 인프라 × 책나무 콘텐츠 결합', file: 'booktree/preread/index.html', date: '2026-04-14', category: 'B2B 사업', dept: '펜타랩', sp: '책나무연수원', milestoneKeyword: '미팅/의향' },
-  { title: '책나무 B2B 제안서 (풀 제안서)', desc: '8섹션 풀스크린 제안서 — 5월 초 미팅용. Before/After·데모 QR·파일럿 조건 포함', file: 'https://daniel-donggil-lee.github.io/penta/booktree/', date: '2026-04-14', category: 'B2B 사업', dept: '펜타랩', sp: '책나무연수원' },
+  { title: '책나무 B2B 제안서', desc: '책나무 원격연수원 공동 구축 제안 — 업계 구조·빈자리·원격연수원·협회·6개월 턴키 10섹션', file: 'booktree/preread/index.html', date: '2026-04-14', category: 'B2B 사업', dept: '펜타랩', sp: '책나무연수원', milestoneKeyword: 'M1' },
   { title: '구독 BM 검토', desc: '이은경 구독 BM 구조 정리 + 이동길 항목별 의견 (2회차 회의 준비자료)', file: 'bm_subscription_counterarguments.html', date: '2026-03-31', category: '사업 모델', dept: '본부', sp: '' },
   { title: 'BM 분석 리포트', desc: '5개 프랜차이즈 정보공개서 기반 사업모델 비교 분석', file: 'bm-analysis.html', date: '2026-03-22', category: '사업 모델', dept: '본부', sp: '' },
   { title: '카페 분석 리포트', desc: '슬기로운 초등생활 네이버 카페 통계·진단·자동화 방안', file: 'cafe-analysis-report.html', date: '2026-03-27', category: '마케팅', dept: '본부', sp: '브랜드' },
@@ -971,6 +1000,22 @@ function routeView() {
   renderWeekly();
 }
 
+// 부서별 서브프로젝트 표시 순서 고정 (목록에 없는 항목은 가나다순)
+const SUBPROJECT_ORDER = {
+  '펜타스쿨': ['커리큘럼 개발', '본점 오픈', '가맹 확장'],
+};
+function sortSubprojects(dept, arr) {
+  const order = SUBPROJECT_ORDER[dept] || [];
+  return arr.slice().sort((a, b) => {
+    const ai = order.indexOf(a);
+    const bi = order.indexOf(b);
+    if (ai >= 0 && bi >= 0) return ai - bi;
+    if (ai >= 0) return -1;
+    if (bi >= 0) return 1;
+    return a.localeCompare(b, 'ko');
+  });
+}
+
 function subProjectsOfDept(dept) {
   const names = new Set();
   for (const sheet of ['로드맵', '논의']) {
@@ -979,10 +1024,12 @@ function subProjectsOfDept(dept) {
     const pIdx = cfg.columns.indexOf('프로젝트');
     const spIdx = cfg.columns.indexOf('서브프로젝트');
     if (pIdx < 0 || spIdx < 0) continue;
+    const stIdx = cfg.columns.indexOf('상태');
     const rows = (allData[sheet] || []).slice(2);
     rows.forEach(r => {
       const title = (r[1]||'').trim();
       if (!title || title.startsWith('[아카이브') || title.startsWith('✓')) return;
+      if (stIdx >= 0 && (r[stIdx]||'').trim() === '삭제') return;
       if (normalizeDept(r[pIdx]) !== dept) return;
       const sp = (r[spIdx]||'').trim();
       if (sp) names.add(sp);
@@ -999,6 +1046,7 @@ function milestonesOfSubproject(dept, sp) {
   const rows = (allData['로드맵'] || []).slice(2);
   const set = new Set();
   rows.forEach(r => {
+    if ((r[3]||'').trim() === '삭제') return;
     if (normalizeDept(r[pIdx]) !== dept) return;
     if ((r[spIdx]||'').trim() !== sp) return;
     const ms = (r[1]||'').trim();
@@ -1043,18 +1091,11 @@ function renderLanding() {
   const main = document.getElementById('mainContent');
   const cards = DEPTS.map(d => {
     const meta = DEPT_META[d];
-    const todoCnt = deptRowCount(d, '할일');
-    const decCnt = deptRowCount(d, '의사결정');
-    const ideaCnt = deptRowCount(d, '아이디어');
     const spSet = subProjectsOfDept(d);
     const spCount = spSet.size;
-    const spChips = Array.from(spSet).map(sp =>
+    const spChips = sortSubprojects(d, Array.from(spSet)).map(sp =>
       `<span class="lc-sp-chip" onclick="event.stopPropagation(); enterDeptSubproject('${d}','${escapeHtml(sp)}')">${escapeHtml(sp)}</span>`
     ).join('');
-    const next = nextMilestone(d);
-    const nextHtml = next
-      ? `<div class="lc-next">다음: <b>${escapeHtml(next.title)}</b>${next.due?` · ${escapeHtml(next.due)}`:''}</div>`
-      : `<div class="lc-next">다음 마일스톤 없음</div>`;
     const hq = d === '본부' ? 'hq' : '';
     return `<div class="landing-card ${hq}" onclick="enterDept('${d}')">
       <div class="lc-head">
@@ -1065,12 +1106,6 @@ function renderLanding() {
       <div class="lc-sp">
         <span class="lc-sp-badge">서브프로젝트 <b>${spCount}</b></span>
         ${spCount ? spChips : `<span class="lc-sp-empty">미등록</span>`}
-      </div>
-      ${nextHtml}
-      <div class="lc-stats">
-        <div class="lc-stat"><b>${todoCnt}</b>진행 할일</div>
-        <div class="lc-stat"><b>${decCnt}</b>결정 대기</div>
-        <div class="lc-stat"><b>${ideaCnt}</b>아이디어</div>
       </div>
     </div>`;
   }).join('');
@@ -1087,6 +1122,11 @@ function renderLanding() {
 }
 
 function enterDept(dept) {
+  const sps = sortSubprojects(dept, Array.from(subProjectsOfDept(dept)));
+  if (sps.length > 0) {
+    enterDeptSubproject(dept, sps[0]);
+    return;
+  }
   viewMode = 'dept';
   currentDept = dept;
   projectFilter = '';
@@ -1118,11 +1158,6 @@ function renderDeptBanner() {
   if (!inner || !label) return;
 
   const meta = DEPT_META[currentDept];
-  const deptTotals = {};
-  FUNCTIONAL_TABS.forEach(t => { deptTotals[t] = deptRowCount(currentDept, t); });
-  const activeTotal = deptTotals['할일'] || 0;
-  const decisions = deptTotals['의사결정'] || 0;
-  const ideas = deptTotals['아이디어'] || 0;
 
   label.innerHTML = `${meta.icon} <b>${currentDept}</b> <span style="opacity:0.7;font-weight:400">${meta.desc}</span>`;
 
@@ -1130,15 +1165,8 @@ function renderDeptBanner() {
     `<a class="project-link" href="${s.href}"><span class="pl-name">${s.label}</span></a>`
   ).join('');
 
-  const stats = `
-    <span class="dept-stat">진행 할일 <b>${activeTotal}</b></span>
-    <span class="dept-stat">결정 대기 <b>${decisions}</b></span>
-    <span class="dept-stat">아이디어 <b>${ideas}</b></span>
-  `;
-
   inner.innerHTML = `
     <span class="projects-banner-label" id="deptBannerLabel">${label.innerHTML}</span>
-    <div class="dept-stats">${stats}</div>
     ${siteLinks ? `<div class="dept-sites">${siteLinks}</div>` : ''}
     ${renderSubprojectBar()}
   `;
@@ -1427,7 +1455,11 @@ function deptRowCount(dept, sheet) {
   return rows.filter(r => {
     const title = (r[1]||'').trim();
     if (!title || title.startsWith('[아카이브')) return false;
-    if (sheet === '할일' && (r[4]||'') === '완료') return false;
+    if (sheet === '할일') {
+      const st = (r[4]||'').trim();
+      if (st === '완료' || st === '삭제') return false;
+    }
+    if (sheet === '로드맵' && (r[3]||'').trim() === '삭제') return false;
     if (dept) {
       if (!hasProj) return false;
       if (normalizeDept(r[pIdx]) !== dept) return false;
@@ -1449,13 +1481,30 @@ function renderTabs() {
   const bar = document.getElementById('tabBar');
   const arrow = '<span class="sub-arrow">&rarr;</span>';
 
-  const backBtn = `<div class="dept-tab" onclick="backToLanding()" title="랜딩으로" style="background:rgba(255,255,255,0.08);color:#C9A84C;font-weight:600">← 부서 선택</div>`;
+  const backBtn = `<div class="dept-tab" onclick="backToLanding()" title="랜딩으로" style="background:rgba(255,255,255,0.08);color:#C9A84C;font-weight:600;flex:0 0 auto">← 부서 선택</div>`;
   const deptHtml = backBtn + DEPTS.map(d => {
     const meta = DEPT_META[d];
     const active = d === currentDept ? 'active' : '';
-    const cnt = deptTotal(d);
-    return `<div class="dept-tab ${active}" onclick="switchDept('${d}')" title="${meta.desc}">
+    const sps = sortSubprojects(d, [...subProjectsOfDept(d)]);
+    const cnt = sps.length;
+    const popItems = sps.length
+      ? sps.map(sp => {
+          const spEsc = sp.replace(/'/g, "\\'");
+          const msCnt = milestonesOfSubproject(d, sp).size;
+          return `<div class="dept-popover-item" onclick="event.stopPropagation(); jumpToSubproject('${d}','${spEsc}')">
+            <span>${escapeHtml(sp)}</span><span class="dp-cnt">M ${msCnt}</span>
+          </div>`;
+        }).join('')
+      : `<div class="dept-popover-empty">서브프로젝트 없음</div>`;
+    const clickAction = sps.length === 1
+      ? `jumpToSubproject('${d}','${sps[0].replace(/'/g, "\\'")}')`
+      : `toggleDeptPopover(event, this)`;
+    return `<div class="dept-tab ${active}" onclick="${clickAction}" title="${meta.desc}">
       <span class="dept-icon">${meta.icon}</span><span class="dept-name">${d}</span><span class="dept-count">${cnt}</span>
+      <div class="dept-popover">
+        <div class="dept-popover-head">${escapeHtml(d)} 서브프로젝트</div>
+        ${popItems}
+      </div>
     </div>`;
   }).join('');
 
@@ -1499,6 +1548,30 @@ function switchDept(dept) {
   if (GLOBAL_TABS.includes(currentTab)) currentTab = '할일';
   routeView();
 }
+
+function jumpToSubproject(dept, sp) {
+  viewMode = 'dept';
+  currentDept = dept;
+  projectFilter = '';
+  subprojectFilter = sp;
+  if (GLOBAL_TABS.includes(currentTab)) currentTab = '할일';
+  routeView();
+}
+
+// 서브프로젝트 2개 이상인 부서 탭: 클릭 시 팝오버 토글 (모바일/터치 대응)
+function toggleDeptPopover(ev, tabEl) {
+  ev.stopPropagation();
+  const pop = tabEl.querySelector('.dept-popover');
+  if (!pop) return;
+  const isOpen = pop.style.display === 'block';
+  document.querySelectorAll('.dept-popover').forEach(p => p.style.display = '');
+  if (!isOpen) pop.style.display = 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.dept-tab')) {
+    document.querySelectorAll('.dept-popover').forEach(p => p.style.display = '');
+  }
+});
 
 function renderProjectFilterBar(rows, colIdx) {
   const counts = {};
@@ -1545,6 +1618,7 @@ function renderSubprojectFocus() {
   const roadRows = (allData['로드맵']||[]).slice(2).filter(r => {
     const title = (r[1]||'').trim();
     if (!title || title.startsWith('[아카이브')) return false;
+    if ((r[3]||'').trim() === '삭제') return false;
     if (normalizeDept(r[roadPIdx]) !== dept) return false;
     return (r[roadSpIdx]||'').trim() === sp;
   });
@@ -1555,10 +1629,10 @@ function renderSubprojectFocus() {
   const msSet = milestonesOfSubproject(dept, sp);
   const todoRows = (allData['할일']||[]).slice(2).filter(r => {
     if (!(r[1]||'').trim()) return false;
+    if ((r[4]||'').trim() === '삭제') return false;
     return msSet.has((r[0]||'').trim());
   });
-  const todoActive = todoRows.filter(r => (r[4]||'') !== '완료');
-  const todoDone = todoRows.filter(r => (r[4]||'') === '완료');
+  // todoRows는 칸반보드에서 상태별 분류됨 (아래 할일 섹션 참조)
 
   // 논의 수집
   const disCfg = SHEET_CONFIG['논의'] || {columns:['카테고리','제목','내용','상태','담당','프로젝트','서브프로젝트']};
@@ -1600,10 +1674,6 @@ function renderSubprojectFocus() {
 
   let html = `
     <div class="sp-focus">
-      <div class="sp-focus-topbar">
-        <a class="sp-back" onclick="setSubprojectFilter('')">← ${escapeHtml(dept)} 전체</a>
-      </div>
-
       <div class="sp-hero">
         <div class="sp-hero-eyebrow">${deptMeta.icon} ${escapeHtml(dept.toUpperCase())} · ${escapeHtml(sp.toUpperCase())}</div>
         <h1 class="sp-hero-title">${escapeHtml(sp)}</h1>
@@ -1665,44 +1735,51 @@ function renderSubprojectFocus() {
   }
   html += `</div>`;
 
-  // 할일
+  // 할일 — 칸반보드
+  const todoPending = todoRows.filter(r => { const s = (r[4]||'').trim(); return s === '대기' || !s; });
+  const todoInProg = todoRows.filter(r => (r[4]||'').trim() === '진행중');
+  const todoDoneAll = todoRows.filter(r => (r[4]||'').trim() === '완료');
+  const spEsc = escapeHtml(sp).replace(/'/g,"\\'");
+  const deptEsc = escapeHtml(dept).replace(/'/g,"\\'");
+
+  function kanbanCard(row) {
+    const realIdx = rawTodo.indexOf(row);
+    const pi = getPersonInfo(row[2]||'');
+    const due = row[3]||'';
+    const dueDate = due ? new Date(due) : null;
+    const isOverdue = dueDate && dueDate < today && (row[4]||'').trim() !== '완료';
+    const ms = (row[0]||'').trim();
+    return `<div class="sp-kanban-card" draggable="true" data-todo-idx="${realIdx}" onclick="openEditModal(${realIdx},'할일')">
+      <div class="kc-title">${escapeHtml(row[1]||'')}</div>
+      <div class="kc-meta">
+        ${ms ? `<span class="kc-ms">${escapeHtml(ms)}</span>` : ''}
+        ${due ? `<span class="kc-due ${isOverdue?'overdue':''}">${formatDateWithDay(due)}</span>` : ''}
+        <span class="dot ${pi.dot}" style="width:18px;height:18px;font-size:9px">${pi.label}</span>
+      </div>
+    </div>`;
+  }
+
   html += `
     <div class="sp-section">
       <div class="sp-section-head">
-        <div><span class="sp-section-eyebrow">TASKS</span><h2 class="sp-section-title">할일 <span class="sp-count">${todoActive.length}</span></h2></div>
-        <button class="sp-add-btn" onclick="openAddForSheet('할일','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 할일 추가</button>
+        <div><span class="sp-section-eyebrow">TASKS</span><h2 class="sp-section-title">할일 <span class="sp-count">${todoRows.length}</span></h2></div>
+        <button class="sp-add-btn" onclick="openAddForSheet('할일','${spEsc}','${deptEsc}')">+ 할일 추가</button>
+      </div>
+      <div class="sp-kanban">
+        <div class="sp-kanban-col col-pending" data-kanban-status="대기" ondragover="kanbanDragOver(event)" ondragleave="kanbanDragLeave(event)" ondrop="kanbanDrop(event,'대기')">
+          <div class="sp-kanban-header"><span class="kh-dot"></span>대기 <span class="kh-cnt">${todoPending.length}</span></div>
+          <div class="sp-kanban-cards">${todoPending.length ? todoPending.map(kanbanCard).join('') : `<div class="sp-kanban-empty" onclick="openAddForSheet('할일','${spEsc}','${deptEsc}')" style="cursor:pointer">+ 추가</div>`}</div>
+        </div>
+        <div class="sp-kanban-col col-progress" data-kanban-status="진행중" ondragover="kanbanDragOver(event)" ondragleave="kanbanDragLeave(event)" ondrop="kanbanDrop(event,'진행중')">
+          <div class="sp-kanban-header"><span class="kh-dot"></span>진행중 <span class="kh-cnt">${todoInProg.length}</span></div>
+          <div class="sp-kanban-cards">${todoInProg.length ? todoInProg.map(kanbanCard).join('') : '<div class="sp-kanban-empty">—</div>'}</div>
+        </div>
+        <div class="sp-kanban-col col-done" data-kanban-status="완료" ondragover="kanbanDragOver(event)" ondragleave="kanbanDragLeave(event)" ondrop="kanbanDrop(event,'완료')">
+          <div class="sp-kanban-header"><span class="kh-dot"></span>완료 <span class="kh-cnt">${todoDoneAll.length}</span></div>
+          <div class="sp-kanban-cards">${todoDoneAll.length ? todoDoneAll.map(kanbanCard).join('') : '<div class="sp-kanban-empty">—</div>'}</div>
+        </div>
       </div>
   `;
-  if (!todoActive.length && !todoDone.length) {
-    html += `<div class="sp-empty">등록된 할일이 없습니다. <a onclick="openAddForSheet('할일','${escapeHtml(sp).replace(/'/g,"\\'")}','${escapeHtml(dept).replace(/'/g,"\\'")}')">+ 첫 할일 추가</a></div>`;
-  } else {
-    html += `<div class="sp-list">`;
-    todoActive.forEach(row => {
-      const realIdx = rawTodo.indexOf(row);
-      const pi = getPersonInfo(row[2]||'');
-      const due = row[3]||'';
-      const dueDate = due ? new Date(due) : null;
-      const isOverdue = dueDate && dueDate < today;
-      const status = row[4]||'대기';
-      html += `
-        <div class="sp-item" onclick="openEditModal(${realIdx},'할일')">
-          <span class="sp-item-title">${escapeHtml(row[1]||'')}</span>
-          <span class="sp-item-ms">${escapeHtml(row[0]||'')}</span>
-          <span class="sp-item-due ${isOverdue?'overdue':''}">${due ? formatDateWithDay(due) : ''}</span>
-          <span class="dot ${pi.dot}" style="width:22px;height:22px;font-size:10px">${pi.label}</span>
-          <span class="status-badge status-${status==='완료'?'done':status==='진행중'?'progress':'scheduled'}">${status}</span>
-        </div>`;
-    });
-    if (todoDone.length) {
-      html += `<div class="sp-subheader" onclick="this.nextElementSibling.classList.toggle('show'); this.classList.toggle('open')">▶ 완료 ${todoDone.length}건</div><div class="sp-done-list">`;
-      todoDone.forEach(row => {
-        const realIdx = rawTodo.indexOf(row);
-        html += `<div class="sp-item done" onclick="openEditModal(${realIdx},'할일')"><span class="sp-item-title">${escapeHtml(row[1]||'')}</span><span class="status-badge status-done">완료</span></div>`;
-      });
-      html += `</div>`;
-    }
-    html += `</div>`;
-  }
   html += `</div>`;
 
   // 논의
@@ -1729,6 +1806,34 @@ function renderSubprojectFocus() {
   }
   html += `</div>`;
 
+  // 산출물 (로드맵 비고 URL 추출, 해당 서브프로젝트만)
+  const deliverables = roadRows.map(r => {
+    const note = r[6] || '';
+    const m = note.match(/https?:\/\/[^\s]+/);
+    if (!m) return null;
+    return { milestone: r[1]||'', date: r[2]||'', status: (r[3]||'').trim()||'대기', url: m[0] };
+  }).filter(Boolean);
+  if (deliverables.length) {
+    html += `
+      <div class="sp-section">
+        <div class="sp-section-head">
+          <div><span class="sp-section-eyebrow">DELIVERABLES</span><h2 class="sp-section-title">산출물 <span class="sp-count">${deliverables.length}</span></h2></div>
+        </div>
+        <div class="deliverables-grid">`;
+    deliverables.forEach(it => {
+      const done = it.status === '완료';
+      const statusColor = done ? '#10b981' : it.status === '진행중' ? '#C9A84C' : '#6b6b6b';
+      html += `<a class="deliv-card ${done ? 'done' : ''}" href="${escapeHtml(it.url)}" target="_blank" rel="noopener">
+        <div class="deliv-top">
+          <span class="deliv-status" style="background:${statusColor}">${it.status}</span>
+          <span class="deliv-date">${it.date}</span>
+        </div>
+        <div class="deliv-title">🔗 ${escapeHtml(it.milestone)}</div>
+      </a>`;
+    });
+    html += `</div></div>`;
+  }
+
   // 리포트
   if (reps.length) {
     html += `
@@ -1753,8 +1858,11 @@ function renderSubprojectFocus() {
   main.innerHTML = html;
 }
 
+let currentContext = { sp: '', dept: '' };
+
 function openAddForSheet(sheet, sp, dept) {
   currentTab = sheet;
+  currentContext = { sp: sp || '', dept: dept || '' };
   openAddModal();
   // 새 항목 프리셋: 서브프로젝트/프로젝트 필드 자동 입력
   setTimeout(() => {
@@ -1838,6 +1946,33 @@ function injectSpFocusStyles() {
     .sp-done-list { display: none; }
     .sp-done-list.show { display: flex; flex-direction: column; gap: 2px; }
 
+    /* Kanban board */
+    .sp-kanban { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .sp-kanban-col { background: #f8f8f8; border-radius: 10px; padding: 12px; min-height: 120px; transition: background 0.15s; }
+    .sp-kanban-col.col-pending { background: #f8f8f8; }
+    .sp-kanban-col.col-progress { background: #fffbeb; }
+    .sp-kanban-col.col-done { background: #f0fdf4; }
+    .sp-kanban-col.drag-over { outline: 2px dashed #C9A84C; outline-offset: -2px; }
+    .sp-kanban-header { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .sp-kanban-header .kh-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .sp-kanban-header .kh-cnt { font-size: 11px; font-weight: 400; color: #8a8a8e; }
+    .col-pending .sp-kanban-header { color: #6b7280; }
+    .col-pending .kh-dot { background: #9ca3af; }
+    .col-progress .sp-kanban-header { color: #92400e; }
+    .col-progress .kh-dot { background: #C9A84C; }
+    .col-done .sp-kanban-header { color: #166534; }
+    .col-done .kh-dot { background: #16a34a; }
+    .sp-kanban-cards { display: flex; flex-direction: column; gap: 8px; min-height: 40px; }
+    .sp-kanban-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 10px 12px; cursor: grab; transition: all 0.15s; }
+    .sp-kanban-card:hover { border-color: #C9A84C; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .sp-kanban-card.dragging { opacity: 0.4; transform: rotate(2deg); }
+    .sp-kanban-card .kc-title { font-size: 13px; font-weight: 500; color: #1d1d1f; margin-bottom: 6px; line-height: 1.4; }
+    .sp-kanban-card .kc-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .sp-kanban-card .kc-ms { font-size: 10px; color: #C9A84C; background: #faf5e4; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+    .sp-kanban-card .kc-due { font-size: 11px; color: #656d76; }
+    .sp-kanban-card .kc-due.overdue { color: #dc2626; font-weight: 600; }
+    .sp-kanban-empty { font-size: 12px; color: #bbb; text-align: center; padding: 16px 0; }
+
     @media (max-width: 640px) {
       .sp-hero-title { font-size: 32px; }
       .sp-meta { gap: 16px; padding: 12px; }
@@ -1845,6 +1980,7 @@ function injectSpFocusStyles() {
       .sp-mile-date { grid-column: 2; font-size: 11px; }
       .sp-item { grid-template-columns: 1fr auto; }
       .sp-item-ms, .sp-item-due, .sp-item .dot { display: none; }
+      .sp-kanban { grid-template-columns: 1fr; }
     }
   `;
   document.head.appendChild(s);
@@ -2106,13 +2242,81 @@ function buildFieldHtml(col, i, val) {
       ${PROJECTS.map(p => `<option value="${p}" ${val===p?'selected':''}>${p}</option>`).join('')}</select></div>`;
   }
   if (col === 'Phase') {
-    const opts = Object.entries(PHASE_NAMES).map(([k,v]) => `<option value="${k}" ${val===k?'selected':''}>${k}: ${v}</option>`).join('');
-    return `<div class="form-group"><label>${col}</label>
+    const rmCfg = SHEET_CONFIG['로드맵'];
+    const rmPIdx = rmCfg.columns.indexOf('프로젝트');
+    const rmSpIdx = rmCfg.columns.indexOf('서브프로젝트');
+    const rmRows = (allData['로드맵'] || []).slice(2);
+    const ctxSp = currentContext.sp || '';
+    const ctxDept = currentContext.dept || '';
+    const hasCtx = !!(ctxSp && ctxDept);
+    let allowedKeys = Object.keys(PHASE_NAMES);
+    let labelExtra = '';
+    if (hasCtx) {
+      const set = new Set();
+      rmRows.forEach(r => {
+        if ((r[3]||'').trim() === '삭제') return;
+        if (normalizeDept(r[rmPIdx]||'') !== ctxDept) return;
+        if ((r[rmSpIdx]||'').trim() !== ctxSp) return;
+        const p = (r[0]||'').trim();
+        if (p) set.add(p);
+      });
+      if (set.size > 0) {
+        allowedKeys = Object.keys(PHASE_NAMES).filter(k => set.has(k));
+        labelExtra = ` <span style="font-size:11px;color:#8a8a8e;font-weight:400">— ${escapeHtml(ctxDept)} / ${escapeHtml(ctxSp)}</span>`;
+      }
+    }
+    let opts = allowedKeys.map(k => `<option value="${k}" ${val===k?'selected':''}>${k}: ${PHASE_NAMES[k]}</option>`).join('');
+    if (val && !allowedKeys.includes(val)) {
+      const label = PHASE_NAMES[val] ? `${val}: ${PHASE_NAMES[val]}` : val;
+      opts = `<option value="${escapeHtml(val)}" selected>${escapeHtml(label)} (외부)</option>` + opts;
+    }
+    return `<div class="form-group"><label>${col}${labelExtra}</label>
       <select id="field_${i}"><option value="">선택</option>${opts}</select></div>`;
   }
   if (col === '마일스톤' && currentTab === '할일') {
-    const milestones = (allData['로드맵'] || []).slice(2).map(r => r[1]).filter(Boolean);
-    const opts = [...new Set(milestones)].map(m => `<option value="${m}" ${val===m?'selected':''}>${m}</option>`).join('');
+    const rmCfg = SHEET_CONFIG['로드맵'];
+    const rmPIdx = rmCfg.columns.indexOf('프로젝트');
+    const rmSpIdx = rmCfg.columns.indexOf('서브프로젝트');
+    const rmRows = (allData['로드맵'] || []).slice(2);
+    const ctxSp = currentContext.sp || '';
+    const ctxDept = currentContext.dept || '';
+    const hasCtx = !!(ctxSp && ctxDept);
+    // 컨텍스트 있으면 해당 서브프로젝트만, 없으면 부서/서브프로젝트 그룹핑
+    let opts = '';
+    if (hasCtx) {
+      const set = new Set();
+      rmRows.forEach(r => {
+        if ((r[3]||'').trim() === '삭제') return;
+        if (normalizeDept(r[rmPIdx]||'') !== ctxDept) return;
+        if ((r[rmSpIdx]||'').trim() !== ctxSp) return;
+        const m = (r[1]||'').trim();
+        if (m) set.add(m);
+      });
+      opts = [...set].map(m => `<option value="${escapeHtml(m)}" ${val===m?'selected':''}>${escapeHtml(m)}</option>`).join('');
+      // 현재 값이 컨텍스트 밖이면 추가로 노출 (데이터 보존)
+      if (val && !set.has(val)) {
+        opts = `<option value="${escapeHtml(val)}" selected>${escapeHtml(val)} (외부)</option>` + opts;
+      }
+      return `<div class="form-group"><label>${col} <span style="font-size:11px;color:#8a8a8e;font-weight:400">— ${escapeHtml(ctxDept)} / ${escapeHtml(ctxSp)}</span></label>
+        <select id="field_${i}"><option value="">선택</option>${opts}</select></div>`;
+    }
+    // 컨텍스트 없음: 부서 / 서브프로젝트로 그룹핑
+    const groups = {};
+    rmRows.forEach(r => {
+      if ((r[3]||'').trim() === '삭제') return;
+      const m = (r[1]||'').trim();
+      if (!m) return;
+      const dept = normalizeDept(r[rmPIdx]||'') || '(부서 미지정)';
+      const sp = (r[rmSpIdx]||'').trim() || '(서브프로젝트 미지정)';
+      const key = `${dept} / ${sp}`;
+      if (!groups[key]) groups[key] = new Set();
+      groups[key].add(m);
+    });
+    const orderedKeys = Object.keys(groups).sort((a,b) => a.localeCompare(b,'ko'));
+    opts = orderedKeys.map(key => {
+      const inner = [...groups[key]].map(m => `<option value="${escapeHtml(m)}" ${val===m?'selected':''}>${escapeHtml(m)}</option>`).join('');
+      return `<optgroup label="${escapeHtml(key)}">${inner}</optgroup>`;
+    }).join('');
     return `<div class="form-group"><label>${col}</label>
       <select id="field_${i}"><option value="">선택</option>${opts}</select></div>`;
   }
@@ -2154,13 +2358,15 @@ function buildFieldHtml(col, i, val) {
         <option value="예정" ${val==='예정'?'selected':''}>예정</option>
         <option value="진행중" ${val==='진행중'?'selected':''}>진행중</option>
         <option value="완료" ${val==='완료'?'selected':''}>완료</option>
-        <option value="지연" ${val==='지연'?'selected':''}>지연</option></select></div>`;
+        <option value="지연" ${val==='지연'?'selected':''}>지연</option>
+        <option value="삭제" ${val==='삭제'?'selected':''}>삭제 (숨김)</option></select></div>`;
     }
     return `<div class="form-group"><label>${col}</label>
       <select id="field_${i}"><option value="">선택</option>
       <option value="대기" ${val==='대기'?'selected':''}>대기</option>
       <option value="진행중" ${val==='진행중'?'selected':''}>진행중</option>
-      <option value="완료" ${val==='완료'?'selected':''}>완료</option></select></div>`;
+      <option value="완료" ${val==='완료'?'selected':''}>완료</option>
+      <option value="삭제" ${val==='삭제'?'selected':''}>삭제 (숨김)</option></select></div>`;
   }
   const type = (['비고','내용','결과 요약'].includes(col)) ? 'textarea' : 'input';
   const escaped = type === 'input' ? (val||'').replace(/"/g, '&quot;') : '';
@@ -2181,6 +2387,28 @@ function openEditModal(rowIdx, sheetOverride) {
   editingRow = rowIdx;
   const config = SHEET_CONFIG[currentTab];
   const row = (allData[currentTab] || [])[rowIdx] || [];
+  // 할일 수정 시: 마일스톤으로부터 서브프로젝트 컨텍스트 역추적
+  if (currentTab === '할일') {
+    const ms = (row[0] || '').trim();
+    if (ms) {
+      const rmCfg = SHEET_CONFIG['로드맵'];
+      const rmSpI = rmCfg.columns.indexOf('서브프로젝트');
+      const rmPI = rmCfg.columns.indexOf('프로젝트');
+      const rm = (allData['로드맵'] || []).slice(2).find(r => (r[1] || '').trim() === ms);
+      if (rm) {
+        currentContext = { sp: (rm[rmSpI] || '').trim(), dept: normalizeDept(rm[rmPI] || '') };
+      } else {
+        currentContext = { sp: '', dept: '' };
+      }
+    } else {
+      currentContext = { sp: '', dept: '' };
+    }
+  } else if (currentTab === '로드맵') {
+    const rmCfg = SHEET_CONFIG['로드맵'];
+    const rmSpI = rmCfg.columns.indexOf('서브프로젝트');
+    const rmPI = rmCfg.columns.indexOf('프로젝트');
+    currentContext = { sp: (row[rmSpI] || '').trim(), dept: normalizeDept(row[rmPI] || '') };
+  }
   document.getElementById('modalTitle').textContent = `${currentTab} - 항목 수정`;
   document.getElementById('modalFields').innerHTML = config.columns.map((col, i) => buildFieldHtml(col, i, row[i] || '')).join('');
   document.getElementById('modal').classList.add('show');
@@ -2190,6 +2418,52 @@ function closeModal() {
   document.getElementById('modal').classList.remove('show');
   editingRow = null;
 }
+
+// ─── 칸반 드래그 앤 드롭 ───
+function kanbanDragOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over');
+}
+function kanbanDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+async function kanbanDrop(e, newStatus) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  const todoIdx = parseInt(e.dataTransfer.getData('text/plain'));
+  if (isNaN(todoIdx)) return;
+  const row = (allData['할일'] || [])[todoIdx];
+  if (!row) return;
+  const oldStatus = (row[4]||'').trim() || '대기';
+  if (oldStatus === newStatus) return;
+
+  // 낙관적 업데이트
+  row[4] = newStatus;
+  if (newStatus === '완료') row[5] = fmtDate(new Date());
+  renderSubprojectFocus();
+  showToast(`${oldStatus} → ${newStatus}`);
+
+  // Sheets 업데이트
+  const values = [...row];
+  while (values.length < 8) values.push('');
+  try {
+    await gasPost({ action: 'update', sheet: '할일', range: `A${todoIdx+1}:H${todoIdx+1}`, values });
+  } catch (err) {
+    showToast('저장 실패 — 새로고침 필요');
+  }
+}
+document.addEventListener('dragstart', (e) => {
+  const card = e.target.closest('.sp-kanban-card');
+  if (!card) return;
+  e.dataTransfer.setData('text/plain', card.dataset.todoIdx);
+  e.dataTransfer.effectAllowed = 'move';
+  card.classList.add('dragging');
+});
+document.addEventListener('dragend', (e) => {
+  const card = e.target.closest('.sp-kanban-card');
+  if (card) card.classList.remove('dragging');
+  document.querySelectorAll('.sp-kanban-col.drag-over').forEach(c => c.classList.remove('drag-over'));
+});
 
 async function gasPost(payload) {
   const url = API + '?payload=' + encodeURIComponent(JSON.stringify(payload)) + '&_=' + Date.now();
@@ -2527,10 +2801,11 @@ function renderRoadmapPanel(config, rows, allDataRows) {
     return a.localeCompare(b, 'ko');
   });
 
-  // 필터 적용
+  // 필터 적용 (삭제 상태 제외)
+  const baseRows = allDataRows.filter(r => (r[3]||'').trim() !== '삭제');
   const filteredRows = currentProjectFilter
-    ? allDataRows.filter(r => ((r[8] || '').trim() || '미분류') === currentProjectFilter)
-    : allDataRows;
+    ? baseRows.filter(r => ((r[8] || '').trim() || '미분류') === currentProjectFilter)
+    : baseRows;
 
   const total = filteredRows.length;
   const done = filteredRows.filter(r => (r[3]||'') === '완료').length;
@@ -2663,8 +2938,9 @@ function renderRoadmapPanel(config, rows, allDataRows) {
 function renderTodoPanel(config, rows, allDataRows) {
   const today = new Date(); today.setHours(0,0,0,0);
   const weekLater = new Date(today); weekLater.setDate(weekLater.getDate() + 7);
-  const active = allDataRows.filter(r => (r[4]||'') !== '완료');
-  const completed = allDataRows.filter(r => (r[4]||'') === '완료');
+  const visible = allDataRows.filter(r => (r[4]||'').trim() !== '삭제');
+  const active = visible.filter(r => (r[4]||'') !== '완료');
+  const completed = visible.filter(r => (r[4]||'') === '완료');
   const overdue = active.filter(r => {
     const d = r[3] ? new Date(r[3]) : null;
     return d && d < today;
@@ -2910,15 +3186,18 @@ async function renderExistingFeedback(target) {
     container.innerHTML = '<div style="color:#dc2626">이전 요청을 불러오지 못했습니다.</div>';
   }
 }
-async function submitFeedback() {
+function submitFeedback() {
   const author = document.getElementById('fb_author').value;
   const content = document.getElementById('fb_content').value.trim();
   if (!content) { showToast('내용을 입력해주세요'); return; }
   const today = new Date().toISOString().slice(0, 10);
-  await gasPost({ action: 'append', sheet: '개선요청', values: [author, today, content, '접수', fbCurrentTarget] });
-  const msg = fbCurrentTarget ? '수정 요청 접수 완료' : '개선 요청 접수 완료';
+  const target = fbCurrentTarget;
+  const msg = target ? '수정 요청 접수 완료' : '개선 요청 접수 완료';
   closeFeedbackModal();
   showToast(msg);
+  gasPost({ action: 'append', sheet: '개선요청', values: [author, today, content, '접수', target] }).catch(() => {
+    showToast('전송 실패 — 다시 시도해주세요');
+  });
 }
 document.getElementById('feedbackModal').addEventListener('click', (e) => {
   if (e.target === document.getElementById('feedbackModal')) closeFeedbackModal();
