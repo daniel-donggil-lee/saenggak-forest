@@ -970,16 +970,70 @@ function buildChangeMap(data) {
   return map;
 }
 
+function setSyncIndicator(state) {
+  let el = document.getElementById('syncIndicator');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'syncIndicator';
+    el.style.cssText = 'position:fixed;top:12px;right:12px;z-index:9999;font-size:11px;padding:4px 10px;border-radius:999px;font-weight:600;transition:opacity 0.3s;pointer-events:none';
+    document.body.appendChild(el);
+  }
+  if (state === 'syncing') {
+    el.textContent = '↻ 최신 데이터 불러오는 중…';
+    el.style.background = '#fffbeb';
+    el.style.color = '#92400e';
+    el.style.border = '1px solid #fcd34d';
+    el.style.opacity = '1';
+  } else if (state === 'synced') {
+    el.textContent = '✓ 최신';
+    el.style.background = '#f0fdf4';
+    el.style.color = '#166534';
+    el.style.border = '1px solid #86efac';
+    el.style.opacity = '1';
+    setTimeout(() => { el.style.opacity = '0'; }, 1500);
+  } else if (state === 'error') {
+    el.textContent = '⚠ 오프라인 (캐시 표시)';
+    el.style.background = '#fef2f2';
+    el.style.color = '#991b1b';
+    el.style.border = '1px solid #fca5a5';
+    el.style.opacity = '1';
+    setTimeout(() => { el.style.opacity = '0'; }, 3000);
+  }
+}
+
 async function loadData() {
+  // 1) 캐시 즉시 렌더 (두 번째 방문부터 체감 0초)
+  const cached = localStorage.getItem('brainstorm_prev');
+  let hasCache = false;
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached);
+      if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+        allData = parsed;
+        changeMap = {};
+        routeView();
+        hasCache = true;
+      }
+    } catch (e) {}
+  }
+  // 2) 백그라운드 fetch → diff 렌더
+  setSyncIndicator('syncing');
   try {
     const res = await fetch(API + '?_=' + Date.now(), { cache: 'no-store' });
-    allData = await res.json();
+    const fresh = await res.json();
+    changeMap = buildChangeMap(fresh);
+    allData = fresh;
+    routeView();
+    localStorage.setItem('brainstorm_prev', JSON.stringify(fresh));
+    setSyncIndicator('synced');
   } catch (e) {
-    allData = INLINE_DATA;
+    if (!hasCache) {
+      allData = INLINE_DATA;
+      changeMap = buildChangeMap(allData);
+      routeView();
+    }
+    setSyncIndicator('error');
   }
-  changeMap = buildChangeMap(allData);
-  routeView();
-  localStorage.setItem('brainstorm_prev', JSON.stringify(allData));
 }
 
 function routeView() {
