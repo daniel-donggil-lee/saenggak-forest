@@ -798,7 +798,8 @@ const REPORTS = [
   { title: '펜타 지수 진단 결과 샘플', desc: '초4 이서진 샘플 — 오각형 레이더 차트·5영역 T점수·도서 추천·프리미엄 클래스 연결', file: 'https://daniel-donggil-lee.github.io/remark-report-engine/demo/penta-sample.html', date: '2026-04-02', category: 'PENTA', dept: '펜타스쿨', sp: '커리큘럼 개발' },
   { title: '책나무 학부모 리포트 샘플', desc: '책나무 가맹점 학부모에게 발송되는 HTML 리포트 데모 — 4영역 게이지·추이그래프·AI 코멘트', file: 'https://daniel-donggil-lee.github.io/remark-report-engine/demo/chaknamu-sample.html', date: '2026-04-02', category: 'B2B 사업', dept: '펜타랩', sp: '' },
   { title: '책나무 B2B 제안서', desc: '8섹션 풀스크린 제안서 — 5월 초 미팅용. Before/After·데모 QR·파일럿 조건 포함', file: 'https://daniel-donggil-lee.github.io/remark-report-engine/demo/chaknamu-proposal.html', date: '2026-04-02', category: 'B2B 사업', dept: '펜타랩', sp: '' },
-  { title: '책나무 원격연수원 사전전송 제안', desc: '슬초기획팀 사전전송용 — 책나무 원격연수원 공동 구축 제안. 펜타캠퍼스 인프라 × 책나무 콘텐츠 결합', file: 'booktree/preread/index.html', date: '2026-04-14', category: 'B2B 사업', dept: '펜타랩', sp: '' },
+  { title: '책나무 원격연수원 사전전송 제안', desc: '슬초기획팀 사전전송용 — 책나무 원격연수원 공동 구축 제안. 펜타캠퍼스 인프라 × 책나무 콘텐츠 결합', file: 'booktree/preread/index.html', date: '2026-04-14', category: 'B2B 사업', dept: '펜타랩', sp: '책나무연수원', milestoneKeyword: '미팅/의향' },
+  { title: '책나무 B2B 제안서 (풀 제안서)', desc: '8섹션 풀스크린 제안서 — 5월 초 미팅용. Before/After·데모 QR·파일럿 조건 포함', file: 'https://daniel-donggil-lee.github.io/penta/booktree/', date: '2026-04-14', category: 'B2B 사업', dept: '펜타랩', sp: '책나무연수원' },
   { title: '구독 BM 검토', desc: '이은경 구독 BM 구조 정리 + 이동길 항목별 의견 (2회차 회의 준비자료)', file: 'bm_subscription_counterarguments.html', date: '2026-03-31', category: '사업 모델', dept: '본부', sp: '' },
   { title: 'BM 분석 리포트', desc: '5개 프랜차이즈 정보공개서 기반 사업모델 비교 분석', file: 'bm-analysis.html', date: '2026-03-22', category: '사업 모델', dept: '본부', sp: '' },
   { title: '카페 분석 리포트', desc: '슬기로운 초등생활 네이버 카페 통계·진단·자동화 방안', file: 'cafe-analysis-report.html', date: '2026-03-27', category: '마케팅', dept: '본부', sp: '브랜드' },
@@ -1595,15 +1596,22 @@ function renderSubprojectFocus() {
       const done = status === '완료';
       const inProgress = status === '진행중';
       const stepCls = done ? 'done' : inProgress ? 'active' : 'pending';
-      const title = escapeHtml(row[1]||'');
+      const msTitle = row[1]||'';
+      const title = escapeHtml(msTitle);
       const note = escapeHtml(row[6]||'');
       const date = row[2]||'';
+      // 연결 산출물: 같은 서브프로젝트 리포트 중 마일스톤 키워드 매칭
+      const linkedReport = reps.find(r => r.milestoneKeyword && msTitle.includes(r.milestoneKeyword));
+      const linkedIdx = linkedReport ? REPORTS.indexOf(linkedReport) : -1;
+      const linkIcon = linkedReport
+        ? `<span class="sp-mile-link" title="${escapeHtml(linkedReport.title)}" onclick="event.stopPropagation(); openReport(${linkedIdx})">🔗</span>`
+        : '';
       html += `
         <div class="sp-mile ${stepCls}" onclick="openEditModal(${realIdx},'로드맵')">
           <div class="sp-mile-dot">${done ? '✓' : (i+1)}</div>
           <div class="sp-mile-body">
             <div class="sp-mile-label">M${i+1}</div>
-            <div class="sp-mile-title">${title}</div>
+            <div class="sp-mile-title">${title}${linkIcon}</div>
             ${note ? `<div class="sp-mile-note">${note}</div>` : ''}
           </div>
           <div class="sp-mile-date">${date ? formatDateWithDay(date) : ''}</div>
@@ -1766,6 +1774,8 @@ function injectSpFocusStyles() {
     .sp-mile.pending .sp-mile-dot { background: #fff; border: 1.5px solid #d9d9d9; color: #8a8a8e; }
     .sp-mile-label { font-size: 11px; color: #C9A84C; font-weight: 600; letter-spacing: 0.08em; }
     .sp-mile-title { font-size: 15px; font-weight: 500; color: #1d1d1f; margin-top: 2px; }
+    .sp-mile-link { margin-left: 8px; cursor: pointer; font-size: 14px; opacity: 0.7; }
+    .sp-mile-link:hover { opacity: 1; }
     .sp-mile-note { font-size: 12px; color: #8a8a8e; margin-top: 3px; }
     .sp-mile-date { font-size: 12px; color: #8a8a8e; white-space: nowrap; }
 
@@ -2527,8 +2537,8 @@ function renderRoadmapPanel(config, rows, allDataRows) {
   const groupBySp = !!currentDept;
   const activeRows = filteredRows.filter(r => (r[3]||'') !== '완료');
   const completedRows = filteredRows.filter(r => (r[3]||'') === '완료');
-  const keyOf = r => groupBySp ? ((r[7]||'').trim() || '(미분류)') : ((r[0]||'').trim());
-  const groupKeys = [...new Set(activeRows.map(keyOf).filter(Boolean))];
+  const keyOf = r => groupBySp ? ((r[7]||'').trim() || '(미분류)') : ((r[0]||'').trim() || '(단계 미지정)');
+  const groupKeys = [...new Set(activeRows.map(keyOf))];
   groupKeys.forEach(gk => {
     const groupAll = filteredRows.filter(r => keyOf(r) === gk);
     const groupActive = activeRows.filter(r => keyOf(r) === gk);
@@ -2543,9 +2553,14 @@ function renderRoadmapPanel(config, rows, allDataRows) {
       groupTitle = phaseLabel ? `${gk}: ${phaseLabel}` : gk;
     }
 
+    // 부서 뷰에서 그룹 헤더 = 서브프로젝트 → 클릭 시 포커스 뷰로
+    const headerClick = groupBySp && gk !== '(미분류)'
+      ? `style="cursor:pointer" onclick="enterDeptSubproject('${currentDept}','${gk.replace(/'/g,"\\'")}')" title="${gk} 포커스 뷰 열기"`
+      : '';
+    const titleSuffix = groupBySp && gk !== '(미분류)' ? ' <span style="color:#C9A84C;font-size:12px">→</span>' : '';
     html += `<div class="roadmap-group">
-      <div class="roadmap-group-header">
-        <span class="roadmap-group-title">${groupTitle}</span>
+      <div class="roadmap-group-header" ${headerClick}>
+        <span class="roadmap-group-title">${groupTitle}${titleSuffix}</span>
         <div style="display:flex;align-items:center;gap:8px">
           <div class="progress-bar"><div class="progress-fill progress-fill-blue" style="width:${groupPct}%"></div></div>
           <span class="progress-text">${groupDone}/${groupAll.length}</span>
