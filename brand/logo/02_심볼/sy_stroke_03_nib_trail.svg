@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Nib trail with five dots">
+  <title>B-03 · Nib Trail — 펜촉이 남긴 5점의 궤적</title>
+  <path d="M 22 160 C 60 55, 110 175, 178 45"
+        fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#c9a84c">
+    <circle cx="22"  cy="160" r="6"/>
+    <circle cx="62"  cy="95"  r="6"/>
+    <circle cx="100" cy="105" r="6"/>
+    <circle cx="140" cy="100" r="6"/>
+    <circle cx="178" cy="45"  r="6"/>
+  </g>
+</svg>

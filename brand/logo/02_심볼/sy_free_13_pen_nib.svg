@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Fountain pen nib">
+  <title>E-13 · Pen Nib — 만년필 촉 클로즈업</title>
+  <path d="M 100 30 L 138 140 L 100 172 L 62 140 Z" fill="#0a0a0a"/>
+  <line x1="100" y1="55" x2="100" y2="172" stroke="#c9a84c" stroke-width="1.4"/>
+  <circle cx="100" cy="112" r="6" fill="#c9a84c"/>
+  <circle cx="100" cy="112" r="2.5" fill="#0a0a0a"/>
+  <text x="100" y="192" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-weight="400" font-size="8" fill="#0a0a0a" letter-spacing="5">PENTA</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="Five point crown above PENTA">
+  <title>LK-04 · 5점 왕관 + PENTA 수직 결합</title>
+  <g transform="translate(260 18) scale(0.52)">
+    <path d="M 40 140 L 55 72 L 77 110 L 100 52 L 123 110 L 145 72 L 160 140 Z" fill="#0a0a0a"/>
+    <g fill="#c9a84c">
+      <circle cx="55" cy="70" r="4.5"/>
+      <circle cx="77" cy="108" r="4"/>
+      <circle cx="100" cy="50" r="5.5"/>
+      <circle cx="123" cy="108" r="4"/>
+      <circle cx="145" cy="70" r="4.5"/>
+    </g>
+    <rect x="40" y="146" width="120" height="7" fill="#0a0a0a"/>
+  </g>
+  <text x="300" y="172" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="700" font-size="40" fill="#0a0a0a" letter-spacing="10">PENTA</text>
+</svg>

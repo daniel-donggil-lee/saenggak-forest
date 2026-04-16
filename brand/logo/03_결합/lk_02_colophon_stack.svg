@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="Colophon above PENTA wordmark">
+  <title>LK-02 · 콜로폰 + PENTA 수직 결합</title>
+  <g transform="translate(300 62)">
+    <ellipse cx="0" cy="0" rx="32" ry="44" fill="none" stroke="#0a0a0a" stroke-width="1.4"/>
+    <ellipse cx="0" cy="0" rx="28" ry="40" fill="none" stroke="#0a0a0a" stroke-width="0.3"/>
+    <text x="0" y="-10" text-anchor="middle"
+          font-family="Didot, 'Playfair Display', serif"
+          font-style="italic" font-weight="400" font-size="8" fill="#0a0a0a" letter-spacing="2">penta</text>
+    <line x1="-16" y1="-4" x2="16" y2="-4" stroke="#c9a84c" stroke-width="0.4"/>
+    <text x="0" y="18" text-anchor="middle"
+          font-family="Didot, 'Playfair Display', serif"
+          font-weight="700" font-size="32" fill="#0a0a0a">P</text>
+  </g>
+  <line x1="220" y1="130" x2="380" y2="130" stroke="#c9a84c" stroke-width="0.6"/>
+  <text x="300" y="170" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="700" font-size="34" fill="#0a0a0a" letter-spacing="8">PENTA</text>
+</svg>

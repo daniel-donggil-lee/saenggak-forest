@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Golden ratio rectangle and spiral">
+  <title>C-01 · Phi Rectangle — 황금비 분할 + 로그 스파이럴</title>
+  <!-- Golden rectangle: 160 x 99 (ratio ≈ 1.618). Centered: x=20 y=50 -->
+  <g fill="none" stroke="#0a0a0a" stroke-width="1.5">
+    <rect x="20" y="50" width="160" height="99"/>
+    <line x1="119" y1="50" x2="119" y2="149"/>
+    <line x1="119" y1="88" x2="180" y2="88"/>
+    <line x1="157" y1="88" x2="157" y2="149"/>
+    <line x1="157" y1="112" x2="180" y2="112"/>
+  </g>
+  <!-- Log spiral via quarter arcs -->
+  <g fill="none" stroke="#c9a84c" stroke-width="2">
+    <path d="M 180 50 A 99 99 0 0 1 180 149"/>
+    <path d="M 180 149 A 61 61 0 0 1 119 88"/>
+    <path d="M 119 88 A 38 38 0 0 1 157 50"/>
+    <path d="M 157 50 A 24 24 0 0 0 133 74"/>
+  </g>
+</svg>

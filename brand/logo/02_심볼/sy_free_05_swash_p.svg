@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Italic P with swash">
+  <title>E-05 · Swash P — 펭귄 클래식 고전 출판사 세리프</title>
+  <text x="92" y="160" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="700" font-size="200" fill="#0a0a0a">P</text>
+  <!-- Decorative swash extending from lower right of P -->
+  <path d="M 62 168 Q 55 182 75 182 Q 130 186 168 146"
+        fill="none" stroke="#0a0a0a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M 164 149 Q 172 144 170 138"
+        fill="none" stroke="#0a0a0a" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Ex libris bookplate">
+  <title>E-15 · Ex Libris — 장서표</title>
+  <rect x="30" y="30" width="140" height="140" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+  <rect x="36" y="36" width="128" height="128" fill="none" stroke="#0a0a0a" stroke-width="0.4"/>
+  <text x="100" y="76" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', serif"
+        font-style="italic" font-weight="400" font-size="14" fill="#c9a84c" letter-spacing="2">Ex Libris</text>
+  <line x1="72" y1="88" x2="128" y2="88" stroke="#0a0a0a" stroke-width="0.5"/>
+  <text x="100" y="124" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', serif"
+        font-weight="700" font-size="26" fill="#0a0a0a" letter-spacing="4">PENTA</text>
+  <line x1="72" y1="138" x2="128" y2="138" stroke="#0a0a0a" stroke-width="0.5"/>
+  <text x="100" y="156" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-weight="400" font-size="9" fill="#0a0a0a" letter-spacing="3">MMXXVI</text>
+</svg>

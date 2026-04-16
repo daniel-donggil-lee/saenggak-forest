@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Five petal arcs">
+  <title>Five Arcs — Petal-like pentagonal bloom</title>
+  <!-- 5 teardrop petals rotating around center -->
+  <g fill="#0a0a0a">
+    <g transform="translate(100 100)">
+      <g>
+        <path d="M 0 -68 Q 14 -36 0 -18 Q -14 -36 0 -68 Z"/>
+      </g>
+      <g transform="rotate(72)">
+        <path d="M 0 -68 Q 14 -36 0 -18 Q -14 -36 0 -68 Z"/>
+      </g>
+      <g transform="rotate(144)">
+        <path d="M 0 -68 Q 14 -36 0 -18 Q -14 -36 0 -68 Z"/>
+      </g>
+      <g transform="rotate(216)">
+        <path d="M 0 -68 Q 14 -36 0 -18 Q -14 -36 0 -68 Z"/>
+      </g>
+      <g transform="rotate(288)">
+        <path d="M 0 -68 Q 14 -36 0 -18 Q -14 -36 0 -68 Z"/>
+      </g>
+    </g>
+  </g>
+  <circle cx="100" cy="100" r="10" fill="#c9a84c"/>
+</svg>

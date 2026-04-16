@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Book spine">
+  <title>E-14 · Book Spine — 책등 (펭귄·에브리맨)</title>
+  <rect x="62" y="18" width="76" height="164" fill="none" stroke="#0a0a0a" stroke-width="1.4"/>
+  <rect x="62" y="42" width="76" height="3.5" fill="#c9a84c"/>
+  <rect x="62" y="154" width="76" height="3.5" fill="#c9a84c"/>
+  <text x="100" y="36" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-weight="400" font-size="10" fill="#0a0a0a" letter-spacing="2">№ 5</text>
+  <text x="100" y="112" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="700" font-size="22" fill="#0a0a0a" letter-spacing="6">PENTA</text>
+  <text x="100" y="174" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="8" fill="#0a0a0a" letter-spacing="2">five domains</text>
+</svg>

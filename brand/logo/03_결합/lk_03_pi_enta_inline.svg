@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="Pi ENTA inline ligature">
+  <title>LK-03 · ΠENTA — 첫 글자 P를 Π로 치환</title>
+  <text x="300" y="140" text-anchor="middle"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', Georgia, serif"
+        font-weight="700" font-size="88" fill="#0a0a0a" letter-spacing="4">ΠENTA</text>
+  <text x="300" y="170" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="11" fill="#c9a84c" letter-spacing="6">literacy · five</text>
+</svg>

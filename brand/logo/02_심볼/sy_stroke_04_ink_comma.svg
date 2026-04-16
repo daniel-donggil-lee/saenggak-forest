@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Ink comma five loops">
+  <title>B-04 · Ink Comma — 쉼표형 먹빛 P</title>
+  <!-- A single flowing stroke evoking both P's bowl and a reading comma -->
+  <path d="M 70 180 Q 60 100 80 55 Q 110 25 145 55 Q 175 95 130 110 Q 95 118 85 100"
+        fill="#0a0a0a" stroke="#0a0a0a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"
+        fill-rule="evenodd"/>
+</svg>

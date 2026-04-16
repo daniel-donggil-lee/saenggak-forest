@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="P with pentagon counter">
+  <title>D-03 · P Pentagon Counter — P의 눈이 오각형</title>
+  <!-- Sans P, black -->
+  <text x="100" y="172" text-anchor="middle"
+        font-family="Pretendard, 'Helvetica Neue', sans-serif"
+        font-weight="900" font-size="240" fill="#0a0a0a" letter-spacing="-12">P</text>
+  <!-- Pentagon overlay at the bowl's counter — position tuned for Pretendard/Helvetica fallback -->
+  <polygon points="107,80 131,98 122,126 92,126 83,98"
+           fill="#c9a84c"/>
+</svg>

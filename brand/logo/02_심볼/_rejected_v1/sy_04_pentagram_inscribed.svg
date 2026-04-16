@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Pentagram inscribed in pentagon">
+  <title>Pentagram Inscribed — Negative space within pentagon</title>
+  <!-- Outer pentagon solid black -->
+  <polygon points="100,22 174.2,76.1 145.9,163.9 54.1,163.9 25.8,76.1" fill="#0a0a0a"/>
+  <!-- Inner pentagram cut out in gold (as if carved) -->
+  <polygon points="100,52 110.6,87.2 147.3,87.2 117.9,108.7 128.5,143.9 100,122.3 71.5,143.9 82.1,108.7 52.7,87.2 89.4,87.2"
+           fill="#c9a84c"/>
+</svg>

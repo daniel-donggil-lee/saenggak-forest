@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Five fanned pens">
+  <title>E-12 · Five Pens — 5자루 펜 부채</title>
+  <g stroke="#0a0a0a" stroke-width="2.4" stroke-linecap="round" fill="none">
+    <line x1="100" y1="175" x2="40"  y2="65"/>
+    <line x1="100" y1="175" x2="70"  y2="45"/>
+    <line x1="100" y1="175" x2="100" y2="35"/>
+    <line x1="100" y1="175" x2="130" y2="45"/>
+    <line x1="100" y1="175" x2="160" y2="65"/>
+  </g>
+  <g fill="#c9a84c">
+    <circle cx="40"  cy="65" r="3"/>
+    <circle cx="70"  cy="45" r="3"/>
+    <circle cx="100" cy="35" r="3.5"/>
+    <circle cx="130" cy="45" r="3"/>
+    <circle cx="160" cy="65" r="3"/>
+  </g>
+  <circle cx="100" cy="175" r="4" fill="#0a0a0a"/>
+</svg>

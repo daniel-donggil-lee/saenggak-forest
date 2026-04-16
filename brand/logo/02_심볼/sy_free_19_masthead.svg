@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="PENTA newspaper masthead">
+  <title>E-19 · Masthead — 신문 제호 (NYT 톤)</title>
+  <text x="100" y="66" text-anchor="middle"
+        font-family="'Playfair Display', Didot, Georgia, serif"
+        font-weight="900" font-size="18" fill="#0a0a0a" letter-spacing="3" font-style="italic">The</text>
+  <text x="100" y="116" text-anchor="middle"
+        font-family="'Playfair Display', Didot, Georgia, serif"
+        font-weight="900" font-size="44" fill="#0a0a0a" letter-spacing="4">PENTA</text>
+  <line x1="40" y1="128" x2="160" y2="128" stroke="#0a0a0a" stroke-width="0.6"/>
+  <text x="100" y="148" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="10" fill="#0a0a0a" letter-spacing="3">Weekly Literacy</text>
+  <line x1="40" y1="158" x2="160" y2="158" stroke="#0a0a0a" stroke-width="0.6"/>
+  <text x="100" y="178" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-weight="400" font-size="8" fill="#c9a84c" letter-spacing="5">VOL. V</text>
+</svg>

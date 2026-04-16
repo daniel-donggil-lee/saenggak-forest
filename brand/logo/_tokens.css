@@ -1,0 +1,31 @@
+/* PENTA Brand Tokens — Single Source of Truth
+   펜타 로고 워크숍 전체에서 이 파일만 참조
+   변경 시 모든 시안에 동시 반영
+*/
+
+:root {
+  /* ---------- Color ---------- */
+  --penta-black: #0a0a0a;
+  --penta-white: #ffffff;
+  --penta-gold: #c9a84c;
+  --penta-gold-dim: rgba(201, 168, 76, 0.2);
+  --penta-gold-bright: #e0c06a;   /* 다크 배경 가독성 보정용 */
+  --penta-ink: #1d1d1f;            /* Apple-style near-black */
+  --penta-paper: #faf8f4;          /* 라이트 배경 종이 톤 */
+  --penta-line: rgba(17, 17, 17, 0.12);
+
+  /* ---------- Typography ---------- */
+  --font-serif: "Noto Serif KR", Georgia, "Times New Roman", serif;
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+  --font-display: "Pretendard", sans-serif;
+
+  /* ---------- Sizing ---------- */
+  --wordmark-vb: 0 0 300 100;
+  --symbol-vb: 0 0 200 200;
+  --lockup-vb: 0 0 400 140;
+
+  /* ---------- Stroke ---------- */
+  --stroke-hair: 1;
+  --stroke-thin: 2;
+  --stroke-bold: 4;
+}

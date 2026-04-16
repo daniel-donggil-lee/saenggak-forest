@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Pentagon vertex dots">
+  <title>C-02 · Vertex Dots — 오각형 꼭짓점 5점만</title>
+  <!-- Very faint pentagon guide -->
+  <polygon points="100,40 157.6,81.8 135.6,149 64.4,149 42.4,81.8"
+           fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.25"/>
+  <!-- Five solid dots -->
+  <g fill="#0a0a0a">
+    <circle cx="100"   cy="40"  r="11"/>
+    <circle cx="157.6" cy="81.8" r="11"/>
+    <circle cx="135.6" cy="149" r="11"/>
+    <circle cx="64.4"  cy="149" r="11"/>
+    <circle cx="42.4"  cy="81.8" r="11"/>
+  </g>
+</svg>

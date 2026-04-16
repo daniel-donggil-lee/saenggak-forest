@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Serif P with small 5">
+  <title>D-01 · Serif P + 작은 5 (지수)</title>
+  <text x="88" y="168" text-anchor="middle"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', Georgia, serif"
+        font-weight="900" font-size="220" fill="#0a0a0a" letter-spacing="-6">P</text>
+  <text x="150" y="90" text-anchor="middle"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', Georgia, serif"
+        font-weight="500" font-size="56" fill="#c9a84c">5</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="PENTA seal emblem">
+  <title>Seal Emblem — Double ring with arc text, samcheok pattern</title>
+  <defs>
+    <path id="topArc" d="M 24 100 A 76 76 0 0 1 176 100" fill="none"/>
+    <path id="botArc" d="M 18 100 A 82 82 0 0 0 182 100" fill="none"/>
+  </defs>
+  <!-- Outer double rings in gold -->
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="76" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- Inner pentagon in gold-dim -->
+  <polygon points="100,52 143.1,83.3 126.7,134.8 73.3,134.8 56.9,83.3"
+           fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+  <!-- Top arc text -->
+  <text font-family="Pretendard, sans-serif" font-size="9" letter-spacing="2.7" fill="#c9a84c">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">PENTA · LITERACY CENTER</textPath>
+  </text>
+  <!-- Bottom arc text -->
+  <text font-family="Pretendard, sans-serif" font-size="9" letter-spacing="5" fill="#c9a84c">
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">EST · 2026 · SEOUL</textPath>
+  </text>
+  <!-- Central mark -->
+  <text x="100" y="94" text-anchor="middle" font-family="Noto Serif KR, Georgia, serif" font-weight="700" font-size="28" fill="#0a0a0a">5</text>
+  <text x="100" y="116" text-anchor="middle" font-family="Pretendard, sans-serif" font-weight="600" font-size="9" letter-spacing="3" fill="#0a0a0a">DOMAINS</text>
+</svg>

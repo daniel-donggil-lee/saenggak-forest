@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="펜타 hangul wordmark">
+  <title>펜타 — Hangul Only</title>
+  <style>
+    .t { font-family: "Noto Serif KR", serif; font-weight: 700; fill: #0a0a0a; }
+    .sub { font-family: "Pretendard", sans-serif; font-weight: 400; fill: #c9a84c; letter-spacing: 8px; }
+  </style>
+  <text class="t"   x="150" y="58" text-anchor="middle" font-size="52" letter-spacing="-2">펜타</text>
+  <text class="sub" x="150" y="82" text-anchor="middle" font-size="9">LITERACY · PENTA</text>
+</svg>

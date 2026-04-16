@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Brush P single stroke">
+  <title>B-01 · Brush P — 한 획 붓질</title>
+  <path d="M 55 175 L 55 45 Q 55 32 70 32 Q 135 32 142 78 Q 147 115 95 115 L 72 115"
+        fill="none" stroke="#0a0a0a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Ink dot at start (brush press) -->
+  <circle cx="55" cy="175" r="10" fill="#0a0a0a"/>
+</svg>

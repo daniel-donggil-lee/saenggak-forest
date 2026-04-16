@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="P dot E dot N dot T dot A">
+  <title>PENTA — Dot Divider (P·E·N·T·A 문해력 5영역)</title>
+  <style>
+    .t { font-family: "Pretendard", sans-serif; font-weight: 800; fill: #0a0a0a; }
+    .dot { fill: #c9a84c; }
+  </style>
+  <text class="t" x="150" y="64" text-anchor="middle" font-size="34" letter-spacing="10">P E N T A</text>
+  <!-- Gold dots between letters -->
+  <g class="dot">
+    <circle cx="96"  cy="55" r="2.6"/>
+    <circle cx="126" cy="55" r="2.6"/>
+    <circle cx="156" cy="55" r="2.6"/>
+    <circle cx="186" cy="55" r="2.6"/>
+  </g>
+</svg>

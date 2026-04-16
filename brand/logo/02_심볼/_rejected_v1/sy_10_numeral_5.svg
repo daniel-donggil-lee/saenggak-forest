@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Numeral 5 with pentagon enclosure">
+  <title>Numeral 5 — Serif on pentagon</title>
+  <!-- Pentagon backdrop in black -->
+  <polygon points="100,22 174.2,76.1 145.9,163.9 54.1,163.9 25.8,76.1" fill="#0a0a0a"/>
+  <!-- Numeral 5 in Georgia-style serif, gold -->
+  <text x="100" y="138" text-anchor="middle"
+        font-family="Noto Serif KR, Georgia, serif" font-weight="700" font-size="130" fill="#c9a84c">5</text>
+</svg>

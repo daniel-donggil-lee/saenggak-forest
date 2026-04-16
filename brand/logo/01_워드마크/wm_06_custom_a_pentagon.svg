@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="PENTA with A as pentagon">
+  <title>PENTA — A as Pentagon</title>
+  <style>
+    .t { font-family: "Noto Serif KR", Georgia, serif; font-weight: 700; fill: #0a0a0a; }
+  </style>
+  <!-- PENT as text, A replaced by pentagon shape -->
+  <text class="t" x="58" y="68" font-size="54" letter-spacing="-1">PENT</text>
+  <!-- Pentagon shape replacing A — vertex up, same visual height as cap-height (~38) -->
+  <g transform="translate(232 42)">
+    <!-- Regular pentagon, circumradius 22, vertex top -->
+    <polygon points="0,-22 20.9,-6.8 12.9,17.8 -12.9,17.8 -20.9,-6.8" fill="none" stroke="#c9a84c" stroke-width="4" stroke-linejoin="round"/>
+    <!-- Horizontal cross-bar like A -->
+    <line x1="-13" y1="6" x2="13" y2="6" stroke="#0a0a0a" stroke-width="3"/>
+  </g>
+</svg>

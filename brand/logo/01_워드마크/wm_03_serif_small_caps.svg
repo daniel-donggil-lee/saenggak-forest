@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="PENTA serif small caps with literacy domains">
+  <title>PENTA — Serif Small Caps</title>
+  <style>
+    .lead { font-family: "Noto Serif KR", Georgia, serif; font-weight: 700; fill: #0a0a0a; }
+    .sub  { font-family: "Pretendard", sans-serif; font-weight: 500; fill: #c9a84c; letter-spacing: 6px; }
+  </style>
+  <text class="lead" x="150" y="52" text-anchor="middle" font-size="38" letter-spacing="4">PENTA</text>
+  <text class="sub"  x="150" y="78" text-anchor="middle" font-size="10">P · E · N · T · A</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Five concentric rings">
+  <title>Concentric 5 — Five rings expanding outward</title>
+  <g fill="none" stroke="#0a0a0a" stroke-width="4">
+    <circle cx="100" cy="100" r="78"/>
+    <circle cx="100" cy="100" r="60"/>
+    <circle cx="100" cy="100" r="42"/>
+    <circle cx="100" cy="100" r="24"/>
+  </g>
+  <!-- 5th ring (innermost) in gold as the core literacy nucleus -->
+  <circle cx="100" cy="100" r="8" fill="#c9a84c"/>
+</svg>

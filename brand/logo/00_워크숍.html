@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>펜타 로고 워크숍 · PENTA Logo Workshop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="_tokens.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-sans); color: var(--penta-ink); background: var(--penta-paper); }
+  header { padding: 48px 40px 24px; border-bottom: 1px solid var(--penta-line); background: #fff; }
+  header h1 { font-family: var(--font-serif); font-weight: 900; margin: 0 0 8px; font-size: 34px; letter-spacing: -1px; }
+  header p { margin: 0; color: #666; font-size: 14px; }
+  .meta { margin-top: 16px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: #888; letter-spacing: 1px; }
+  .meta span b { color: #111; letter-spacing: 0; font-weight: 700; }
+
+  nav.tabs { position: sticky; top: 0; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); z-index: 10;
+             display: flex; gap: 4px; padding: 12px 40px; border-bottom: 1px solid var(--penta-line); align-items: center; }
+  nav.tabs button { border: 1px solid var(--penta-line); background: #fff; padding: 8px 16px; border-radius: 999px;
+                    font-family: inherit; font-size: 13px; cursor: pointer; color: #333; }
+  nav.tabs button.active { background: var(--penta-black); color: #fff; border-color: var(--penta-black); }
+  nav.tabs .spacer { flex: 1; }
+  nav.tabs .count { font-size: 12px; color: #999; }
+
+  main { padding: 32px 40px 120px; }
+  section.group { display: none; }
+  section.group.active { display: block; }
+  section.group h2 { font-family: var(--font-serif); font-weight: 700; font-size: 22px; margin: 24px 0 16px; letter-spacing: -0.3px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+  .grid.lk-grid { grid-template-columns: repeat(auto-fill, minmax(520px, 1fr)); }
+  .grid.lk-grid .previews .bg { aspect-ratio: 3 / 1; }
+  .card { background: #fff; border: 1px solid var(--penta-line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+  .card .idbar { padding: 12px 16px; font-family: "SF Mono", ui-monospace, monospace; font-size: 11px; color: #666; border-bottom: 1px solid var(--penta-line); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .card .idbar .badges { display: flex; gap: 4px; }
+  .card .idbar .badge { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.5px; padding: 2px 6px; border-radius: 4px; background: #f2f2ef; color: #888; }
+  .card .idbar .badge.ek.o, .card .idbar .badge.dk.o { background: #2d6a4f; color: #fff; }
+  .card .idbar .badge.ek.t, .card .idbar .badge.dk.t { background: #c9a84c; color: #fff; }
+  .card .idbar .badge.ek.x, .card .idbar .badge.dk.x { background: #c0392b; color: #fff; }
+
+  .previews { display: grid; grid-template-columns: 1fr 1fr; }
+  .previews .bg { aspect-ratio: 3 / 2; display: flex; align-items: center; justify-content: center; padding: 20px; overflow: hidden; }
+  .previews .light { background: #fff; border-right: 1px solid var(--penta-line); }
+  .previews .dark  { background: #0a0a0a; }
+  .previews .bg svg, .previews .bg img { max-width: 100%; max-height: 100%; display: block; }
+
+  .favicon-row { display: flex; gap: 10px; padding: 10px 16px; align-items: center; border-top: 1px solid var(--penta-line); background: #fafaf8; font-size: 10px; color: #aaa; letter-spacing: 0.5px; }
+  .favicon-row .label { color: #888; font-weight: 600; }
+  .favicon-row .fav { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #eee; }
+  .favicon-row .fav.big { width: 32px; height: 32px; }
+  .favicon-row .fav.dark { background: #0a0a0a; border-color: #0a0a0a; }
+  .favicon-row .fav svg, .favicon-row .fav img { max-width: 100%; max-height: 100%; display: block; }
+
+  .judge-rows { border-top: 1px solid var(--penta-line); background: #fff; }
+  .judge-row { display: grid; grid-template-columns: 56px 1fr 1fr 1fr 40px; gap: 6px; padding: 8px 12px; align-items: stretch; }
+  .judge-row + .judge-row { border-top: 1px dashed var(--penta-line); }
+  .judge-row .who { display: flex; align-items: center; font-size: 12px; font-weight: 700; color: #333; letter-spacing: -0.2px; }
+  .judge-row .who.ek { color: #8a2e7c; }
+  .judge-row .who.dk { color: #1f4e8a; }
+  .judge-row button { padding: 7px 4px; border: 1px solid var(--penta-line); background: #fff; cursor: pointer; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: inherit; color: #666; }
+  .judge-row button.o { color: #2d6a4f; }
+  .judge-row button.t { color: #c9a84c; }
+  .judge-row button.x { color: #c0392b; }
+  .judge-row button.active.o { background: #2d6a4f; color: #fff; border-color: #2d6a4f; }
+  .judge-row button.active.t { background: #c9a84c; color: #fff; border-color: #c9a84c; }
+  .judge-row button.active.x { background: #c0392b; color: #fff; border-color: #c0392b; }
+  .judge-row .clear { color: #aaa; font-size: 11px; }
+
+  .shortlist { margin-top: 64px; padding-top: 40px; border-top: 2px solid var(--penta-black); }
+  .shortlist h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 900; }
+  .shortlist h3 { font-family: var(--font-serif); font-size: 18px; margin-top: 28px; margin-bottom: 12px; letter-spacing: -0.3px; }
+  .shortlist .empty { color: #999; font-size: 14px; padding: 40px; text-align: center; border: 2px dashed var(--penta-line); border-radius: 12px; }
+
+  .actions { padding: 12px 40px; background: #fff; border-top: 1px solid var(--penta-line); display: flex; gap: 8px; justify-content: flex-end; position: sticky; bottom: 0; z-index: 10; }
+  .actions button { padding: 8px 16px; border: 1px solid var(--penta-line); background: #fff; border-radius: 999px; font-family: inherit; font-size: 13px; cursor: pointer; }
+  .actions button.primary { background: var(--penta-black); color: #fff; border-color: var(--penta-black); }
+
+  @media (max-width: 720px) {
+    header, nav.tabs, main, .actions { padding-left: 20px; padding-right: 20px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PENTA · 펜타 로고 워크숍</h1>
+  <p>워드마크 10 + 심볼 36 + 결합 8 = 54개 시안을 라이트·다크 배경에서 동시 비교합니다. 이은경·이동길이 각자 O/△/X 판정을 남기면 하단 숏리스트에 자동 누적됩니다.</p>
+  <div class="meta">
+    <span>DATE <b>2026-04-16</b></span>
+    <span>COLOR <b>#0a0a0a / #c9a84c / #ffffff</b></span>
+    <span>FONT <b>Noto Serif KR · Pretendard</b></span>
+    <span>JUDGES <b style="color:#8a2e7c;">이은경</b> · <b style="color:#1f4e8a;">이동길</b></span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button data-tab="wm" class="active">워드마크 (10)</button>
+  <button data-tab="sy">심볼 (36)</button>
+  <button data-tab="lk">결합 (8)</button>
+  <button data-tab="sl">숏리스트</button>
+  <div class="spacer"></div>
+  <div class="count" id="countLabel"></div>
+</nav>
+
+<main>
+
+<section class="group active" data-group="wm">
+  <h2>워드마크 10종</h2>
+  <div class="grid" id="gridWm"></div>
+</section>
+
+<section class="group" data-group="sy">
+  <h2>심볼 36종 (5개 컨셉 카테고리)</h2>
+  <div id="gridSy"></div>
+</section>
+
+<section class="group" data-group="lk">
+  <h2>결합 8종 — 심볼 × 워드마크</h2>
+  <p style="color:#666; font-size:13px; margin:-8px 0 20px;">가로 3:1 비율. 실제 명함·간판·웹 네비에 들어갈 공식 로고 최종 형태.</p>
+  <div class="grid lk-grid" id="gridLk"></div>
+</section>
+
+<section class="group" data-group="sl">
+  <div class="shortlist">
+    <h2>숏리스트</h2>
+    <div id="shortlistArea"></div>
+  </div>
+</section>
+
+</main>
+
+<div class="actions">
+  <button onclick="exportVerdicts()">판정 내보내기 (JSON)</button>
+  <button onclick="clearAll()">전체 초기화</button>
+  <button class="primary" onclick="document.querySelector('[data-tab=sl]').click()">숏리스트 보기</button>
+</div>
+
+<script>
+/* ========== Catalog ==========
+   invertDark: 검정→흰색 자동 치환 여부.
+   false = 검정 배경이 디자인 요소이므로 다크에서도 원본 그대로 표시.
+*/
+const WORDMARKS = [
+  { id: 'wm_01', file: '01_워드마크/wm_01_serif_tight.svg',        label: 'Serif Tight', invertDark: true },
+  { id: 'wm_02', file: '01_워드마크/wm_02_serif_wide.svg',         label: 'Serif Wide', invertDark: true },
+  { id: 'wm_03', file: '01_워드마크/wm_03_serif_small_caps.svg',   label: 'Serif + P·E·N·T·A 서브', invertDark: true },
+  { id: 'wm_04', file: '01_워드마크/wm_04_sans_bold.svg',          label: 'Sans Bold (Pretendard)', invertDark: true },
+  { id: 'wm_05', file: '01_워드마크/wm_05_sans_condensed.svg',     label: 'Sans Condensed (압축)', invertDark: true },
+  { id: 'wm_06', file: '01_워드마크/wm_06_custom_a_pentagon.svg',  label: 'A = Pentagon (커스텀)', invertDark: true },
+  { id: 'wm_07', file: '01_워드마크/wm_07_custom_e_five.svg',      label: 'E = 5 획 (커스텀)', invertDark: true },
+  { id: 'wm_08', file: '01_워드마크/wm_08_hangul_펜타.svg',        label: '한글 펜타', invertDark: true },
+  { id: 'wm_09', file: '01_워드마크/wm_09_bilingual_stack.svg',    label: 'PENTA / 펜타 이중', invertDark: true },
+  { id: 'wm_10', file: '01_워드마크/wm_10_dot_divider.svg',        label: 'P·E·N·T·A 중점', invertDark: true },
+];
+
+const SYMBOLS = [
+  /* A. 세리프 모노그램 시그넷 — 에르메스·샤넬·티파니 톤 */
+  { id: 'sy_mono_01', cat: 'A', catName: '세리프 모노그램 시그넷', file: '02_심볼/sy_mono_01_didot_p.svg',          label: 'Didot P 단독', invertDark: true },
+  { id: 'sy_mono_02', cat: 'A', catName: '세리프 모노그램 시그넷', file: '02_심볼/sy_mono_02_p5_ligature.svg',       label: 'P × 5 리거처', invertDark: true },
+  { id: 'sy_mono_03', cat: 'A', catName: '세리프 모노그램 시그넷', file: '02_심볼/sy_mono_03_signet_plate.svg',      label: '인장 프레임 + P', invertDark: true },
+  { id: 'sy_mono_04', cat: 'A', catName: '세리프 모노그램 시그넷', file: '02_심볼/sy_mono_04_pl_overlap.svg',        label: 'PL 겹침 (Penta Literacy)', invertDark: true },
+
+  /* B. 한 획 추상 — Muji·Kinfolk·교보문고 톤 */
+  { id: 'sy_stroke_01', cat: 'B', catName: '한 획 추상', file: '02_심볼/sy_stroke_01_brush_p.svg',       label: '붓 한 획 P', invertDark: true },
+  { id: 'sy_stroke_02', cat: 'B', catName: '한 획 추상', file: '02_심볼/sy_stroke_02_open_pentagon.svg', label: '열린 오각형 (여백)', invertDark: true },
+  { id: 'sy_stroke_03', cat: 'B', catName: '한 획 추상', file: '02_심볼/sy_stroke_03_nib_trail.svg',     label: '펜촉 5점 궤적', invertDark: true },
+  { id: 'sy_stroke_04', cat: 'B', catName: '한 획 추상', file: '02_심볼/sy_stroke_04_ink_comma.svg',     label: '먹빛 쉼표 P', invertDark: true },
+
+  /* C. 황금비 기하 정밀 — Apple·Kodak·Mobil 톤 */
+  { id: 'sy_geo_01', cat: 'C', catName: '황금비 기하 정밀', file: '02_심볼/sy_geo_01_phi_rectangle.svg',      label: 'φ 직사각형 + 로그 스파이럴', invertDark: true },
+  { id: 'sy_geo_02', cat: 'C', catName: '황금비 기하 정밀', file: '02_심볼/sy_geo_02_vertex_dots.svg',        label: '꼭짓점 5점만', invertDark: true },
+  { id: 'sy_geo_03', cat: 'C', catName: '황금비 기하 정밀', file: '02_심볼/sy_geo_03_phi_circles.svg',        label: '5원 φ 위계', invertDark: true },
+  { id: 'sy_geo_04', cat: 'C', catName: '황금비 기하 정밀', file: '02_심볼/sy_geo_04_fibonacci_spiral.svg',   label: '피보나치 5단 스파이럴', invertDark: true },
+
+  /* D. P 글자 변형 (워드마크 연장) — Pinterest·Paramount·Prada 톤 */
+  { id: 'sy_pvar_01', cat: 'D', catName: 'P 글자 변형', file: '02_심볼/sy_pvar_01_serif_p.svg',              label: '세리프 P + 작은 5 지수', invertDark: true },
+  { id: 'sy_pvar_02', cat: 'D', catName: 'P 글자 변형', file: '02_심볼/sy_pvar_02_sans_p.svg',               label: '산세리프 블랙 P', invertDark: true },
+  { id: 'sy_pvar_03', cat: 'D', catName: 'P 글자 변형', file: '02_심볼/sy_pvar_03_p_pentagon_counter.svg',   label: 'P 눈에 오각형', invertDark: true },
+  { id: 'sy_pvar_04', cat: 'D', catName: 'P 글자 변형', file: '02_심볼/sy_pvar_04_p_five_columns.svg',       label: 'P stem 5기둥', invertDark: true },
+
+  /* E. 자유 창작 — 제약 풀고 펜타 이름만으로 */
+  { id: 'sy_free_01', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_01_pi_sub5.svg',      label: 'Π₅ 그리스 파이 + 5',       invertDark: true },
+  { id: 'sy_free_02', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_02_p_period.svg',     label: 'P. 극단 미니멀',            invertDark: true },
+  { id: 'sy_free_03', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_03_brackets.svg',     label: '[PENTA] 편집자 대괄호',    invertDark: true },
+  { id: 'sy_free_04', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_04_monospace.svg',    label: 'PENTA 모노스페이스',        invertDark: true },
+  { id: 'sy_free_05', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_05_swash_p.svg',      label: 'Swash P 펭귄 클래식',       invertDark: true },
+  { id: 'sy_free_06', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_06_pi_alone.svg',     label: 'Π 파이 단독',               invertDark: true },
+  { id: 'sy_free_07', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_07_ink_drop.svg',     label: '잉크방울 + 5점',            invertDark: true },
+  { id: 'sy_free_08', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_08_chanel_5.svg',     label: 'No.5 Chanel 오마주',        invertDark: true },
+  { id: 'sy_free_09', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_09_roman_v.svg',      label: 'V 로마숫자 5 단독',         invertDark: true },
+  { id: 'sy_free_10', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_10_v_penta.svg',      label: 'V. PENTA 목차 엔트리',      invertDark: true },
+  { id: 'sy_free_11', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_11_constellation.svg',label: '별자리 5점',                invertDark: true },
+  { id: 'sy_free_12', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_12_fanned_pens.svg',  label: '5자루 펜 부채',             invertDark: true },
+  { id: 'sy_free_13', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_13_pen_nib.svg',      label: '만년필 촉 클로즈업',        invertDark: true },
+  { id: 'sy_free_14', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_14_book_spine.svg',   label: '책등 (펭귄·에브리맨)',      invertDark: true },
+  { id: 'sy_free_15', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_15_exlibris.svg',     label: 'Ex Libris 장서표',          invertDark: true },
+  { id: 'sy_free_16', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_16_crown.svg',        label: '5점 왕관',                  invertDark: true },
+  { id: 'sy_free_17', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_17_letterpress.svg',  label: '활자 한 조각 (Letterpress)',invertDark: true },
+  { id: 'sy_free_18', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_18_colophon.svg',     label: '콜로폰 (Knopf 톤)',         invertDark: true },
+  { id: 'sy_free_19', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_19_masthead.svg',     label: '신문 제호 (NYT 톤)',        invertDark: true },
+  { id: 'sy_free_20', cat: 'E', catName: '자유 창작', file: '02_심볼/sy_free_20_feather.svg',      label: '깃펜 한 자루',              invertDark: true },
+];
+
+const LINKS = [
+  { id: 'lk_01', file: '03_결합/lk_01_pi_pair.svg',              label: 'Π | PENTA 좌우',           invertDark: true },
+  { id: 'lk_02', file: '03_결합/lk_02_colophon_stack.svg',       label: '콜로폰 + PENTA 수직',      invertDark: true },
+  { id: 'lk_03', file: '03_결합/lk_03_pi_enta_inline.svg',       label: 'ΠENTA — P를 Π로 치환',     invertDark: true },
+  { id: 'lk_04', file: '03_결합/lk_04_crown_stack.svg',          label: '왕관 + PENTA 수직',        invertDark: true },
+  { id: 'lk_05', file: '03_결합/lk_05_exlibris_penta.svg',       label: '장서표 프레임 + PENTA',    invertDark: true },
+  { id: 'lk_06', file: '03_결합/lk_06_the_penta_masthead.svg',   label: 'The PENTA 제호',           invertDark: true },
+  { id: 'lk_07', file: '03_결합/lk_07_feather_pair.svg',         label: '깃펜 | PENTA 좌우',        invertDark: true },
+  { id: 'lk_08', file: '03_결합/lk_08_constellation_stack.svg',  label: '별자리 + PENTA 수직',      invertDark: true },
+];
+
+const ALL_ITEMS = [...WORDMARKS, ...SYMBOLS, ...LINKS];
+
+/* ========== Verdicts storage ========== */
+const STORAGE_KEY = 'penta_logo_verdicts_v2';
+/* Shape: { wm_01: { ek: 'O', dk: 'T' }, ... } */
+const verdicts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+function saveVerdicts() { localStorage.setItem(STORAGE_KEY, JSON.stringify(verdicts)); }
+function getV(id, who) { return (verdicts[id] || {})[who] || ''; }
+function setV(id, who, val) {
+  if (!verdicts[id]) verdicts[id] = {};
+  if (val) verdicts[id][who] = val;
+  else delete verdicts[id][who];
+  if (!Object.keys(verdicts[id]).length) delete verdicts[id];
+  saveVerdicts();
+}
+
+/* ========== SVG cache + dark-invert helper ========== */
+const svgCache = new Map();
+async function fetchSvg(url) {
+  if (svgCache.has(url)) return svgCache.get(url);
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.statusText);
+    const text = await res.text();
+    svgCache.set(url, text);
+    return text;
+  } catch (e) {
+    svgCache.set(url, null);
+    return null;
+  }
+}
+
+function invertBlackToWhite(svgText) {
+  if (!svgText) return null;
+  return svgText
+    .replace(/#0a0a0a/gi, '#ffffff')
+    .replace(/#1d1d1f/gi, '#ffffff');
+}
+
+async function renderDarkPreview(container, url, invertDark) {
+  if (!invertDark) {
+    container.innerHTML = `<img src="${url}" alt=""/>`;
+    return;
+  }
+  const txt = await fetchSvg(url);
+  if (txt) {
+    container.innerHTML = invertBlackToWhite(txt);
+  } else {
+    /* fetch failed (e.g., file:// CORS) — fallback to CSS filter */
+    container.innerHTML = `<img src="${url}" alt="" style="filter: invert(1) hue-rotate(180deg);"/>`;
+  }
+}
+
+/* ========== Card rendering ========== */
+function mkBadge(who, val) {
+  const cls = val ? val.toLowerCase() : '';
+  const sym = val === 'O' ? '○' : val === 'T' ? '△' : val === 'X' ? '×' : '–';
+  const name = who === 'ek' ? '은경' : '동길';
+  return `<span class="badge ${who} ${cls}">${name} ${sym}</span>`;
+}
+
+function renderCard(item) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.id = item.id;
+
+  const ek = getV(item.id, 'ek');
+  const dk = getV(item.id, 'dk');
+
+  card.innerHTML = `
+    <div class="idbar">
+      <span>${item.id} · ${item.label}</span>
+      <span class="badges">${mkBadge('ek', ek)}${mkBadge('dk', dk)}</span>
+    </div>
+    <div class="previews">
+      <div class="bg light"><img src="${item.file}" alt="${item.id} light"/></div>
+      <div class="bg dark" data-dark-target></div>
+    </div>
+    <div class="favicon-row">
+      <span class="label">16px</span>
+      <span class="fav"><img src="${item.file}" alt=""/></span>
+      <span class="fav dark" data-dark-fav></span>
+      <span class="label" style="margin-left:8px;">32px</span>
+      <span class="fav big"><img src="${item.file}" alt=""/></span>
+      <span class="fav big dark" data-dark-fav></span>
+    </div>
+    <div class="judge-rows">
+      ${renderJudgeRow(item.id, 'ek', ek)}
+      ${renderJudgeRow(item.id, 'dk', dk)}
+    </div>
+  `;
+
+  /* Dark previews: inline SVG with white replacement */
+  card.querySelectorAll('[data-dark-target], [data-dark-fav]').forEach(el => {
+    renderDarkPreview(el, item.file, item.invertDark);
+  });
+
+  /* Judge button handlers */
+  card.querySelectorAll('.judge-row button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const who = btn.closest('.judge-row').dataset.who;
+      const val = btn.dataset.v;
+      setV(item.id, who, val);
+      renderAll();
+    });
+  });
+
+  return card;
+}
+
+function renderJudgeRow(id, who, cur) {
+  const name = who === 'ek' ? '은경' : '동길';
+  return `
+    <div class="judge-row" data-who="${who}">
+      <div class="who ${who}">${name}</div>
+      <button class="o ${cur==='O'?'active':''}" data-v="O">○</button>
+      <button class="t ${cur==='T'?'active':''}" data-v="T">△</button>
+      <button class="x ${cur==='X'?'active':''}" data-v="X">×</button>
+      <button class="clear" data-v="">지움</button>
+    </div>
+  `;
+}
+
+function renderList(container, items) {
+  container.innerHTML = '';
+  items.forEach(it => container.appendChild(renderCard(it)));
+}
+
+/* Category-grouped rendering for symbols */
+function renderGrouped(container, items) {
+  container.innerHTML = '';
+  const byCat = new Map();
+  items.forEach(it => {
+    const key = it.cat || '_';
+    if (!byCat.has(key)) byCat.set(key, { catName: it.catName || '기타', items: [] });
+    byCat.get(key).items.push(it);
+  });
+  for (const [cat, { catName, items: group }] of byCat) {
+    const header = document.createElement('h3');
+    header.textContent = `${cat}. ${catName} (${group.length})`;
+    header.style.cssText = 'font-family: var(--font-serif); font-weight: 700; font-size: 18px; margin: 28px 0 14px; letter-spacing: -0.3px; padding-bottom: 8px; border-bottom: 1px solid var(--penta-line);';
+    container.appendChild(header);
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    group.forEach(it => grid.appendChild(renderCard(it)));
+    container.appendChild(grid);
+  }
+}
+
+/* ========== Shortlist ========== */
+function renderShortlist() {
+  const area = document.getElementById('shortlistArea');
+  const both = [];       // both say O
+  const oneO = [];       // one says O, other not X
+  const bothMaybe = [];  // both △
+  ALL_ITEMS.forEach(it => {
+    const ek = getV(it.id, 'ek');
+    const dk = getV(it.id, 'dk');
+    if (ek === 'O' && dk === 'O') both.push(it);
+    else if ((ek === 'O' && dk !== 'X') || (dk === 'O' && ek !== 'X')) oneO.push(it);
+    else if (ek === 'T' && dk === 'T') bothMaybe.push(it);
+  });
+
+  if (!both.length && !oneO.length && !bothMaybe.length) {
+    area.innerHTML = '<div class="empty">아직 판정된 시안이 없습니다.<br/>워드마크·심볼 탭에서 이은경·이동길 각자 판정을 남기면 여기에 모입니다.</div>';
+    return;
+  }
+
+  area.innerHTML = '';
+  const makeSection = (title, items, color) => {
+    if (!items.length) return;
+    const h = document.createElement('h3');
+    h.textContent = `${title} (${items.length})`;
+    h.style.color = color;
+    area.appendChild(h);
+    const g = document.createElement('div'); g.className = 'grid';
+    items.forEach(it => g.appendChild(renderCard(it)));
+    area.appendChild(g);
+  };
+
+  makeSection('◎ 두 사람 모두 O — 최우선 후보', both, '#2d6a4f');
+  makeSection('○ 한 사람만 O — 논의 필요', oneO, '#c9a84c');
+  makeSection('△ 두 사람 모두 △ — 재검토', bothMaybe, '#888');
+}
+
+/* ========== Count ========== */
+function updateCount() {
+  const total = ALL_ITEMS.length;
+  let doneEk = 0, doneDk = 0, bothO = 0;
+  ALL_ITEMS.forEach(it => {
+    const ek = getV(it.id, 'ek'); const dk = getV(it.id, 'dk');
+    if (ek) doneEk++; if (dk) doneDk++;
+    if (ek === 'O' && dk === 'O') bothO++;
+  });
+  document.getElementById('countLabel').textContent =
+    `은경 ${doneEk}/${total} · 동길 ${doneDk}/${total} · 둘다 O ${bothO}`;
+}
+
+/* ========== Tab switching ========== */
+document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button[data-tab]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('section.group').forEach(s => s.classList.remove('active'));
+    document.querySelector(`section.group[data-group="${btn.dataset.tab}"]`).classList.add('active');
+  });
+});
+
+/* ========== Export / Clear ========== */
+function exportVerdicts() {
+  const blob = new Blob([JSON.stringify(verdicts, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `penta_verdicts_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function clearAll() {
+  if (!confirm('모든 판정을 지웁니다. 계속할까요?')) return;
+  for (const k of Object.keys(verdicts)) delete verdicts[k];
+  saveVerdicts();
+  renderAll();
+}
+
+/* ========== Main render ========== */
+function renderAll() {
+  renderList(document.getElementById('gridWm'), WORDMARKS);
+  renderGrouped(document.getElementById('gridSy'), SYMBOLS);
+  renderList(document.getElementById('gridLk'), LINKS);
+  renderShortlist();
+  updateCount();
+}
+
+renderAll();
+</script>
+
+</body>
+</html>

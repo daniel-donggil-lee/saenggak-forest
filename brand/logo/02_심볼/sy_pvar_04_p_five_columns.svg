@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="P stem as five columns">
+  <title>D-04 · P Five Columns — P의 stem이 5기둥</title>
+  <!-- P rendered, then 4 thin white vertical lines carve stem into 5 columns -->
+  <text x="100" y="172" text-anchor="middle"
+        font-family="Pretendard, 'Helvetica Neue', sans-serif"
+        font-weight="900" font-size="240" fill="#0a0a0a" letter-spacing="-12">P</text>
+  <!-- White carving lines over stem (approx stem x range 52~82 for Pretendard 240px P) -->
+  <g stroke="#ffffff" stroke-width="2.2">
+    <line x1="60" y1="108" x2="60" y2="172"/>
+    <line x1="67" y1="108" x2="67" y2="172"/>
+    <line x1="74" y1="108" x2="74" y2="172"/>
+    <line x1="81" y1="108" x2="81" y2="172"/>
+  </g>
+  <!-- Gold accent on last column slice -->
+  <rect x="82" y="108" width="6" height="64" fill="#c9a84c"/>
+</svg>

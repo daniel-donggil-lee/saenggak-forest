@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="P signet plate">
+  <title>A-03 · Signet Plate — 인장 프레임 + P</title>
+  <rect x="14" y="14" width="172" height="172" rx="6" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+  <rect x="22" y="22" width="156" height="156" rx="2" fill="none" stroke="#c9a84c" stroke-width="0.6"/>
+  <text x="100" y="160" text-anchor="middle"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', Georgia, serif"
+        font-weight="900" font-size="170" fill="#0a0a0a" letter-spacing="-6">P</text>
+  <text x="100" y="186" text-anchor="middle"
+        font-family="Pretendard, sans-serif" font-weight="500" font-size="8" letter-spacing="3" fill="#c9a84c">EST · 2026</text>
+</svg>

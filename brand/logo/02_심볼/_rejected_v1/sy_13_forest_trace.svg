@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Forest trace — five trees">
+  <title>Forest Trace — Five trees forming pentagon (nostalgia of 생각의숲)</title>
+  <!-- 5 minimal trees (trunk + triangular canopy) arranged at pentagon vertices, center facing outward -->
+  <g fill="#0a0a0a">
+    <!-- Top -->
+    <g transform="translate(100 40)">
+      <rect x="-2" y="0" width="4" height="14"/>
+      <polygon points="0,-18 -12,4 12,4"/>
+    </g>
+    <!-- Upper right -->
+    <g transform="translate(160 84) rotate(72)">
+      <rect x="-2" y="0" width="4" height="14"/>
+      <polygon points="0,-18 -12,4 12,4"/>
+    </g>
+    <!-- Lower right -->
+    <g transform="translate(137 160) rotate(144)">
+      <rect x="-2" y="0" width="4" height="14"/>
+      <polygon points="0,-18 -12,4 12,4"/>
+    </g>
+    <!-- Lower left -->
+    <g transform="translate(63 160) rotate(216)">
+      <rect x="-2" y="0" width="4" height="14"/>
+      <polygon points="0,-18 -12,4 12,4"/>
+    </g>
+    <!-- Upper left -->
+    <g transform="translate(40 84) rotate(288)">
+      <rect x="-2" y="0" width="4" height="14"/>
+      <polygon points="0,-18 -12,4 12,4"/>
+    </g>
+  </g>
+  <!-- Center gold dot — the gathering -->
+  <circle cx="100" cy="100" r="6" fill="#c9a84c"/>
+</svg>

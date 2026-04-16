@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Letterpress hot metal block">
+  <title>E-17 · Letterpress — 활자 한 조각</title>
+  <rect x="40" y="40" width="120" height="120" fill="#0a0a0a" stroke="#c9a84c" stroke-width="2.5"/>
+  <text x="100" y="128" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="700" font-size="88" fill="#c9a84c" letter-spacing="-3">P</text>
+  <text x="100" y="150" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="8" fill="#c9a84c" letter-spacing="3">penta</text>
+</svg>

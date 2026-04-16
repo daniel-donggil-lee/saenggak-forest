@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Five ascending bars">
+  <title>Five Bars — Rising literacy domains</title>
+  <!-- 5 vertical bars of rising height (growth/reading/writing/thinking) -->
+  <g fill="#0a0a0a">
+    <rect x="28"  y="128" width="22" height="48" rx="2"/>
+    <rect x="58"  y="108" width="22" height="68" rx="2"/>
+    <rect x="88"  y="82"  width="22" height="94" rx="2"/>
+    <rect x="118" y="58"  width="22" height="118" rx="2"/>
+    <rect x="148" y="32"  width="22" height="144" rx="2"/>
+  </g>
+  <!-- Gold tip on the tallest — the "A" summit -->
+  <rect x="148" y="32" width="22" height="10" rx="2" fill="#c9a84c"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Numeral 5 Chanel homage">
+  <title>E-08 · No. 5 — Chanel 오마주 (우아한 숫자)</title>
+  <text x="100" y="44" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="400" font-size="14" fill="#0a0a0a" letter-spacing="6">PENTA</text>
+  <line x1="70" y1="54" x2="130" y2="54" stroke="#c9a84c" stroke-width="0.8"/>
+  <text x="100" y="168" text-anchor="middle"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', Georgia, serif"
+        font-weight="300" font-size="170" fill="#0a0a0a" letter-spacing="-4">5</text>
+  <text x="100" y="188" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="10" fill="#c9a84c" letter-spacing="3">domaines</text>
+</svg>

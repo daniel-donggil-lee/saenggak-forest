@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="PENTA bilingual stacked">
+  <title>PENTA — Bilingual Stack</title>
+  <style>
+    .en { font-family: "Noto Serif KR", Georgia, serif; font-weight: 700; fill: #0a0a0a; }
+    .ko { font-family: "Pretendard", sans-serif; font-weight: 500; fill: #0a0a0a; }
+  </style>
+  <text class="en" x="150" y="48" text-anchor="middle" font-size="38" letter-spacing="6">PENTA</text>
+  <line x1="120" y1="58" x2="180" y2="58" stroke="#c9a84c" stroke-width="1.5"/>
+  <text class="ko" x="150" y="82" text-anchor="middle" font-size="18" letter-spacing="14">펜타</text>
+</svg>

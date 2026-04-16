@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Circle with negative pentagon">
+  <title>Negative Pentagon — Circle with pentagon cutout</title>
+  <!-- Solid circle with pentagon-shaped cutout -->
+  <mask id="penta-cut">
+    <rect width="200" height="200" fill="white"/>
+    <polygon points="100,52 143.1,83.3 126.7,134.8 73.3,134.8 56.9,83.3" fill="black"/>
+  </mask>
+  <circle cx="100" cy="100" r="78" fill="#0a0a0a" mask="url(#penta-cut)"/>
+  <!-- Gold tiny pentagon inside the cutout center -->
+  <polygon points="100,86 111.8,94.6 107.3,108.4 92.7,108.4 88.2,94.6" fill="#c9a84c"/>
+</svg>

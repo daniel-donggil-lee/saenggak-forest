@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="PENTA serif tight">
+  <title>PENTA — Serif Tight</title>
+  <style>
+    .t { font-family: "Noto Serif KR", Georgia, serif; font-weight: 700; fill: #0a0a0a; }
+  </style>
+  <text class="t" x="150" y="68" text-anchor="middle" font-size="54" letter-spacing="-2">PENTA</text>
+</svg>

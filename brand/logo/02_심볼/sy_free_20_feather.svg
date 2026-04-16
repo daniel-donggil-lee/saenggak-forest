@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Quill feather">
+  <title>E-20 · Feather — 깃펜 한 자루</title>
+  <path d="M 62 172 Q 90 132 120 84 Q 136 54 152 30 Q 142 62 130 98 Q 114 134 84 164 Z"
+        fill="#0a0a0a"/>
+  <line x1="62" y1="172" x2="148" y2="36" stroke="#c9a84c" stroke-width="0.8"/>
+  <g stroke="#c9a84c" stroke-width="0.5" fill="none">
+    <line x1="82"  y1="142" x2="102" y2="132"/>
+    <line x1="92"  y1="122" x2="116" y2="112"/>
+    <line x1="102" y1="102" x2="126" y2="88"/>
+    <line x1="116" y1="82"  x2="136" y2="66"/>
+    <line x1="128" y1="62"  x2="144" y2="48"/>
+  </g>
+</svg>

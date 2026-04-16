@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Ink drop with five scattered points">
+  <title>E-07 · Ink Drop — 잉크 한 방울이 남긴 5점</title>
+  <!-- Main teardrop ink blot -->
+  <path d="M 72 36 C 95 62 108 85 108 105 C 108 125 94 138 72 138 C 50 138 36 125 36 105 C 36 85 49 62 72 36 Z"
+        fill="#0a0a0a"/>
+  <!-- Five splattered dots suggesting emergence / the five domains -->
+  <g fill="#0a0a0a">
+    <circle cx="122" cy="78"  r="3.5"/>
+    <circle cx="140" cy="112" r="5.5"/>
+    <circle cx="128" cy="148" r="2.8"/>
+    <circle cx="160" cy="128" r="3.2"/>
+    <circle cx="152" cy="158" r="2"/>
+  </g>
+</svg>

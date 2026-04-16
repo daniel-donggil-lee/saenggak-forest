@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Five dots in pentagonal arrangement">
+  <title>Five Dots — P·E·N·T·A five literacy domains</title>
+  <!-- 5 circles at pentagon vertices, center (100,100), r=70, dot radius=14 -->
+  <g fill="#0a0a0a">
+    <circle cx="100" cy="30"  r="14"/>
+    <circle cx="166.6" cy="78.4" r="14"/>
+    <circle cx="141.2" cy="156.6" r="14"/>
+    <circle cx="58.8"  cy="156.6" r="14"/>
+    <circle cx="33.4"  cy="78.4" r="14"/>
+  </g>
+  <!-- Center gold dot — the unifying core -->
+  <circle cx="100" cy="100" r="9" fill="#c9a84c"/>
+</svg>

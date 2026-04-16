@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Pentagram star">
+  <title>Pentagram — Five-point star</title>
+  <!-- 5-point star, center (100,100), outer r=78, inner r=30 -->
+  <polygon points="100,22 117.6,78.9 178,78.9 129.2,114.1 146.8,171 100,135.8 53.2,171 70.8,114.1 22,78.9 82.4,78.9"
+           fill="#0a0a0a"/>
+</svg>

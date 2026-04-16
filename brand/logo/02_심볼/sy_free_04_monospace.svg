@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="PENTA monospace">
+  <title>E-04 · PENTA mono — 코딩 폰트 (IBM·Stripe 테크 감성)</title>
+  <text x="100" y="104" text-anchor="middle"
+        font-family="'SF Mono', 'JetBrains Mono', 'IBM Plex Mono', Menlo, Consolas, monospace"
+        font-weight="700" font-size="34" fill="#0a0a0a" letter-spacing="4">PENTA</text>
+  <!-- Command-line prompt -->
+  <text x="100" y="135" text-anchor="middle"
+        font-family="'SF Mono', Menlo, monospace"
+        font-weight="400" font-size="13" fill="#c9a84c" letter-spacing="3">$ read.write.think</text>
+</svg>

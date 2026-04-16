@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="The PENTA newspaper masthead">
+  <title>LK-06 · The PENTA — NYT 제호 결합</title>
+  <text x="300" y="62" text-anchor="middle"
+        font-family="'Playfair Display', Didot, Georgia, serif"
+        font-style="italic" font-weight="900" font-size="22" fill="#0a0a0a" letter-spacing="3">The</text>
+  <text x="300" y="135" text-anchor="middle"
+        font-family="'Playfair Display', Didot, Georgia, serif"
+        font-weight="900" font-size="68" fill="#0a0a0a" letter-spacing="8">PENTA</text>
+  <line x1="160" y1="150" x2="440" y2="150" stroke="#0a0a0a" stroke-width="0.7"/>
+  <text x="300" y="172" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="12" fill="#0a0a0a" letter-spacing="3">literacy · five domains</text>
+  <line x1="160" y1="182" x2="440" y2="182" stroke="#0a0a0a" stroke-width="0.7"/>
+</svg>

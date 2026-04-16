@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Fibonacci spiral">
+  <title>C-04 · Fibonacci Spiral — 5단 피보나치 스파이럴</title>
+  <g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round">
+    <!-- Starting from a Fibonacci-unit anchor, sweeping outward. 5 quarter arcs. -->
+    <path d="M 108 100 A 8 8 0 0 1 100 92"/>
+    <path d="M 100 92  A 13 13 0 0 1 113 79"/>
+    <path d="M 113 79  A 21 21 0 0 1 134 100"/>
+    <path d="M 134 100 A 34 34 0 0 1 100 134"/>
+    <path d="M 100 134 A 55 55 0 0 1 45 79"/>
+  </g>
+  <circle cx="108" cy="100" r="3" fill="#c9a84c"/>
+</svg>

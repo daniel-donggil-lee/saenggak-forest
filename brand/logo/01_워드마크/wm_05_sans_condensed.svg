@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="PENTA sans condensed">
+  <title>PENTA — Sans Condensed (Black Han Sans feel)</title>
+  <style>
+    .t { font-family: "Black Han Sans", "Pretendard", sans-serif; font-weight: 900; fill: #0a0a0a; }
+  </style>
+  <text class="t" x="150" y="72" text-anchor="middle" font-size="66" letter-spacing="2" transform="scale(0.85 1.15) translate(26.5 -7)">PENTA</text>
+</svg>

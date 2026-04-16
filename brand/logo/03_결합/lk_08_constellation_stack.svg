@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="Constellation above PENTA">
+  <title>LK-08 · 별자리 5점 + PENTA 수직 결합</title>
+  <g transform="translate(260 12) scale(0.45)">
+    <g stroke="#c9a84c" stroke-width="1.4" fill="none">
+      <line x1="50" y1="55" x2="115" y2="45"/>
+      <line x1="115" y1="45" x2="155" y2="90"/>
+      <line x1="155" y1="90" x2="130" y2="150"/>
+      <line x1="130" y1="150" x2="70" y2="135"/>
+      <line x1="70" y1="135" x2="50" y2="55"/>
+    </g>
+    <g fill="#0a0a0a">
+      <circle cx="50" cy="55" r="7"/>
+      <circle cx="115" cy="45" r="10"/>
+      <circle cx="155" cy="90" r="7"/>
+      <circle cx="130" cy="150" r="8"/>
+      <circle cx="70" cy="135" r="6"/>
+    </g>
+  </g>
+  <text x="300" y="175" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="700" font-size="36" fill="#0a0a0a" letter-spacing="10">PENTA</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="PENTA with E as five strokes">
+  <title>PENTA — E as 5 horizontal strokes</title>
+  <style>
+    .t { font-family: "Pretendard", sans-serif; font-weight: 800; fill: #0a0a0a; }
+  </style>
+  <!-- P -->
+  <text class="t" x="60" y="68" font-size="54" letter-spacing="-1">P</text>
+  <!-- E as 5 horizontal bars (P/E/N/T/A five-domain mnemonic) -->
+  <g transform="translate(96 30)" fill="#0a0a0a">
+    <rect x="0" y="0"  width="26" height="5"/>
+    <rect x="0" y="9"  width="20" height="5"/>
+    <rect x="0" y="18" width="24" height="5" fill="#c9a84c"/>
+    <rect x="0" y="27" width="20" height="5"/>
+    <rect x="0" y="36" width="26" height="5"/>
+  </g>
+  <!-- NTA -->
+  <text class="t" x="134" y="68" font-size="54" letter-spacing="-1">NTA</text>
+</svg>

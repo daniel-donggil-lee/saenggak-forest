@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Five point crown">
+  <title>E-16 · Crown — 5점 왕관 (Rolex 톤)</title>
+  <path d="M 40 140 L 55 72 L 77 110 L 100 52 L 123 110 L 145 72 L 160 140 Z"
+        fill="#0a0a0a"/>
+  <g fill="#c9a84c">
+    <circle cx="55"  cy="70"  r="4.5"/>
+    <circle cx="77"  cy="108" r="4"/>
+    <circle cx="100" cy="50"  r="5.5"/>
+    <circle cx="123" cy="108" r="4"/>
+    <circle cx="145" cy="70"  r="4.5"/>
+  </g>
+  <rect x="40" y="146" width="120" height="7" fill="#0a0a0a"/>
+</svg>

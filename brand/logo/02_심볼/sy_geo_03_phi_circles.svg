@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Five circles in golden ratio sizes">
+  <title>C-03 · Phi Circles — 5개 원의 황금비 위계</title>
+  <!-- Radii following golden ratio: 8, 13, 21, 34, 21 (cyclic reading) -->
+  <g fill="#0a0a0a">
+    <circle cx="30"  cy="100" r="8"/>
+    <circle cx="50"  cy="100" r="13"/>
+    <circle cx="82"  cy="100" r="21"/>
+    <circle cx="134" cy="100" r="34"/>
+    <circle cx="182" cy="100" r="8" fill="#c9a84c"/>
+  </g>
+</svg>

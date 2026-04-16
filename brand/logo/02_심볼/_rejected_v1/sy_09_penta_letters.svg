@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="P E N T A letters in pentagon arrangement">
+  <title>PENTA Letters — Arranged on pentagon vertices</title>
+  <style>
+    .l { font-family: "Noto Serif KR", Georgia, serif; font-weight: 700; fill: #0a0a0a; font-size: 26px; }
+    .c { font-family: "Pretendard", sans-serif; font-weight: 400; fill: #c9a84c; font-size: 11px; letter-spacing: 3px; }
+  </style>
+  <!-- Pentagon faint guide -->
+  <polygon points="100,30 166.6,78.4 141.2,156.6 58.8,156.6 33.4,78.4"
+           fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+  <!-- Letters at vertices -->
+  <text class="l" x="100"   y="28"  text-anchor="middle">P</text>
+  <text class="l" x="172"   y="85"  text-anchor="middle">E</text>
+  <text class="l" x="145"   y="170" text-anchor="middle">N</text>
+  <text class="l" x="55"    y="170" text-anchor="middle">T</text>
+  <text class="l" x="28"    y="85"  text-anchor="middle">A</text>
+  <!-- Core -->
+  <text class="c" x="100" y="104" text-anchor="middle">PENTA</text>
+</svg>

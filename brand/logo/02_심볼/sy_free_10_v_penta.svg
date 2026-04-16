@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="V PENTA table of contents entry">
+  <title>E-10 · V. PENTA — 책 목차 엔트리</title>
+  <line x1="30" y1="60" x2="170" y2="60" stroke="#c9a84c" stroke-width="0.5"/>
+  <text x="100" y="108" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-style="italic" font-weight="400" font-size="28" fill="#0a0a0a">V.</text>
+  <text x="100" y="144" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="400" font-size="26" fill="#0a0a0a" letter-spacing="10">PENTA</text>
+  <line x1="30" y1="162" x2="170" y2="162" stroke="#c9a84c" stroke-width="0.5"/>
+  <text x="100" y="182" text-anchor="middle"
+        font-family="Didot, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="9" fill="#0a0a0a" letter-spacing="3">the fifth chapter</text>
+</svg>

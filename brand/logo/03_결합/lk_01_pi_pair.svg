@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="Pi symbol and PENTA wordmark horizontal">
+  <title>LK-01 · Π | PENTA 좌우 결합</title>
+  <text x="130" y="150" text-anchor="middle"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', serif"
+        font-weight="700" font-size="170" fill="#0a0a0a">Π</text>
+  <line x1="230" y1="55" x2="230" y2="155" stroke="#c9a84c" stroke-width="1"/>
+  <text x="430" y="128" text-anchor="middle"
+        font-family="Didot, 'Playfair Display', Georgia, serif"
+        font-weight="700" font-size="54" fill="#0a0a0a" letter-spacing="10">PENTA</text>
+</svg>

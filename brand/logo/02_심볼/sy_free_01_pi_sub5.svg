@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Greek Pi with subscript 5">
+  <title>E-01 · Π₅ — 그리스 파이 + 아래첨자 5 (수학 기호)</title>
+  <text x="70" y="145"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', 'Times New Roman', serif"
+        font-weight="700" font-size="170" fill="#0a0a0a">Π</text>
+  <text x="148" y="165"
+        font-family="Didot, 'Bodoni 72', 'Playfair Display', Georgia, serif"
+        font-weight="400" font-style="italic" font-size="56" fill="#c9a84c">5</text>
+</svg>
