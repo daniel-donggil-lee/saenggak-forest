@@ -1235,6 +1235,43 @@ function renderWeekly() {
 function escapeHtml(s) {
   return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+// URL을 클릭 가능한 링크로 변환 (iframe 뷰어로 열림)
+function linkifyText(s) {
+  const text = String(s||'');
+  const urlRe = /(https?:\/\/[^\s()<>"]+)/g;
+  let out = '';
+  let last = 0;
+  let m;
+  while ((m = urlRe.exec(text)) !== null) {
+    out += escapeHtml(text.slice(last, m.index));
+    const url = m[1].replace(/[.,;:)]+$/, '');
+    const trailing = m[1].slice(url.length);
+    const safe = url.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    out += `<a class="sp-inline-link" onclick="event.stopPropagation(); openExternalLink('${safe}')">${escapeHtml(url)}</a>`;
+    out += escapeHtml(trailing);
+    last = m.index + m[1].length;
+  }
+  out += escapeHtml(text.slice(last));
+  return out;
+}
+function openExternalLink(url) {
+  const title = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  const viewer = document.createElement('div');
+  viewer.className = 'report-viewer';
+  viewer.id = 'reportViewer';
+  viewer.innerHTML = `
+    <div class="report-viewer-bar">
+      <span class="rv-title">${escapeHtml(title)}</span>
+      <div class="rv-actions">
+        <button class="btn-rv" style="background:#C9A84C;color:#1d1d1f;font-weight:600" onclick="openFeedbackModal(${JSON.stringify(title).replace(/"/g,'&quot;')})">✏️ 수정 요청</button>
+        <button class="btn-rv" onclick="window.open('${url}', '_blank')">새 탭에서 열기</button>
+        <button class="btn-rv" onclick="closeReport()">닫기</button>
+      </div>
+    </div>
+    <iframe src="${url}"></iframe>
+  `;
+  document.body.appendChild(viewer);
+}
 async function addWeekly(who) {
   const inputId = who === '이은경' ? 'eInput' : 'dInput';
   const authorId = who === '이은경' ? 'eAuthor' : 'dAuthor';
@@ -1603,7 +1640,7 @@ function renderSubprojectFocus() {
       const stepCls = done ? 'done' : inProgress ? 'active' : 'pending';
       const msTitle = row[1]||'';
       const title = escapeHtml(msTitle);
-      const note = escapeHtml(row[6]||'');
+      const note = linkifyText(row[6]||'');
       const date = row[2]||'';
       // 연결 산출물: 같은 서브프로젝트 리포트 중 마일스톤 키워드 매칭
       const linkedReports = reps.filter(r => r.milestoneKeyword && msTitle.includes(r.milestoneKeyword));
@@ -1783,6 +1820,8 @@ function injectSpFocusStyles() {
     .sp-mile-assets { margin-top: 6px; display: flex; flex-direction: column; gap: 3px; }
     .sp-mile-asset { display: inline-block; font-size: 12px; color: #0969da; cursor: pointer; text-decoration: none; padding: 3px 0; }
     .sp-mile-asset:hover { color: #C9A84C; text-decoration: underline; }
+    .sp-inline-link { color: #0969da; cursor: pointer; text-decoration: underline; word-break: break-all; }
+    .sp-inline-link:hover { color: #C9A84C; }
     .sp-mile-note { font-size: 12px; color: #8a8a8e; margin-top: 3px; }
     .sp-mile-date { font-size: 12px; color: #8a8a8e; white-space: nowrap; }
 
