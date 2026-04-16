@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>펜타웍스 강사풀 · PENTA WORKS Speaker Roster 2026</title>
+<meta name="description" content="펜타웍스 교육 인재 에이전시 — 부모교육·현직교사·자기계발 검증 강사 10인 라인업">
+<meta property="og:title" content="펜타웍스 강사풀 · 2026">
+<meta property="og:description" content="교육 인재 에이전시 펜타웍스가 큐레이션한 강사 10인">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --gray-900: #111;
+    --gray-800: #1a1a1a;
+    --gray-700: #333;
+    --gray-600: #555;
+    --gray-500: #666;
+    --gray-400: #888;
+    --gray-300: #aaa;
+    --gray-200: #ddd;
+    --gray-100: #f5f5f5;
+    --gray-50: #fafafa;
+    --white: #ffffff;
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dark: #A88938;
+    --border: #e8e8e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── 헤더 ── */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 72px 8% 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+  .hero::after {
+    content: 'WORKS';
+    position: absolute;
+    right: -3%;
+    bottom: -24%;
+    font-size: clamp(120px, 18vw, 280px);
+    font-weight: 900;
+    color: rgba(201, 168, 76, 0.06);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .brand-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    padding: 6px 14px;
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: clamp(15px, 1.4vw, 18px);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+    max-width: 640px;
+    line-height: 1.65;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 2;
+  }
+  .hero-meta b {
+    display: block;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .hero-meta b span { color: var(--gold); }
+
+  /* ── 필터 바 ── */
+  .filter-bar {
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 8%;
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+  }
+  .chip {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--gray-700);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    letter-spacing: -0.01em;
+  }
+  .chip:hover {
+    border-color: var(--black);
+    color: var(--black);
+  }
+  .chip.active {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+  .chip .count {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 12px;
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  /* ── 카드 그리드 ── */
+  main {
+    padding: 56px 8% 96px;
+    background: var(--gray-50);
+    min-height: 60vh;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  @media (max-width: 1024px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; gap: 20px; }
+    .hero { padding: 56px 6% 44px; }
+    main { padding: 40px 5% 72px; }
+    .filter-bar { padding: 16px 5%; }
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -16px rgba(10, 10, 10, 0.12);
+    border-color: var(--gray-300);
+  }
+  .card.hidden { display: none; }
+
+  .photo {
+    aspect-ratio: 1 / 1;
+    background: var(--gray-100);
+    overflow: hidden;
+    position: relative;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo .cat-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(10, 10, 10, 0.92);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 5px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+
+  .body {
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+  .name {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--black);
+    line-height: 1.2;
+  }
+  .affiliation {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--gray-700);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .meta-row {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--gray-600);
+  }
+  .meta-label {
+    flex-shrink: 0;
+    width: 44px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold-dark);
+    letter-spacing: 0.05em;
+    padding-top: 2px;
+    text-transform: uppercase;
+  }
+  .meta-val {
+    flex: 1;
+    color: var(--gray-700);
+    word-break: keep-all;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px -22px 4px;
+  }
+
+  .topics-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .topics {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    counter-reset: topic;
+  }
+  .topic {
+    position: relative;
+    padding-left: 26px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--gray-800);
+    counter-increment: topic;
+    word-break: keep-all;
+  }
+  .topic::before {
+    content: counter(topic, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    background: var(--gray-50);
+    padding: 2px 5px;
+    border-radius: 4px;
+    line-height: 1;
+  }
+
+  /* ── 푸터 ── */
+  footer {
+    padding: 40px 8% 56px;
+    border-top: 1px solid var(--border);
+    background: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--black);
+  }
+  .footer-brand span { color: var(--gold); }
+  .footer-note {
+    font-size: 12px;
+    color: var(--gray-400);
+    letter-spacing: -0.01em;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="brand-tag">PENTA WORKS · EDUCATION TALENT AGENCY</div>
+  <h1>검증된 강사와<br>수요처를 <span>연결합니다</span></h1>
+  <p class="hero-sub">
+    펜타웍스는 부모교육·초등교육 영역의 검증된 강연가와 현직 교사, 자기계발 전문가를 큐레이션해
+    기업·학교·지자체·도서관 등 수요처에 연결합니다.
+  </p>
+  <div class="hero-meta">
+    <div><b>10<span>명</span></b>등록 강사</div>
+    <div><b>3<span>개</span></b>분야</div>
+    <div><b>2026<span></span></b>시즌</div>
+  </div>
+</header>
+
+<nav class="filter-bar" id="filters">
+  <button class="chip active" data-filter="all">전체<span class="count">10</span></button>
+  <button class="chip" data-filter="parent">부모교육<span class="count">5</span></button>
+  <button class="chip" data-filter="teacher">현직교사<span class="count">3</span></button>
+  <button class="chip" data-filter="self">자기계발<span class="count">2</span></button>
+</nav>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="footer-brand">PENTA <span>WORKS</span></div>
+  <div class="footer-note">강사풀 2026 · v1</div>
+</footer>
+
+<script type="application/json" id="speakers-data">
+[
+  {
+    "no": "01",
+    "category": "parent",
+    "categoryLabel": "부모교육",
+    "name": "이은경",
+    "photo": "photos/01_lee-eunkyung.jpg",
+    "affiliation": "(주)범잡은포수 대표",
+    "career": "전) 초등교사 15년 / 현) 부모교육 전문가·저술가·강연가",
+    "books": "『나는 다정한 관찰자가 되기로 했다』 외 80여 권",
+    "channel": "유튜브 [슬기로운 초등생활]",
+    "topics": [
+      "다정한 관찰자를 위한 슬기로운 부모 역할",
+      "점점 더 잘하는 아이들의 비밀",
+      "슬기로운 초등생활"
+    ]
+  },
+  {
+    "no": "02",
+    "category": "parent",
+    "categoryLabel": "부모교육",
+    "name": "이현정",
+    "photo": "photos/02_lee-hyunjung.png",
+    "affiliation": "이현정미래교육연구소 대표",
+    "career": "생성형 AI 교육 전문가 / 교육부 함께학교 콘텐츠지원단 / 교육 인플루언서",
+    "topics": [
+      "AI 리터러시와 올바른 학습 윤리",
+      "미래 학부모 아카데미 (AI 튜터 활용법)",
+      "사춘기 자녀의 마음을 여는 말공부"
+    ]
+  },
+  {
+    "no": "03",
+    "category": "parent",
+    "categoryLabel": "부모교육",
+    "name": "고은영",
+    "photo": "photos/03_go-eunyoung.jpg",
+    "affiliation": "키즈북토리 대표",
+    "career": "영어도서관 운영 / TESOL 자격 / 어린이영어교육연구회 대표강사",
+    "books": "『영어원서 필독서 100』 외 2권",
+    "channel": "키북스쿨",
+    "topics": [
+      "영어 원서 단계별 노출 전략",
+      "듣기로 시작하는 영어그림책 활용법",
+      "영어가 아이의 날개가 되다"
+    ]
+  },
+  {
+    "no": "04",
+    "category": "parent",
+    "categoryLabel": "부모교육",
+    "name": "이민주",
+    "photo": "photos/04_lee-minju.png",
+    "affiliation": "이민주육아연구소 소장",
+    "books": "『민주선생님's 똑소리나는 육아 — 훈육편』 외 다수",
+    "channel": "[이민주육아연구소]",
+    "topics": [
+      "주도성을 키워주기 위한 양육환경 및 부모 역할",
+      "0~7세 골든타임, 놓치면 안 되는 부모 역할",
+      "기질 맞춤 육아법"
+    ]
+  },
+  {
+    "no": "05",
+    "category": "parent",
+    "categoryLabel": "부모교육",
+    "name": "최서윤",
+    "photo": "photos/05_choi-seoyun.png",
+    "affiliation": "유로스쿨 대표",
+    "career": "TESOL 강사 / 엄마표 영어 총 경력 15년",
+    "books": "『영어전용스위치부터 켜라』",
+    "channel": "인스타그램 [유로스쿨]",
+    "topics": [
+      "영어 교육 로드맵 (유치원부터 수능까지)",
+      "우리집 영어 환경 구축 및 유지법",
+      "영어책 기반 영어 역량 강화 전략"
+    ]
+  },
+  {
+    "no": "06",
+    "category": "teacher",
+    "categoryLabel": "현직교사",
+    "name": "김수린",
+    "photo": "photos/06_kim-surin.jpg",
+    "affiliation": "경기도교육청 소속 중학교",
+    "career": "23년차 중등영어교사",
+    "books": "『중등 문해력의 비밀』 외 5권",
+    "topics": [
+      "현직 교사가 알려주는 중학교 생활의 진짜 핵심",
+      "교육과정부터 공부 전략까지 — 현직 중학교 영어교사의 현실 가이드",
+      "현직 교사가 본 사춘기 아이와 부모의 현실 대응법"
+    ]
+  },
+  {
+    "no": "07",
+    "category": "teacher",
+    "categoryLabel": "현직교사",
+    "name": "김성화",
+    "photo": "photos/07_kim-sunghwa.jpg",
+    "affiliation": "광명동초등학교",
+    "career": "현) 17년차 초등교사 / 강연가·저술가",
+    "books": "『우리아이 첫 입학 준비』 외 4권",
+    "topics": [
+      "초등 입학 준비 (유초이음교육)",
+      "초등 문해력, 자기주도 학습",
+      "부모-자녀 소통 대화법"
+    ]
+  },
+  {
+    "no": "08",
+    "category": "teacher",
+    "categoryLabel": "현직교사",
+    "name": "류지현",
+    "photo": "photos/08_ryu-jihyun.jpg",
+    "affiliation": "특수학교",
+    "career": "17년차 현직 특수학교 교사",
+    "books": "『나는 느린 세계를 가르치는 사람입니다』",
+    "topics": [
+      "특수학교 17년 교사가 말하는 현실적인 부모 역할",
+      "문제 행동 뒤에 숨은 아이의 신호 읽기",
+      "죄책감·번아웃·비교 스트레스에 지치지 않는 부모 되는 법"
+    ]
+  },
+  {
+    "no": "09",
+    "category": "self",
+    "categoryLabel": "자기계발",
+    "name": "이민하",
+    "photo": "photos/09_lee-minha.png",
+    "affiliation": "이민하커뮤니케이션연구소 대표",
+    "career": "LG 등 기업 연수 강의 / 행사 진행",
+    "books": "『연봉을 높이는 프레젠테이션의 비밀』",
+    "channel": "인스타그램 [이민하커뮤니케이션연구소]",
+    "topics": [
+      "실전에서 통하는 스피치 역량 완성",
+      "짧게·정확하게·설득력 있게 말하는 법",
+      "다문화 부모 / 스피치 입문자 / 학생 대상 소통 입문"
+    ]
+  },
+  {
+    "no": "10",
+    "category": "self",
+    "categoryLabel": "자기계발",
+    "name": "조미연",
+    "photo": "photos/10_cho-miyeon.jpg",
+    "affiliation": "리온브랜딩 대표",
+    "career": "글쓰기 강의 / 브런치 작가 과정 운영",
+    "books": "『나는 여기 잘 도착했다』",
+    "channel": "인스타그램 [리온브랜딩]",
+    "topics": [
+      "내 삶의 순간으로 완성하는 포토에세이",
+      "내 삶의 주인공이 되는 에세이 쓰기의 실제",
+      "나에게 쓰는 엽서, 감정 글쓰기"
+    ]
+  }
+]
+</script>
+
+<script>
+  const speakers = JSON.parse(document.getElementById('speakers-data').textContent);
+  const grid = document.getElementById('grid');
+  const filters = document.getElementById('filters');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  function renderCard(s) {
+    const metaRows = [];
+    if (s.career)  metaRows.push(['경력', s.career]);
+    if (s.books)   metaRows.push(['저서', s.books]);
+    if (s.channel) metaRows.push(['채널', s.channel]);
+
+    const metaHtml = metaRows.map(([k,v]) =>
+      `<div class="meta-row"><div class="meta-label">${escapeHtml(k)}</div><div class="meta-val">${escapeHtml(v)}</div></div>`
+    ).join('');
+
+    const topicsHtml = (s.topics || [])
+      .filter(t => t && t.trim())
+      .map(t => `<div class="topic">${escapeHtml(t)}</div>`)
+      .join('');
+
+    return `
+      <article class="card" data-category="${s.category}">
+        <div class="photo">
+          <span class="cat-badge">${escapeHtml(s.categoryLabel)}</span>
+          <img src="${escapeHtml(s.photo)}" alt="${escapeHtml(s.name)} 프로필 사진" loading="lazy">
+        </div>
+        <div class="body">
+          <h2 class="name">${escapeHtml(s.name)}</h2>
+          <div class="affiliation">${escapeHtml(s.affiliation || '')}</div>
+          ${metaHtml ? `<div class="meta">${metaHtml}</div>` : ''}
+          ${topicsHtml ? `
+            <div class="divider"></div>
+            <div class="topics-title">강연 주제</div>
+            <div class="topics">${topicsHtml}</div>
+          ` : ''}
+        </div>
+      </article>
+    `;
+  }
+
+  grid.innerHTML = speakers.map(renderCard).join('');
+
+  filters.addEventListener('click', (e) => {
+    const btn = e.target.closest('.chip');
+    if (!btn) return;
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+    document.querySelectorAll('.card').forEach(card => {
+      card.classList.toggle('hidden', f !== 'all' && card.dataset.category !== f);
+    });
+  });
+</script>
+
+</body>
+</html>
