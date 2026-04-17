@@ -1672,7 +1672,7 @@ function renderSubprojectFocus() {
   // 로드맵 수집
   const roadCfg = SHEET_CONFIG['로드맵'];
   const roadPIdx = roadCfg.columns.indexOf('프로젝트');
-  const roadSpIdx = roadCfg.columns.indexOf('프로젝트');
+  const roadSpIdx = roadCfg.columns.indexOf('서브프로젝트');
   const roadRows = (allData['로드맵']||[]).slice(2).filter(r => {
     const title = (r[1]||'').trim();
     if (!title || title.startsWith('[아카이브')) return false;
