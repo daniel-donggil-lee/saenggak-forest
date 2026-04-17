@@ -80,9 +80,25 @@
   .actions button { padding: 8px 16px; border: 1px solid var(--penta-line); background: #fff; border-radius: 999px; font-family: inherit; font-size: 13px; cursor: pointer; }
   .actions button.primary { background: var(--penta-black); color: #fff; border-color: var(--penta-black); }
 
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+              background: rgba(0,0,0,0.85); z-index: 9000; align-items: center; justify-content: center;
+              flex-direction: column; cursor: zoom-out; }
+  .lightbox.show { display: flex; }
+  .lightbox .lb-wrap { max-width: 80vw; max-height: 70vh; display: flex; gap: 24px; align-items: center; }
+  .lightbox .lb-pane { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; border-radius: 16px; }
+  .lightbox .lb-pane.light { background: #fff; }
+  .lightbox .lb-pane.dark { background: #0a0a0a; }
+  .lightbox .lb-pane svg, .lightbox .lb-pane img { max-width: 100%; max-height: 60vh; display: block; }
+  .lightbox .lb-label { color: #fff; font-family: "SF Mono", monospace; font-size: 13px; margin-top: 16px; text-align: center; letter-spacing: 1px; }
+  .lightbox .lb-close { position: absolute; top: 20px; right: 28px; color: #fff; font-size: 28px; cursor: pointer; background: none; border: none; }
+
+  .previews .bg { cursor: zoom-in; }
+
   @media (max-width: 720px) {
     header, nav.tabs, main, .actions { padding-left: 20px; padding-right: 20px; }
     .grid { grid-template-columns: 1fr; }
+    .lightbox .lb-wrap { flex-direction: column; max-width: 95vw; }
   }
 </style>
 </head>
@@ -134,6 +150,15 @@
 </section>
 
 </main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox(event)">&times;</button>
+  <div class="lb-wrap">
+    <div class="lb-pane light" id="lbLight"></div>
+    <div class="lb-pane dark" id="lbDark"></div>
+  </div>
+  <div class="lb-label" id="lbLabel"></div>
+</div>
 
 <div class="actions">
   <button onclick="exportVerdicts()">판정 내보내기 (JSON)</button>
@@ -315,6 +340,14 @@ function renderCard(item) {
     renderDarkPreview(el, item.file, item.invertDark);
   });
 
+  /* Click preview to open lightbox */
+  card.querySelectorAll('.previews .bg').forEach(bg => {
+    bg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightbox(item);
+    });
+  });
+
   /* Judge button handlers */
   card.querySelectorAll('.judge-row button').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -442,6 +475,25 @@ function clearAll() {
   saveVerdicts();
   renderAll();
 }
+
+/* ========== Lightbox ========== */
+async function openLightbox(item) {
+  const lb = document.getElementById('lightbox');
+  const lbLight = document.getElementById('lbLight');
+  const lbDark = document.getElementById('lbDark');
+  const lbLabel = document.getElementById('lbLabel');
+  lbLight.innerHTML = `<img src="${item.file}" alt="${item.id}"/>`;
+  await renderDarkPreview(lbDark, item.file, item.invertDark);
+  lbLabel.textContent = `${item.id} · ${item.label}`;
+  lb.classList.add('show');
+  document.addEventListener('keydown', lbEsc);
+}
+function closeLightbox(e) {
+  if (e && e.target.closest('.lb-pane')) return;
+  document.getElementById('lightbox').classList.remove('show');
+  document.removeEventListener('keydown', lbEsc);
+}
+function lbEsc(e) { if (e.key === 'Escape') closeLightbox(); }
 
 /* ========== Main render ========== */
 function renderAll() {
