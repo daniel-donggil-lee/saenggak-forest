@@ -85,11 +85,11 @@
               background: rgba(0,0,0,0.85); z-index: 9000; align-items: center; justify-content: center;
               flex-direction: column; cursor: zoom-out; }
   .lightbox.show { display: flex; }
-  .lightbox .lb-wrap { max-width: 80vw; max-height: 70vh; display: flex; gap: 24px; align-items: center; }
-  .lightbox .lb-pane { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; border-radius: 16px; }
+  .lightbox .lb-wrap { width: 80vw; max-height: 75vh; display: flex; gap: 24px; align-items: stretch; }
+  .lightbox .lb-pane { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; border-radius: 16px; min-height: 45vh; }
   .lightbox .lb-pane.light { background: #fff; }
   .lightbox .lb-pane.dark { background: #0a0a0a; }
-  .lightbox .lb-pane svg, .lightbox .lb-pane img { max-width: 100%; max-height: 60vh; display: block; }
+  .lightbox .lb-pane svg, .lightbox .lb-pane img { width: 100%; height: auto; max-height: 55vh; display: block; }
   .lightbox .lb-label { color: #fff; font-family: "SF Mono", monospace; font-size: 13px; margin-top: 16px; text-align: center; letter-spacing: 1px; }
   .lightbox .lb-close { position: absolute; top: 20px; right: 28px; color: #fff; font-size: 28px; cursor: pointer; background: none; border: none; }
 
