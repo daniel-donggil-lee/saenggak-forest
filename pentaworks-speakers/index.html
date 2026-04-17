@@ -3,429 +3,631 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>펜타웍스 강사풀 · PENTA WORKS Speaker Roster 2026</title>
-<meta name="description" content="펜타웍스 교육 인재 에이전시 — 부모교육·현직교사·자기계발 검증 강사 10인 라인업">
-<meta property="og:title" content="펜타웍스 강사풀 · 2026">
-<meta property="og:description" content="교육 인재 에이전시 펜타웍스가 큐레이션한 강사 10인">
-<meta property="og:type" content="website">
+<title>PENTA WORKS — Speaker Roster 2026</title>
+<meta name="description" content="펜타웍스 교육 인재 에이전시 — 부모교육·현직교사·자기계발 검증 강사 라인업">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #0a0a0a;
-    --gray-900: #111;
-    --gray-800: #1a1a1a;
-    --gray-700: #333;
-    --gray-600: #555;
-    --gray-500: #666;
-    --gray-400: #888;
-    --gray-300: #aaa;
-    --gray-200: #ddd;
-    --gray-100: #f5f5f5;
-    --gray-50: #fafafa;
-    --white: #ffffff;
-    --gold: #C9A84C;
-    --gold-light: #F0D080;
-    --gold-dark: #A88938;
-    --border: #e8e8e8;
-  }
+:root {
+  --black:  #0a0a0a;
+  --g900:   #111111;
+  --g800:   #1a1a1a;
+  --g700:   #2a2a2a;
+  --g600:   #3a3a3a;
+  --g400:   #666666;
+  --g300:   #999999;
+  --g200:   #cccccc;
+  --g100:   #f0f0f0;
+  --white:  #ffffff;
+  --gold:   #C9A84C;
+  --gold-l: #F0D080;
+  --gold-d: #9A7A2E;
+  --gold-dim: rgba(201,168,76,0.12);
+  --gold-border: rgba(201,168,76,0.25);
+  --bdark:  rgba(255,255,255,0.07);
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 
-  html { scroll-behavior: smooth; }
+body {
+  font-family:'Pretendard',-apple-system,sans-serif;
+  background:var(--black);
+  color:var(--white);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
 
-  body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--white);
-    color: var(--black);
-    line-height: 1.6;
-    font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+/* ── TOP BAR ── */
+.top-bar {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:64px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 6%;
+  background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--bdark);
+  transition:background .3s;
+}
+.top-bar::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-l),var(--gold));
+}
+.tb-logo {
+  font-size:13px; font-weight:800; letter-spacing:.18em;
+  color:var(--white); text-decoration:none; text-transform:uppercase;
+}
+.tb-logo span { color:var(--gold); }
+.tb-right { display:flex; align-items:center; gap:20px; }
+.tb-link {
+  font-size:13px; color:var(--g300); text-decoration:none;
+  letter-spacing:.02em; transition:color .2s;
+}
+.tb-link:hover { color:var(--gold); }
+.tb-cta {
+  font-size:13px; font-weight:700; letter-spacing:.05em;
+  color:var(--black); background:var(--gold);
+  padding:9px 22px; border-radius:100px; text-decoration:none;
+  transition:background .2s, transform .15s;
+}
+.tb-cta:hover { background:var(--gold-l); transform:translateY(-1px); }
 
-  /* ── 헤더 ── */
-  .hero {
-    background: var(--black);
-    color: var(--white);
-    padding: 72px 8% 56px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
-  }
-  .hero::after {
-    content: 'WORKS';
-    position: absolute;
-    right: -3%;
-    bottom: -24%;
-    font-size: clamp(120px, 18vw, 280px);
-    font-weight: 900;
-    color: rgba(201, 168, 76, 0.06);
-    letter-spacing: -0.05em;
-    pointer-events: none;
-    white-space: nowrap;
-    line-height: 1;
-  }
-  .brand-tag {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    color: var(--gold);
-    padding: 6px 14px;
-    border: 1px solid rgba(201, 168, 76, 0.4);
-    border-radius: 100px;
-    margin-bottom: 28px;
-  }
-  .hero h1 {
-    font-size: clamp(36px, 6vw, 64px);
-    font-weight: 900;
-    letter-spacing: -0.035em;
-    line-height: 1.05;
-    margin-bottom: 18px;
-  }
-  .hero h1 span { color: var(--gold); }
-  .hero-sub {
-    font-size: clamp(15px, 1.4vw, 18px);
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 400;
-    max-width: 640px;
-    line-height: 1.65;
-  }
-  .hero-meta {
-    display: flex;
-    gap: 40px;
-    margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    flex-wrap: wrap;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.5);
-    position: relative;
-    z-index: 2;
-  }
-  .hero-meta b {
-    display: block;
-    color: var(--white);
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    letter-spacing: -0.01em;
-  }
-  .hero-meta b span { color: var(--gold); }
+/* ── HERO ── */
+.hero {
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:140px 6% 80px;
+  position:relative; overflow:hidden;
+}
+.hero-bg-word {
+  position:absolute; right:-3%; bottom:-5%;
+  font-size:clamp(120px,22vw,320px); font-weight:900;
+  color:rgba(201,168,76,.04); letter-spacing:-.05em;
+  pointer-events:none; white-space:nowrap; line-height:1;
+  user-select:none;
+}
+.hero-divider {
+  position:absolute; top:0; left:0; right:0; bottom:0;
+  background:radial-gradient(ellipse 60% 60% at 80% 40%, rgba(201,168,76,.06) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:12px; font-weight:700; letter-spacing:.2em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:32px;
+}
+.hero-eyebrow::before {
+  content:''; display:block; width:32px; height:2px; background:var(--gold);
+}
+.hero h1 {
+  font-size:clamp(52px,8vw,108px); font-weight:900;
+  letter-spacing:-.04em; line-height:.95;
+  margin-bottom:32px;
+}
+.hero h1 em { font-style:normal; color:var(--gold); }
+.hero-desc {
+  font-size:clamp(15px,1.3vw,18px); color:rgba(255,255,255,.5);
+  max-width:560px; line-height:1.75; margin-bottom:56px;
+  font-weight:400;
+}
+.hero-stats {
+  display:flex; gap:56px; flex-wrap:wrap;
+  padding-top:40px; border-top:1px solid var(--bdark);
+}
+.stat-num {
+  font-size:clamp(32px,4vw,52px); font-weight:900;
+  letter-spacing:-.04em; line-height:1; color:var(--white);
+}
+.stat-num span { color:var(--gold); font-size:.65em; margin-left:2px; }
+.stat-lbl {
+  font-size:12px; color:var(--g400); letter-spacing:.08em;
+  text-transform:uppercase; margin-top:6px;
+}
+.hero-scroll {
+  position:absolute; bottom:40px; right:6%;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  font-size:11px; font-weight:700; letter-spacing:.15em;
+  color:var(--g400); text-transform:uppercase;
+  animation:bounce 2s infinite;
+}
+.hero-scroll svg { width:20px; height:20px; stroke:var(--gold); }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
-  /* ── 필터 바 ── */
-  .filter-bar {
-    position: sticky;
-    top: 0;
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 8%;
-    z-index: 10;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.95);
-  }
-  .chip {
-    appearance: none;
-    border: 1px solid var(--border);
-    background: var(--white);
-    color: var(--gray-700);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 9px 18px;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    letter-spacing: -0.01em;
-  }
-  .chip:hover {
-    border-color: var(--black);
-    color: var(--black);
-  }
-  .chip.active {
-    background: var(--black);
-    color: var(--white);
-    border-color: var(--black);
-  }
-  .chip .count {
-    display: inline-block;
-    margin-left: 6px;
-    font-size: 12px;
-    opacity: 0.7;
-    font-weight: 400;
-  }
+/* ── FILTER ── */
+.filter-wrap {
+  position:sticky; top:64px; z-index:90;
+  background:rgba(10,10,10,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdark);
+  padding:16px 6%;
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+}
+.filter-label {
+  font-size:11px; font-weight:700; letter-spacing:.15em;
+  color:var(--g400); text-transform:uppercase; margin-right:8px;
+}
+.chip {
+  appearance:none; cursor:pointer; font-family:inherit;
+  font-size:13px; font-weight:600; letter-spacing:.02em;
+  padding:8px 20px; border-radius:100px;
+  border:1px solid var(--bdark);
+  background:transparent; color:var(--g300);
+  transition:all .15s ease;
+}
+.chip:hover { border-color:var(--gold-border); color:var(--gold); }
+.chip.active {
+  background:var(--gold); color:var(--black); border-color:var(--gold);
+}
+.chip .cnt {
+  font-size:11px; opacity:.7; margin-left:5px; font-weight:400;
+}
+.result-count {
+  margin-left:auto; font-size:12px; color:var(--g400); letter-spacing:.04em;
+}
 
-  /* ── 카드 그리드 ── */
-  main {
-    padding: 56px 8% 96px;
-    background: var(--gray-50);
-    min-height: 60vh;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  @media (max-width: 1024px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 640px) {
-    .grid { grid-template-columns: 1fr; gap: 20px; }
-    .hero { padding: 56px 6% 44px; }
-    main { padding: 40px 5% 72px; }
-    .filter-bar { padding: 16px 5%; }
-  }
+/* ── ROSTER GRID ── */
+.roster {
+  padding:72px 6% 120px;
+}
+.section-header {
+  display:flex; align-items:baseline; justify-content:space-between;
+  margin-bottom:56px;
+}
+.section-title {
+  font-size:clamp(22px,2.5vw,32px); font-weight:800;
+  letter-spacing:-.03em;
+}
+.section-title span { color:var(--gold); }
+.section-note { font-size:13px; color:var(--g400); }
 
-  .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px -16px rgba(10, 10, 10, 0.12);
-    border-color: var(--gray-300);
-  }
-  .card.hidden { display: none; }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+@media(max-width:1100px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:680px){  .grid{ grid-template-columns:1fr; } }
 
-  .photo {
-    aspect-ratio: 1 / 1;
-    background: var(--gray-100);
-    overflow: hidden;
-    position: relative;
-  }
-  .photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .photo .cat-badge {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    background: rgba(10, 10, 10, 0.92);
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    padding: 5px 10px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    backdrop-filter: blur(8px);
-  }
+/* ── SPEAKER CARD ── */
+.card {
+  position:relative; overflow:hidden;
+  background:var(--g900);
+  display:flex; flex-direction:column;
+  transition:transform .3s cubic-bezier(.25,.46,.45,.94);
+  cursor:pointer;
+}
+.card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0); transform-origin:center;
+  transition:transform .3s ease;
+}
+.card:hover { transform:translateY(-4px); z-index:2; }
+.card:hover::after { transform:scaleX(1); }
+.card.hidden { display:none; }
 
-  .body {
-    padding: 22px 22px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-  }
-  .name {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    color: var(--black);
-    line-height: 1.2;
-  }
-  .affiliation {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--gray-700);
-    letter-spacing: -0.01em;
-    line-height: 1.4;
-  }
+/* Photo area */
+.card-photo {
+  aspect-ratio:4/3; overflow:hidden; position:relative;
+  background:var(--g800);
+}
+.card-photo img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s cubic-bezier(.25,.46,.45,.94), filter .4s;
+  filter:grayscale(20%);
+}
+.card:hover .card-photo img {
+  transform:scale(1.04);
+  filter:grayscale(0%);
+}
+.card-photo-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(10,10,10,.85) 0%, rgba(10,10,10,.1) 50%, transparent 100%);
+}
+.cat-pill {
+  position:absolute; top:16px; left:16px;
+  font-size:10px; font-weight:800; letter-spacing:.14em;
+  color:var(--gold); text-transform:uppercase;
+  background:rgba(10,10,10,.85); backdrop-filter:blur(8px);
+  padding:5px 12px; border-radius:100px;
+  border:1px solid var(--gold-border);
+}
+.card-num {
+  position:absolute; bottom:16px; right:16px;
+  font-size:11px; font-weight:800; letter-spacing:.08em;
+  color:rgba(255,255,255,.3);
+}
 
-  .meta {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
-  }
-  .meta-row {
-    display: flex;
-    gap: 10px;
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--gray-600);
-  }
-  .meta-label {
-    flex-shrink: 0;
-    width: 44px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--gold-dark);
-    letter-spacing: 0.05em;
-    padding-top: 2px;
-    text-transform: uppercase;
-  }
-  .meta-val {
-    flex: 1;
-    color: var(--gray-700);
-    word-break: keep-all;
-  }
+/* Card body */
+.card-body {
+  padding:24px 24px 28px;
+  display:flex; flex-direction:column; gap:0; flex:1;
+  border:1px solid var(--bdark); border-top:none;
+}
+.card-name {
+  font-size:22px; font-weight:900; letter-spacing:-.035em;
+  color:var(--white); line-height:1.1; margin-bottom:6px;
+}
+.card-affil {
+  font-size:12.5px; font-weight:600; color:var(--g300);
+  letter-spacing:-.01em; margin-bottom:16px;
+}
+.card-career {
+  font-size:12.5px; color:var(--g400); line-height:1.6;
+  padding-bottom:16px; margin-bottom:16px;
+  border-bottom:1px solid var(--bdark);
+}
 
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 8px -22px 4px;
-  }
+/* Topics */
+.topics-head {
+  font-size:10px; font-weight:800; letter-spacing:.14em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
+}
+.topic-item {
+  display:flex; align-items:baseline; gap:8px;
+  font-size:13px; color:rgba(255,255,255,.65);
+  line-height:1.55; padding:5px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  word-break:keep-all;
+}
+.topic-item:last-child { border-bottom:none; }
+.topic-num {
+  font-size:10px; font-weight:800; color:var(--gold-d);
+  letter-spacing:.05em; flex-shrink:0; margin-top:1px;
+}
 
-  .topics-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--gold-dark);
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
-  .topics {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    counter-reset: topic;
-  }
-  .topic {
-    position: relative;
-    padding-left: 26px;
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: var(--gray-800);
-    counter-increment: topic;
-    word-break: keep-all;
-  }
-  .topic::before {
-    content: counter(topic, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 1px;
-    font-size: 10.5px;
-    font-weight: 800;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-    background: var(--gray-50);
-    padding: 2px 5px;
-    border-radius: 4px;
-    line-height: 1;
-  }
+/* Tags */
+.card-tags {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:16px;
+}
+.tag {
+  font-size:11px; font-weight:600; letter-spacing:.02em;
+  color:var(--g400); background:var(--g800);
+  border:1px solid var(--g700);
+  padding:4px 10px; border-radius:4px;
+}
 
-  /* ── 푸터 ── */
-  footer {
-    padding: 40px 8% 56px;
-    border-top: 1px solid var(--border);
-    background: var(--white);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .footer-brand {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: var(--black);
-  }
-  .footer-brand span { color: var(--gold); }
-  .footer-note {
-    font-size: 12px;
-    color: var(--gray-400);
-    letter-spacing: -0.01em;
-  }
+/* Inquiry button */
+.card-btn {
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  margin-top:20px; padding:12px;
+  background:transparent; border:1px solid var(--bdark);
+  border-radius:6px; cursor:pointer; font-family:inherit;
+  font-size:12px; font-weight:700; letter-spacing:.06em;
+  color:var(--g400); text-transform:uppercase;
+  transition:all .2s;
+}
+.card-btn:hover { background:var(--gold-dim); border-color:var(--gold-border); color:var(--gold); }
+.card-btn svg { width:14px; height:14px; stroke:currentColor; }
+
+/* ── FEATURED SPEAKER (1등: 이은경) ── */
+.card.featured {
+  grid-column: span 2;
+}
+.card.featured .card-photo { aspect-ratio:16/7; }
+.card.featured .card-name { font-size:32px; }
+.card.featured .card-body {
+  display:grid; grid-template-columns:1fr 1fr; gap:0 32px;
+  align-items:start;
+}
+.card.featured .card-name,
+.card.featured .card-affil,
+.card.featured .card-career { grid-column:1 / -1; }
+.card.featured .card-tags { grid-column:1 / -1; }
+.card.featured .card-btn { grid-column:1 / -1; }
+@media(max-width:1100px){
+  .card.featured { grid-column:span 1; }
+  .card.featured .card-body { grid-template-columns:1fr; }
+  .card.featured .card-photo { aspect-ratio:4/3; }
+}
+
+/* ── CONTACT STRIP ── */
+.contact-strip {
+  padding:100px 6%;
+  background:var(--g900);
+  border-top:1px solid var(--bdark);
+  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+}
+@media(max-width:768px){ .contact-strip{ grid-template-columns:1fr; gap:40px; } }
+.cs-eyebrow {
+  font-size:11px; font-weight:800; letter-spacing:.18em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:20px;
+}
+.cs-title {
+  font-size:clamp(28px,3.5vw,48px); font-weight:900;
+  letter-spacing:-.04em; line-height:1.1; margin-bottom:16px;
+}
+.cs-desc { font-size:15px; color:var(--g300); line-height:1.75; }
+.cs-cards { display:flex; flex-direction:column; gap:2px; }
+.cs-card {
+  background:var(--g800); padding:24px 28px;
+  border-left:3px solid var(--gold);
+  display:flex; flex-direction:column; gap:6px;
+}
+.cs-card-head {
+  font-size:11px; font-weight:800; letter-spacing:.12em;
+  color:var(--gold); text-transform:uppercase;
+}
+.cs-card-title { font-size:17px; font-weight:700; color:var(--white); }
+.cs-card-desc { font-size:13px; color:var(--g400); line-height:1.6; }
+.cs-cta {
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:32px; padding:16px 36px;
+  background:var(--gold); color:var(--black);
+  font-size:14px; font-weight:800; letter-spacing:.06em;
+  text-transform:uppercase; border-radius:100px;
+  text-decoration:none; transition:background .2s, transform .2s;
+  width:fit-content;
+}
+.cs-cta:hover { background:var(--gold-l); transform:translateY(-2px); }
+.cs-cta svg { width:16px; height:16px; stroke:currentColor; }
+
+/* ── FOOTER ── */
+footer {
+  padding:36px 6%;
+  background:var(--black);
+  border-top:1px solid var(--bdark);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.foot-logo {
+  font-size:12px; font-weight:800; letter-spacing:.18em; color:var(--white);
+}
+.foot-logo span { color:var(--gold); }
+.foot-note { font-size:12px; color:var(--g400); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; z-index:200;
+  background:rgba(0,0,0,.88); backdrop-filter:blur(12px);
+  display:none; align-items:center; justify-content:center;
+  padding:24px;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--g900); max-width:680px; width:100%;
+  max-height:90vh; overflow-y:auto;
+  border:1px solid var(--bdark);
+  position:relative;
+  animation:modalIn .25s cubic-bezier(.25,.46,.45,.94);
+}
+@keyframes modalIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+.modal-close {
+  position:sticky; top:0; right:0; float:right; z-index:10;
+  width:44px; height:44px; border:none; background:var(--g800);
+  color:var(--g300); cursor:pointer; font-size:18px;
+  display:flex; align-items:center; justify-content:center;
+  transition:color .2s;
+}
+.modal-close:hover { color:var(--gold); }
+.modal-photo { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+.modal-body { padding:32px 32px 40px; }
+.modal-cat {
+  font-size:11px; font-weight:800; letter-spacing:.14em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:12px;
+}
+.modal-name { font-size:36px; font-weight:900; letter-spacing:-.04em; margin-bottom:4px; }
+.modal-affil { font-size:14px; color:var(--g300); margin-bottom:24px; }
+.modal-section { margin-top:24px; }
+.modal-section-head {
+  font-size:10px; font-weight:800; letter-spacing:.15em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:12px;
+}
+.modal-career { font-size:14px; color:var(--g200); line-height:1.75; }
+.modal-topics { display:flex; flex-direction:column; gap:8px; }
+.modal-topic {
+  display:flex; gap:10px; align-items:baseline;
+  font-size:14px; color:var(--g200); line-height:1.6;
+  padding-bottom:8px; border-bottom:1px solid var(--bdark);
+  word-break:keep-all;
+}
+.modal-topic:last-child { border-bottom:none; }
+.mt-num {
+  font-size:10px; font-weight:800; color:var(--gold-d);
+  letter-spacing:.05em; flex-shrink:0;
+}
+.modal-contact {
+  margin-top:28px; padding:20px 24px;
+  background:var(--g800); border-left:3px solid var(--gold);
+}
+.modal-contact p { font-size:13px; color:var(--g300); line-height:1.7; }
+.modal-contact strong { color:var(--white); font-weight:700; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--black); }
+::-webkit-scrollbar-thumb { background:var(--g700); border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:var(--gold-d); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hero { padding:120px 5% 64px; }
+  .hero-stats { gap:32px; }
+  .filter-wrap { padding:12px 5%; }
+  .roster { padding:56px 5% 80px; }
+  .contact-strip { padding:72px 5%; }
+  footer { padding:28px 5%; }
+  .top-bar { padding:0 5%; }
+  .modal-body { padding:24px 20px 32px; }
+  .modal-name { font-size:28px; }
+}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="brand-tag">PENTA WORKS · EDUCATION TALENT AGENCY</div>
-  <h1>검증된 강사와<br>수요처를 <span>연결합니다</span></h1>
-  <p class="hero-sub">
-    펜타웍스는 부모교육·초등교육 영역의 검증된 강연가와 현직 교사, 자기계발 전문가를 큐레이션해
-    기업·학교·지자체·도서관 등 수요처에 연결합니다.
-  </p>
-  <div class="hero-meta">
-    <div><b>10<span>명</span></b>등록 강사</div>
-    <div><b>3<span>개</span></b>분야</div>
-    <div><b>2026<span></span></b>시즌</div>
+<!-- ── TOP BAR ── -->
+<header class="top-bar">
+  <a class="tb-logo" href="../">PENTA <span>WORKS</span></a>
+  <div class="tb-right">
+    <a class="tb-link" href="../pentaworks-brand-proposal.html">기획서</a>
+    <a class="tb-cta" href="mailto:hello@openpenta.com">강연 문의</a>
   </div>
 </header>
 
-<nav class="filter-bar" id="filters">
-  <button class="chip active" data-filter="all">전체<span class="count">10</span></button>
-  <button class="chip" data-filter="parent">부모교육<span class="count">5</span></button>
-  <button class="chip" data-filter="teacher">현직교사<span class="count">3</span></button>
-  <button class="chip" data-filter="self">자기계발<span class="count">2</span></button>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-word">WORKS</div>
+  <div class="hero-divider"></div>
+
+  <div class="hero-eyebrow">Education Talent Agency</div>
+  <h1>검증된 강사,<br>지금 <em>연결합니다</em></h1>
+  <p class="hero-desc">
+    펜타웍스는 부모교육·초등교육·자기계발 영역의 검증된 강연가와
+    현직 교사를 큐레이션해 기업·학교·지자체·도서관에 연결합니다.
+  </p>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">10<span>인</span></div>
+      <div class="stat-lbl">등록 강사</div>
+    </div>
+    <div>
+      <div class="stat-num">3<span>개</span></div>
+      <div class="stat-lbl">전문 분야</div>
+    </div>
+    <div>
+      <div class="stat-num">4<span>곳</span></div>
+      <div class="stat-lbl">수요처 유형</div>
+    </div>
+    <div>
+      <div class="stat-num">2026</div>
+      <div class="stat-lbl">시즌</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+    </svg>
+    SCROLL
+  </div>
+</section>
+
+<!-- ── FILTER ── -->
+<nav class="filter-wrap" id="filterBar">
+  <span class="filter-label">분야</span>
+  <button class="chip active" data-filter="all">전체<span class="cnt">10</span></button>
+  <button class="chip" data-filter="parent">부모교육<span class="cnt">5</span></button>
+  <button class="chip" data-filter="teacher">현직교사<span class="cnt">3</span></button>
+  <button class="chip" data-filter="self">자기계발<span class="cnt">2</span></button>
+  <span class="result-count" id="resultCount">10명</span>
 </nav>
 
-<main>
+<!-- ── ROSTER ── -->
+<section class="roster">
+  <div class="section-header">
+    <h2 class="section-title">Speaker <span>Roster</span></h2>
+    <span class="section-note">PENTA WORKS · 2026</span>
+  </div>
   <div class="grid" id="grid"></div>
-</main>
+</section>
 
+<!-- ── CONTACT STRIP ── -->
+<section class="contact-strip">
+  <div>
+    <div class="cs-eyebrow">Book a Speaker</div>
+    <h3 class="cs-title">강연을<br>기획 중이신가요?</h3>
+    <p class="cs-desc">
+      주제·예산·일정을 알려주시면 24시간 내 적합한 강사를
+      매칭해드립니다. 섭외부터 계약까지 펜타웍스가 원스톱으로 처리합니다.
+    </p>
+    <a class="cs-cta" href="mailto:hello@openpenta.com">
+      문의하기
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
+  <div class="cs-cards">
+    <div class="cs-card">
+      <div class="cs-card-head">기업 연수</div>
+      <div class="cs-card-title">임직원 부모교육 프로그램</div>
+      <div class="cs-card-desc">1회 강연부터 시리즈 워크숍까지. 기업 규모·예산 맞춤 제안.</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-card-head">학교·지자체</div>
+      <div class="cs-card-title">학부모 아카데미 & 평생학습</div>
+      <div class="cs-card-desc">예산 제한형 섭외, 커리큘럼 설계, 진행 지원 포함.</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-card-head">에이전시 수수료</div>
+      <div class="cs-card-title">섭외비의 20~30%</div>
+      <div class="cs-card-desc">투명한 수수료 구조. 법인 간 용역 계약으로 정산.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
 <footer>
-  <div class="footer-brand">PENTA <span>WORKS</span></div>
-  <div class="footer-note">강사풀 2026 · v1</div>
+  <div class="foot-logo">PENTA <span>WORKS</span></div>
+  <div class="foot-note">Speaker Roster 2026 · v2 · CONFIDENTIAL</div>
 </footer>
 
-<script type="application/json" id="speakers-data">
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <img class="modal-photo" id="modalPhoto" src="" alt="">
+    <div class="modal-body">
+      <div class="modal-cat" id="modalCat"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-affil" id="modalAffil"></div>
+      <div class="modal-section" id="modalCareerSection">
+        <div class="modal-section-head">경력</div>
+        <div class="modal-career" id="modalCareer"></div>
+      </div>
+      <div class="modal-section" id="modalTopicsSection">
+        <div class="modal-section-head">강연 주제</div>
+        <div class="modal-topics" id="modalTopics"></div>
+      </div>
+      <div class="modal-contact">
+        <p><strong>섭외 문의:</strong> hello@openpenta.com<br>
+        주제·날짜·예산을 함께 보내주시면 24시간 내 회신드립니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DATA ── -->
+<script type="application/json" id="speakersData">
 [
   {
-    "no": "01",
-    "category": "parent",
-    "categoryLabel": "부모교육",
+    "no": "01", "category": "parent", "categoryLabel": "부모교육", "featured": true,
     "name": "이은경",
     "photo": "photos/01_lee-eunkyung.jpg",
     "affiliation": "(주)범잡은포수 대표",
-    "career": "전) 초등교사 15년 / 현) 부모교육 전문가·저술가·강연가",
+    "career": "전) 초등교사 15년 / 현) 부모교육 전문가·저술가·강연가 / 유튜브 [슬기로운 초등생활] 구독자 15만+",
     "books": "『나는 다정한 관찰자가 되기로 했다』 외 80여 권",
-    "channel": "유튜브 [슬기로운 초등생활]",
+    "tags": ["초등교육", "부모역할", "자기주도학습"],
     "topics": [
       "다정한 관찰자를 위한 슬기로운 부모 역할",
       "점점 더 잘하는 아이들의 비밀",
-      "슬기로운 초등생활"
+      "슬기로운 초등생활 — 입학부터 고학년까지"
     ]
   },
   {
-    "no": "02",
-    "category": "parent",
-    "categoryLabel": "부모교육",
+    "no": "02", "category": "parent", "categoryLabel": "부모교육",
     "name": "이현정",
     "photo": "photos/02_lee-hyunjung.png",
     "affiliation": "이현정미래교육연구소 대표",
     "career": "생성형 AI 교육 전문가 / 교육부 함께학교 콘텐츠지원단 / 교육 인플루언서",
+    "tags": ["AI교육", "미래교육", "사춘기"],
     "topics": [
       "AI 리터러시와 올바른 학습 윤리",
-      "미래 학부모 아카데미 (AI 튜터 활용법)",
+      "미래 학부모 아카데미 — AI 튜터 활용법",
       "사춘기 자녀의 마음을 여는 말공부"
     ]
   },
   {
-    "no": "03",
-    "category": "parent",
-    "categoryLabel": "부모교육",
+    "no": "03", "category": "parent", "categoryLabel": "부모교육",
     "name": "고은영",
     "photo": "photos/03_go-eunyoung.jpg",
     "affiliation": "키즈북토리 대표",
     "career": "영어도서관 운영 / TESOL 자격 / 어린이영어교육연구회 대표강사",
     "books": "『영어원서 필독서 100』 외 2권",
-    "channel": "키북스쿨",
+    "tags": ["영어교육", "원서", "TESOL"],
     "topics": [
       "영어 원서 단계별 노출 전략",
       "듣기로 시작하는 영어그림책 활용법",
@@ -433,14 +635,12 @@
     ]
   },
   {
-    "no": "04",
-    "category": "parent",
-    "categoryLabel": "부모교육",
+    "no": "04", "category": "parent", "categoryLabel": "부모교육",
     "name": "이민주",
     "photo": "photos/04_lee-minju.png",
     "affiliation": "이민주육아연구소 소장",
     "books": "『민주선생님's 똑소리나는 육아 — 훈육편』 외 다수",
-    "channel": "[이민주육아연구소]",
+    "tags": ["육아", "훈육", "기질"],
     "topics": [
       "주도성을 키워주기 위한 양육환경 및 부모 역할",
       "0~7세 골든타임, 놓치면 안 되는 부모 역할",
@@ -448,30 +648,27 @@
     ]
   },
   {
-    "no": "05",
-    "category": "parent",
-    "categoryLabel": "부모교육",
+    "no": "05", "category": "parent", "categoryLabel": "부모교육",
     "name": "최서윤",
     "photo": "photos/05_choi-seoyun.png",
     "affiliation": "유로스쿨 대표",
     "career": "TESOL 강사 / 엄마표 영어 총 경력 15년",
     "books": "『영어전용스위치부터 켜라』",
-    "channel": "인스타그램 [유로스쿨]",
+    "tags": ["엄마표영어", "영어로드맵", "TESOL"],
     "topics": [
-      "영어 교육 로드맵 (유치원부터 수능까지)",
+      "영어 교육 로드맵 — 유치원부터 수능까지",
       "우리집 영어 환경 구축 및 유지법",
       "영어책 기반 영어 역량 강화 전략"
     ]
   },
   {
-    "no": "06",
-    "category": "teacher",
-    "categoryLabel": "현직교사",
+    "no": "06", "category": "teacher", "categoryLabel": "현직교사",
     "name": "김수린",
     "photo": "photos/06_kim-surin.jpg",
     "affiliation": "경기도교육청 소속 중학교",
     "career": "23년차 중등영어교사",
     "books": "『중등 문해력의 비밀』 외 5권",
+    "tags": ["중등교육", "영어교사", "문해력"],
     "topics": [
       "현직 교사가 알려주는 중학교 생활의 진짜 핵심",
       "교육과정부터 공부 전략까지 — 현직 중학교 영어교사의 현실 가이드",
@@ -479,29 +676,27 @@
     ]
   },
   {
-    "no": "07",
-    "category": "teacher",
-    "categoryLabel": "현직교사",
+    "no": "07", "category": "teacher", "categoryLabel": "현직교사",
     "name": "김성화",
     "photo": "photos/07_kim-sunghwa.jpg",
     "affiliation": "광명동초등학교",
     "career": "현) 17년차 초등교사 / 강연가·저술가",
     "books": "『우리아이 첫 입학 준비』 외 4권",
+    "tags": ["초등입학", "문해력", "자기주도"],
     "topics": [
-      "초등 입학 준비 (유초이음교육)",
+      "초등 입학 준비 — 유초이음교육",
       "초등 문해력, 자기주도 학습",
       "부모-자녀 소통 대화법"
     ]
   },
   {
-    "no": "08",
-    "category": "teacher",
-    "categoryLabel": "현직교사",
+    "no": "08", "category": "teacher", "categoryLabel": "현직교사",
     "name": "류지현",
     "photo": "photos/08_ryu-jihyun.jpg",
     "affiliation": "특수학교",
     "career": "17년차 현직 특수학교 교사",
     "books": "『나는 느린 세계를 가르치는 사람입니다』",
+    "tags": ["특수교육", "다양성", "번아웃"],
     "topics": [
       "특수학교 17년 교사가 말하는 현실적인 부모 역할",
       "문제 행동 뒤에 숨은 아이의 신호 읽기",
@@ -509,15 +704,13 @@
     ]
   },
   {
-    "no": "09",
-    "category": "self",
-    "categoryLabel": "자기계발",
+    "no": "09", "category": "self", "categoryLabel": "자기계발",
     "name": "이민하",
     "photo": "photos/09_lee-minha.png",
     "affiliation": "이민하커뮤니케이션연구소 대표",
     "career": "LG 등 기업 연수 강의 / 행사 진행",
     "books": "『연봉을 높이는 프레젠테이션의 비밀』",
-    "channel": "인스타그램 [이민하커뮤니케이션연구소]",
+    "tags": ["스피치", "프레젠테이션", "소통"],
     "topics": [
       "실전에서 통하는 스피치 역량 완성",
       "짧게·정확하게·설득력 있게 말하는 법",
@@ -525,15 +718,13 @@
     ]
   },
   {
-    "no": "10",
-    "category": "self",
-    "categoryLabel": "자기계발",
+    "no": "10", "category": "self", "categoryLabel": "자기계발",
     "name": "조미연",
     "photo": "photos/10_cho-miyeon.jpg",
     "affiliation": "리온브랜딩 대표",
     "career": "글쓰기 강의 / 브런치 작가 과정 운영",
     "books": "『나는 여기 잘 도착했다』",
-    "channel": "인스타그램 [리온브랜딩]",
+    "tags": ["에세이", "글쓰기", "브랜딩"],
     "topics": [
       "내 삶의 순간으로 완성하는 포토에세이",
       "내 삶의 주인공이 되는 에세이 쓰기의 실제",
@@ -544,62 +735,99 @@
 </script>
 
 <script>
-  const speakers = JSON.parse(document.getElementById('speakers-data').textContent);
-  const grid = document.getElementById('grid');
-  const filters = document.getElementById('filters');
+const speakers = JSON.parse(document.getElementById('speakersData').textContent);
+const grid = document.getElementById('grid');
+let currentFilter = 'all';
 
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[c]));
-  }
+function esc(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  function renderCard(s) {
-    const metaRows = [];
-    if (s.career)  metaRows.push(['경력', s.career]);
-    if (s.books)   metaRows.push(['저서', s.books]);
-    if (s.channel) metaRows.push(['채널', s.channel]);
+function buildCard(s) {
+  const topicsHtml = (s.topics||[]).map((t,i)=>
+    `<div class="topic-item"><span class="topic-num">0${i+1}</span>${esc(t)}</div>`
+  ).join('');
+  const tagsHtml = (s.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+  const metaLines = [];
+  if (s.career) metaLines.push(s.career);
+  if (s.books)  metaLines.push(s.books);
+  const careerHtml = metaLines.map(l=>`<div>${esc(l)}</div>`).join('');
 
-    const metaHtml = metaRows.map(([k,v]) =>
-      `<div class="meta-row"><div class="meta-label">${escapeHtml(k)}</div><div class="meta-val">${escapeHtml(v)}</div></div>`
-    ).join('');
+  const isFeatured = s.featured ? 'featured' : '';
 
-    const topicsHtml = (s.topics || [])
-      .filter(t => t && t.trim())
-      .map(t => `<div class="topic">${escapeHtml(t)}</div>`)
-      .join('');
-
-    return `
-      <article class="card" data-category="${s.category}">
-        <div class="photo">
-          <span class="cat-badge">${escapeHtml(s.categoryLabel)}</span>
-          <img src="${escapeHtml(s.photo)}" alt="${escapeHtml(s.name)} 프로필 사진" loading="lazy">
+  return `
+    <article class="card ${isFeatured}" data-category="${esc(s.category)}" onclick="openModal(${JSON.stringify(s).replace(/'/g,'&#39;')})">
+      <div class="card-photo">
+        <img src="${esc(s.photo)}" alt="${esc(s.name)} 프로필" loading="lazy" onerror="this.style.display='none'">
+        <div class="card-photo-overlay"></div>
+        <div class="cat-pill">${esc(s.categoryLabel)}</div>
+        <div class="card-num">${esc(s.no)}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${esc(s.name)}</div>
+        <div class="card-affil">${esc(s.affiliation||'')}</div>
+        ${careerHtml ? `<div class="card-career">${careerHtml}</div>` : ''}
+        <div>
+          <div class="topics-head">강연 주제</div>
+          ${topicsHtml}
         </div>
-        <div class="body">
-          <h2 class="name">${escapeHtml(s.name)}</h2>
-          <div class="affiliation">${escapeHtml(s.affiliation || '')}</div>
-          ${metaHtml ? `<div class="meta">${metaHtml}</div>` : ''}
-          ${topicsHtml ? `
-            <div class="divider"></div>
-            <div class="topics-title">강연 주제</div>
-            <div class="topics">${topicsHtml}</div>
-          ` : ''}
-        </div>
-      </article>
-    `;
-  }
+        ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
+        <button class="card-btn" onclick="event.stopPropagation(); openModal(${JSON.stringify(s).replace(/'/g,'&#39;')})">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          섭외 문의
+        </button>
+      </div>
+    </article>
+  `;
+}
 
-  grid.innerHTML = speakers.map(renderCard).join('');
+function render() {
+  const filtered = currentFilter === 'all'
+    ? speakers
+    : speakers.filter(s => s.category === currentFilter);
+  grid.innerHTML = filtered.map(buildCard).join('');
+  document.getElementById('resultCount').textContent = filtered.length + '명';
+}
 
-  filters.addEventListener('click', (e) => {
-    const btn = e.target.closest('.chip');
-    if (!btn) return;
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
-    document.querySelectorAll('.card').forEach(card => {
-      card.classList.toggle('hidden', f !== 'all' && card.dataset.category !== f);
-    });
-  });
+document.getElementById('filterBar').addEventListener('click', e => {
+  const btn = e.target.closest('.chip');
+  if (!btn) return;
+  currentFilter = btn.dataset.filter;
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+  render();
+});
+
+// ── Modal ──
+function openModal(s) {
+  document.getElementById('modalPhoto').src = s.photo || '';
+  document.getElementById('modalPhoto').alt = s.name;
+  document.getElementById('modalCat').textContent = s.categoryLabel || '';
+  document.getElementById('modalName').textContent = s.name || '';
+  document.getElementById('modalAffil').textContent = s.affiliation || '';
+
+  const careerLines = [s.career, s.books].filter(Boolean);
+  const careerEl = document.getElementById('modalCareer');
+  careerEl.innerHTML = careerLines.map(l=>`<div>${esc(l)}</div>`).join('');
+  document.getElementById('modalCareerSection').style.display = careerLines.length ? '' : 'none';
+
+  const topicsEl = document.getElementById('modalTopics');
+  topicsEl.innerHTML = (s.topics||[]).map((t,i)=>
+    `<div class="modal-topic"><span class="mt-num">0${i+1}</span>${esc(t)}</div>`
+  ).join('');
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+}
+function closeModalBtn() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+render();
 </script>
 
 </body>
