@@ -461,6 +461,71 @@
     footer strong {
       color: var(--gold);
     }
+
+    /* ── FACULTY ── */
+    .fac-director {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    @media(max-width:700px){ .fac-director{ grid-template-columns:1fr; } }
+    .fac-director-photo { position: relative; aspect-ratio:1/1; overflow:hidden; background:#111; }
+    .fac-director-photo img { width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+    .fac-director-body { padding: 36px 36px 36px 0; }
+    @media(max-width:700px){ .fac-director-body{ padding:24px; } }
+
+    .fac-badge {
+      position:absolute; top:14px; left:14px;
+      font-size:10px; font-weight:800; letter-spacing:.16em;
+      color: var(--gold); background:rgba(10,10,10,.85);
+      padding:5px 12px; border-radius:999px;
+      border:1px solid rgba(201,168,76,.4);
+    }
+    .fac-badge-sm {
+      position:absolute; top:12px; left:12px;
+      font-size:10px; font-weight:800; letter-spacing:.1em;
+      color: var(--gold); background:rgba(10,10,10,.85);
+      padding:4px 10px; border-radius:999px;
+      border:1px solid rgba(201,168,76,.3);
+    }
+    .fac-label { font-size:11px; font-weight:700; letter-spacing:.18em; color:var(--gold); text-transform:uppercase; margin-bottom:8px; }
+    .fac-name { font-size:26px; font-weight:900; color:#fff; letter-spacing:-.02em; margin-bottom:4px; }
+    .fac-nick { font-size:14px; font-weight:500; color:var(--muted); margin-left:6px; }
+    .fac-affil { font-size:13px; color:var(--muted); margin-bottom:14px; }
+    .fac-career { font-size:13px; color:rgba(255,255,255,.6); line-height:1.7; margin-bottom:16px; }
+    .fac-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .fac-tag { font-size:11px; font-weight:600; color:var(--gold); background:var(--gold-dim); border:1px solid rgba(201,168,76,.3); padding:3px 10px; border-radius:4px; }
+
+    .fac-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    @media(max-width:900px){ .fac-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:560px){ .fac-grid{ grid-template-columns:1fr; } }
+
+    .fac-card {
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:12px; overflow:hidden;
+      display:flex; flex-direction:column;
+      transition: border-color .2s, transform .2s;
+    }
+    .fac-card:hover { border-color: rgba(201,168,76,.5); transform:translateY(-3px); }
+    .fac-photo { position:relative; aspect-ratio:1/1; background:#111; overflow:hidden; }
+    .fac-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+    .fac-placeholder {
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:64px; font-weight:900; color:var(--gold);
+      background: linear-gradient(135deg,#111 0%,#1e1e1e 100%);
+    }
+    .fac-body { padding:20px; flex:1; }
+    .fac-body .fac-name { font-size:18px; margin-bottom:3px; }
+    .fac-body .fac-affil { font-size:12px; margin-bottom:10px; }
+    .fac-body .fac-career { font-size:12px; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.06); }
   </style>
 </head>
 <body>
@@ -688,6 +753,120 @@
       <div class="pending-dot dot-yellow"></div>
       <span class="pc-text">평생교육원 인가 완료</span>
     </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<section id="faculty">
+  <div class="pill-label">Master Faculty</div>
+  <h2 class="section-title">마스터 강사진</h2>
+  <p style="color:var(--muted);margin-bottom:40px;max-width:600px;">전문가 과정 5개 연수를 이끌 검증된 강사진입니다. 현장 경험·저술·콘텐츠 파워를 갖춘 분야별 최고 전문가로 구성했습니다.</p>
+
+  <!-- 디렉터 -->
+  <div class="fac-director">
+    <div class="fac-director-photo">
+      <img src="photos/master/01-lee-eunkyung.jpg" alt="이은경">
+      <div class="fac-badge">DIRECTOR</div>
+    </div>
+    <div class="fac-director-body">
+      <div class="fac-label">교육 총괄 디렉터</div>
+      <div class="fac-name">이은경</div>
+      <div class="fac-affil">슬기로운 초등생활 대표</div>
+      <div class="fac-career">前 초등교사 15년 · 저서 60여 권 · 유튜브 구독자 15만+<br>초등 자기주도 공부법 / 초등 매일 공부의 힘 외 베스트셀러 다수</div>
+      <div class="fac-tags">
+        <span class="fac-tag">교육 총괄</span>
+        <span class="fac-tag">커리큘럼 설계</span>
+        <span class="fac-tag">강사 양성</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5강사 그리드 -->
+  <div class="fac-grid">
+
+    <div class="fac-card">
+      <div class="fac-photo">
+        <img src="photos/master/02-kim-munyoung.jpg" alt="김문영" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fac-placeholder" style="display:none">김</div>
+        <div class="fac-badge-sm">인문독서</div>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">김문영 <span class="fac-nick">달콤쌤</span></div>
+        <div class="fac-affil">더채움 교육연구소 대표</div>
+        <div class="fac-career">前 초등교사 15년차 · 저서 2권<br>인문독서 · 고전 · 융합독서 전문</div>
+        <div class="fac-tags">
+          <span class="fac-tag">인문독서</span>
+          <span class="fac-tag">고전</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card">
+      <div class="fac-photo">
+        <div class="fac-placeholder">법</div>
+        <div class="fac-badge-sm">논증과추론</div>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">섭외 진행 중</div>
+        <div class="fac-affil">현직 변호사</div>
+        <div class="fac-career">서울시 교육청 소속 10년<br>고대 로스쿨 졸업 · 현직 변호사</div>
+        <div class="fac-tags">
+          <span class="fac-tag">논증</span>
+          <span class="fac-tag">추론</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card">
+      <div class="fac-photo">
+        <img src="photos/master/04-lee-dahee.png" alt="이다희" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fac-placeholder" style="display:none">이</div>
+        <div class="fac-badge-sm">시사분석</div>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">이다희</div>
+        <div class="fac-affil">(주)리딩타임즈 대표</div>
+        <div class="fac-career">前 초등정교사 · 저서 4권<br>하루 한 장 키즈신문 발행인 · 인스타 5.8만</div>
+        <div class="fac-tags">
+          <span class="fac-tag">시사분석</span>
+          <span class="fac-tag">독서교육</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card">
+      <div class="fac-photo">
+        <div class="fac-placeholder">권</div>
+        <div class="fac-badge-sm">보고서작성</div>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">권보경</div>
+        <div class="fac-affil">서울대학교 행정학 박사</div>
+        <div class="fac-career">저서 『공공기관 조직 분석』<br>구조적 글쓰기 · 보고서 논리 전문</div>
+        <div class="fac-tags">
+          <span class="fac-tag">보고서</span>
+          <span class="fac-tag">논리적 글쓰기</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card">
+      <div class="fac-photo">
+        <img src="photos/master/06-cho-seungwoo.png" alt="조승우" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fac-placeholder" style="display:none">조</div>
+        <div class="fac-badge-sm">요약훈련</div>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">조승우</div>
+        <div class="fac-affil">스몰빅클래스 대표</div>
+        <div class="fac-career">서울대 최우등 졸업 · 청소년 베스트셀러 1위<br>유튜브 24만 · 저서 『공부가 설렘이 되는 순간』</div>
+        <div class="fac-tags">
+          <span class="fac-tag">요약</span>
+          <span class="fac-tag">자기주도학습</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
