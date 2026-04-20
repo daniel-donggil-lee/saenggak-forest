@@ -143,6 +143,131 @@ body {
 .about-card-title { font-size:16px; font-weight:800; color:var(--black); margin-bottom:8px; }
 .about-card-desc { font-size:13px; color:var(--g500); line-height:1.7; }
 
+/* ── ECOSYSTEM ── */
+.ecosystem {
+  background:var(--white);
+  padding:96px 6%;
+  border-top:1px solid var(--blight);
+}
+.ecosystem-inner { max-width:1000px; margin:0 auto; }
+
+/* 플로우 다이어그램 */
+.eco-flow {
+  display:grid;
+  grid-template-columns:1fr 60px 1fr;
+  gap:0;
+  align-items:center;
+  margin:56px 0;
+}
+@media(max-width:700px){
+  .eco-flow { grid-template-columns:1fr; gap:0; }
+  .eco-arrow { margin:8px auto; }
+  .eco-arrow svg { transform:rotate(90deg); }
+}
+.eco-box {
+  border-radius:16px;
+  padding:36px 32px;
+  position:relative;
+}
+.eco-box.school {
+  background:var(--g50);
+  border:2px solid var(--blight);
+}
+.eco-box.campus {
+  background:var(--black);
+  border:2px solid var(--g700);
+}
+.eco-box-label {
+  font-size:10px; font-weight:800; letter-spacing:.2em;
+  text-transform:uppercase; margin-bottom:10px;
+}
+.eco-box.school .eco-box-label { color:var(--gold-d); }
+.eco-box.campus .eco-box-label { color:var(--gold); }
+.eco-box-name {
+  font-size:22px; font-weight:900; letter-spacing:-.03em; margin-bottom:6px;
+}
+.eco-box.school .eco-box-name { color:var(--black); }
+.eco-box.campus .eco-box-name { color:var(--white); }
+.eco-box-sub {
+  font-size:13px; margin-bottom:20px; line-height:1.6;
+}
+.eco-box.school .eco-box-sub { color:var(--g500); }
+.eco-box.campus .eco-box-sub { color:rgba(255,255,255,.45); }
+
+.eco-courses { display:flex; flex-direction:column; gap:8px; }
+.eco-course {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:12.5px;
+}
+.eco-box.school .eco-course {
+  background:var(--white); border:1px solid var(--blight); color:var(--black);
+}
+.eco-box.campus .eco-course {
+  background:var(--g800); border:1px solid var(--g700); color:rgba(255,255,255,.8);
+}
+.eco-course-dot {
+  width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  background:var(--gold);
+}
+.eco-course strong { font-weight:800; }
+.eco-course-note { margin-left:auto; font-size:11px; }
+.eco-box.school .eco-course-note { color:var(--g400); }
+.eco-box.campus .eco-course-note { color:rgba(255,255,255,.3); }
+
+.eco-arrow {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:4px;
+}
+.eco-arrow-line {
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+}
+.eco-arrow svg { display:block; }
+.eco-arrow-label {
+  font-size:10px; font-weight:800; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gold); text-align:center;
+  margin-top:6px; line-height:1.4;
+}
+
+/* 역할 요청 */
+.eco-role {
+  background:linear-gradient(135deg,var(--gold-dim) 0%,rgba(201,168,76,0.04) 100%);
+  border:1px solid var(--gold-border);
+  border-radius:16px;
+  padding:36px 40px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:24px;
+  align-items:flex-start;
+}
+@media(max-width:640px){ .eco-role{ grid-template-columns:1fr; } }
+.eco-role-icon {
+  width:52px; height:52px;
+  background:var(--gold); color:var(--black);
+  border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; flex-shrink:0;
+}
+.eco-role-label {
+  font-size:11px; font-weight:800; letter-spacing:.18em;
+  color:var(--gold-d); text-transform:uppercase; margin-bottom:8px;
+}
+.eco-role-title { font-size:18px; font-weight:900; color:var(--black); margin-bottom:12px; }
+.eco-role-desc { font-size:13.5px; color:var(--g500); line-height:1.8; }
+.eco-role-list {
+  margin-top:16px;
+  display:flex; flex-direction:column; gap:8px;
+}
+.eco-role-item {
+  display:flex; gap:10px; align-items:flex-start;
+  font-size:13px; color:var(--g500); line-height:1.6;
+}
+.eco-role-item::before {
+  content:'→';
+  color:var(--gold); font-weight:800; flex-shrink:0; margin-top:1px;
+}
+
 /* ── ROSTER ── */
 .roster {
   background:var(--white);
@@ -323,6 +448,122 @@ footer {
   footer { padding:24px 5%; }
   .top-bar { padding:0 5%; }
 }
+
+/* ── CARD CLICK CURSOR ── */
+.card { cursor:pointer; }
+.director-card { cursor:default; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; z-index:999;
+  background:rgba(10,10,10,.72);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:flex-end; justify-content:center;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+
+.modal-panel {
+  width:100%; max-width:780px;
+  max-height:88vh;
+  background:var(--white);
+  border-radius:20px 20px 0 0;
+  display:flex; flex-direction:column;
+  transform:translateY(40px);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+  overflow:hidden;
+}
+.modal-overlay.open .modal-panel { transform:translateY(0); }
+
+.modal-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  padding:28px 28px 0;
+  border-bottom:1px solid var(--blight);
+  flex-shrink:0;
+}
+.modal-subject {
+  font-size:11px; font-weight:800; letter-spacing:.18em;
+  color:var(--gold-d); text-transform:uppercase; margin-bottom:4px;
+}
+.modal-name { font-size:22px; font-weight:900; color:var(--black); letter-spacing:-.03em; }
+.modal-method { font-size:12px; color:var(--g400); margin-top:4px; margin-bottom:20px; }
+.modal-close {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--g100); border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; color:var(--g500); flex-shrink:0; margin-top:2px;
+  transition:background .2s;
+}
+.modal-close:hover { background:var(--g200); }
+
+.modal-tabs {
+  display:flex; gap:0;
+  padding:0 28px;
+  border-bottom:1px solid var(--blight);
+  flex-shrink:0;
+}
+.modal-tab {
+  padding:12px 16px;
+  font-size:12.5px; font-weight:700; color:var(--g400);
+  border:none; background:none; cursor:pointer;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:color .2s, border-color .2s;
+  white-space:nowrap;
+}
+.modal-tab.active { color:var(--black); border-bottom-color:var(--gold); }
+.modal-tab:hover:not(.active) { color:var(--g500); }
+
+.modal-body {
+  flex:1; overflow-y:auto;
+  padding:24px 28px 36px;
+}
+
+/* Sessions Table */
+.sess-table { width:100%; border-collapse:collapse; font-size:13px; }
+.sess-table th {
+  text-align:left; font-size:10px; font-weight:800; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--g400);
+  padding:8px 10px; border-bottom:2px solid var(--blight);
+}
+.sess-table td { padding:11px 10px; border-bottom:1px solid var(--g50); vertical-align:top; }
+.sess-table tr:last-child td { border-bottom:none; }
+.sess-n {
+  font-size:11px; font-weight:900; color:var(--gold);
+  background:var(--gold-dim); border:1px solid var(--gold-border);
+  width:28px; height:28px; border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; margin-top:1px;
+}
+.sess-row { display:flex; gap:12px; align-items:flex-start; }
+.sess-title { font-weight:700; color:var(--black); margin-bottom:3px; }
+.sess-desc { font-size:12px; color:var(--g500); line-height:1.6; }
+
+/* Week Table */
+.week-table { width:100%; border-collapse:collapse; font-size:13px; }
+.week-table th {
+  text-align:left; font-size:10px; font-weight:800; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--g400);
+  padding:8px 10px; border-bottom:2px solid var(--blight);
+}
+.week-table td { padding:10px; border-bottom:1px solid var(--g50); vertical-align:top; }
+.week-table tr:last-child td { border-bottom:none; }
+.week-w {
+  font-size:11px; font-weight:800; color:var(--g400);
+  white-space:nowrap; width:32px;
+}
+.week-title { font-weight:700; color:var(--black); }
+.week-q { font-size:12px; color:var(--g500); margin-top:2px; line-height:1.5; }
+
+.tab-pane { display:none; }
+.tab-pane.active { display:block; }
+
+.modal-note {
+  font-size:12px; color:var(--g400);
+  background:var(--g50); border-radius:8px;
+  padding:10px 14px; margin-bottom:20px; line-height:1.6;
+}
 </style>
 </head>
 <body>
@@ -388,6 +629,91 @@ footer {
   </div>
 </section>
 
+<!-- ECOSYSTEM -->
+<section class="ecosystem">
+  <div class="ecosystem-inner">
+    <div class="section-eyebrow">Our Ecosystem</div>
+    <h2 class="section-title">펜타, 우리가 하는 일</h2>
+    <p class="section-desc">
+      펜타는 두 축으로 움직입니다. <strong>펜타스쿨</strong>은 초등생을 직접 가르치는 오프라인 문해력 학원이고,
+      <strong>펜타캠퍼스</strong>는 그 교실에서 수업할 강사를 양성하는 연수원입니다.
+      두 브랜드가 맞물릴 때, 교육의 선순환이 만들어집니다.
+    </p>
+
+    <!-- 플로우 다이어그램 -->
+    <div class="eco-flow">
+
+      <!-- 펜타스쿨 -->
+      <div class="eco-box school">
+        <div class="eco-box-label">Penta School</div>
+        <div class="eco-box-name">펜타스쿨</div>
+        <div class="eco-box-sub">초등생 대상 오프라인 종합 문해력 학원.<br>전국 직영·가맹점 확장 예정.</div>
+        <div class="eco-courses">
+          <div class="eco-course">
+            <div class="eco-course-dot"></div>
+            <span><strong>12주 과정</strong> — 기본 문해력 트랙</span>
+            <span class="eco-course-note">주 2회</span>
+          </div>
+          <div class="eco-course">
+            <div class="eco-course-dot"></div>
+            <span><strong>24주 과정</strong> — 심화 문해력 트랙</span>
+            <span class="eco-course-note">주 3회</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 화살표 -->
+      <div class="eco-arrow">
+        <div class="eco-arrow-line">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <div class="eco-arrow-label">수료생<br>강사 취업</div>
+      </div>
+
+      <!-- 펜타캠퍼스 -->
+      <div class="eco-box campus">
+        <div class="eco-box-label">Penta Campus</div>
+        <div class="eco-box-name">펜타캠퍼스</div>
+        <div class="eco-box-sub">성인 대상 강사 양성 평생교육원.<br>전문가 자격증 과정 5개 운영.</div>
+        <div class="eco-courses">
+          <div class="eco-course">
+            <div class="eco-course-dot"></div>
+            <span><strong>10차시 전문가 과정</strong> × 5개 영역</span>
+            <span class="eco-course-note">온라인</span>
+          </div>
+          <div class="eco-course">
+            <div class="eco-course-dot"></div>
+            <span><strong>자격증 취득</strong> → 3경로 취업 연결</span>
+            <span class="eco-course-note">2026.10</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 강사에게 요청하는 것 -->
+    <div class="eco-role">
+      <div class="eco-role-icon">🎯</div>
+      <div>
+        <div class="eco-role-label">Your Role</div>
+        <div class="eco-role-title">강사님께 부탁드리는 것</div>
+        <div class="eco-role-desc">
+          강사님의 전문 콘텐츠를 <strong>10차시 연수 과정</strong>으로 재설계해 주십시오.
+          처음부터 새로 만들 필요 없습니다. 이미 보유하신 커리큘럼과 경험을
+          펜타캠퍼스 수강생에게 전달하는 구조로 다듬는 것이 전부입니다.
+        </div>
+        <div class="eco-role-list">
+          <div class="eco-role-item">10차시 강의 설계 및 온라인 진행 (라이브 + 녹화 병행)</div>
+          <div class="eco-role-item">수강생이 현장에서 바로 쓸 수 있는 교수법 중심 콘텐츠 구성</div>
+          <div class="eco-role-item">과정 종료 후 수료생 평가 참여 (자격증 발급 기준 검토)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ROSTER -->
 <section class="roster">
   <div class="roster-inner">
@@ -418,7 +744,7 @@ footer {
     <!-- 5강사 -->
     <div class="grid">
 
-      <div class="card">
+      <div class="card" data-teacher="kim" onclick="openModal('kim')">
         <div class="card-photo">
           <img src="../photos/master/02-kim-munyoung.png" alt="김문영" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="card-placeholder" style="display:none">김</div>
@@ -432,20 +758,21 @@ footer {
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-teacher="cho" onclick="openModal('cho')">
         <div class="card-photo">
-          <div class="card-placeholder">⚖️</div>
-          <div class="cat-pill">논증과추론</div>
+          <img src="../photos/master/06-cho-seungwoo.png" alt="조승우" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="card-placeholder" style="display:none">조</div>
+          <div class="cat-pill">요약훈련</div>
         </div>
         <div class="card-body">
-          <div class="card-name">섭외 진행 중</div>
-          <div class="card-affil">현직 변호사</div>
-          <div class="card-career">서울시 교육청 소속 10년<br>고대 로스쿨 졸업 · 현직 변호사</div>
-          <div class="card-tags"><span class="card-tag">논증</span><span class="card-tag">추론</span><span class="card-tag">법적사고</span></div>
+          <div class="card-name">조승우</div>
+          <div class="card-affil">스몰빅클래스 대표</div>
+          <div class="card-career">서울대 최우등 졸업 · 청소년 베스트셀러 1위<br>유튜브 24만 · 『공부가 설렘이 되는 순간』</div>
+          <div class="card-tags"><span class="card-tag">요약훈련</span><span class="card-tag">자기주도</span><span class="card-tag">공부법</span></div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-teacher="lee" onclick="openModal('lee')">
         <div class="card-photo">
           <img src="../photos/master/04-lee-dahee.png" alt="이다희" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="card-placeholder" style="display:none">이</div>
@@ -459,7 +786,7 @@ footer {
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-teacher="kwon" onclick="openModal('kwon')">
         <div class="card-photo">
           <img src="../photos/master/05-kwon-bokyung.jpg" alt="권보경" style="transform:scale(1.5) translateY(15%);transform-origin:center top;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="card-placeholder" style="display:none">권</div>
@@ -473,17 +800,16 @@ footer {
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-teacher="lawyer" onclick="openModal('lawyer')">
         <div class="card-photo">
-          <img src="../photos/master/06-cho-seungwoo.png" alt="조승우" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="card-placeholder" style="display:none">조</div>
-          <div class="cat-pill">요약훈련</div>
+          <div class="card-placeholder">⚖️</div>
+          <div class="cat-pill">논증과추론</div>
         </div>
         <div class="card-body">
-          <div class="card-name">조승우</div>
-          <div class="card-affil">스몰빅클래스 대표</div>
-          <div class="card-career">서울대 최우등 졸업 · 청소년 베스트셀러 1위<br>유튜브 24만 · 『공부가 설렘이 되는 순간』</div>
-          <div class="card-tags"><span class="card-tag">요약훈련</span><span class="card-tag">자기주도</span><span class="card-tag">공부법</span></div>
+          <div class="card-name">섭외 진행 중</div>
+          <div class="card-affil">현직 변호사</div>
+          <div class="card-career">서울시 교육청 소속 10년<br>고대 로스쿨 졸업 · 현직 변호사</div>
+          <div class="card-tags"><span class="card-tag">논증</span><span class="card-tag">추론</span><span class="card-tag">법적사고</span></div>
         </div>
       </div>
 
@@ -581,5 +907,314 @@ footer {
   <div class="foot-note">Master Faculty Proposal 2026 · CONFIDENTIAL</div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal-panel">
+    <div class="modal-header">
+      <div>
+        <div class="modal-subject" id="m-subject"></div>
+        <div class="modal-name" id="m-name"></div>
+        <div class="modal-method" id="m-method"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" onclick="switchTab(0)">📋 10차시 커리큘럼</button>
+      <button class="modal-tab" onclick="switchTab(1)">🌱 기본반 12주</button>
+      <button class="modal-tab" onclick="switchTab(2)">🚀 심화반 13~24주</button>
+    </div>
+    <div class="modal-body">
+      <!-- Tab 0: 10차시 -->
+      <div class="tab-pane active" id="tab-0">
+        <div class="modal-note">펜타캠퍼스 마스터 강사 자격증 과정 · 180분 × 10차시 = 30시간 · 평생교육법 2학점</div>
+        <table class="sess-table">
+          <thead><tr><th colspan="2">차시별 구성</th></tr></thead>
+          <tbody id="sess-tbody"></tbody>
+        </table>
+      </div>
+      <!-- Tab 1: 12주 -->
+      <div class="tab-pane" id="tab-1">
+        <div class="modal-note">펜타스쿨 기본반(3~4학년) · 주 1회 90분 · 1:4 그룹수업 · 12주 과정</div>
+        <table class="week-table">
+          <thead><tr><th>주차</th><th>텍스트 / 주제</th></tr></thead>
+          <tbody id="basic-tbody"></tbody>
+        </table>
+      </div>
+      <!-- Tab 2: 24주 -->
+      <div class="tab-pane" id="tab-2">
+        <div class="modal-note">펜타스쿨 심화반(5~6학년) · 24주 과정 · 13~24주 (1~12주는 기본반 연장선)</div>
+        <table class="week-table">
+          <thead><tr><th>주차</th><th>텍스트 / 주제</th></tr></thead>
+          <tbody id="adv-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const C = {
+  kim: {
+    name:'김문영', subject:'인문독서', method:'Shared Inquiry™ · Great Books Foundation',
+    s10:[
+      ['1','오리엔테이션 + Shared Inquiry 개관','해석 유보 패러다임 수용, 정답 강박에서 벗어나기'],
+      ['2','Interpretive Question 작성법','정답 없되 본문 근거 있는 질문 20개 설계'],
+      ['3','발문·경청·Wait Time','7~10초 침묵 견디기, 3종 후속 질문 자동화'],
+      ['4','12주/24주 커리큘럼 해독','30작품 시대별 배치 원리, 학년별 난이도 계단'],
+      ['5','마이크로티칭 1차','10분 모의 수업 — Focus Question 운영'],
+      ['6','학부모 상담 & 포트폴리오','"사고력·독서 습관"으로 설득하는 상담 대본'],
+      ['7','평가·루브릭 캘리브레이션','5등급 루브릭 제작, 학생 샘플 교차 채점'],
+      ['8','문제 학생 대응','침묵형·독점형·불안형 학생 케이스 스터디'],
+      ['9','펜타 브랜드 철학·윤리','PENTA 5영역 연결, 교사 윤리 서약'],
+      ['10','최종 시연 + 수료 평가','20분 풀사이클 시연, 심사 3인, 자격증 발급'],
+    ],
+    b12:[
+      ['1','일리아스·오디세이아','아킬레우스는 왜 화가 났을까?'],
+      ['2','로빈후드','도둑질이 정의가 될 수 있을까?'],
+      ['3','돈키호테','바보일까, 용감한 사람일까?'],
+      ['4','동방견문록','마르코 폴로는 왜 긴 여행을 떠났을까?'],
+      ['5','로빈슨 크루소','무인도에서 가장 먼저 할 일은?'],
+      ['6','걸리버 여행기','소인국에서 거인이라면 어떻게 행동해야 할까?'],
+      ['7','올리버 트위스트','"더 주세요"라고 한 것은 잘못일까?'],
+      ['8','80일간의 세계일주','이 내기, 너라면 받겠어?'],
+      ['9','노트르담의 꼽추','왜 사람들에게 미움을 받았을까?'],
+      ['10','안네의 일기','벽장 속에서도 희망을 가질 수 있을까?'],
+      ['11','동물농장','모든 동물은 평등하다가 왜 거짓말이 됐을까?'],
+      ['12','페스트 (종합)','도망 vs 남아서 싸우기 — 어느 것이 맞을까?'],
+    ],
+    a24:[
+      ['13','명상록 — 자기 다스림'],['14','니벨룽겐의 노래 — 배신과 복수'],
+      ['15','지킬 박사와 하이드 — 인간의 이중성'],['16','주홍글씨 — 잘못과 용서'],
+      ['17','톰 아저씨의 오두막 — 인권'],['18','종의 기원 — 과학과 믿음'],
+      ['19','자유론 — 자유의 경계'],['20','국부론 — 경제의 시작'],
+      ['21','서부전선 이상 없다 — 반전'],['22','죄와 벌 — 양심과 구원'],
+      ['23','자본론 — 노동과 공정'],['24','아Q정전 (종합) — 자기합리화의 위험'],
+    ],
+  },
+  cho: {
+    name:'조승우', subject:'요약훈련', method:'Harvey & Goudvis · SWBST · GIST',
+    s10:[
+      ['1','OT + 요약의 이론 지형','Determining Importance·Summarizing 개관, 자기 요약 진단'],
+      ['2','SWBST — 서사 장르 공식','5요소로 동화·교과서 이야기 분해, 발문 카드 15장'],
+      ['3','GIST — 20어절 제약 훈련','압축력 체화, 40자 한 문장 버전, 교사 샘플 10편'],
+      ['4','2색 하이라이트 — Determining Importance','"중요" vs "흥미롭지만 중요 아님" 분리 훈련'],
+      ['5','논설 — Claim-Evidence Map','3장르 도구 완성, SWBST·GIST와 구별 지점'],
+      ['6','시각 정리표 5종 마스터','타임라인·피라미드·비교표·마인드맵·매그넷'],
+      ['7','Retell → Summarize → Synthesize','발달 계단별 수업 시연 3단'],
+      ['8','마이크로티칭 — SWBST 10분 시연','초3~4 대상 SWBST 카드 워크숍'],
+      ['9','평가·루브릭 + 학부모 상담','3장르 루브릭, "요약=사고력"으로 설득'],
+      ['10','최종 시연 + 수료','20분 풀사이클, 심사 3인, 자격증 발급'],
+    ],
+    b12:[
+      ['1','OT — 베껴쓰기 vs 요약','요약이 뭐지? 사례 비교'],
+      ['2','흥부전 — SWBST 입문','5요소 카드 1장'],
+      ['3','만복이네 떡집 — SWBST + 감정','주인공 감정 라인'],
+      ['4','동물의 한살이 — GIST 20어절','설명문 압축'],
+      ['5','왜 식물은 빛을 찾을까 — 2색 하이라이트','중요 vs 흥미 구별'],
+      ['6','학교 앞 보행로 — Claim-Evidence','논설 Map 1장'],
+      ['7','세종의 훈민정음 — 타임라인','역사 일화 시각화'],
+      ['8','동화 3편 교차 Retell','Retell 2분 발표'],
+      ['9','위인 전기 — 피라미드 정리','구조화 시각 도구'],
+      ['10','설명문 2편 — 비교표','개와 고양이 습성 비교'],
+      ['11','독서감상문 — 마인드맵','혼합 장르 처리'],
+      ['12','종합 — 내가 읽은 책 1권','장르 판별→도구 선택 풀사이클'],
+    ],
+    a24:[
+      ['13','Synthesis Matrix 입문 — "환경" 주제 2편'],
+      ['14','"AI와 아이들" 글 3편 종합'],
+      ['15','"학원 vs 자기주도" 상반 관점 2편'],
+      ['16','"수면과 학습" 과학 3편'],
+      ['17','역사 사건의 다른 해석 2편'],
+      ['18','한 인물 여러 전기 3편'],
+      ['19','통계 + 기사 — 숫자와 서사 결합'],
+      ['20','원문(책 1장) + 해설 1편 대조'],
+      ['21','동화 + 비평 — 텍스트 vs 메타'],
+      ['22','내 관심 주제 3편 자유 수집'],
+      ['23','Evolution of Thought 초안'],
+      ['24','최종 — 에세이 A4 2장 + 10분 발표'],
+    ],
+  },
+  lee: {
+    name:'이다희', subject:'시사분석', method:'News Literacy Project · Stanford Civic Online Reasoning',
+    s10:[
+      ['1','OT + 뉴스 리터러시 지형','5 Information Neighborhoods + COR 3질문'],
+      ['2','5 Neighborhoods 숙달','기사·사설·광고·선전·원자료 초등 번역, 판별 카드 30장'],
+      ['3','IMVAIN 6기준 내재화','출처 평가 6기준 한국어 발문 카드 18장'],
+      ['4','Lateral Reading 실전 훈련','의심 사이트 10종 탭 열어 검증, 검색어 설계'],
+      ['5','Claim Spotting + Bias/Framing','제목·사진·단어 선택의 프레임 분석'],
+      ['6','12주/24주 커리큘럼 해독','주차별 소재 선정·난이도 계단·가정 연계'],
+      ['7','마이크로티칭 — "제목 뒤집기" 워크숍','제목과 본문이 어긋난 기사 5편, 10분 시연'],
+      ['8','학부모 상담 + 디지털 미디어 지도','"비판적 읽기·민주적 시민성"으로 설득'],
+      ['9','평가·루브릭 캘리브레이션','5 Neighborhoods·IMVAIN·Lateral·Framing 4축'],
+      ['10','최종 시연 + 수료','20분 풀사이클, 한국 뉴스 20편 교재 재구성'],
+    ],
+    b12:[
+      ['1','이건 뉴스일까 광고일까?','학급 소식지·유튜브 썸네일 10종 분류'],
+      ['2','어린이조선 오늘자 톱기사','역피라미드 구조 해독'],
+      ['3','학교 공지문 vs 학부모 카톡','원자료 vs 2차 정보'],
+      ['4','EBS뉴스 어린이판','출처 3질문 — 누가·근거·다른 말'],
+      ['5','날씨·공기질 기사 3편','숫자·단위 정확성 점검'],
+      ['6','유튜브 쇼츠 1편','영상 광고 vs 콘텐츠'],
+      ['7','"학교 앞 사고" 지역 뉴스 2사 비교','제목 대조표'],
+      ['8','인스타 카드뉴스 3장','의견 vs 사실 분리'],
+      ['9','"새 게임 출시" 리뷰 vs 광고','협찬·뒷광고 구별'],
+      ['10','네이버 댓글 TOP 5','댓글=의견 이해'],
+      ['11','AI가 만든 가짜 사진 5장','이미지 의심 3단계'],
+      ['12','종합 — 내가 본 뉴스 1편 분석','3질문 풀사이클'],
+    ],
+    a24:[
+      ['13','선거 보도 — 여론조사 해석'],
+      ['14','재난 보도 — 속보의 위험'],
+      ['15','건강 뉴스 — "○○에 좋다" 기사'],
+      ['16','과학 뉴스 — 논문 vs 보도'],
+      ['17','경제 뉴스 — 그래프 착시'],
+      ['18','국제 뉴스 — 외신 번역 편향'],
+      ['19','AI 합성·딥페이크 판별'],
+      ['20','루머·음모론 생태계 해부'],
+      ['21','기자의 오보 사례 분석'],
+      ['22','사진 저널리즘 — 크롭·캡션'],
+      ['23','내 피드 감사(Audit) — 1주일 소비 뉴스'],
+      ['24','최종 — 한국 이슈 1건 심층 분석 A4 2장'],
+    ],
+  },
+  kwon: {
+    name:'권보경', subject:'보고서작성', method:'Jane Schaffer CD:CM + Hochman "Sentence First"',
+    s10:[
+      ['1','OT + Schaffer·Hochman 개관','"느낀 점 3줄"이 왜 실패하는지 증거 기반 설명'],
+      ['2','앵커 이론 심화 — CD:CM','CD와 CM을 한국어 문장 20개에서 분리 판정'],
+      ['3','Because/But/So 30문장 드릴','한 문장 줄기를 3종 접속으로 확장 체화'],
+      ['4','12/24주 커리큘럼 해독','문장→단락→SPO→MPO 상향 설계 구조'],
+      ['5','마이크로티칭 — 8문장 단락 시연','Schaffer 8문장 공식 20분 완전 시연'],
+      ['6','학부모 상담 & 포트폴리오','"왜 구조부터 가르치는가" 납득 스크립트'],
+      ['7','평가·루브릭 캘리브레이션','"사고의 두께" 3단계 루브릭, 강사 간 ±1점'],
+      ['8','문제 학생 대응','구조 거부·CM 백지·과잉 복제 유형별 대응'],
+      ['9','펜타 브랜드 철학·윤리','"틀→해체" 약속과 금지 행동 내재화'],
+      ['10','최종 시연 + 수료 평가','90분 수업 완전 운영, 외부 평가자 채점'],
+    ],
+    b12:[
+      ['1','OT — 구조가 왜 먼저인가','"느낀 점 3줄" 실패 사례 진단'],
+      ['2','Because/But/So 입문','3종 접속으로 문장 줄기 확장'],
+      ['3','CD:CM 분리 훈련','사실 1개 + 해석 2개 이상'],
+      ['4','4문장 단락 (TS+CD+CM+CS)','첫 단락 구조 작성'],
+      ['5','SPO(단문단 개요) 입문','약어 개요로 작업 기억 보호'],
+      ['6','Schaffer 8문장 단락 완성','TS+[CD+CM+CM]×2+CS'],
+      ['7','Appositive(동격) 삽입','"세종대왕, 훈민정음을 만든 임금은…"'],
+      ['8','어미 연결 훈련','-고/-며/-지만/-므로 다양화'],
+      ['9','MPO(다문단 개요) 입문','3단락 설계 약어 개요'],
+      ['10','3단락 에세이 초안','MPO → 완전 문장 전환'],
+      ['11','자기 교정 & 동료 피드백','루브릭으로 교차 채점'],
+      ['12','종합 — 자유 주제 3단락 에세이','MPO → 완성 에세이 A4 1장'],
+    ],
+    a24:[
+      ['13','5단락 에세이 구조 입문'],
+      ['14','서론·결론 작성법'],
+      ['15','인용·출처 표기 기초'],
+      ['16','반론 수용 단락(Concession)'],
+      ['17','문장 다양성 — 길이·구조 변주'],
+      ['18','데이터·통계 인용 글쓰기'],
+      ['19','비교·대조 에세이'],
+      ['20','인과 분석 에세이'],
+      ['21','문제 해결 에세이'],
+      ['22','자기 교정 루틴 내재화'],
+      ['23','5단락 에세이 심화 — 동료 컨퍼런스'],
+      ['24','최종 — 자유 주제 5단락 에세이 + 발표'],
+    ],
+  },
+  lawyer: {
+    name:'섭외 진행 중', subject:'논증과추론', method:'Toulmin Argument Model + Paul-Elder Critical Thinking',
+    s10:[
+      ['1','OT + Toulmin·Paul-Elder 개관','두 이론 결합 구조 이해, 교사 자신의 논증 진단'],
+      ['2','Warrant(숨은 전제) 발굴 훈련','"왜냐하면의 왜냐하면" — 2단 질문 드릴'],
+      ['3','Paul-Elder 9 Standards 내재화','초등 적용 5기준 한국어 발문 카드 27장'],
+      ['4','12주/24주 커리큘럼 해독','논제 난이도 계단 — 학급→사회→사설'],
+      ['5','마이크로티칭 — 논증 카드 10분','Claim-Grounds-Warrant 빈칸 카드 시연'],
+      ['6','학부모 상담 & 포트폴리오','"비판적 사고와 품격 있는 토론"으로 설득'],
+      ['7','평가·루브릭 캘리브레이션','Toulmin 6요소 × Paul-Elder 5기준 결합'],
+      ['8','문제 학생 대응','"정답 싸움" 중재, 침묵·독점·감정형 대응'],
+      ['9','펜타 브랜드 철학·윤리','Intellectual Humility — 한국 교실에서 모델링'],
+      ['10','최종 시연 + 수료 평가','20분 풀사이클 — 논제→6요소→2:2 반박→자가평가'],
+    ],
+    b12:[
+      ['1','"숙제는 꼭 있어야 할까?"','3요소 입문, Claim 선언'],
+      ['2','"급식 남기면 안 될까?"','Grounds 3개 찾기'],
+      ['3','"체육 시간 일주일에 몇 번?"','Warrant 말로 꺼내기'],
+      ['4','"싸웠을 때 먼저 사과하는 사람이 맞을까?"','"왜냐하면의 왜냐하면" 2단 질문'],
+      ['5','"휴대폰 학교에 가져와도 될까?"','찬반 입장 바꿔 말하기'],
+      ['6','"용돈 — 정액 vs 심부름마다"','Grounds 신뢰성 평가'],
+      ['7','"동물 키우는 건 꼭 좋은 일일까?"','양면 사고, 보류 입장'],
+      ['8','"학원 많이 다니는 게 도움될까?"','Relevance(관련성) 훈련'],
+      ['9','"거짓말은 언제나 나쁜 걸까?"','예외 상황·Qualifier 맛보기'],
+      ['10','"우리 반 규칙 투표로 정하자"','4인 2:2 첫 토론'],
+      ['11','"만화 vs 책"','Fairness — 반대 입장 대변'],
+      ['12','"우리 반에 가장 필요한 것" (종합)','3요소 풀사이클'],
+    ],
+    a24:[
+      ['13','"초등생 스마트폰 — 부작용 있어도 줘야 하나?"'],
+      ['14','"동물 실험은 허용돼야 하나?"'],
+      ['15','"사형제는 폐지돼야 하나?"'],
+      ['16','"AI가 만든 예술은 예술인가?"'],
+      ['17','"부자에게 세금 더 걷는 것이 공평한가?"'],
+      ['18','"무인 자동차 사고 시 책임은 누구에게?"'],
+      ['19','"유전자 편집은 허용돼야 하나?"'],
+      ['20','"학교 교복은 자유를 침해하는가?"'],
+      ['21','짧은 사설 1편 — 6요소 분해'],
+      ['22','신문 칼럼 2편 비교 논증'],
+      ['23','나의 논증 포트폴리오 — 12편 선별'],
+      ['24','최종 — 사회 이슈 6요소 논증 + 10분 발표'],
+    ],
+  },
+};
+
+let curTab = 0;
+
+function openModal(id) {
+  const d = C[id];
+  document.getElementById('m-subject').textContent = d.subject;
+  document.getElementById('m-name').textContent = d.name;
+  document.getElementById('m-method').textContent = d.method;
+
+  // 10차시
+  document.getElementById('sess-tbody').innerHTML = d.s10.map(([n,t,desc])=>`
+    <tr><td><div class="sess-row">
+      <div class="sess-n">${n}</div>
+      <div><div class="sess-title">${t}</div><div class="sess-desc">${desc}</div></div>
+    </div></td></tr>`).join('');
+
+  // 12주
+  document.getElementById('basic-tbody').innerHTML = d.b12.map(([w,t,q])=>`
+    <tr>
+      <td class="week-w">${w}주</td>
+      <td><div class="week-title">${t}</div>${q?`<div class="week-q">${q}</div>`:''}</td>
+    </tr>`).join('');
+
+  // 24주 (13~24)
+  document.getElementById('adv-tbody').innerHTML = d.a24.map(([w,t])=>`
+    <tr>
+      <td class="week-w">${w}주</td>
+      <td><div class="week-title">${t}</div></td>
+    </tr>`).join('');
+
+  switchTab(0);
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function handleOverlayClick(e) {
+  if(e.target===document.getElementById('modal')) closeModal();
+}
+
+function switchTab(i) {
+  curTab = i;
+  document.querySelectorAll('.modal-tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+  document.querySelectorAll('.tab-pane').forEach((p,idx)=>p.classList.toggle('active',idx===i));
+}
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+</script>
 </body>
 </html>
