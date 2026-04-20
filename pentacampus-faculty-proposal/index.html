@@ -292,6 +292,36 @@ body {
 }
 .roster-inner { max-width:1080px; margin:0 auto; }
 
+/* 강사진 그룹 구분 */
+.roster-group-head {
+  display:flex; align-items:center; gap:14px;
+  margin:48px 0 20px;
+}
+.roster-group-head:first-of-type { margin-top:0; }
+.roster-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11px; font-weight:800; letter-spacing:.12em;
+  padding:5px 16px; border-radius:100px;
+}
+.roster-badge.confirmed {
+  background:var(--gold); color:var(--black);
+}
+.roster-badge.confirmed::before { content:'✓'; font-size:10px; }
+.roster-badge.recruiting {
+  background:transparent; color:var(--g400);
+  border:1.5px solid var(--g200);
+}
+.roster-badge.recruiting::before { content:'◎'; font-size:9px; }
+.roster-group-desc { font-size:13px; color:var(--g500); }
+
+/* 확정 카드 강조 */
+.card.confirmed { border-color:var(--gold); }
+.card.confirmed .card-body { border-top-color:var(--gold); }
+
+/* 제안 카드 — 점선 느낌 */
+.card.recruiting { border-style:dashed; border-color:var(--g200); }
+.card.recruiting .card-photo { opacity:.85; }
+
 /* Director */
 .director-card {
   display:grid; grid-template-columns:300px 1fr; gap:0;
@@ -739,14 +769,14 @@ footer {
 <section class="roster">
   <div class="roster-inner">
     <div class="section-eyebrow">Faculty Lineup</div>
-    <h2 class="section-title">함께할 강사진</h2>
-    <p class="section-desc" style="margin-bottom:48px;">이미 확정된 강사진입니다. 귀하가 합류하면 이 라인업과 함께하게 됩니다.</p>
+    <h2 class="section-title">강사진 라인업</h2>
+    <p class="section-desc" style="margin-bottom:48px;">확정된 강사진과 함께하고 싶은 강사진을 함께 소개합니다.<br>귀하가 합류하면 이 팀이 완성됩니다.</p>
 
     <!-- 디렉터 -->
     <div class="director-card">
       <div class="director-photo">
         <img src="../photos/master/01-lee-eunkyung.jpg" alt="이은경">
-        <div class="dir-badge">DIRECTOR</div>
+        <div class="dir-badge">DIRECTOR · 확정</div>
       </div>
       <div class="director-body">
         <div class="dir-label">교육 총괄 디렉터</div>
@@ -762,10 +792,14 @@ footer {
       </div>
     </div>
 
-    <!-- 5강사 -->
+    <!-- 확정 강사진 -->
+    <div class="roster-group-head">
+      <span class="roster-badge confirmed">합류 확정</span>
+      <span class="roster-group-desc">이미 함께하기로 한 강사진입니다</span>
+    </div>
     <div class="grid">
 
-      <div class="card" data-teacher="kim" onclick="openModal('kim')">
+      <div class="card confirmed" data-teacher="kim" onclick="openModal('kim')">
         <div class="card-photo">
           <img src="../photos/master/02-kim-munyoung.png" alt="김문영" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="card-placeholder" style="display:none">김</div>
@@ -779,35 +813,7 @@ footer {
         </div>
       </div>
 
-      <div class="card" data-teacher="cho" onclick="openModal('cho')">
-        <div class="card-photo">
-          <img src="../photos/master/06-cho-seungwoo.png" alt="조승우" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="card-placeholder" style="display:none">조</div>
-          <div class="cat-pill">요약훈련</div>
-        </div>
-        <div class="card-body">
-          <div class="card-name">조승우</div>
-          <div class="card-affil">스몰빅클래스 대표</div>
-          <div class="card-career">서울대 최우등 졸업 · 청소년 베스트셀러 1위<br>유튜브 24만 · 『공부가 설렘이 되는 순간』</div>
-          <div class="card-tags"><span class="card-tag">요약훈련</span><span class="card-tag">자기주도</span><span class="card-tag">공부법</span></div>
-        </div>
-      </div>
-
-      <div class="card" data-teacher="lee" onclick="openModal('lee')">
-        <div class="card-photo">
-          <img src="../photos/master/04-lee-dahee.png" alt="이다희" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="card-placeholder" style="display:none">이</div>
-          <div class="cat-pill">시사분석</div>
-        </div>
-        <div class="card-body">
-          <div class="card-name">이다희</div>
-          <div class="card-affil">(주)리딩타임즈 대표</div>
-          <div class="card-career">前 초등정교사 · 저서 4권<br>하루 한 장 키즈신문 발행인 · 인스타 5.8만</div>
-          <div class="card-tags"><span class="card-tag">시사분석</span><span class="card-tag">독서교육</span><span class="card-tag">콘텐츠</span></div>
-        </div>
-      </div>
-
-      <div class="card" data-teacher="kwon" onclick="openModal('kwon')">
+      <div class="card confirmed" data-teacher="kwon" onclick="openModal('kwon')">
         <div class="card-photo">
           <img src="../photos/master/05-kwon-bokyung.jpg" alt="권보경" style="transform:scale(1.5) translateY(15%);transform-origin:center top;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="card-placeholder" style="display:none">권</div>
@@ -821,7 +827,44 @@ footer {
         </div>
       </div>
 
-      <div class="card" data-teacher="lawyer" onclick="openModal('lawyer')">
+    </div>
+
+    <!-- 합류 제안 강사진 -->
+    <div class="roster-group-head">
+      <span class="roster-badge recruiting">합류 제안 중</span>
+      <span class="roster-group-desc">함께하고 싶은 강사진 — 귀하도 이 자리에 해당합니다</span>
+    </div>
+    <div class="grid">
+
+      <div class="card recruiting" data-teacher="cho" onclick="openModal('cho')">
+        <div class="card-photo">
+          <img src="../photos/master/06-cho-seungwoo.png" alt="조승우" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="card-placeholder" style="display:none">조</div>
+          <div class="cat-pill">요약훈련</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">조승우</div>
+          <div class="card-affil">스몰빅클래스 대표</div>
+          <div class="card-career">서울대 최우등 졸업 · 청소년 베스트셀러 1위<br>유튜브 24만 · 『공부가 설렘이 되는 순간』</div>
+          <div class="card-tags"><span class="card-tag">요약훈련</span><span class="card-tag">자기주도</span><span class="card-tag">공부법</span></div>
+        </div>
+      </div>
+
+      <div class="card recruiting" data-teacher="lee" onclick="openModal('lee')">
+        <div class="card-photo">
+          <img src="../photos/master/04-lee-dahee.png" alt="이다희" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="card-placeholder" style="display:none">이</div>
+          <div class="cat-pill">시사분석</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">이다희</div>
+          <div class="card-affil">(주)리딩타임즈 대표</div>
+          <div class="card-career">前 초등정교사 · 저서 4권<br>하루 한 장 키즈신문 발행인 · 인스타 5.8만</div>
+          <div class="card-tags"><span class="card-tag">시사분석</span><span class="card-tag">독서교육</span><span class="card-tag">콘텐츠</span></div>
+        </div>
+      </div>
+
+      <div class="card recruiting" data-teacher="lawyer" onclick="openModal('lawyer')">
         <div class="card-photo">
           <div class="card-placeholder">⚖️</div>
           <div class="cat-pill">논증과추론</div>
