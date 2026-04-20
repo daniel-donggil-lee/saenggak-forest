@@ -384,7 +384,7 @@ footer {
   border-radius:0 12px 0 0;
 }
 .modal-close:hover { background:var(--black); color:var(--white); }
-.modal-photo { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+.modal-photo { width:100%; aspect-ratio:4/3; object-fit:cover; object-position:center top; display:block; }
 .modal-body { padding:28px 28px 36px; }
 .modal-cat {
   font-size:11px; font-weight:800; letter-spacing:.14em;
@@ -701,8 +701,10 @@ document.getElementById('filterBar').addEventListener('click', e=>{
 });
 
 function openModal(s) {
-  document.getElementById('modalPhoto').src = s.photo||'';
-  document.getElementById('modalPhoto').alt = s.name;
+  const mp = document.getElementById('modalPhoto');
+  mp.src = s.photo||'';
+  mp.alt = s.name;
+  mp.style.cssText = s.imgStyle ? s.imgStyle.replace(/transform[^;]*/g,'').replace(/transform-origin[^;]*/g,'') : '';
   document.getElementById('modalCat').textContent = s.categoryLabel||'';
   document.getElementById('modalName').textContent = s.name||'';
   document.getElementById('modalAffil').textContent = s.affiliation||'';
