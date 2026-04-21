@@ -3327,7 +3327,7 @@ function openReport(idx) {
         <button class="btn-rv" onclick="closeReport()">닫기</button>
       </div>
     </div>
-    <iframe src="${r.file}"></iframe>
+    <iframe src="${r.file}?_=${Date.now()}"></iframe>
   `;
   document.body.appendChild(viewer);
 }
