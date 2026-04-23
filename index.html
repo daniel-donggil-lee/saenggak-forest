@@ -1882,6 +1882,7 @@ function renderSubprojectFocus() {
   // 산출물 (로드맵 비고 URL 추출, 해당 프로젝트만)
   const deliverables = roadRows.map(r => {
     const note = r[6] || '';
+    if (/\[[^\]]+\]\(https?:\/\/[^)]+\)/.test(note)) return null;
     const m = note.match(/https?:\/\/[^\s]+/);
     if (!m) return null;
     return { milestone: r[1]||'', date: r[2]||'', status: (r[3]||'').trim()||'대기', url: m[0] };
@@ -3082,6 +3083,8 @@ function renderDeliverables() {
   const items = [];
   roadmapRows.forEach(r => {
     const note = r[6] || '';
+    // 마크다운 [text](url) 형식만 있는 비고는 pill 버튼으로 표시되므로 산출물 카드 제외
+    if (/\[[^\]]+\]\(https?:\/\/[^)]+\)/.test(note)) return;
     const urlMatch = note.match(/https?:\/\/[^\s]+/);
     if (!urlMatch) return;
     if (currentDept && normalizeDept(r[pIdx]) !== currentDept) return;
