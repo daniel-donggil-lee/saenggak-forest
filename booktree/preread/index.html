@@ -233,6 +233,105 @@
     .wrap { padding: 0 20px; }
     .next-step { padding: 40px 24px; }
   }
+
+  /* ── 섹션별 의견 작성란 ── */
+  .comment-zone {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .comment-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, color 0.15s;
+  }
+  .comment-toggle:hover,
+  .comment-toggle.active {
+    background: var(--gold);
+    color: #fff;
+  }
+  .ct-count {
+    background: var(--gold);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 2px;
+  }
+  .comment-toggle.active .ct-count {
+    background: rgba(255,255,255,0.3);
+  }
+  .comment-panel {
+    margin-top: 20px;
+  }
+  .comment-list {
+    margin-bottom: 16px;
+  }
+  .comment-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .comment-item:last-child { border-bottom: none; }
+  .ci-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--mute);
+    margin-bottom: 6px;
+  }
+  .ci-author { font-weight: 700; color: var(--navy); }
+  .ci-content {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+  .comment-loading { font-size: 13px; color: var(--mute); }
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .comment-input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+    background: #fafafa;
+  }
+  .comment-input:focus { border-color: var(--gold); background: #fff; }
+  .comment-submit {
+    align-self: flex-end;
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    padding: 9px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .comment-submit:hover { background: #2a2a2a; }
+  .comment-submit:disabled { opacity: 0.5; cursor: default; }
 </style>
 </head>
 <body>
@@ -302,6 +401,21 @@
       책나무는 가맹 규모로는 업계 최상위권에 이미 도달했습니다.
       그러나 이 네 가지 구조 중 어느 것도 갖추지 못한 상태로 여기까지 왔습니다.
     </p>
+
+    <div class="comment-zone" data-section="bt-01">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -334,6 +448,21 @@
     <p style="margin-top: 32px;">
       이 네 개의 공백을 동시에 메우는 방법은, 업계가 이미 검증한 두 개의 축을 책나무 버전으로 설치하는 것입니다.
     </p>
+
+    <div class="comment-zone" data-section="bt-02">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -369,6 +498,21 @@
       <li>본사의 가맹점 통제력 회복 — "본사 인증 교사"가 브랜드의 최소 단위</li>
       <li>신규 교사 수급 경로 확보 — 외부 유입자도 동일 경로로 진입</li>
     </ul>
+
+    <div class="comment-zone" data-section="bt-03">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -403,6 +547,21 @@
       <li>지사장·지점장·강사가 협회를 중심으로 자연스럽게 결집</li>
       <li>자격 유지 조건이 본사 활동과 연동되어 이탈 비용 상승</li>
     </ul>
+
+    <div class="comment-zone" data-section="bt-04">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -442,6 +601,21 @@
         <p>첫 기수 수강 운영 / 이슈 대응 / 본사 담당자가 자체 운영 가능한 수준까지 코칭</p>
       </div>
     </div>
+
+    <div class="comment-zone" data-section="bt-05">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -479,6 +653,21 @@
       저희가 실제로 쓰고 있는 디스커버리 프로세스와 질문지 구조를 본 미팅 자리에서 직접 보여드립니다.
       이것이 책나무 건이 "양산형 연수원"이 아니라 "책나무 전용 연수원"이 되는 이유입니다.
     </blockquote>
+
+    <div class="comment-zone" data-section="bt-06">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -504,6 +693,21 @@
     <p style="color: var(--mute);">
       책나무 브랜드 가이드, 가맹점 네트워크, 자격증 발급 주체 결정, 협회 설립 관련 최종 승인.
     </p>
+
+    <div class="comment-zone" data-section="bt-07">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -531,6 +735,21 @@
         사전 문서로 오가기보다, 대표님과 얼굴 맞대고 협의하는 것이 서로 시간을 아끼는 길입니다.
       </p>
     </div>
+
+    <div class="comment-zone" data-section="bt-08">
+      <button class="comment-toggle" onclick="toggleComment(this)">
+        <span class="ct-icon">✏</span>
+        <span class="ct-label">의견 남기기</span>
+        <span class="ct-count" style="display:none"></span>
+      </button>
+      <div class="comment-panel" style="display:none">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <textarea class="comment-input" placeholder="이 섹션에 대한 수정 의견을 남겨주세요…" rows="3"></textarea>
+          <button class="comment-submit" onclick="submitComment(this)">의견 제출</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -540,6 +759,120 @@
     <p style="margin-top: 4px;">책나무 대표 전용 사전 공유본 · 외부 유출 삼가 · 2026</p>
   </div>
 </footer>
+
+<script>
+// ─── 섹션별 의견 시스템 ───
+const GAS_WRITE = 'https://script.google.com/macros/s/AKfycbxN3NaaZpCPPZfH7gEJVOGnyzJp9kvH5KtTXBMh86gnp6OCxcFPN8dGaK7THmVQb9vJoQ/exec';
+const GAS_READ  = 'https://script.google.com/macros/s/AKfycbyGbLdZSuRfvWC-Yy9xEh9AbIX7NMPWr4EW4cXnP3BPC22AHAtJKI-fixY5W7dk14Kw/exec';
+const COMMENTER = '이은경';
+
+let cachedComments = null;
+
+async function fetchAllComments() {
+  if (cachedComments) return cachedComments;
+  try {
+    const res = await fetch(GAS_READ + '?_=' + Date.now());
+    const data = await res.json();
+    cachedComments = (data['개선요청'] || []).slice(1);
+  } catch (e) {
+    cachedComments = [];
+  }
+  return cachedComments;
+}
+
+function toggleComment(btn) {
+  const zone = btn.closest('.comment-zone');
+  const panel = zone.querySelector('.comment-panel');
+  const isOpen = panel.style.display !== 'none';
+  if (isOpen) {
+    panel.style.display = 'none';
+    btn.classList.remove('active');
+  } else {
+    panel.style.display = 'block';
+    btn.classList.add('active');
+    loadCommentList(zone);
+  }
+}
+
+async function loadCommentList(zone) {
+  const sectionId = zone.dataset.section;
+  const list = zone.querySelector('.comment-list');
+  list.innerHTML = '<div class="comment-loading">불러오는 중…</div>';
+  const all = await fetchAllComments();
+  const matches = all.filter(r => (r[4] || '').trim() === sectionId);
+
+  const countEl = zone.querySelector('.ct-count');
+  if (matches.length) {
+    countEl.textContent = matches.length;
+    countEl.style.display = 'inline';
+  } else {
+    countEl.style.display = 'none';
+  }
+
+  if (!matches.length) {
+    list.innerHTML = '';
+    return;
+  }
+  list.innerHTML = matches.map(r => {
+    const [author, date, content] = r;
+    return `<div class="comment-item">
+      <div class="ci-meta">
+        <span class="ci-author">${escHtml(author || '')}</span>
+        <span class="ci-date">${escHtml(date || '')}</span>
+      </div>
+      <div class="ci-content">${escHtml(content || '').replace(/\n/g, '<br>')}</div>
+    </div>`;
+  }).join('');
+}
+
+async function submitComment(btn) {
+  const zone = btn.closest('.comment-zone');
+  const sectionId = zone.dataset.section;
+  const textarea = zone.querySelector('.comment-input');
+  const content = textarea.value.trim();
+  if (!content) {
+    textarea.focus();
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = '제출 중…';
+  const today = new Date().toISOString().slice(0, 10);
+  const payload = { action: 'append', sheet: '개선요청', values: [COMMENTER, today, content, '접수', sectionId] };
+  const url = GAS_WRITE + '?payload=' + encodeURIComponent(JSON.stringify(payload)) + '&_=' + Date.now();
+  try {
+    await fetch(url, { cache: 'no-store' });
+    textarea.value = '';
+    cachedComments = null; // 캐시 초기화
+    btn.textContent = '✓ 제출 완료';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = '의견 제출';
+    }, 1800);
+    await loadCommentList(zone);
+  } catch (e) {
+    btn.textContent = '실패 · 다시 시도';
+    btn.disabled = false;
+  }
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// 페이지 로드 시 배지(카운트) 미리 표시
+document.addEventListener('DOMContentLoaded', async () => {
+  const all = await fetchAllComments();
+  document.querySelectorAll('.comment-zone').forEach(zone => {
+    const sectionId = zone.dataset.section;
+    const count = all.filter(r => (r[4] || '').trim() === sectionId).length;
+    if (count > 0) {
+      const countEl = zone.querySelector('.ct-count');
+      countEl.textContent = count;
+      countEl.style.display = 'inline';
+    }
+  });
+});
+</script>
 
 </body>
 </html>
