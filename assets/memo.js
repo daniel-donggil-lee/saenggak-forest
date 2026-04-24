@@ -3,21 +3,6 @@
   const PAGE_NAME = document.title || location.pathname.split("/").pop().replace(".html", "");
   const STORAGE_KEY = "penta_memos_" + location.pathname;
 
-  // ── 섹션 자동 감지 ──────────────────────────────────────────────────────────
-  function getSections() {
-    const headings = Array.from(document.querySelectorAll("h1, h2, h3, [data-section], section[id]"));
-    const seen = new Set();
-    const result = [{ id: "__page__", label: "페이지 전체" }];
-    headings.forEach((el) => {
-      const text = (el.textContent || "").trim().slice(0, 40);
-      if (text && !seen.has(text)) {
-        seen.add(text);
-        result.push({ id: el.id || text, label: text });
-      }
-    });
-    return result;
-  }
-
   // ── 로컬 메모 ────────────────────────────────────────────────────────────────
   function loadMemos() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; }
@@ -67,13 +52,13 @@
     #pm-header span { font-size: 11px; color: #aaa; }
     #pm-close { background: none; border: none; cursor: pointer; font-size: 18px; color: #aaa; padding: 0; }
     #pm-body { padding: 14px 18px; overflow-y: auto; flex: 1; }
-    #pm-section-select {
-      width: 100%; padding: 9px 12px; border-radius: 10px;
+    #pm-section-input {
+      width: 100%; box-sizing: border-box; padding: 9px 12px; border-radius: 10px;
       border: 1.5px solid #e5e5e5; font-size: 13px;
       color: #0a0a0a; background: #fafafa; margin-bottom: 10px;
-      outline: none;
+      outline: none; font-family: inherit;
     }
-    #pm-section-select:focus { border-color: #C9A84C; }
+    #pm-section-input:focus { border-color: #C9A84C; }
     #pm-textarea {
       width: 100%; box-sizing: border-box; padding: 10px 12px;
       border-radius: 10px; border: 1.5px solid #e5e5e5;
@@ -120,7 +105,7 @@
       <button id="pm-close">✕</button>
     </div>
     <div id="pm-body">
-      <select id="pm-section-select"></select>
+      <input id="pm-section-input" type="text" placeholder="섹션 이름 직접 입력 (예: 수익 모델, 3조항 등)" />
       <textarea id="pm-textarea" placeholder="이 섹션에 대한 수정 요청이나 메모를 적어주세요"></textarea>
       <button id="pm-submit">메모 저장 + 전송</button>
       <div id="pm-status"></div>
@@ -133,14 +118,14 @@
   document.body.appendChild(panel);
 
   // ── 참조 ─────────────────────────────────────────────────────────────────────
-  const badge   = document.getElementById("pm-badge");
-  const pname   = document.getElementById("pm-page-name");
-  const select  = document.getElementById("pm-section-select");
-  const textarea= document.getElementById("pm-textarea");
-  const submit  = document.getElementById("pm-submit");
-  const status  = document.getElementById("pm-status");
-  const list    = document.getElementById("pm-list");
-  const close   = document.getElementById("pm-close");
+  const badge        = document.getElementById("pm-badge");
+  const pname        = document.getElementById("pm-page-name");
+  const sectionInput = document.getElementById("pm-section-input");
+  const textarea     = document.getElementById("pm-textarea");
+  const submit       = document.getElementById("pm-submit");
+  const status       = document.getElementById("pm-status");
+  const list         = document.getElementById("pm-list");
+  const close        = document.getElementById("pm-close");
 
   // ── 렌더링 ───────────────────────────────────────────────────────────────────
   function renderList() {
@@ -167,18 +152,8 @@
     });
   }
 
-  function populateSections() {
-    getSections().forEach((s) => {
-      const opt = document.createElement("option");
-      opt.value = s.id;
-      opt.textContent = s.label;
-      select.appendChild(opt);
-    });
-  }
-
   function openPanel() {
     pname.textContent = PAGE_NAME.slice(0, 20);
-    if (!select.options.length) populateSections();
     renderList();
     panel.classList.add("open");
   }
@@ -192,7 +167,7 @@
   submit.addEventListener("click", async () => {
     const text = textarea.value.trim();
     if (!text) { status.textContent = "메모 내용을 입력해주세요."; return; }
-    const section = select.options[select.selectedIndex]?.text || "전체";
+    const section = sectionInput.value.trim() || "페이지 전체";
     const date = new Date().toLocaleString("ko-KR");
 
     // 로컬 저장
@@ -214,6 +189,7 @@
       status.textContent = "⚠ 로컬 저장만 됨 (전송 실패)";
     }
     textarea.value = "";
+    sectionInput.value = "";
     submit.disabled = false;
     renderList();
     setTimeout(() => { status.textContent = ""; }, 3000);
